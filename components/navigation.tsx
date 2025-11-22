@@ -47,10 +47,10 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-foreground',
   },
   'project-5': {
-    navbar: 'rounded-lg border-4 border-foreground/20 bg-background/95 backdrop-blur-md shadow-xl',
-    brand: 'hover:text-foreground/80',
-    link: 'text-muted-foreground hover:text-foreground',
-    activeLink: 'text-foreground',
+    navbar: 'rounded-lg border-4 border-foreground/20 bg-neutral-600/60 backdrop-blur-md shadow-xl',
+    brand: 'text-white',
+    link: 'text-muted-foreground hover:text-white',
+    activeLink: 'text-white',
   },
   'project-6': {
     navbar: 'rounded-xl border-1 border border-white/10 bg-neutral-500/10 backdrop-blur-md',
@@ -74,7 +74,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
 
 const SECTION_BACKGROUNDS: Record<string, string> = {
   welcome: '#ffffff',
-  'project-1': '#fc9090ff',
+  'project-1': '#fcd390ff',
   'project-2': '#ffc19dff',
   'project-3': '#f9fafb',
   'project-4': '#eff6ff',
