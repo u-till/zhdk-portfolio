@@ -12,7 +12,7 @@ const NAVIGATION_LINKS = [
   { href: '#project-4', label: 'toy lexicon' },
   { href: '#project-5', label: 'lost in space' },
   { href: '#project-6', label: 'saudade' },
-  { href: '#project-7', label: 'capitalism' },
+  { href: '#project-7', label: 'dayjob' },
 ];
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
@@ -78,8 +78,8 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
   'project-2': '#ffc19dff',
   'project-3': '#f9fafb',
   'project-4': '#eff6ff',
-  'project-5': '#faf5ff',
-  'project-6': '#faf5ff',
+  'project-5': '#000000ff',
+  'project-6': '#646464ff',
   'project-7': '#1f2937',
   about: '#f9fafb',
 };

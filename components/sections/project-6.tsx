@@ -6,13 +6,19 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
 const PHOTOS = [
-  { src: '/saudade/Untitled-001.jpg', lat: 40.7128, lng: -74.006 }, // NYC - update with real coords
-  { src: '/saudade/Untitled-009.jpg', lat: 51.5074, lng: -0.1278 }, // London - update with real coords
-  { src: '/saudade/Untitled-010.jpg', lat: 35.6762, lng: 139.6503 }, // Tokyo - update with real coords
+  { src: '/saudade/addis.jpg', lat: 40.7128, lng: -74.006 },
+  { src: '/saudade/hongkong-1.jpg', lat: 51.5074, lng: -0.1278 },
+  { src: '/saudade/hongkong-2.jpg', lat: 35.6762, lng: 139.6503 },
+  { src: '/saudade/hongkong-3.jpg', lat: 35.6762, lng: 139.6503 },
+  { src: '/saudade/kuala-lumpur.jpg', lat: 35.6762, lng: 139.6503 },
+  { src: '/saudade/kunming.jpg', lat: 25.6762, lng: 129.6503 },
+  { src: '/saudade/phnompenh.jpg', lat: 45.6762, lng: 119.6503 },
+  { src: '/saudade/stolze-1.jpg', lat: 15.6762, lng: 149.6503 },
 ];
 
 export function Project6() {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedPanel, setExpandedPanel] = useState<'globe' | 'olympus' | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,19 +37,16 @@ export function Project6() {
   }, []);
 
   return (
-    <section id='project-6' className='h-screen snap-start overflow-hidden relative'>
-      {/* Fixed Title and Globe Overlay */}
-      <div className='absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 gap-8'>
-        <div className='flex flex-col items-center gap-8 p-8 rounded-xl border-1 border border-white/10 bg-neutral-500/10 backdrop-blur-md'>
-          <h2 className={`text-6xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>saudade</h2>
-          <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
-        </div>
+    <section id='project-6' className='h-screen snap-start relative overflow-hidden'>
+      {/* Title */}
+      <div className='absolute inset-x-0 top-0 pt-32 flex justify-center pointer-events-none z-10'>
+        <h2 className={`text-8xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>saudade</h2>
       </div>
 
       {/* Scrolling Photos */}
       <div
         ref={scrollRef}
-        className='h-full overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
+        className='absolute inset-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
         {PHOTOS.map((photo, index) => (
           <div key={photo.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
@@ -57,6 +60,38 @@ export function Project6() {
             />
           </div>
         ))}
+      </div>
+
+      {/* Globe Panel - Bottom Right */}
+      <div
+        className={`absolute right-8 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md z-20 transition-all duration-500 ${
+          expandedPanel === 'globe' ? 'w-96 h-96' : 'w-48 h-48'
+        }`}
+      >
+        <button
+          onClick={() => setExpandedPanel(expandedPanel === 'globe' ? null : 'globe')}
+          className='absolute top-2 left-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors'
+        >
+          {expandedPanel === 'globe' ? '−' : '+'}
+        </button>
+        <div className='w-full h-full flex items-center justify-center'>
+          <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
+        </div>
+      </div>
+
+      {/* Olympus Panel - Bottom Left */}
+      <div
+        className={`absolute left-8 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden z-20 transition-all duration-500 ${
+          expandedPanel === 'olympus' ? 'w-96 h-96' : 'w-48 h-48'
+        }`}
+      >
+        <button
+          onClick={() => setExpandedPanel(expandedPanel === 'olympus' ? null : 'olympus')}
+          className='absolute top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors'
+        >
+          {expandedPanel === 'olympus' ? '−' : '+'}
+        </button>
+        <Image src='/saudade/olympus.png' alt='Olympus' fill className='object-cover' />
       </div>
     </section>
   );
