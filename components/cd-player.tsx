@@ -28,7 +28,11 @@ export function CDPlayer() {
   };
 
   return (
-    <div className='w-screen h-screen flex overflow-hidden' onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
+    <div
+      className='w-screen h-screen flex overflow-hidden'
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+    >
       {/* Left Column - CD */}
       <div className='flex-1 flex items-center justify-center'>
         <div className='perspective-1000 mt-48'>
@@ -115,7 +119,7 @@ export function CDPlayer() {
               </button>
               <iframe
                 data-testid='embed-iframe'
-                src='https://open.spotify.com/embed/playlist/6NncGaE8c3pdJkJPfM6Jcc?utm_source=generator&theme=0'
+                src='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
                 width='100%'
                 height='352'
                 frameBorder='0'

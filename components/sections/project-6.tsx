@@ -37,7 +37,7 @@ export function Project6() {
   }, []);
 
   return (
-    <section id='project-6' className='h-screen snap-start relative overflow-hidden'>
+    <section className='h-screen relative overflow-hidden'>
       {/* Title */}
       <div className='absolute inset-x-0 top-0 pt-32 flex justify-center pointer-events-none z-10'>
         <h2 className={`text-8xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>saudade</h2>

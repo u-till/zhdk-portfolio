@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -116,9 +116,6 @@
   * {
     @apply border-border outline-ring/50;
   }
-  html {
-    scroll-behavior: smooth;
-  }
   body {
     @apply bg-background text-foreground;
   }
@@ -147,5 +144,15 @@
 
   .rotate-y-180 {
     transform: rotateY(180deg);
+  }
+
+  .rotate-45-center {
+    transform-origin: 50%;
+    transform: translate(-3px, 3px) rotate(45deg);
+  }
+
+  .rotate--45-center {
+    transform-origin: 50%;
+    transform: translate(-3px, -4px) rotate(-45deg);
   }
 }

@@ -4,17 +4,16 @@ import { orbitron } from '@/lib/fonts';
 
 export function Project5() {
   return (
-    <section
-      id='project-5'
-      className='h-screen flex flex-col items-center snap-start relative overflow-hidden pt-32 gap-16'
-    >
+    <section className='h-screen flex flex-col relative overflow-hidden'>
       <StarField />
-      <h2
-        className={`text-8xl font-bold text-white relative z-10 ${orbitron.className}`}
-        style={{ transform: 'perspective(300px) rotateX(25deg)' }}
-      >
-        LOST IN SPACE
-      </h2>
+      <div className='absolute inset-x-0 top-0 pt-24 md:pt-36 flex justify-center pointer-events-none z-10'>
+        <h2
+          className={`text-4xl md:text-6xl lg:text-8xl font-bold text-white ${orbitron.className}`}
+          style={{ transform: 'perspective(300px) rotateX(25deg)' }}
+        >
+          LOST IN SPACE
+        </h2>
+      </div>
       <div className='absolute inset-0 z-10'>
         <CDPlayer />
       </div>

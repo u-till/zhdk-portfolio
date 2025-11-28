@@ -2,8 +2,10 @@ import { vt323 } from '@/lib/fonts';
 
 export function Project3() {
   return (
-    <section id='project-3' className='h-screen flex items-center justify-center snap-start'>
-      <h2 className={`text-4xl font-bold ${vt323.className}`}>amped up</h2>
+    <section className='h-screen flex flex-col relative overflow-hidden'>
+      <div className='absolute inset-x-0 top-0 pt-24 md:pt-36 flex justify-center pointer-events-none z-10'>
+        <h2 className={`text-3xl md:text-4xl lg:text-5xl font-bold ${vt323.className}`}>amped up</h2>
+      </div>
     </section>
   );
 }

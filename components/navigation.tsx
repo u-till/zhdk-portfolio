@@ -1,9 +1,10 @@
 'use client';
 
-import { useActiveSection } from '@/hooks/use-active-section';
-import Link from 'next/link';
+import { MobileMenuToggle } from '@/components/mobile-menu-toggle';
+import { useActiveSectionContext } from '@/contexts/active-section-context';
+import { AnimatePresence, motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const NAVIGATION_LINKS = [
   { href: '#project-1', label: 'under construction' },
@@ -23,10 +24,10 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-foreground',
   },
   'project-1': {
-    navbar: 'rounded-sm border-1 border-red-600/20 shadow-xl',
-    brand: 'text-black',
-    link: 'text-black',
-    activeLink: 'text-black',
+    navbar: 'rounded-[0px] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]',
+    brand: 'text-black hover:text-black/80',
+    link: 'text-black transition-colors',
+    activeLink: 'text-white',
   },
   'project-2': {
     navbar: 'rounded-[50px] border border-border/40 bg-orange-500/80 backdrop-blur-md shadow-sm',
@@ -74,7 +75,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
 
 const SECTION_BACKGROUNDS: Record<string, string> = {
   welcome: '#ffffff',
-  'project-1': '#fcd390ff',
+  'project-1': '#ffdc51ff',
   'project-2': '#ffc19dff',
   'project-3': '#f9fafb',
   'project-4': '#eff6ff',
@@ -86,8 +87,9 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 
 export function Navigation() {
   const pathname = usePathname();
-  const activeSection = useActiveSection();
+  const { activeSection } = useActiveSectionContext();
   const isHomePage = pathname === '/';
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const currentSection = activeSection && NAVBAR_CONFIG[activeSection] ? activeSection : 'welcome';
 
@@ -99,43 +101,136 @@ export function Navigation() {
 
   const config = NAVBAR_CONFIG[currentSection];
 
-  const navbarStyle =
-    currentSection === 'project-1'
-      ? {
-          background:
-            'repeating-linear-gradient(90deg, #dc2626 0%, #dc2626 14.28%, white 14.28%, white 28.56%, #dc2626 28.56%, #dc2626 42.84%, white 42.84%, white 57.12%, #dc2626 57.12%, #dc2626 71.4%, white 71.4%, white 85.68%, #dc2626 85.68%, #dc2626 100%)',
-          transition:
-            'background-color 400ms ease-in-out, border-color 400ms ease-in-out, border-width 400ms ease-in-out, border-radius 400ms ease-in-out, box-shadow 400ms ease-in-out',
-        }
-      : {
-          transition:
-            'background-color 400ms ease-in-out, border-color 400ms ease-in-out, border-width 400ms ease-in-out, border-radius 400ms ease-in-out, box-shadow 400ms ease-in-out',
-        };
+  const navbarStyle = {
+    transition:
+      'background-color 400ms ease-in-out, border-color 400ms ease-in-out, border-width 400ms ease-in-out, border-radius 400ms ease-in-out, box-shadow 400ms ease-in-out',
+  };
 
   return (
-    <nav className={`fixed top-8 left-0 right-0 z-50 max-w-6xl mx-auto px-4 ${config.navbar}`} style={navbarStyle}>
-      <div className='flex items-center justify-between px-6 py-4'>
-        <Link href='/' className={`text-lg font-medium tracking-tight transition-colors ${config.brand}`}>
-          till solenthaler
-        </Link>
+    <nav
+      className={`fixed top-4 md:top-8 left-4 right-4 md:left-0 md:right-0 z-50 max-w-6xl md:mx-auto ${config.navbar}`}
+      style={navbarStyle}
+    >
+      <div className='flex flex-col'>
+        <div className='flex items-center justify-between px-4 md:px-6 py-3 md:py-4'>
+          <button
+            onClick={() => {
+              window.__scrollToSection?.(0);
+              setIsMobileMenuOpen(false);
+            }}
+            className={`text-base md:text-lg font-medium tracking-tight transition-colors ${config.brand} cursor-pointer`}
+          >
+            till solenthaler
+          </button>
 
-        <ul className='flex items-center gap-8'>
-          {NAVIGATION_LINKS.map((link) => {
-            const isActive =
-              isHomePage && activeSection.startsWith('project-') && activeSection === link.href.substring(1);
+          {/* Desktop Navigation */}
+          <ul className='hidden md:flex items-center gap-8'>
+            {NAVIGATION_LINKS.map((link) => {
+              const linkSection = link.href.substring(1);
+              const isActive = isHomePage && activeSection === linkSection;
 
-            return (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className={`text-sm font-medium transition-colors ${isActive ? config.activeLink : config.link}`}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li key={link.href}>
+                  <button
+                    onClick={() => {
+                      const sectionIndex = [
+                        'welcome',
+                        'project-1',
+                        'project-2',
+                        'project-3',
+                        'project-4',
+                        'project-5',
+                        'project-6',
+                        'project-7',
+                        'about',
+                      ].indexOf(linkSection);
+                      if (sectionIndex !== -1) {
+                        window.__scrollToSection?.(sectionIndex);
+                      }
+                    }}
+                    className={`relative text-sm font-medium transition-colors cursor-pointer py-2 px-2 whitespace-nowrap ${
+                      isActive ? config.activeLink : config.link
+                    }`}
+                  >
+                    {link.label}
+                    {isActive && currentSection === 'project-1' && (
+                      <motion.div
+                        layoutId='activeNavLink'
+                        className='absolute inset-x-0 -inset-y-2 md:-inset-y-3 bg-red-600 -z-10'
+                        transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                      />
+                    )}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className={`md:hidden ${config.link}`}
+            aria-label='Toggle menu'
+          >
+            <MobileMenuToggle menuOpen={isMobileMenuOpen} />
+          </button>
+        </div>
+
+        {/* Mobile Menu - Expandable */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              className='overflow-hidden md:hidden'
+            >
+              <ul className='flex flex-col gap-2 px-4 pb-4'>
+                {NAVIGATION_LINKS.map((link) => {
+                  const linkSection = link.href.substring(1);
+                  const isActive = isHomePage && activeSection === linkSection;
+
+                  return (
+                    <li key={link.href}>
+                      <button
+                        onClick={() => {
+                          const sectionIndex = [
+                            'welcome',
+                            'project-1',
+                            'project-2',
+                            'project-3',
+                            'project-4',
+                            'project-5',
+                            'project-6',
+                            'project-7',
+                            'about',
+                          ].indexOf(linkSection);
+                          if (sectionIndex !== -1) {
+                            window.__scrollToSection?.(sectionIndex);
+                          }
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap ${
+                          isActive ? config.activeLink : config.link
+                        }`}
+                      >
+                        {link.label}
+                        {isActive && currentSection === 'project-1' && (
+                          <motion.div
+                            layoutId='activeNavLinkMobile'
+                            className='absolute inset-x-0 inset-y-0 bg-red-600 -z-10'
+                            transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+                          />
+                        )}
+                      </button>
+                    </li>
+                  );
+                })}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
