@@ -6,9 +6,9 @@ export function Project5() {
   return (
     <section className='h-screen flex flex-col relative overflow-hidden'>
       <StarField />
-      <div className='absolute inset-x-0 top-0 pt-24 md:pt-36 flex justify-center pointer-events-none z-10'>
+      <div className='absolute inset-x-0 top-0 pt-32 md:pt-42 flex justify-center pointer-events-none z-10'>
         <h2
-          className={`text-4xl md:text-6xl lg:text-8xl font-bold text-white ${orbitron.className}`}
+          className={`text-5xl lg:text-7xl font-bold text-white ${orbitron.className}`}
           style={{ transform: 'perspective(300px) rotateX(25deg)' }}
         >
           LOST IN SPACE

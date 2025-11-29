@@ -30,7 +30,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   'project-2': {
-    navbar: 'rounded-[50px] border border-border/40 bg-orange-500/80 backdrop-blur-md shadow-sm',
+    navbar: 'rounded-[32px] border border-border/40 bg-orange-500/80 backdrop-blur-md shadow-sm',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
@@ -42,7 +42,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-foreground',
   },
   'project-4': {
-    navbar: 'rounded-[50px] border-2 border-green-500/40 bg-green-500/20 backdrop-blur-md shadow-sm',
+    navbar: 'rounded-[32px] border-2 border-green-500/40 bg-green-500/20 backdrop-blur-md shadow-sm',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
     activeLink: 'text-foreground',

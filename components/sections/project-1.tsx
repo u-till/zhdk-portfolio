@@ -103,10 +103,10 @@ export function Project1() {
 
   return (
     <section className='h-screen flex flex-col relative overflow-hidden'>
-      <div className='absolute inset-x-0 top-0 pt-32 md:pt-32 flex justify-center pointer-events-none z-10'>
-        <h2 className={`text-3xl md:text-5xl lg:text-6xl font-bold ${allertaStencil.className}`}>under construction</h2>
+      <div className='absolute inset-x-0 top-0 pt-32 md:pt-42 flex justify-center pointer-events-none z-10'>
+        <h2 className={`text-5xl lg:text-7xl font-bold ${allertaStencil.className}`}>under construction</h2>
       </div>
-      <div className='flex-1 flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-12 gap-8 lg:gap-12 pt-20 md:pt-40 max-w-7xl mx-auto w-full pb-8'>
+      <div className='flex-1 flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-12 gap-8 lg:gap-12 pt-32 md:pt-40 max-w-7xl mx-auto w-full pb-8'>
         {/* 360 Viewer */}
         <div className='w-full lg:w-auto flex-shrink-0 relative'>
           <Viewer360

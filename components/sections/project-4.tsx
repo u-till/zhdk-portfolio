@@ -7,8 +7,8 @@ import Image from 'next/image';
 export function Project4() {
   return (
     <section className='h-screen flex flex-col relative overflow-hidden'>
-      <div className='absolute inset-x-0 top-0 pt-24 md:pt-36 flex justify-center pointer-events-none z-10'>
-        <h2 className={`text-3xl md:text-5xl lg:text-6xl font-bold ${doto.className}`}>toy lexicon</h2>
+      <div className='absolute inset-x-0 top-0 pt-32 md:pt-42 flex justify-center pointer-events-none z-10'>
+        <h2 className={`text-5xl lg:text-7xl font-bold ${doto.className}`}>toy lexicon</h2>
       </div>
       <div className='flex-1 flex flex-col md:flex-row items-center justify-center px-4 md:px-12 gap-6 md:gap-16 max-w-7xl mx-auto pt-32 md:pt-40'>
         <motion.div
