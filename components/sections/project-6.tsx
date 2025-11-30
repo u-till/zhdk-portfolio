@@ -2,6 +2,7 @@
 
 import { Globe } from '@/components/globe';
 import { courierPrime } from '@/lib/fonts';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 
@@ -19,7 +20,14 @@ const PHOTOS = [
 export function Project6() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState<'globe' | 'olympus' | null>(null);
+  const [showFlash, setShowFlash] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleCameraClick = () => {
+    setShowFlash(true);
+    setTimeout(() => setShowFlash(false), 100);
+    setExpandedPanel(expandedPanel === 'olympus' ? null : 'olympus');
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -40,8 +48,10 @@ export function Project6() {
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42'>
       {/* Title */}
       <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
-        <div className='max-w-6xl mx-auto w-full px-4 md:px-6 flex justify-center'>
-          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>saudade</h2>
+        <div className='max-w-screen-2xl mx-auto w-full px-4 md:px-6 flex justify-center'>
+          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
+            saudade
+          </h2>
         </div>
       </div>
 
@@ -65,11 +75,11 @@ export function Project6() {
       </div>
 
       {/* Container for panels - constrained width */}
-      <div className='absolute inset-0 max-w-6xl mx-auto px-4 md:px-6 pointer-events-none z-20'>
+      <div className='absolute inset-0 max-w-screen-2xl mx-auto px-4 md:px-6 pointer-events-none z-20'>
         {/* Globe Panel - Bottom Right */}
         <div
-          className={`absolute right-0 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md pointer-events-auto transition-all duration-500 ${
-            expandedPanel === 'globe' ? 'w-96 h-96' : 'w-48 h-48'
+          className={`absolute right-4 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md pointer-events-auto transition-all duration-500 ${
+            expandedPanel === 'globe' ? 'w-36 h-36 lg:w-96 lg:h-96' : 'w-36 h-36 lg:w-48 lg:h-48'
           }`}
         >
           <button
@@ -85,19 +95,63 @@ export function Project6() {
 
         {/* Olympus Panel - Bottom Left */}
         <div
-          className={`absolute left-0 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto transition-all duration-500 ${
-            expandedPanel === 'olympus' ? 'w-96 h-96' : 'w-48 h-48'
+          className={`absolute left-4 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto transition-all duration-500 ${
+            expandedPanel === 'olympus' ? 'w-36 h-36 lg:w-96 lg:h-96' : 'w-36 h-36 lg:w-48 lg:h-48'
           }`}
         >
           <button
             onClick={() => setExpandedPanel(expandedPanel === 'olympus' ? null : 'olympus')}
-            className='absolute top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors'
+            className='absolute top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors font-mono'
           >
-            {expandedPanel === 'olympus' ? '−' : '+'}
+            {expandedPanel === 'olympus' ? '×' : 'i'}
           </button>
-          <Image src='/saudade/olympus.png' alt='Olympus' fill className='object-cover' />
+
+          {!expandedPanel || expandedPanel !== 'olympus' ? (
+            <Image
+              src='/saudade/olympus.png'
+              alt='Olympus'
+              fill
+              className='object-cover cursor-pointer'
+              onClick={handleCameraClick}
+            />
+          ) : (
+            <div className='w-full h-full p-6 text-white overflow-y-auto flex flex-col gap-4'>
+              <h3 className={`text-2xl font-bold ${courierPrime.className}`}>Olympus OM-1</h3>
+              <p className='text-sm leading-relaxed'>
+                A legendary 35mm SLR camera from the 1970s. This compact marvel revolutionized camera design with its
+                innovative engineering and timeless aesthetic.
+              </p>
+              <div className='space-y-2 text-sm'>
+                <div className='border-l-2 border-white/40 pl-3'>
+                  <span className='font-bold block'>Year:</span>
+                  <span>1972-1984</span>
+                </div>
+                <div className='border-l-2 border-white/40 pl-3'>
+                  <span className='font-bold block'>Type:</span>
+                  <span>35mm SLR</span>
+                </div>
+                <div className='border-l-2 border-white/40 pl-3'>
+                  <span className='font-bold block'>Legacy:</span>
+                  <span>Capturing memories across continents</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
+
+      {/* Camera Flash Effect */}
+      <AnimatePresence>
+        {showFlash && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className='fixed inset-0 bg-white z-50 pointer-events-none'
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

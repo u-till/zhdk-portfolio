@@ -69,7 +69,7 @@ function Earth({ activeLocation }: GlobeProps) {
 
 export function Globe({ activeLocation }: GlobeProps) {
   return (
-    <div className='w-48 h-48'>
+    <div className='w-36 h-36 lg:w-48 lg:h-48'>
       <Canvas camera={{ position: [0, 0, 6.5], fov: 45 }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={1.2} />

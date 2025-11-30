@@ -105,12 +105,13 @@ export function Project3() {
 
   return (
     <section className='h-screen flex flex-col relative overflow-hidden pt-32 md:pt-42 gap-8'>
-      <div className='flex justify-center max-w-6xl mx-auto w-full px-4 md:px-6'>
+      <div className='flex justify-center max-w-screen-2xl mx-auto w-full px-4 md:px-6'>
         <h2 className={`text-5xl lg:text-7xl font-bold ${vt323.className}`}>amped up</h2>
       </div>
-      <div className='flex-1 flex flex-col lg:flex-row items-start justify-center px-4 md:px-0 gap-8 lg:gap-12 max-w-6xl mx-auto w-full pb-8'>
-        {/* Image Gallery */}
-        <div className='w-full lg:w-auto flex-shrink-0 relative'>
+      {/* Horizontal Scrolling Container */}
+      <div className='flex-1 overflow-x-auto overflow-y-hidden snap-x snap-mandatory lg:snap-none flex gap-8 px-4 md:px-6 pb-8 max-w-screen-2xl mx-auto scrollbar-hide'>
+        {/* Column 1: Image Gallery */}
+        <div className='min-w-full max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center relative'>
           <ImageGallery images={IMAGES} width={500} height={500} />
 
           {/* Mobile Info Button */}
@@ -122,26 +123,33 @@ export function Project3() {
           </button>
         </div>
 
-        {/* Tabbed Content - Desktop always visible, Mobile conditional */}
-        <div className='hidden lg:block w-full'>
-          <MinimalTabs tabs={TABS} />
+        {/* Column 2: Tabs */}
+        <div className='min-w-full max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center'>
+          <div className='w-full max-w-4xl h-[500px]'>
+            <MinimalTabs tabs={TABS} />
+          </div>
         </div>
 
-        {/* Mobile Tabs Modal */}
-        <AnimatePresence>
-          {showMobileTabs && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className='lg:hidden fixed inset-4 top-32 max-h-[60vh] z-30'
-            >
-              <MinimalTabs tabs={TABS} />
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Column 3: Empty styled div */}
+        <div className='min-w-full max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center'>
+          <div className='w-full max-w-4xl h-[500px] border border-black/60 bg-background/90 backdrop-blur-md'></div>
+        </div>
       </div>
+
+      {/* Mobile Tabs Modal */}
+      <AnimatePresence>
+        {showMobileTabs && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+            className='lg:hidden fixed inset-4 top-32 max-h-[60vh] z-30'
+          >
+            <MinimalTabs tabs={TABS} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

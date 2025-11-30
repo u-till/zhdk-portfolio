@@ -108,7 +108,7 @@ export function Navigation() {
 
   return (
     <nav
-      className={`fixed top-4 md:top-8 left-4 right-4 md:left-0 md:right-0 z-50 max-w-6xl md:mx-auto ${config.navbar}`}
+      className={`fixed top-4 md:top-8 left-4 right-4 z-50 max-w-screen-2xl md:mx-auto ${config.navbar}`}
       style={navbarStyle}
     >
       <div className='flex flex-col'>

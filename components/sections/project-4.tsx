@@ -7,10 +7,10 @@ import Image from 'next/image';
 export function Project4() {
   return (
     <section className='h-screen flex flex-col relative overflow-hidden pt-32 md:pt-42 gap-8'>
-      <div className='flex justify-center max-w-6xl mx-auto w-full px-4 md:px-6'>
+      <div className='flex justify-center max-w-screen-2xl mx-auto w-full px-4 md:px-6'>
         <h2 className={`text-5xl lg:text-7xl font-bold ${doto.className}`}>toy lexicon</h2>
       </div>
-      <div className='flex-1 flex flex-col md:flex-row items-center justify-center px-4 md:px-6 gap-6 md:gap-16 max-w-6xl mx-auto'>
+      <div className='flex-1 flex flex-col md:flex-row items-center justify-center px-4 md:px-6 gap-6 md:gap-16 max-w-screen-2xl mx-auto'>
         <motion.div
           className='w-full md:flex-[2] max-w-md md:max-w-none'
           whileHover={{ scale: 1.05 }}
