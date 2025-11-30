@@ -45,10 +45,11 @@ function Earth({ activeLocation }: GlobeProps) {
   const groupRef = useRef<THREE.Group>(null);
   const texture = useLoader(THREE.TextureLoader, '/saudade/globe-texture.png');
 
-  useFrame((state) => {
+  useFrame(() => {
     if (groupRef.current) {
-      const targetRotation = (activeLocation.lng * Math.PI) / 180 + state.clock.elapsedTime * 0.05;
-      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotation, 0.05);
+      // Rotate to show the pin (negate longitude to face the camera, subtract 95° offset)
+      const targetRotation = -(activeLocation.lng * Math.PI) / 180 - (95 * Math.PI) / 180;
+      groupRef.current.rotation.y = THREE.MathUtils.lerp(groupRef.current.rotation.y, targetRotation, 0.08);
     }
   });
 
@@ -69,7 +70,7 @@ function Earth({ activeLocation }: GlobeProps) {
 
 export function Globe({ activeLocation }: GlobeProps) {
   return (
-    <div className='w-36 h-36 lg:w-48 lg:h-48'>
+    <div className='w-full h-full'>
       <Canvas camera={{ position: [0, 0, 6.5], fov: 45 }}>
         <ambientLight intensity={0.4} />
         <directionalLight position={[5, 5, 5]} intensity={1.2} />

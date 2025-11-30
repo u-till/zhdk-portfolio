@@ -124,7 +124,7 @@ export function Navigation() {
           </button>
 
           {/* Desktop Navigation */}
-          <ul className='hidden md:flex items-center gap-8'>
+          <ul className='hidden lg:flex items-center gap-8'>
             {NAVIGATION_LINKS.map((link) => {
               const linkSection = link.href.substring(1);
               const isActive = isHomePage && activeSection === linkSection;
@@ -169,7 +169,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`md:hidden ${config.link}`}
+            className={`lg:hidden ${config.link}`}
             aria-label='Toggle menu'
           >
             <MobileMenuToggle menuOpen={isMobileMenuOpen} />
@@ -184,7 +184,7 @@ export function Navigation() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className='overflow-hidden md:hidden'
+              className='overflow-hidden lg:hidden'
             >
               <ul className='flex flex-col gap-2 px-4 pb-4'>
                 {NAVIGATION_LINKS.map((link) => {
