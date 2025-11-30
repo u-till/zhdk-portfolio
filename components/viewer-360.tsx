@@ -1,8 +1,8 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 interface Viewer360Props {
   imageFolder: string;
@@ -27,6 +27,7 @@ export function Viewer360({
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -35,37 +36,40 @@ export function Viewer360({
     return `/${imageFolder}/${imagePrefix}${frameNumber}.${imageFormat}`;
   };
 
-  const animateRotation = (direction: number) => {
-    if (isAnimating) return;
+  const animateRotation = useCallback(
+    (direction: number) => {
+      if (isAnimating) return;
 
-    setIsAnimating(true);
-    const framesToMove = 4;
-    let step = 0;
+      setIsAnimating(true);
+      const framesToMove = 4;
+      let step = 0;
 
-    if (animationRef.current) {
-      clearInterval(animationRef.current);
-    }
-
-    animationRef.current = setInterval(() => {
-      if (step < framesToMove) {
-        setCurrentFrame((prev) => (prev + direction + totalFrames) % totalFrames);
-        step++;
-      } else {
-        if (animationRef.current) {
-          clearInterval(animationRef.current);
-        }
-        setIsAnimating(false);
+      if (animationRef.current) {
+        clearInterval(animationRef.current);
       }
-    }, 30);
-  };
 
-  const rotateLeft = () => {
+      animationRef.current = setInterval(() => {
+        if (step < framesToMove) {
+          setCurrentFrame((prev) => (prev + direction + totalFrames) % totalFrames);
+          step++;
+        } else {
+          if (animationRef.current) {
+            clearInterval(animationRef.current);
+          }
+          setIsAnimating(false);
+        }
+      }, 30);
+    },
+    [isAnimating, totalFrames]
+  );
+
+  const rotateLeft = useCallback(() => {
     animateRotation(-1);
-  };
+  }, [animateRotation]);
 
-  const rotateRight = () => {
+  const rotateRight = useCallback(() => {
     animateRotation(1);
-  };
+  }, [animateRotation]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
@@ -115,15 +119,72 @@ export function Viewer360({
     };
   }, []);
 
+  // Keyboard controls for fullscreen mode
+  useEffect(() => {
+    if (!isFullscreen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        rotateLeft();
+      } else if (e.key === 'ArrowRight') {
+        rotateRight();
+      } else if (e.key === 'Escape') {
+        setIsFullscreen(false);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFullscreen, rotateLeft, rotateRight]);
+
   return (
-    <div className='flex flex-col items-center gap-4'>
+    <>
+      {/* Backdrop - Only shown in fullscreen */}
+      <AnimatePresence>
+        {isFullscreen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className='fixed inset-0 z-40'
+            style={{ backgroundColor: '#ffdc51ff' }}
+            onClick={() => setIsFullscreen(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Single Animated Viewer */}
       <motion.div
         ref={containerRef}
-        className='relative overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full lg:w-auto aspect-square'
-        style={{ width, height }}
+        layout
+        className={`overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square ${
+          isFullscreen
+            ? 'fixed inset-x-0 bottom-0 top-24 z-40 m-auto'
+            : 'relative w-full  max-w-3xl max-h-3xl lg:w-auto'
+        }`}
+        style={
+          isFullscreen
+            ? {
+                width: 'min(80vw, 80vh)',
+                height: 'min(80vw, 80vh)',
+              }
+            : { width, height }
+        }
+        transition={{ duration: 0.4, ease: 'easeInOut' }}
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
+        onClick={(e) => isFullscreen && e.stopPropagation()}
       >
+        {/* Fullscreen Button */}
+        <button
+          onClick={() => setIsFullscreen(!isFullscreen)}
+          className='absolute top-4 right-4 w-12 h-12 border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-mono font-bold text-xl hover:bg-neutral-100 transition-colors z-20 flex items-center justify-center'
+          aria-label={isFullscreen ? 'Close fullscreen' : 'Fullscreen'}
+        >
+          {isFullscreen ? '×' : '⛶'}
+        </button>
+
         {/* Background image */}
         <Image
           src='/under-construction/korpus-360/uc-360-bg.jpg'
@@ -147,6 +208,6 @@ export function Viewer360({
           </div>
         </div>
       </motion.div>
-    </div>
+    </>
   );
 }

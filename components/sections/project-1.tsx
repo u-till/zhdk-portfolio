@@ -102,11 +102,11 @@ export function Project1() {
   const [showMobileTabs, setShowMobileTabs] = useState(false);
 
   return (
-    <section className='h-screen flex flex-col relative overflow-hidden'>
-      <div className='absolute inset-x-0 top-0 pt-32 md:pt-42 flex justify-center pointer-events-none z-10'>
+    <section className='h-screen flex flex-col relative overflow-hidden pt-32 md:pt-42 gap-8'>
+      <div className='flex justify-center max-w-6xl mx-auto w-full px-4 md:px-6'>
         <h2 className={`text-5xl lg:text-7xl font-bold ${allertaStencil.className}`}>under construction</h2>
       </div>
-      <div className='flex-1 flex flex-col lg:flex-row items-center justify-center px-4 md:px-8 lg:px-12 gap-8 lg:gap-12 pt-32 md:pt-40 max-w-7xl mx-auto w-full pb-8'>
+      <div className='flex-1 flex flex-col lg:flex-row items-center justify-center px-4 md:px-0 gap-8 lg:gap-12 max-w-6xl mx-auto w-full pb-8'>
         {/* 360 Viewer */}
         <div className='w-full lg:w-auto flex-shrink-0 relative'>
           <Viewer360
@@ -129,7 +129,7 @@ export function Project1() {
         </div>
 
         {/* Tabbed Content - Desktop always visible, Mobile conditional */}
-        <div className='hidden lg:block lg:w-[500px] lg:h-[500px]'>
+        <div className='hidden lg:block w-full'>
           <BrutalistTabs tabs={TABS} />
         </div>
 
