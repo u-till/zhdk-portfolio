@@ -158,10 +158,8 @@ export function Viewer360({
       <motion.div
         ref={containerRef}
         layout
-        className={`overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square ${
-          isFullscreen
-            ? 'fixed inset-x-0 bottom-0 top-24 z-40 m-auto'
-            : 'relative w-full  max-w-3xl max-h-3xl lg:w-auto'
+        className={`overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] max-w-full ${
+          isFullscreen ? 'fixed inset-x-0 bottom-0 top-24 z-40 m-auto aspect-square' : 'relative mx-auto aspect-square'
         }`}
         style={
           isFullscreen
@@ -169,7 +167,10 @@ export function Viewer360({
                 width: 'min(80vw, 80vh)',
                 height: 'min(80vw, 80vh)',
               }
-            : { width, height }
+            : {
+                width: width,
+                height: height,
+              }
         }
         transition={{ duration: 0.4, ease: 'easeInOut' }}
         onMouseDown={handleMouseDown}

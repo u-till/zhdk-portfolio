@@ -70,8 +70,8 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       {/* Single Animated Viewer */}
       <motion.div
         layout
-        className={`overflow-hidden ${currentStyle.container} ${
-          isFullscreen ? 'fixed inset-0 z-40 w-full h-full' : 'relative'
+        className={`overflow-hidden ${currentStyle.container} max-w-full mx-auto ${
+          isFullscreen ? 'fixed inset-0 z-40 w-full h-full' : 'relative aspect-square'
         }`}
         style={isFullscreen ? {} : { width, height }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
