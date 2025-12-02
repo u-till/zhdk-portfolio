@@ -1,6 +1,5 @@
 'use client';
 
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -20,14 +19,11 @@ export function Viewer360({
   imageFormat = 'jpg',
   imagePrefix = '',
   imagePadding = 0,
-  width = 600,
-  height = 600,
 }: Viewer360Props) {
   const [currentFrame, setCurrentFrame] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
-  const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -119,96 +115,35 @@ export function Viewer360({
     };
   }, []);
 
-  // Keyboard controls for fullscreen mode
-  useEffect(() => {
-    if (!isFullscreen) return;
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        rotateLeft();
-      } else if (e.key === 'ArrowRight') {
-        rotateRight();
-      } else if (e.key === 'Escape') {
-        setIsFullscreen(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen, rotateLeft, rotateRight]);
-
   return (
-    <>
-      {/* Backdrop - Only shown in fullscreen */}
-      <AnimatePresence>
-        {isFullscreen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className='fixed inset-0 z-40'
-            style={{ backgroundColor: '#ffdc51ff' }}
-            onClick={() => setIsFullscreen(false)}
+    <div
+      ref={containerRef}
+      className='overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full relative aspect-square'
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+    >
+      {/* Background image */}
+      <Image
+        src='/under-construction/korpus-360/uc-360-bg.jpg'
+        alt='360 viewer background'
+        fill
+        className='object-cover pointer-events-none'
+        priority
+      />
+
+      {/* 360 rotating image */}
+      <div className='absolute inset-0 flex items-center justify-center z-10 p-8'>
+        <div className='relative w-full h-full'>
+          <Image
+            src={getImagePath(currentFrame)}
+            alt={`360 view frame ${currentFrame + 1}`}
+            fill
+            className='object-contain pointer-events-none'
+            priority={currentFrame === 0}
+            draggable={false}
           />
-        )}
-      </AnimatePresence>
-
-      {/* Single Animated Viewer */}
-      <motion.div
-        ref={containerRef}
-        layout
-        className={`overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] max-w-full ${
-          isFullscreen ? 'fixed inset-x-0 bottom-0 top-24 z-40 m-auto aspect-square' : 'relative mx-auto aspect-square'
-        }`}
-        style={
-          isFullscreen
-            ? {
-                width: 'min(80vw, 80vh)',
-                height: 'min(80vw, 80vh)',
-              }
-            : {
-                width: width,
-                height: height,
-              }
-        }
-        transition={{ duration: 0.4, ease: 'easeInOut' }}
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onClick={(e) => isFullscreen && e.stopPropagation()}
-      >
-        {/* Fullscreen Button */}
-        <button
-          onClick={() => setIsFullscreen(!isFullscreen)}
-          className='absolute top-4 right-4 w-12 h-12 border-4 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-mono font-bold text-xl hover:bg-neutral-100 transition-colors z-20 flex items-center justify-center'
-          aria-label={isFullscreen ? 'Close fullscreen' : 'Fullscreen'}
-        >
-          {isFullscreen ? '×' : '⛶'}
-        </button>
-
-        {/* Background image */}
-        <Image
-          src='/under-construction/korpus-360/uc-360-bg.jpg'
-          alt='360 viewer background'
-          fill
-          className='object-cover pointer-events-none'
-          priority
-        />
-
-        {/* 360 rotating image */}
-        <div className='absolute inset-0 flex items-center justify-center z-10 p-8'>
-          <div className='relative w-full h-full'>
-            <Image
-              src={getImagePath(currentFrame)}
-              alt={`360 view frame ${currentFrame + 1}`}
-              fill
-              className='object-contain pointer-events-none'
-              priority={currentFrame === 0}
-              draggable={false}
-            />
-          </div>
         </div>
-      </motion.div>
-    </>
+      </div>
+    </div>
   );
 }

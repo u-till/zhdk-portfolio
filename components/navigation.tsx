@@ -107,11 +107,8 @@ export function Navigation() {
   };
 
   return (
-    <nav
-      className={`fixed top-4 md:top-8 left-4 right-4 z-50 max-w-screen-2xl md:mx-auto ${config.navbar}`}
-      style={navbarStyle}
-    >
-      <div className='flex flex-col'>
+    <div className={`fixed top-4 md:top-8 w-full z-50 flex justify-center`}>
+      <nav className={`flex w-full flex-col max-w-screen-2xl mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
         <div className='flex items-center justify-between px-4 md:px-6 py-3 md:py-4'>
           <button
             onClick={() => {
@@ -148,15 +145,15 @@ export function Navigation() {
                         window.__scrollToSection?.(sectionIndex);
                       }
                     }}
-                    className={`relative text-sm font-medium transition-colors cursor-pointer py-2 px-2 whitespace-nowrap ${
+                    className={`relative text-sm font-medium transition-colors cursor-pointer py-2 px-2 whitespace-nowrap isolate ${
                       isActive ? config.activeLink : config.link
                     }`}
                   >
                     {link.label}
-                    {isActive && currentSection === 'project-1' && (
+                    {isActive && linkSection === 'project-1' && (
                       <motion.div
                         layoutId='activeNavLink'
-                        className='absolute inset-x-0 -inset-y-2 md:-inset-y-3 bg-red-600 -z-10'
+                        className='absolute inset-x-0 -inset-y-2 md:-inset-y-3 bg-red-600 z-[-1]'
                         transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                       />
                     )}
@@ -211,15 +208,15 @@ export function Navigation() {
                           }
                           setIsMobileMenuOpen(false);
                         }}
-                        className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap ${
+                        className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
                           isActive ? config.activeLink : config.link
                         }`}
                       >
                         {link.label}
-                        {isActive && currentSection === 'project-1' && (
+                        {isActive && linkSection === 'project-1' && (
                           <motion.div
                             layoutId='activeNavLinkMobile'
-                            className='absolute inset-x-0 inset-y-0 bg-red-600 -z-10'
+                            className='absolute inset-x-0 inset-y-0 bg-red-600 z-[-1]'
                             transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
                           />
                         )}
@@ -231,7 +228,7 @@ export function Navigation() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
-    </nav>
+      </nav>
+    </div>
   );
 }

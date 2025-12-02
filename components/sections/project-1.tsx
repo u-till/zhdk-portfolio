@@ -98,35 +98,29 @@ const TABS = [
 
 export function Project1() {
   return (
-    <section className='h-screen flex flex-col relative overflow-y-hidden pt-24 md:pt-42 gap-4 lg:gap-8'>
-      <div className='flex justify-center max-w-screen-2xl mx-auto w-full px-4 md:px-6 flex-shrink-0'>
-        <h2 className={`text-4xl lg:text-7xl font-bold sticky left-2 lg:static ${allertaStencil.className}`}>under construction</h2>
-      </div>
-      {/* Horizontal Scrolling Container */}
-      <div className='flex-1 overflow-x-auto overflow-y-hidden lg:overflow-y-visible snap-x snap-mandatory lg:snap-none flex gap-4 lg:gap-8 px-4 md:px-6 pb-8 pt-4 max-w-screen-2xl mx-auto scrollbar-hide'>
+    <section className='h-screen flex flex-col pt-24 md:pt-28 gap-4 md:gap-8'>
+      {/* Content Container */}
+      <div className='flex-1 flex flex-col lg:flex-row gap-4 md:gap-8 p-4 md:p-8 max-w-screen-2xl mx-auto w-full overflow-hidden'>
         {/* Column 1: 360 Viewer */}
-        <div className='min-w-[90vw] max-w-[90vw] max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center relative'>
+
+        <div className='flex flex items-start justify-start'>
           <Viewer360
             imageFolder='under-construction/korpus-360'
             totalFrames={27}
             imageFormat='png'
             imagePrefix='normalized-'
             imagePadding={2}
-            width={500}
-            height={500}
           />
         </div>
 
         {/* Column 2: Tabs */}
-        <div className='min-w-[90vw] max-w-[90vw] max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center'>
-          <div className='w-[500px] max-w-full h-[500px]'>
+        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start'>
+          <h2 className={`text-4xl lg:text-7xl font-bold ${allertaStencil.className}`}>
+            under <br></br>construction
+          </h2>
+          <div className='w-full h-full'>
             <BrutalistTabs tabs={TABS} />
           </div>
-        </div>
-
-        {/* Column 3: Empty styled div */}
-        <div className='min-w-[90vw] max-w-[90vw] max-h-[60vh] lg:max-h-none lg:min-w-[480px] lg:flex-1 snap-center lg:snap-align-none flex-shrink-0 flex items-center justify-center'>
-          <div className='w-[500px] max-w-full h-[500px] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'></div>
         </div>
       </div>
     </section>

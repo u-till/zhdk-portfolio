@@ -1,7 +1,7 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Tab {
   id: string;
@@ -25,9 +25,7 @@ export function BrutalistTabs({ tabs }: BrutalistTabsProps) {
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
             className={`relative py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors border-r-4 even:border-r-0 border-black ${
-              activeTab === tab.id
-                ? 'bg-red-600 text-white'
-                : 'bg-white text-black hover:bg-neutral-100'
+              activeTab === tab.id ? 'bg-red-600 text-white' : 'bg-white text-black hover:bg-neutral-100'
             }`}
           >
             {tab.label}
@@ -43,7 +41,7 @@ export function BrutalistTabs({ tabs }: BrutalistTabsProps) {
       </div>
 
       {/* Tab Content */}
-      <div className='relative min-h-[300px] md:min-h-[400px] p-6 md:p-8 overflow-auto'>
+      <div className='relative h-full p-6 md:p-8 overflow-auto'>
         <AnimatePresence mode='wait'>
           {tabs.map(
             (tab) =>

@@ -18,6 +18,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
   const styles = {
     minimal: {
       container: 'border border-black/60 bg-background/90 backdrop-blur-md',
+      containerFullscreen: 'border border-black/60 bg-background/90 backdrop-blur-md',
       button: 'border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5',
       thumbnail: 'border-black/60',
       thumbnailActive: 'border-2 border-black',
@@ -25,6 +26,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
     },
     retro: {
       container: 'rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg',
+      containerFullscreen: 'border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg',
       button: 'rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80',
       thumbnail: 'border-orange-300/40 rounded-lg',
       thumbnailActive: 'border-2 border-orange-300 rounded-lg',
@@ -61,7 +63,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className={`fixed inset-0 z-40 ${currentStyle.backdrop}`}
+            className={`fixed inset-0 z-[60] ${currentStyle.backdrop}`}
             onClick={() => setIsFullscreen(false)}
           />
         )}
@@ -70,10 +72,9 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       {/* Single Animated Viewer */}
       <motion.div
         layout
-        className={`overflow-hidden ${currentStyle.container} max-w-full mx-auto ${
-          isFullscreen ? 'fixed inset-0 z-40 w-full h-full' : 'relative aspect-square'
+        className={`overflow-hidden ${isFullscreen ? currentStyle.containerFullscreen : currentStyle.container} ${
+          isFullscreen ? 'fixed inset-0 z-[60] w-full h-full' : 'relative aspect-square h-full'
         }`}
-        style={isFullscreen ? {} : { width, height }}
         transition={{ duration: 0.4, ease: 'easeInOut' }}
         onClick={(e) => isFullscreen && e.stopPropagation()}
       >
@@ -116,21 +117,16 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
         </button>
 
         {/* Main Image */}
-        <motion.div
-          key={selectedImage}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.3 }}
-          className='relative w-full h-full'
-        >
+        <div className='relative w-full h-full'>
           <Image
+            key={selectedImage}
             src={images[selectedImage]}
             alt={`Gallery image ${selectedImage + 1}`}
             fill
-            className={isFullscreen ? 'object-contain' : 'object-cover'}
+            className={`transition-all ${isFullscreen ? 'object-contain' : 'object-cover'}`}
             priority={selectedImage === 0}
           />
-        </motion.div>
+        </div>
 
         {/* Thumbnail Strip */}
         <div className='absolute bottom-4 left-4 right-4 flex gap-2 justify-start'>
