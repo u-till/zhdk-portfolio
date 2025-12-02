@@ -3,6 +3,8 @@
 import { BrutalistTabs } from '@/components/brutalist-tabs';
 import { Viewer360 } from '@/components/viewer-360';
 import { allertaStencil } from '@/lib/fonts';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
 const TABS = [
   {
@@ -97,12 +99,13 @@ const TABS = [
 ];
 
 export function Project1() {
+  const [showMobileInfo, setShowMobileInfo] = useState(false);
+
   return (
     <section className='h-screen flex flex-col pt-24 md:pt-28 gap-4 md:gap-8'>
-      {/* Content Container */}
-      <div className='flex-1 flex flex-col lg:flex-row gap-4 md:gap-8 p-4 md:p-8 max-w-screen-2xl mx-auto w-full overflow-hidden'>
+      {/* Desktop Layout */}
+      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 p-4 md:p-8 max-w-screen-2xl mx-auto w-full overflow-hidden'>
         {/* Column 1: 360 Viewer */}
-
         <div className='flex flex items-start justify-start'>
           <Viewer360
             imageFolder='under-construction/korpus-360'
@@ -122,6 +125,57 @@ export function Project1() {
             <BrutalistTabs tabs={TABS} />
           </div>
         </div>
+      </div>
+
+      {/* Mobile Layout */}
+      <div className='lg:hidden flex-1 flex flex-col p-4 gap-4 max-w-screen-2xl mx-auto w-full overflow-hidden'>
+        {/* Title - Always visible */}
+        <h2 className={`text-4xl font-bold ${allertaStencil.className}`}>
+          under <br></br>construction
+        </h2>
+
+        {/* Middle Content - Swipeable */}
+        <div className='flex-1 relative'>
+          <AnimatePresence initial={false}>
+            {!showMobileInfo ? (
+              <motion.div
+                key='viewer'
+                initial={{ x: 'calc(-100% - 1rem)' }}
+                animate={{ x: 0 }}
+                exit={{ x: 'calc(-100% - 1rem)' }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className='absolute inset-0 flex items-center justify-center w-full'
+              >
+                <Viewer360
+                  imageFolder='under-construction/korpus-360'
+                  totalFrames={27}
+                  imageFormat='png'
+                  imagePrefix='normalized-'
+                  imagePadding={2}
+                />
+              </motion.div>
+            ) : (
+              <motion.div
+                key='info'
+                initial={{ x: 'calc(100% + 1rem)' }}
+                animate={{ x: 0 }}
+                exit={{ x: 'calc(100% + 1rem)' }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                className='absolute inset-0 overflow-hidden'
+              >
+                <BrutalistTabs tabs={TABS} />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+
+        {/* Button - Always visible */}
+        <button
+          onClick={() => setShowMobileInfo(!showMobileInfo)}
+          className='w-full py-4 px-6 bg-red-600 text-white font-mono font-bold uppercase border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] hover:bg-red-700 transition-colors'
+        >
+          {showMobileInfo ? 'Back' : 'More Infos'}
+        </button>
       </div>
     </section>
   );

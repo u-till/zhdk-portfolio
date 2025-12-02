@@ -8,7 +8,7 @@ interface ImageGalleryProps {
   images: string[];
   width?: number;
   height?: number;
-  variant?: 'minimal' | 'retro';
+  variant?: 'minimal' | 'retro' | 'pill';
 }
 
 export function ImageGallery({ images, width = 500, height = 500, variant = 'minimal' }: ImageGalleryProps) {
@@ -18,7 +18,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
   const styles = {
     minimal: {
       container: 'border border-black/60 bg-background/90 backdrop-blur-md',
-      containerFullscreen: 'border border-black/60 bg-background/90 backdrop-blur-md',
+      containerFullscreen: 'bg-background/95 backdrop-blur-md',
       button: 'border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5',
       thumbnail: 'border-black/60',
       thumbnailActive: 'border-2 border-black',
@@ -31,6 +31,14 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       thumbnail: 'border-orange-300/40 rounded-lg',
       thumbnailActive: 'border-2 border-orange-300 rounded-lg',
       backdrop: 'bg-orange-400 backdrop-blur-md',
+    },
+    pill: {
+      container: 'bg-transparent',
+      containerFullscreen: 'bg-background/95 backdrop-blur-md',
+      button: 'rounded-full bg-green-500 text-white hover:bg-green-600 border-0',
+      thumbnail: 'border border-green-500/40 rounded-lg',
+      thumbnailActive: 'border-2 border-green-500 rounded-lg',
+      backdrop: 'bg-background/95 backdrop-blur-md',
     },
   };
 
