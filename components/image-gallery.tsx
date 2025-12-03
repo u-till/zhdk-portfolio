@@ -25,7 +25,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       backdrop: 'bg-background/95 backdrop-blur-md',
     },
     retro: {
-      container: 'rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg',
+      container: 'rounded-[32px] border border-none bg-none backdrop-blur-md',
       containerFullscreen: 'border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg',
       button: 'rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80',
       thumbnail: 'border-orange-300/40 rounded-lg',
@@ -131,7 +131,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
             src={images[selectedImage]}
             alt={`Gallery image ${selectedImage + 1}`}
             fill
-            className={`transition-all ${isFullscreen ? 'object-contain' : 'object-cover'}`}
+            className={`transition-all ${isFullscreen ? 'object-contain' : 'object-contain'}`}
             priority={selectedImage === 0}
           />
         </div>

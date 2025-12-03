@@ -6,7 +6,12 @@ import { shrikhand } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-const IMAGES = ['/retrofitted/lamp-1.png', '/retrofitted/lamp-2.png', '/retrofitted/lamp-3.png'];
+const IMAGES = [
+  '/retrofitted/lamp-1.png',
+  '/retrofitted/lamp-2.png',
+  '/retrofitted/lamp-3.png',
+  '/retrofitted/schematic.png',
+];
 
 const TABS = [
   {

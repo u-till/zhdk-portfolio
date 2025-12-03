@@ -164,8 +164,36 @@ export function FullPageScroll({ children }: Props) {
     };
   }, [currentIndex, scrollToSection]);
 
+  const handleDragEnd = (_: any, info: { offset: { y: number }; velocity: { y: number } }) => {
+    const SWIPE_THRESHOLD = 50;
+    const VELOCITY_THRESHOLD = 500;
+
+    if (isScrolling.current) return;
+
+    const { offset, velocity } = info;
+
+    // Detect swipe based on offset or velocity
+    if (Math.abs(offset.y) > SWIPE_THRESHOLD || Math.abs(velocity.y) > VELOCITY_THRESHOLD) {
+      if (offset.y < 0 || velocity.y < 0) {
+        // Swiped up - go to next section
+        scrollToSection(currentIndex + 1);
+      } else {
+        // Swiped down - go to previous section
+        scrollToSection(currentIndex - 1);
+      }
+    }
+  };
+
   return (
-    <div ref={containerRef} className='relative w-full h-screen overflow-hidden'>
+    <motion.div
+      ref={containerRef}
+      className='relative w-full h-screen overflow-hidden'
+      drag="y"
+      dragConstraints={{ top: 0, bottom: 0 }}
+      dragElastic={0.2}
+      onDragEnd={handleDragEnd}
+      dragMomentum={false}
+    >
       <AnimatePresence mode='wait'>
         <motion.div
           key={currentIndex}
@@ -178,6 +206,6 @@ export function FullPageScroll({ children }: Props) {
           {children[currentIndex]}
         </motion.div>
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }

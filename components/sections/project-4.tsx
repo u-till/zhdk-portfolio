@@ -6,7 +6,7 @@ import { doto } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-const IMAGES = ['/toy-lexicon/front-mockup-small.png'];
+const IMAGES = ['/toy-lexicon/front-mockup-small.png', '/toy-lexicon/cover.jpg'];
 
 const TABS = [
   {
