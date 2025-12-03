@@ -7,7 +7,7 @@ import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useRouter } from 'next/navigation';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 
-const SECTION_IDS = ['welcome', 'project-1', 'project-2', 'project-3', 'project-4', 'project-5', 'project-6', 'project-7', 'about'];
+const SECTION_IDS = ['welcome', 'under-construction', 'retrofitted', 'amped-up', 'toy-lexicon', 'lost-in-space', 'saudade', 'dayjob', 'about'];
 
 interface Props {
   children: ReactNode[];

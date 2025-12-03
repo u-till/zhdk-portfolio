@@ -1,13 +1,13 @@
 'use client';
 
 import { Welcome } from '@/components/sections/welcome';
-import { Project1 } from '@/components/sections/project-1';
-import { Project2 } from '@/components/sections/project-2';
-import { Project3 } from '@/components/sections/project-3';
-import { Project4 } from '@/components/sections/project-4';
-import { Project5 } from '@/components/sections/project-5';
-import { Project6 } from '@/components/sections/project-6';
-import { Project7 } from '@/components/sections/project-7';
+import { Project1 } from '@/components/sections/1-under-construction';
+import { Project2 } from '@/components/sections/2-retrofitted';
+import { Project3 } from '@/components/sections/3-amped-up';
+import { Project4 } from '@/components/sections/4-toy-lexicon';
+import { Project5 } from '@/components/sections/5-lost-in-space';
+import { Project6 } from '@/components/sections/6-saudade';
+import { Project7 } from '@/components/sections/7-dayjob';
 import { About } from '@/components/sections/about';
 import { FullPageScroll } from '@/components/fullpage-scroll-motion';
 

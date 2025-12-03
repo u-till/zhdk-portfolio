@@ -5,13 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 const PROJECT_VIDEOS: Record<string, string> = {
-  'project-1': '/under-construction/preview.mp4',
-  'project-2': '/retrofitted/preview.mp4',
-  'project-3': '/amped-up/preview.mp4',
-  'project-4': '/toy-lexicon/preview.mp4',
-  'project-5': '/lost-in-space/preview.mp4',
-  'project-6': '/saudade/preview.mp4',
-  'project-7': '/dayjob/preview.mp4',
+  'under-construction': '/under-construction/preview.mp4',
+  'retrofitted': '/retrofitted/preview.mp4',
+  'amped-up': '/amped-up/preview.mp4',
+  'toy-lexicon': '/toy-lexicon/preview.mp4',
+  'lost-in-space': '/lost-in-space/preview.mp4',
+  'saudade': '/saudade/preview.mp4',
+  'dayjob': '/dayjob/preview.mp4',
 };
 
 export function Welcome() {
