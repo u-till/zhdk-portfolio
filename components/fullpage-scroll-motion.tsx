@@ -13,6 +13,7 @@ interface Props {
 
 export function FullPageScroll({ children }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const isScrolling = useRef(false);
   const scrollAccumulator = useRef(0);
   const lastScrollTime = useRef(Date.now());
@@ -37,6 +38,17 @@ export function FullPageScroll({ children }: Props) {
     }, 1000);
   }, [children.length, router, setActiveSection]);
 
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
   // Expose scrollToSection to window for navigation
   useEffect(() => {
     window.__scrollToSection = scrollToSection;
@@ -44,6 +56,23 @@ export function FullPageScroll({ children }: Props) {
       delete window.__scrollToSection;
     };
   }, [scrollToSection]);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isScrolling.current) return;
+
+      if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        scrollToSection(currentIndex - 1);
+      } else if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        scrollToSection(currentIndex + 1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [currentIndex, scrollToSection]);
 
   useEffect(() => {
     const SCROLL_THRESHOLD = 100;
@@ -188,10 +217,10 @@ export function FullPageScroll({ children }: Props) {
     <motion.div
       ref={containerRef}
       className='relative w-full h-screen overflow-hidden'
-      drag="y"
+      drag={isMobile ? "y" : false}
       dragConstraints={{ top: 0, bottom: 0 }}
       dragElastic={0.2}
-      onDragEnd={handleDragEnd}
+      onDragEnd={isMobile ? handleDragEnd : undefined}
       dragMomentum={false}
     >
       <AnimatePresence mode='wait'>

@@ -87,7 +87,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 
 export function Navigation() {
   const pathname = usePathname();
-  const { activeSection } = useActiveSectionContext();
+  const { activeSection, setHoveredProject } = useActiveSectionContext();
   const isHomePage = pathname === '/';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -143,6 +143,16 @@ export function Navigation() {
                       ].indexOf(linkSection);
                       if (sectionIndex !== -1) {
                         window.__scrollToSection?.(sectionIndex);
+                      }
+                    }}
+                    onMouseEnter={() => {
+                      if (activeSection === 'welcome') {
+                        setHoveredProject(linkSection);
+                      }
+                    }}
+                    onMouseLeave={() => {
+                      if (activeSection === 'welcome') {
+                        setHoveredProject(null);
                       }
                     }}
                     className={`relative text-sm font-medium transition-colors cursor-pointer py-2 px-2 whitespace-nowrap isolate ${
