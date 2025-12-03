@@ -1,7 +1,7 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Tab {
   id: string;
@@ -24,7 +24,7 @@ export function MinimalTabs({ tabs }: MinimalTabsProps) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors border-r border-black/60 even:border-r-0 ${
+            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors border-r border-black/60 even:border-r-0 ${
               activeTab === tab.id
                 ? 'bg-foreground text-background'
                 : 'bg-transparent text-foreground hover:bg-foreground/5'

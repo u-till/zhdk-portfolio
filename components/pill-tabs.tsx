@@ -1,7 +1,7 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Tab {
   id: string;
@@ -24,7 +24,7 @@ export function PillTabs({ tabs }: PillTabsProps) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative py-2 px-4 rounded-full font-medium text-sm uppercase transition-colors ${
+            className={`relative cursor-pointer py-2 px-4 rounded-full font-medium text-sm uppercase transition-colors ${
               activeTab === tab.id
                 ? 'bg-green-500 text-white'
                 : 'bg-transparent text-foreground border border-green-500/40 hover:bg-green-500/10'

@@ -16,11 +16,11 @@ class Star {
     this.y = Math.random() * h;
     this.radius = Math.random();
     this.alpha = Math.random();
-    this.velocity = 0.05 * this.radius;
+    this.velocity = 0.02 * this.radius; // <- movement speed
   }
 
   onUpdate(ctx: CanvasRenderingContext2D, time: number) {
-    this.alpha = Math.abs(0.8 * Math.sin(time + this.id));
+    this.alpha = Math.abs(0.8 * Math.sin(time * 0.5 + this.id)); // (time * 0.5 + this.id) <- blinking speed
     this.x -= this.velocity;
 
     if (this.x <= 0) {
@@ -43,12 +43,16 @@ class Star {
 export function StarField() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const particlesRef = useRef<Star[]>([]);
-  const starsCounter = 500;
+  const resizeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
 
   useEffect(() => {
     const canvas = canvasRef.current!;
     const ctx = canvas.getContext('2d')!;
     let animationFrameId: number;
+
+    // Reduce star count on mobile for better performance
+    const isMobile = window.innerWidth < 1024;
+    const starsCounter = isMobile ? 300 : 500;
 
     const init = () => {
       const maxW = window.innerWidth;
@@ -67,14 +71,21 @@ export function StarField() {
       animate();
     };
 
+    // Debounced resize handler
     const onResize = () => {
-      const maxW = window.innerWidth;
-      const maxH = window.innerHeight;
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
 
-      canvas.width = maxW;
-      canvas.height = maxH;
+      resizeTimeoutRef.current = setTimeout(() => {
+        const maxW = window.innerWidth;
+        const maxH = window.innerHeight;
 
-      particlesRef.current.forEach((particle) => particle.onResize(maxW, maxH));
+        canvas.width = maxW;
+        canvas.height = maxH;
+
+        particlesRef.current.forEach((particle) => particle.onResize(maxW, maxH));
+      }, 150);
     };
 
     const animate = () => {
@@ -83,7 +94,8 @@ export function StarField() {
     };
 
     const render = () => {
-      const time = 0.00075 * new Date().getTime();
+      // Use performance.now() for better performance
+      const time = 0.00075 * performance.now();
       const maxW = canvas.width;
       const maxH = canvas.height;
 
@@ -99,8 +111,18 @@ export function StarField() {
     return () => {
       window.removeEventListener('resize', onResize);
       cancelAnimationFrame(animationFrameId);
+      if (resizeTimeoutRef.current) {
+        clearTimeout(resizeTimeoutRef.current);
+      }
     };
   }, []);
 
-  return <canvas ref={canvasRef} className='absolute inset-0 w-full h-full bg-black' id='star-field' />;
+  return (
+    <canvas
+      ref={canvasRef}
+      className='absolute inset-0 w-full h-full bg-black'
+      id='star-field'
+      style={{ willChange: 'transform' }}
+    />
+  );
 }

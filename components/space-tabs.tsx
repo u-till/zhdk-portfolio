@@ -27,7 +27,7 @@ export function SpaceTabs({ tabs }: SpaceTabsProps) {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative py-4 px-6 flex-1 text-xs md:text-sm font-medium uppercase transition-all border-r-0 last:border-r-0 border-r-foreground/20 ${
+              className={`relative cursor-pointer py-4 px-6 flex-1 text-xs md:text-sm font-medium uppercase transition-all border-r-0 last:border-r-0 border-r-foreground/20 ${
                 isActive ? 'text-[#FF6B66] bg-[#AA4742]' : 'text-white/80 hover:text-white hover:bg-[#AA4742]/20'
               } ${orbitron.className}`}
               style={{

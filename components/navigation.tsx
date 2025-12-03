@@ -18,7 +18,7 @@ const NAVIGATION_LINKS = [
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
   welcome: {
-    navbar: 'rounded-[0px] bg-background/60 backdrop-blur-md',
+    navbar: 'rounded-sm bg-background/60 backdrop-blur-md',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
     activeLink: 'text-foreground',
@@ -29,7 +29,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     link: 'text-black transition-colors',
     activeLink: 'text-white',
   },
-  'retrofitted': {
+  retrofitted: {
     navbar: 'rounded-[32px] border border-border/40 bg-orange-500/80 backdrop-blur-md shadow-sm',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
@@ -53,13 +53,13 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     link: 'text-muted-foreground hover:text-white',
     activeLink: 'text-white',
   },
-  'saudade': {
+  saudade: {
     navbar: 'rounded-xl border-1 border border-white/10 bg-neutral-500/10 backdrop-blur-md',
     brand: 'text-white/60 hover:text-white',
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
   },
-  'dayjob': {
+  dayjob: {
     navbar: 'rounded-2xl border-0 border-transparent bg-foreground/90 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
@@ -76,12 +76,12 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
 const SECTION_BACKGROUNDS: Record<string, string> = {
   welcome: '#ffffff',
   'under-construction': '#ffdc51ff',
-  'retrofitted': '#ffc19dff',
+  retrofitted: '#ffc19dff',
   'amped-up': '#f9fafb',
   'toy-lexicon': '#eff6ff',
   'lost-in-space': '#000000ff',
-  'saudade': '#646464ff',
-  'dayjob': '#1f2937',
+  saudade: '#646464ff',
+  dayjob: '#1f2937',
   about: '#f9fafb',
 };
 

@@ -24,7 +24,7 @@ export function BrutalistTabs({ tabs }: BrutalistTabsProps) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors border-r-4 even:border-r-0 border-black ${
+            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors border-r-4 even:border-r-0 border-black ${
               activeTab === tab.id ? 'bg-red-600 text-white' : 'bg-white text-black hover:bg-neutral-100'
             }`}
           >

@@ -1,7 +1,7 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 interface Tab {
   id: string;
@@ -24,12 +24,10 @@ export function RetroTabs({ tabs }: RetroTabsProps) {
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-all ${
+            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-all ${
               index === 0 ? 'rounded-tl-[32px]' : 'rounded-tr-[32px]'
             } ${
-              activeTab === tab.id
-                ? 'bg-orange-600 text-white'
-                : 'bg-transparent text-white/80 hover:bg-orange-500/50'
+              activeTab === tab.id ? 'bg-orange-600 text-white' : 'bg-transparent text-white/80 hover:bg-orange-500/50'
             }`}
           >
             {tab.label}

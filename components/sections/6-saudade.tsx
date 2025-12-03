@@ -313,7 +313,7 @@ export function Project6() {
       <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
         <button
           onClick={handlePrev}
-          className='hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
           aria-label='Previous photo'
         >
           <svg
@@ -329,7 +329,7 @@ export function Project6() {
         </button>
         <button
           onClick={handleNext}
-          className='hidden lg:flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
           aria-label='Next photo'
         >
           <svg
@@ -360,9 +360,9 @@ export function Project6() {
         >
           <button
             onClick={() => setExpandedPanel(expandedPanel === 'globe' ? null : 'globe')}
-            className='absolute top-2 left-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10'
+            className='absolute cursor-pointer top-2 left-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10 font-mono'
           >
-            {expandedPanel === 'globe' ? '−' : '+'}
+            {expandedPanel === 'globe' ? 'x' : 'i'}
           </button>
 
           <AnimatePresence mode='wait'>
@@ -410,7 +410,7 @@ export function Project6() {
         >
           <button
             onClick={() => setExpandedPanel(expandedPanel === 'olympus' ? null : 'olympus')}
-            className='absolute top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors font-mono'
+            className='absolute cursor-pointer top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors font-mono'
           >
             {expandedPanel === 'olympus' ? '×' : 'i'}
           </button>

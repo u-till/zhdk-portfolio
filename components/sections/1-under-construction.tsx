@@ -13,15 +13,15 @@ const TABS = [
     content: (
       <div className='space-y-4'>
         <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Project Details</h3>
-        <p>A 360° interactive view of the korpus object. Rotate using controls or drag to explore all angles.</p>
+        <p>A filing cabinet built with planks from a construction site visualised with a 360° rotatable viewer.</p>
         <div className='grid grid-cols-2 gap-4 pt-4'>
           <div>
             <span className='font-bold block'>TYPE:</span>
-            <span>3D Viewer</span>
+            <span>Furniture</span>
           </div>
           <div>
             <span className='font-bold block'>YEAR:</span>
-            <span>2024</span>
+            <span>2025</span>
           </div>
         </div>
       </div>

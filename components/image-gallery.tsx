@@ -89,7 +89,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
         {/* Expand/Close Button */}
         <button
           onClick={() => setIsFullscreen(!isFullscreen)}
-          className={`absolute top-4 right-4 w-10 h-10 transition-colors z-10 flex items-center justify-center ${currentStyle.button}`}
+          className={`absolute cursor-pointer top-4 right-4 w-10 h-10 transition-colors z-10 flex items-center justify-center ${currentStyle.button}`}
           aria-label={isFullscreen ? 'Close fullscreen' : 'Fullscreen'}
         >
           {isFullscreen ? (
@@ -142,7 +142,9 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
             <button
               key={index}
               onClick={() => setSelectedImage(index)}
-              className={`relative overflow-hidden transition-all ${isFullscreen ? 'w-20 h-20' : 'w-16 h-16'} ${
+              className={`relative cursor-pointer overflow-hidden transition-all ${
+                isFullscreen ? 'w-20 h-20' : 'w-16 h-16'
+              } ${
                 selectedImage === index
                   ? `${currentStyle.thumbnailActive} opacity-100`
                   : `border ${currentStyle.thumbnail} opacity-60 hover:opacity-100`

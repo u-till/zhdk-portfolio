@@ -5,13 +5,13 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 
 const PROJECT_VIDEOS: Record<string, string> = {
-  'under-construction': '/under-construction/preview.mp4',
-  'retrofitted': '/retrofitted/preview.mp4',
-  'amped-up': '/amped-up/preview.mp4',
-  'toy-lexicon': '/toy-lexicon/preview.mp4',
-  'lost-in-space': '/lost-in-space/preview.mp4',
-  'saudade': '/saudade/preview.mp4',
-  'dayjob': '/dayjob/preview.mp4',
+  'under-construction': '/under-construction/preview-under-construction.mp4',
+  retrofitted: '/retrofitted/preview-retrofitted.mp4',
+  'amped-up': '/amped-up/preview-amped-up.mp4',
+  'toy-lexicon': '/toy-lexicon/preview-toy-lexicon.mp4',
+  'lost-in-space': '/lost-in-space/preview-lost-in-space.mp4',
+  saudade: '/saudade/preview-saudade.mp4',
+  dayjob: '/dayjob/preview-dayjob.mp4',
 };
 
 export function Welcome() {
@@ -20,6 +20,8 @@ export function Welcome() {
 
   useEffect(() => {
     if (videoRef.current && hoveredProject) {
+      // Reset and play the video
+      videoRef.current.currentTime = 0;
       videoRef.current.play().catch(() => {
         // Ignore autoplay errors
       });
@@ -36,13 +38,15 @@ export function Welcome() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
+            transition={{ duration: 0.2 }}
             className='absolute inset-0 z-0'
           >
             <video
+              key={hoveredProject}
               ref={videoRef}
               src={PROJECT_VIDEOS[hoveredProject]}
               className='w-full h-full object-cover'
+              autoPlay
               loop
               muted
               playsInline
