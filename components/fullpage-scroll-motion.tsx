@@ -2,8 +2,10 @@
 
 import { ReactNode, useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import type { PanInfo } from 'framer-motion';
 import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useRouter } from 'next/navigation';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const SECTION_IDS = ['welcome', 'project-1', 'project-2', 'project-3', 'project-4', 'project-5', 'project-6', 'project-7', 'about'];
 
@@ -13,10 +15,10 @@ interface Props {
 
 export function FullPageScroll({ children }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile();
   const isScrolling = useRef(false);
   const scrollAccumulator = useRef(0);
-  const lastScrollTime = useRef(Date.now());
+  const lastScrollTime = useRef(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const { setActiveSection } = useActiveSectionContext();
   const router = useRouter();
@@ -37,17 +39,6 @@ export function FullPageScroll({ children }: Props) {
       isScrolling.current = false;
     }, 1000);
   }, [children.length, router, setActiveSection]);
-
-  // Detect mobile device
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024); // lg breakpoint
-    };
-
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Expose scrollToSection to window for navigation
   useEffect(() => {
@@ -193,7 +184,7 @@ export function FullPageScroll({ children }: Props) {
     };
   }, [currentIndex, scrollToSection]);
 
-  const handleDragEnd = (_: any, info: { offset: { y: number }; velocity: { y: number } }) => {
+  const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
     const SWIPE_THRESHOLD = 50;
     const VELOCITY_THRESHOLD = 500;
 

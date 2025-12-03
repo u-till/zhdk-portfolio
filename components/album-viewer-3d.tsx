@@ -1,7 +1,8 @@
 'use client';
 
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const THICKNESS = 15;
 
@@ -13,46 +14,56 @@ interface AlbumViewer3DProps {
 export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProps) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isFlipping, setIsFlipping] = useState(false);
+  const isMobile = useIsMobile();
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const tiltX = ((y - centerY) / centerY) * -15;
-    const tiltY = ((x - centerX) / centerX) * 15;
-
-    setTilt({ x: tiltX, y: tiltY });
-  };
-
-  const handleMouseLeave = () => {
+  const handleFlip = () => {
+    setIsFlipping(true);
+    setIsFlipped(!isFlipped);
+    // Reset tilt during flip for smoother animation
     setTilt({ x: 0, y: 0 });
+    // Re-enable tilt after flip completes
+    setTimeout(() => setIsFlipping(false), 800);
   };
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      // Don't apply tilt while flipping
+      if (isFlipping) return;
+
+      const windowCenterX = window.innerWidth / 2;
+      const windowCenterY = window.innerHeight / 2;
+
+      // Calculate tilt based on mouse position relative to window center
+      const tiltX = ((e.clientY - windowCenterY) / windowCenterY) * -15;
+      const tiltY = ((e.clientX - windowCenterX) / windowCenterX) * 15;
+
+      setTilt({ x: tiltX, y: tiltY });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [isFlipping]);
 
   return (
-    <div
-      className='w-full h-full flex items-center justify-center aspect-square'
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-    >
+    <div className='w-full h-full flex items-center justify-center aspect-square'>
       <div style={{ perspective: '1000px' }}>
         <div
-          className='relative w-[420px] h-96 lg:w-[570px] lg:h-[500px]'
+          className='relative w-[340px] h-75 lg:w-[570px] lg:h-[500px]'
           style={{
             transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y + (isFlipped ? 180 : 0)}deg)`,
             transformStyle: 'preserve-3d',
-            transition: isFlipped ? 'transform 1s' : 'transform 1s',
+            transition: isFlipping
+              ? 'transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1)'
+              : 'transform 0.1s ease-out',
           }}
         >
           {/* Front - CD Cover */}
           <div
-            className={`absolute inset-0 backface-hidden shadow-2xl cursor-pointer ${
+            className={`absolute inset-0 backface-hidden bg-[#B4AFB8] shadow-2xl cursor-pointer ${
               !isFlipped ? 'pointer-events-auto' : 'pointer-events-none'
             }`}
-            onClick={() => setIsFlipped(true)}
+            onClick={handleFlip}
             style={{ transform: `translateZ(${THICKNESS / 2}px)` }}
           >
             <Image src={coverImage} alt='Album Cover' fill className='object-cover pointer-events-none' />
@@ -60,26 +71,37 @@ export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProp
 
           {/* Back - Spotify Player */}
           <div
-            className={`absolute inset-0 backface-hidden shadow-2xl bg-black p-4 ${
+            className={`absolute inset-0 backface-hidden overflow-hidden shadow-2xl ${
               isFlipped ? 'pointer-events-auto' : 'pointer-events-none'
             }`}
             style={{ transform: `translateZ(-${THICKNESS / 2}px) rotateY(180deg)` }}
           >
-            <button
-              onClick={() => setIsFlipped(false)}
-              className='absolute top-2 right-2 z-10 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm'
-            >
-              Flip Back
-            </button>
-            <iframe
-              data-testid='embed-iframe'
-              src={spotifyEmbedUrl}
-              width='100%'
-              height='100%'
-              frameBorder='0'
-              allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
-              loading='lazy'
-            ></iframe>
+            {/* Background Image */}
+            <Image
+              src='/lost-in-space/backside.jpg'
+              alt='Album Backside'
+              fill
+              className='object-cover pointer-events-none'
+            />
+
+            {/* Spotify Player Overlay */}
+            <div className='absolute inset-0 pt-3 p-4'>
+              <button
+                onClick={handleFlip}
+                className='absolute rotate-90 origin-bottom top-8 md:top-14 -right-3 md:right-0 z-10 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm'
+              >
+                Flip Back
+              </button>
+              <iframe
+                data-testid='embed-iframe'
+                src={spotifyEmbedUrl}
+                width={isMobile ? '92%' : '92%'}
+                height={isMobile ? '134%' : '101%'}
+                frameBorder='0'
+                allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture'
+                loading='lazy'
+              ></iframe>
+            </div>
           </div>
 
           {/* Top Edge */}

@@ -1,8 +1,8 @@
 'use client';
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { orbitron } from '@/lib/fonts';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState } from 'react';
 
 interface Tab {
   id: string;
@@ -18,19 +18,17 @@ export function SpaceTabs({ tabs }: SpaceTabsProps) {
   const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-[#AA4742]/20 rounded-lg overflow-hidden shadow-xl'>
+    <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl'>
       {/* Tab Headers - Vertical Layout */}
-      <div className='flex border-b-4 border-[#AA4742]/20'>
+      <div className='flex border-b-4 border-foreground/20'>
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`relative py-4 px-6 flex-1 text-xs md:text-sm font-medium uppercase transition-all border-r-4 last:border-r-0 border-[#AA4742]/20 ${
-                isActive
-                  ? 'text-[#FF6B66] bg-[#AA4742]'
-                  : 'text-white/80 hover:text-white hover:bg-[#AA4742]/20'
+              className={`relative py-4 px-6 flex-1 text-xs md:text-sm font-medium uppercase transition-all border-r-0 last:border-r-0 border-r-foreground/20 ${
+                isActive ? 'text-[#FF6B66] bg-[#AA4742]' : 'text-white/80 hover:text-white hover:bg-[#AA4742]/20'
               } ${orbitron.className}`}
               style={{
                 textShadow: isActive ? '0 0 10px rgba(255, 107, 102, 0.5)' : 'none',
