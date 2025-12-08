@@ -11,6 +11,9 @@ const IMAGES = [
   '/retrofitted/lamp-2.png',
   '/retrofitted/lamp-3.png',
   '/retrofitted/schematic.png',
+  '/retrofitted/lamp-process.jpg',
+  '/retrofitted/lamp-mood.jpg',
+  '/retrofitted/lamp-mood-2.jpg',
 ];
 
 const TABS = [

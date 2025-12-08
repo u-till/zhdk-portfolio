@@ -6,7 +6,16 @@ import { vt323 } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-const IMAGES = ['/amped-up/speakers-front.jpg', '/amped-up/speakers-back.jpg'];
+const IMAGES = [
+  '/amped-up/amped-up-thumbnail.jpg',
+  '/amped-up/speaker-1.jpg',
+  '/amped-up/speaker-2.jpg',
+  '/amped-up/speaker-3.jpg',
+  '/amped-up/speaker-4.jpg',
+  '/amped-up/speaker-5.jpg',
+  '/amped-up/speaker-6.jpg',
+  '/amped-up/speaker-7.jpg',
+];
 
 const TABS = [
   {
