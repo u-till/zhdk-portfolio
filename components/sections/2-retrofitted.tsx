@@ -24,8 +24,8 @@ const TABS = [
       <div className='space-y-4'>
         <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
         <p>
-          A stunning space-age lamp from the 1970s, retrofitted with modern LED technology while preserving its iconic
-          aesthetic.
+          A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable battery
+          and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
         </p>
         <div className='grid grid-cols-2 gap-4 pt-4'>
           <div>
@@ -33,8 +33,8 @@ const TABS = [
             <span>Lighting Design</span>
           </div>
           <div>
-            <span className='font-bold block'>ERA:</span>
-            <span>1970s Revival</span>
+            <span className='font-bold block'>YEAR:</span>
+            <span>2025</span>
           </div>
         </div>
       </div>

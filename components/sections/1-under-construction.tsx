@@ -90,7 +90,7 @@ const TABS = [
           </div>
           <div>
             <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-            <span>2024</span>
+            <span>2025</span>
           </div>
         </div>
       </div>

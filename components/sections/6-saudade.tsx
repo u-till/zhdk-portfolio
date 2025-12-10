@@ -442,19 +442,20 @@ export function Project6() {
                 transition={{ duration: 0.2, delay: 0.2 }}
                 className='w-full h-full p-6 text-white overflow-y-auto flex flex-col gap-4'
               >
-                <h3 className={`text-2xl font-bold ${courierPrime.className}`}>Olympus OM-1</h3>
+                <h3 className={`text-2xl font-bold ${courierPrime.className}`}>Photography</h3>
                 <p className='text-sm leading-relaxed'>
-                  A legendary 35mm SLR camera from the 1970s. This compact marvel revolutionized camera design with its
-                  innovative engineering and timeless aesthetic.
+                  I bought my first proper camera when i was about 12, a Canon EOS 60D and filled my SD card with an
+                  abundance of photos. Later i discovered the appeal of analogue photography, especially
+                  streetphotography. I mostly take pictures when i am travelling.
                 </p>
                 <div className='space-y-2 text-sm'>
                   <div className='border-l-2 border-white/40 pl-3'>
                     <span className='font-bold block'>Year:</span>
-                    <span>1972-1984</span>
+                    <span>2009-now</span>
                   </div>
                   <div className='border-l-2 border-white/40 pl-3'>
                     <span className='font-bold block'>Type:</span>
-                    <span>35mm SLR</span>
+                    <span>Photography</span>
                   </div>
                   <div className='border-l-2 border-white/40 pl-3'>
                     <span className='font-bold block'>Legacy:</span>

@@ -16,10 +16,7 @@ const TABS = [
         <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
           Project Details
         </h3>
-        <p className='leading-relaxed'>
-          An immersive 3D album experience for &ldquo;Lost in Space&rdquo;. Flip the CD to reveal an embedded Spotify
-          player and explore the complete tracklist.
-        </p>
+        <p className='leading-relaxed'>An album i did toghether with my flatmate when we used to live in a studio.</p>
         <div className='grid grid-cols-2 gap-4 pt-4'>
           <div>
             <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
@@ -27,7 +24,7 @@ const TABS = [
           </div>
           <div>
             <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
-            <span>2024</span>
+            <span>2019</span>
           </div>
         </div>
       </div>
@@ -93,6 +90,10 @@ const TABS = [
           <div>
             <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Album Art</span>
             <span>Till Solenthaler</span>
+          </div>
+          <div>
+            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Music Production</span>
+            <span>Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik</span>
           </div>
           <div>
             <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Development</span>

@@ -16,9 +16,9 @@ const TABS = [
       <div className='space-y-4'>
         <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
         <p>
-          A visual exploration of childhood objects and their meanings. This lexicon captures the essence of toys
-          through photography and thoughtful documentation, creating a reference book that bridges nostalgia and
-          contemporary design.
+          A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
+          fathers hobby has been collecting and building with old construction kids for a long time. Now with two
+          friends of his, he photographed all his work and i made it into a book.
         </p>
         <div className='grid grid-cols-2 gap-4 pt-4'>
           <div>

@@ -24,7 +24,10 @@ const TABS = [
     content: (
       <div className='space-y-4'>
         <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
-        <p>A custom speaker build project featuring handcrafted wooden enclosures with modern audio components.</p>
+        <p>
+          An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
+          functionality like EQ / DSP / and Bluetooth.
+        </p>
         <div className='grid grid-cols-2 gap-4 pt-4'>
           <div>
             <span className='font-bold block'>TYPE:</span>
