@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
 const IMAGES = [
-  '/amped-up/amped-up-thumbnail.jpg',
+  '/amped-up/preview.jpg',
   '/amped-up/speaker-1.jpg',
   '/amped-up/speaker-2.jpg',
   '/amped-up/speaker-3.jpg',
