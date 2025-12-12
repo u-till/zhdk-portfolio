@@ -15,6 +15,7 @@ interface Props {
 
 export function FullPageScroll({ children }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(1); // 1 for down/next, -1 for up/previous
   const isMobile = useIsMobile();
   const isScrolling = useRef(false);
   const scrollAccumulator = useRef(0);
@@ -23,13 +24,25 @@ export function FullPageScroll({ children }: Props) {
   const { setActiveSection } = useActiveSectionContext();
   const router = useRouter();
 
-  const scrollToSection = useCallback((index: number) => {
+  const scrollToSection = useCallback((index: number, scrollDirection?: number) => {
     if (index < 0 || index >= children.length || isScrolling.current) return;
 
     isScrolling.current = true;
     scrollAccumulator.current = 0;
-    setCurrentIndex(index);
-    setActiveSection(SECTION_IDS[index]);
+
+    // Use the explicit scroll direction if provided, otherwise infer from index
+    const newDirection = scrollDirection !== undefined
+      ? scrollDirection
+      : (index > currentIndex ? 1 : -1);
+
+    // Update direction BEFORE updating index to ensure exit animation uses correct direction
+    setDirection(newDirection);
+
+    // Use setTimeout to ensure direction state updates before index changes
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setActiveSection(SECTION_IDS[index]);
+    }, 0);
 
     // Update URL hash using Next.js router (no reload)
     const hash = index === 0 ? '' : SECTION_IDS[index];
@@ -38,7 +51,7 @@ export function FullPageScroll({ children }: Props) {
     setTimeout(() => {
       isScrolling.current = false;
     }, 1000);
-  }, [children.length, router, setActiveSection]);
+  }, [children.length, router, setActiveSection, currentIndex]);
 
   // Expose scrollToSection to window for navigation
   useEffect(() => {
@@ -54,10 +67,10 @@ export function FullPageScroll({ children }: Props) {
 
       if (e.key === 'ArrowUp') {
         e.preventDefault();
-        scrollToSection(currentIndex - 1);
+        scrollToSection(currentIndex - 1, -1); // Scrolling up
       } else if (e.key === 'ArrowDown') {
         e.preventDefault();
-        scrollToSection(currentIndex + 1);
+        scrollToSection(currentIndex + 1, 1); // Scrolling down
       }
     };
 
@@ -111,7 +124,7 @@ export function FullPageScroll({ children }: Props) {
           if (atStart && e.deltaY < 0) {
             e.preventDefault();
             if (!isScrolling.current) {
-              scrollToSection(currentIndex - 1);
+              scrollToSection(currentIndex - 1, -1); // Scrolling up
             }
             return;
           }
@@ -120,7 +133,7 @@ export function FullPageScroll({ children }: Props) {
           if (atEnd && e.deltaY > 0) {
             e.preventDefault();
             if (!isScrolling.current) {
-              scrollToSection(currentIndex + 1);
+              scrollToSection(currentIndex + 1, 1); // Scrolling down
             }
             return;
           }
@@ -158,7 +171,7 @@ export function FullPageScroll({ children }: Props) {
       // Check if we've crossed threshold
       if (Math.abs(scrollAccumulator.current) >= SCROLL_THRESHOLD) {
         const direction = scrollAccumulator.current > 0 ? 1 : -1;
-        scrollToSection(currentIndex + direction);
+        scrollToSection(currentIndex + direction, direction);
         scrollAccumulator.current = 0;
       }
     };
@@ -196,10 +209,10 @@ export function FullPageScroll({ children }: Props) {
     if (Math.abs(offset.y) > SWIPE_THRESHOLD || Math.abs(velocity.y) > VELOCITY_THRESHOLD) {
       if (offset.y < 0 || velocity.y < 0) {
         // Swiped up - go to next section
-        scrollToSection(currentIndex + 1);
+        scrollToSection(currentIndex + 1, 1); // Scrolling down
       } else {
         // Swiped down - go to previous section
-        scrollToSection(currentIndex - 1);
+        scrollToSection(currentIndex - 1, -1); // Scrolling up
       }
     }
   };
@@ -214,13 +227,14 @@ export function FullPageScroll({ children }: Props) {
       onDragEnd={isMobile ? handleDragEnd : undefined}
       dragMomentum={false}
     >
-      <AnimatePresence mode='wait'>
+      <AnimatePresence initial={false} custom={direction}>
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          custom={direction}
+          initial={{ y: direction > 0 ? '100%' : '-100%' }}
+          animate={{ y: 0 }}
+          exit={{ y: direction > 0 ? '-100%' : '100%' }}
+          transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
           className='absolute inset-0'
         >
           {children[currentIndex]}

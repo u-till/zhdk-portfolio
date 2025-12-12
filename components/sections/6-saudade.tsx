@@ -280,10 +280,10 @@ export function Project6() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className='h-screen relative overflow-hidden pt-32 md:pt-42'>
+    <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
       <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
-        <div className='max-w-screen-2xl mx-auto w-full px-4 md:px-6 flex justify-center'>
+        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
           <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
             saudade
           </h2>
@@ -346,7 +346,7 @@ export function Project6() {
       </div>
 
       {/* Container for panels - constrained width */}
-      <div className='absolute inset-0 max-w-screen-2xl mx-auto px-4 md:px-6 pointer-events-none z-20'>
+      <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
         {/* Globe Panel - Bottom Right */}
         <motion.div
           className={`absolute right-4 bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 ${

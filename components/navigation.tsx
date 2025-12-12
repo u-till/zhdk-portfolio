@@ -176,7 +176,7 @@ export function Navigation() {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className={`lg:hidden ${config.link}`}
+            className={`lg:hidden ${config.brand}`}
             aria-label='Toggle menu'
           >
             <MobileMenuToggle menuOpen={isMobileMenuOpen} />

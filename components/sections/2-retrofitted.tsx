@@ -115,9 +115,9 @@ export function Project2() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
 
   return (
-    <section className='h-screen flex flex-col pt-24 md:pt-28 gap-4 md:gap-8'>
+    <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 p-4 md:p-8 max-w-screen-2xl mx-auto w-full overflow-hidden'>
+      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8'>
         {/* Column 1: Image Gallery */}
         <div className='flex flex items-start justify-start'>
           <ImageGallery images={IMAGES} variant='retro' />
@@ -133,7 +133,7 @@ export function Project2() {
       </div>
 
       {/* Mobile Layout */}
-      <div className='lg:hidden flex-1 flex flex-col p-4 gap-4 max-w-screen-2xl mx-auto w-full overflow-hidden'>
+      <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4  '>
         {/* Title - Always visible */}
         <h2 className={`text-4xl text-center font-bold text-white ${shrikhand.className}`}>retrofitted</h2>
 

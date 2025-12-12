@@ -24,6 +24,7 @@ export function Viewer360({
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -68,12 +69,13 @@ export function Viewer360({
   }, [animateRotation]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
+    if (isLoading) return;
     setIsDragging(true);
     setStartX(e.clientX);
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
+    if (!isDragging || isLoading) return;
 
     const deltaX = e.clientX - startX;
     const sensitivity = 5; // pixels per frame
@@ -88,6 +90,32 @@ export function Viewer360({
     }
   };
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (isLoading) return;
+    setIsDragging(true);
+    setStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging || isLoading) return;
+
+    const deltaX = e.touches[0].clientX - startX;
+    const sensitivity = 5; // pixels per frame
+
+    if (Math.abs(deltaX) >= sensitivity) {
+      if (deltaX > 0) {
+        rotateRight();
+      } else {
+        rotateLeft();
+      }
+      setStartX(e.touches[0].clientX);
+    }
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
   useEffect(() => {
     const handleMouseUpGlobal = () => setIsDragging(false);
 
@@ -99,10 +127,31 @@ export function Viewer360({
 
   // Preload all images
   useEffect(() => {
-    for (let i = 0; i < totalFrames; i++) {
-      const img = new window.Image();
-      img.src = getImagePath(i);
-    }
+    setIsLoading(true);
+
+    const loadImages = async () => {
+      const imagePromises = [];
+
+      for (let i = 0; i < totalFrames; i++) {
+        const promise = new Promise((resolve, reject) => {
+          const img = new window.Image();
+          img.onload = () => resolve(img);
+          img.onerror = reject;
+          img.src = getImagePath(i);
+        });
+        imagePromises.push(promise);
+      }
+
+      try {
+        await Promise.all(imagePromises);
+        setIsLoading(false);
+      } catch (error) {
+        console.error('Error loading 360 images:', error);
+        setIsLoading(false);
+      }
+    };
+
+    loadImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [totalFrames, imageFolder]);
 
@@ -115,12 +164,31 @@ export function Viewer360({
     };
   }, []);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (isLoading) return;
+
+      if (e.key === 'ArrowLeft') {
+        rotateLeft();
+      } else if (e.key === 'ArrowRight') {
+        rotateRight();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [rotateLeft, rotateRight, isLoading]);
+
   return (
     <div
       ref={containerRef}
       className='overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] h-full relative aspect-square'
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Background image */}
       <Image
@@ -132,18 +200,25 @@ export function Viewer360({
       />
 
       {/* 360 rotating image */}
-      <div className='absolute inset-0 flex items-center justify-center z-10 p-8'>
+      <div className='absolute inset-0 flex items-center justify-center z-10 p-0'>
         <div className='relative w-full h-full'>
           <Image
             src={getImagePath(currentFrame)}
             alt={`360 view frame ${currentFrame + 1}`}
             fill
-            className='object-contain pointer-events-none'
+            className='object-cover pointer-events-none'
             priority={currentFrame === 0}
             draggable={false}
           />
         </div>
       </div>
+
+      {/* Loading overlay */}
+      {isLoading && (
+        <div className='absolute inset-0 bg-white/80 flex items-center justify-center z-20'>
+          <div className='text-black font-bold text-lg animate-pulse'>Loading...</div>
+        </div>
+      )}
     </div>
   );
 }
