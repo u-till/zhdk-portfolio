@@ -15,6 +15,8 @@ const IMAGES = [
   '/amped-up/speaker-5.jpg',
   '/amped-up/speaker-6.jpg',
   '/amped-up/speaker-7.jpg',
+  '/amped-up/speaker-8.jpg',
+  '/amped-up/speaker-9.jpg',
 ];
 
 const TABS = [
@@ -22,45 +24,41 @@ const TABS = [
     id: 'info',
     label: 'INFO',
     content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
-        <p>
-          An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
-          functionality like EQ / DSP / and Bluetooth.
-        </p>
-        <div className='grid grid-cols-2 gap-4 pt-4'>
-          <div>
-            <span className='font-bold block'>TYPE:</span>
-            <span>Audio Hardware</span>
-          </div>
-          <div>
-            <span className='font-bold block'>YEAR:</span>
-            <span>2024</span>
+      <div className='space-y-6'>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
+          <p className='mt-4'>
+            An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
+            functionality like EQ / DSP / and Bluetooth.
+          </p>
+          <div className='grid grid-cols-2 gap-4 pt-4'>
+            <div>
+              <span className='font-bold block'>TYPE:</span>
+              <span>Audio Hardware</span>
+            </div>
+            <div>
+              <span className='font-bold block'>YEAR:</span>
+              <span>2024</span>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: 'specs',
-    label: 'SPECS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Technical Specifications</h3>
-        <ul className='space-y-2 list-none'>
-          <li className='border-l-2 border-foreground pl-4'>
-            <span className='font-bold'>DRIVERS:</span> Custom Selected
-          </li>
-          <li className='border-l-2 border-foreground pl-4'>
-            <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
-          </li>
-          <li className='border-l-2 border-foreground pl-4'>
-            <span className='font-bold'>FINISH:</span> Natural Wood
-          </li>
-          <li className='border-l-2 border-foreground pl-4'>
-            <span className='font-bold'>OUTPUT:</span> High Fidelity
-          </li>
-        </ul>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Specifications</h3>
+          <ul className='space-y-2 list-none mt-4'>
+            <li className='border-l-2 border-foreground pl-4'>
+              <span className='font-bold'>DRIVERS:</span> Custom Selected
+            </li>
+            <li className='border-l-2 border-foreground pl-4'>
+              <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
+            </li>
+            <li className='border-l-2 border-foreground pl-4'>
+              <span className='font-bold'>FINISH:</span> Natural Wood
+            </li>
+            <li className='border-l-2 border-foreground pl-4'>
+              <span className='font-bold'>OUTPUT:</span> High Fidelity
+            </li>
+          </ul>
+        </div>
       </div>
     ),
   },

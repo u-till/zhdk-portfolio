@@ -24,14 +24,16 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       thumbnail: 'border-black/60',
       thumbnailActive: 'border-2 border-black',
       backdrop: 'bg-background/95 backdrop-blur-md',
+      image: '',
     },
     retro: {
-      container: 'rounded-[32px] border border-none bg-none backdrop-blur-md',
+      container: 'rounded-[32px] border border-orange-300/40',
       containerFullscreen: 'border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg',
       button: 'rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80',
       thumbnail: 'border-orange-300/40 rounded-lg',
       thumbnailActive: 'border-2 border-orange-300 rounded-lg',
       backdrop: 'bg-orange-400 backdrop-blur-md',
+      image: 'rounded-[32px]',
     },
     pill: {
       container: 'bg-transparent',
@@ -40,6 +42,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
       thumbnail: 'border border-green-500/40 rounded-lg',
       thumbnailActive: 'border-2 border-green-500 rounded-lg',
       backdrop: 'bg-background/95 backdrop-blur-md',
+      image: '',
     },
   };
 
@@ -97,7 +100,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
             src={images[selectedImage]}
             alt={`Gallery image ${selectedImage + 1}`}
             fill
-            className='object-contain transition-all'
+            className={`object-contain transition-all ${currentStyle.image}`}
             priority={selectedImage === 0}
           />
         </div>
@@ -174,7 +177,7 @@ export function ImageGallery({ images, width = 500, height = 500, variant = 'min
                   src={images[selectedImage]}
                   alt={`Gallery image ${selectedImage + 1}`}
                   fill
-                  className='object-contain'
+                  className={`object-contain ${currentStyle.image}`}
                   priority={selectedImage === 0}
                 />
               </div>

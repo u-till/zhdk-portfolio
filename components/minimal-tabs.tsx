@@ -19,14 +19,16 @@ export function MinimalTabs({ tabs }: MinimalTabsProps) {
   return (
     <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md'>
       {/* Tab Headers */}
-      <div className='grid grid-cols-2 border-b border-black/60'>
-        {tabs.map((tab) => (
+      <div className='grid grid-cols-3 border-b border-black/60'>
+        {tabs.map((tab, index) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors border-r border-black/60 even:border-r-0 ${
+            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors ${
+              index < tabs.length - 1 ? 'border-r border-black/60' : ''
+            } ${
               activeTab === tab.id
-                ? 'bg-foreground text-background'
+                ? 'bg-foreground text-background border-b border-foreground'
                 : 'bg-transparent text-foreground hover:bg-foreground/5'
             }`}
           >

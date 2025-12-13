@@ -36,7 +36,7 @@ export function PillTabs({ tabs }: PillTabsProps) {
       </div>
 
       {/* Tab Content */}
-      <div className='flex-1 overflow-auto'>
+      <div className='flex-1 overflow-y-auto overflow-x-hidden'>
         <AnimatePresence mode='wait'>
           {tabs.map(
             (tab) =>

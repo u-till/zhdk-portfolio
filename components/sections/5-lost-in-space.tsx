@@ -12,46 +12,42 @@ const TABS = [
     id: 'info',
     label: 'INFO',
     content: (
-      <div className='space-y-4 text-white'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-          Project Details
-        </h3>
-        <p className='leading-relaxed'>An album i did toghether with my flatmate when we used to live in a studio.</p>
-        <div className='grid grid-cols-2 gap-4 pt-4'>
-          <div>
-            <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
-            <span>Music Album</span>
-          </div>
-          <div>
-            <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
-            <span>2019</span>
+      <div className='space-y-6 text-white'>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
+            Project Details
+          </h3>
+          <p className='leading-relaxed mt-4'>An album i did toghether with my flatmate when we used to live in a studio.</p>
+          <div className='grid grid-cols-2 gap-4 pt-4'>
+            <div>
+              <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
+              <span>Music Album</span>
+            </div>
+            <div>
+              <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
+              <span>2019</span>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: 'specs',
-    label: 'SPECS',
-    content: (
-      <div className='space-y-4 text-white'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-          Technical Specifications
-        </h3>
-        <ul className='space-y-2 list-none'>
-          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-            <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
-          </li>
-          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-            <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
-          </li>
-          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-            <span className='font-bold text-[#FF6B66]'>INTERACTION:</span> Mouse Tilt & Flip
-          </li>
-          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-            <span className='font-bold text-[#FF6B66]'>ANIMATION:</span> CSS 3D Transform
-          </li>
-        </ul>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
+            Specifications
+          </h3>
+          <ul className='space-y-2 list-none mt-4'>
+            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+              <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
+            </li>
+            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+              <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
+            </li>
+            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+              <span className='font-bold text-[#FF6B66]'>INTERACTION:</span> Mouse Tilt & Flip
+            </li>
+            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+              <span className='font-bold text-[#FF6B66]'>ANIMATION:</span> CSS 3D Transform
+            </li>
+          </ul>
+        </div>
       </div>
     ),
   },

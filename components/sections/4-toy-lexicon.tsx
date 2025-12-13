@@ -6,53 +6,49 @@ import { doto } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-const IMAGES = ['/toy-lexicon/front-mockup-small.png', '/toy-lexicon/cover.jpg'];
+const IMAGES = ['/toy-lexicon/front-mockup.png', '/toy-lexicon/cover.jpg'];
 
 const TABS = [
   {
     id: 'info',
     label: 'INFO',
     content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
-        <p>
-          A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
-          fathers hobby has been collecting and building with old construction kids for a long time. Now with two
-          friends of his, he photographed all his work and i made it into a book.
-        </p>
-        <div className='grid grid-cols-2 gap-4 pt-4'>
-          <div>
-            <span className='font-bold block'>TYPE:</span>
-            <span>Book Design</span>
-          </div>
-          <div>
-            <span className='font-bold block'>YEAR:</span>
-            <span>2024</span>
+      <div className='space-y-6'>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
+          <p className='mt-4'>
+            A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
+            fathers hobby has been collecting and building with old construction kids for a long time. Now with two
+            friends of his, he photographed all his work and i made it into a book.
+          </p>
+          <div className='grid grid-cols-2 gap-4 pt-4'>
+            <div>
+              <span className='font-bold block'>TYPE:</span>
+              <span>Book Design</span>
+            </div>
+            <div>
+              <span className='font-bold block'>YEAR:</span>
+              <span>2024</span>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: 'specs',
-    label: 'SPECS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Technical Specifications</h3>
-        <ul className='space-y-2 list-none'>
-          <li className='border-l-2 border-green-500 pl-4'>
-            <span className='font-bold'>FORMAT:</span> Hardcover Book
-          </li>
-          <li className='border-l-2 border-green-500 pl-4'>
-            <span className='font-bold'>PAGES:</span> 120+
-          </li>
-          <li className='border-l-2 border-green-500 pl-4'>
-            <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
-          </li>
-          <li className='border-l-2 border-green-500 pl-4'>
-            <span className='font-bold'>LAYOUT:</span> Custom Design
-          </li>
-        </ul>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Specifications</h3>
+          <ul className='space-y-2 list-none mt-4'>
+            <li className='border-l-2 border-green-500 pl-4'>
+              <span className='font-bold'>FORMAT:</span> Hardcover Book
+            </li>
+            <li className='border-l-2 border-green-500 pl-4'>
+              <span className='font-bold'>PAGES:</span> 120+
+            </li>
+            <li className='border-l-2 border-green-500 pl-4'>
+              <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
+            </li>
+            <li className='border-l-2 border-green-500 pl-4'>
+              <span className='font-bold'>LAYOUT:</span> Custom Design
+            </li>
+          </ul>
+        </div>
       </div>
     ),
   },

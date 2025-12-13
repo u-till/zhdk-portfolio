@@ -110,15 +110,26 @@ export function Navigation() {
     <div className={`fixed top-4 md:top-8 w-full z-50 flex justify-center`}>
       <nav className={`flex w-full flex-col max-w-screen-2xl mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
         <div className='flex items-center justify-between px-4 md:px-6 py-3 md:py-4'>
-          <button
-            onClick={() => {
-              window.__scrollToSection?.(0);
-              setIsMobileMenuOpen(false);
-            }}
-            className={`text-base md:text-lg font-medium tracking-tight transition-colors ${config.brand} cursor-pointer`}
-          >
-            till solenthaler
-          </button>
+          <div className='flex items-baseline gap-2'>
+            <button
+              onClick={() => {
+                window.__scrollToSection?.(0);
+                setIsMobileMenuOpen(false);
+              }}
+              className={`text-base md:text-lg font-medium tracking-tight transition-colors ${config.brand} cursor-pointer`}
+            >
+              till solenthaler
+            </button>
+            <button
+              onClick={() => {
+                window.__scrollToSection?.(8);
+                setIsMobileMenuOpen(false);
+              }}
+              className={`text-xs transition-colors cursor-pointer ${config.link}`}
+            >
+              about
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
           <ul className='hidden lg:flex items-center gap-8'>

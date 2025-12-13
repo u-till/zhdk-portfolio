@@ -19,12 +19,14 @@ export function BrutalistTabs({ tabs }: BrutalistTabsProps) {
   return (
     <div className='w-full h-full border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
       {/* Tab Headers */}
-      <div className='grid grid-cols-2 border-b-4 border-black'>
-        {tabs.map((tab) => (
+      <div className='grid grid-cols-3 border-b-4 border-black'>
+        {tabs.map((tab, index) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors border-r-4 even:border-r-0 border-black ${
+            className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors ${
+              index < tabs.length - 1 ? 'border-r-4 border-black' : ''
+            } ${
               activeTab === tab.id ? 'bg-red-600 text-white' : 'bg-white text-black hover:bg-neutral-100'
             }`}
           >

@@ -21,45 +21,41 @@ const TABS = [
     id: 'info',
     label: 'INFO',
     content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
-        <p>
-          A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable battery
-          and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
-        </p>
-        <div className='grid grid-cols-2 gap-4 pt-4'>
-          <div>
-            <span className='font-bold block'>TYPE:</span>
-            <span>Lighting Design</span>
-          </div>
-          <div>
-            <span className='font-bold block'>YEAR:</span>
-            <span>2025</span>
+      <div className='space-y-6'>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
+          <p className='mt-4'>
+            A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable battery
+            and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
+          </p>
+          <div className='grid grid-cols-2 gap-4 pt-4'>
+            <div>
+              <span className='font-bold block'>TYPE:</span>
+              <span>Lighting Design</span>
+            </div>
+            <div>
+              <span className='font-bold block'>YEAR:</span>
+              <span>2025</span>
+            </div>
           </div>
         </div>
-      </div>
-    ),
-  },
-  {
-    id: 'specs',
-    label: 'SPECS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Technical Specifications</h3>
-        <ul className='space-y-2 list-none'>
-          <li className='border-l-2 border-orange-300 pl-4'>
-            <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
-          </li>
-          <li className='border-l-2 border-orange-300 pl-4'>
-            <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
-          </li>
-          <li className='border-l-2 border-orange-300 pl-4'>
-            <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
-          </li>
-          <li className='border-l-2 border-orange-300 pl-4'>
-            <span className='font-bold'>CONDITION:</span> Restored & Updated
-          </li>
-        </ul>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Specifications</h3>
+          <ul className='space-y-2 list-none mt-4'>
+            <li className='border-l-2 border-orange-300 pl-4'>
+              <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
+            </li>
+            <li className='border-l-2 border-orange-300 pl-4'>
+              <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
+            </li>
+            <li className='border-l-2 border-orange-300 pl-4'>
+              <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
+            </li>
+            <li className='border-l-2 border-orange-300 pl-4'>
+              <span className='font-bold'>CONDITION:</span> Restored & Updated
+            </li>
+          </ul>
+        </div>
       </div>
     ),
   },
