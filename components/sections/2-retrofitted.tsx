@@ -1,6 +1,7 @@
 'use client';
 
 import { ImageGallery } from '@/components/image-gallery';
+import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
 import { RetroTabs } from '@/components/retro-tabs';
 import { shrikhand } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -116,7 +117,7 @@ export function Project2() {
       <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8'>
         {/* Column 1: Image Gallery */}
         <div className='flex flex items-start justify-start'>
-          <ImageGallery images={IMAGES} variant='retro' />
+          <ImageGallery images={IMAGES} variant='retro' viewer3D={<Lamp3DViewer variant='retro' />} show3DFirst />
         </div>
 
         {/* Column 2: Tabs */}
@@ -145,7 +146,7 @@ export function Project2() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className='absolute inset-0 flex items-center justify-center w-full'
               >
-                <ImageGallery images={IMAGES} variant='retro' />
+                <ImageGallery images={IMAGES} variant='retro' viewer3D={<Lamp3DViewer variant='retro' />} show3DFirst />
               </motion.div>
             ) : (
               <motion.div
