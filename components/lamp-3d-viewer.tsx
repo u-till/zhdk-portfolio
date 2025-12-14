@@ -1,26 +1,54 @@
 'use client';
 
 import { OrbitControls, useGLTF } from '@react-three/drei';
-import { Canvas, useThree } from '@react-three/fiber';
-import { Suspense, useEffect, useState } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Bloom, EffectComposer } from '@react-three/postprocessing';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
+import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
-function CameraLogger() {
+function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitControlsType | null> }) {
   const { camera } = useThree();
+  const initialPosition = useRef(new THREE.Vector3(2.74, 1.1, 0.9));
+  const initialTarget = useRef(new THREE.Vector3(0, 0, 0));
+  const isInteracting = useRef(false);
 
   useEffect(() => {
-    const logPosition = () => {
-      console.log('Camera position:', [
-        camera.position.x.toFixed(2),
-        camera.position.y.toFixed(2),
-        camera.position.z.toFixed(2),
-      ]);
+    const controls = controlsRef.current;
+    if (!controls) return;
+
+    const handleInteractionStart = () => {
+      isInteracting.current = true;
     };
 
-    // Log when camera moves
-    const interval = setInterval(logPosition, 1000);
-    return () => clearInterval(interval);
-  }, [camera]);
+    const handleInteractionEnd = () => {
+      isInteracting.current = false;
+    };
+
+    controls.addEventListener('start', handleInteractionStart);
+    controls.addEventListener('end', handleInteractionEnd);
+
+    return () => {
+      controls.removeEventListener('start', handleInteractionStart);
+      controls.removeEventListener('end', handleInteractionEnd);
+    };
+  }, [controlsRef]);
+
+  useFrame(() => {
+    if (!isInteracting.current && controlsRef.current) {
+      // Constantly pull camera back to initial position when not interacting (slower)
+      camera.position.lerp(initialPosition.current, 0.03);
+      controlsRef.current.target.lerp(initialTarget.current, 0.03);
+
+      // Stop when very close
+      if (camera.position.distanceTo(initialPosition.current) < 0.001) {
+        camera.position.copy(initialPosition.current);
+        controlsRef.current.target.copy(initialTarget.current);
+      }
+
+      controlsRef.current.update();
+    }
+  });
 
   return null;
 }
@@ -30,7 +58,8 @@ interface LampModelProps {
 }
 
 function LampModel({ intensity }: LampModelProps) {
-  const { scene } = useGLTF('/retrofitted/lamp.glb');
+  const { scene } = useGLTF('/retrofitted/lamp-2.glb');
+  const spotLight2Ref = useRef<THREE.SpotLight>(null!);
 
   // Enable shadow casting and receiving for all meshes in the model
   scene.traverse((child) => {
@@ -41,24 +70,38 @@ function LampModel({ intensity }: LampModelProps) {
   });
 
   return (
-    <group position={[-0.4, -1.8, -0.3]} rotation={[0, -1.5, 0]}>
+    <group position={[-0.4, -1.8, -0.3]} rotation={[0, -1.8, 0]}>
       <primitive object={scene} scale={3.7} />
-      {/* Point lights emanating from the lamp bulb */}
-      {/* Adjust the Y position to match where your bulb is located in the model */}
-      {intensity > 0 && (
-        <>
-          <pointLight position={[0.95, 2.5, -0.95]} intensity={intensity * 16} distance={40} color='#ffa500' />
-
-          {/* Visual markers for light positions - remove these once positioned correctly {[0.36, 2.15, -0.4]} */}
-        </>
-      )}
-      <mesh position={[0.44, 2.62, -0.48]}>
-        <sphereGeometry args={[0.05, 20, 20]} />
-        <meshStandardMaterial
-          color={intensity > 0.1 ? '#D3D3B5' : '#b7b772'}
-          emissive={intensity > 0.1 ? '#fcca6d' : '#000000'}
-          emissiveIntensity={intensity * 0.5}
+      {/* Glass bulb with light inside */}
+      <mesh position={[0.44, 2.55, -0.48]}>
+        <sphereGeometry args={[0.08, 32, 32]} />
+        <meshPhysicalMaterial
+          color='#fff8e1'
+          emissive='#ffa900'
+          emissiveIntensity={intensity * 8}
+          transparent
+          opacity={0.6}
+          transmission={0.9}
+          thickness={0.5}
+          roughness={0.1}
+          metalness={0}
+          clearcoat={1}
+          clearcoatRoughness={0.5}
         />
+        {/* Spotlight to simulate bulb with occlusion */}
+        {intensity > 0 && (
+          <spotLight
+            ref={spotLight2Ref}
+            position={[0, 0, 0]}
+            target-position={[1.3, -1.8, 3.1]}
+            angle={8 / 3}
+            penumbra={0.5}
+            intensity={intensity * 0}
+            distance={12}
+            color='#ffa900'
+            decay={2}
+          />
+        )}
       </mesh>
     </group>
   );
@@ -69,7 +112,8 @@ interface Lamp3DViewerProps {
 }
 
 export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
-  const [intensity, setIntensity] = useState(1);
+  const [intensity, setIntensity] = useState(0.77);
+  const controlsRef = useRef<OrbitControlsType>(null);
 
   const styles = {
     minimal: {
@@ -100,8 +144,8 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
           width='16'
           height='16'
           viewBox='0 0 24 24'
-          fill={intensity > 0.1 ? 'currentColor' : 'none'}
-          stroke='currentColor'
+          fill={intensity > 0.1 ? '#374151' : 'none'}
+          stroke='#374151'
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -117,61 +161,59 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
           step='0.01'
           value={intensity}
           onChange={(e) => setIntensity(parseFloat(e.target.value))}
-          className='w-32 h-2 rounded-full appearance-none cursor-pointer slider'
+          className='w-32 h-2 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-700 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-gray-700 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0'
           aria-label='Light intensity'
           style={{
-            background: `linear-gradient(to right, currentColor ${intensity * 100}%, transparent ${intensity * 100}%)`,
+            background: `linear-gradient(to right, #374151 ${intensity * 100}%, transparent ${intensity * 100}%)`,
           }}
         />
         <span className='text-sm font-medium w-8 text-right'>{Math.round(intensity * 100)}%</span>
       </div>
 
-      <style jsx>{`
-        .slider::-webkit-slider-thumb {
-          appearance: none;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: currentColor;
-          cursor: pointer;
-        }
-        .slider::-moz-range-thumb {
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: currentColor;
-          cursor: pointer;
-          border: none;
-        }
-      `}</style>
-
       {/* 3D Canvas */}
       <Canvas
-        camera={{ position: [2.74, 0.3, 0.9], fov: 50 }}
+        camera={{ position: [2.74, 1.1, 0.9], fov: 50 }}
         gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
         shadows
       >
         <Suspense fallback={null}>
-          <CameraLogger />
-
           {/* Ambient light for overall scene illumination */}
-          <ambientLight intensity={0.6} />
+          <ambientLight intensity={1.4} color='#fffbe1' />
           {/* Key light from top-right */}
-          <directionalLight position={[0, 5, 7]} intensity={0.2} castShadow />
+          <directionalLight position={[0, 5, 7]} intensity={0.2} castShadow color='#f67878' />
           {/* Fill light from left */}
-          <directionalLight position={[-3, 2, -2]} intensity={0.8} />
+          <directionalLight position={[-3, 2, -2]} intensity={0.4} />
           {/* Back light for depth */}
           <directionalLight position={[0, 3, -5]} intensity={0.5} />
 
           <LampModel intensity={intensity} />
 
-          {/* Floor */}
+          {/* Floor - receives shadows from directional light */}
           <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -1, 0]} receiveShadow>
             <planeGeometry args={[20, 20]} />
             <shadowMaterial opacity={0.2} transparent />
           </mesh>
 
-          <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} minDistance={1.5} maxDistance={8} />
+          <OrbitControls
+            ref={controlsRef}
+            enablePan={true}
+            enableZoom={true}
+            enableRotate={true}
+            minDistance={1.5}
+            maxDistance={8}
+          />
+          <CameraReset controlsRef={controlsRef} />
+
+          {/* Bloom effect for realistic light glow */}
+          <EffectComposer>
+            <Bloom
+              intensity={intensity * 4}
+              luminanceThreshold={0.2}
+              luminanceSmoothing={0.3}
+              mipmapBlur
+              radius={0.8}
+            />
+          </EffectComposer>
         </Suspense>
       </Canvas>
     </div>
@@ -179,4 +221,4 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
 }
 
 // Preload the model
-useGLTF.preload('/retrofitted/lamp.glb');
+useGLTF.preload('/retrofitted/lamp-2.glb');

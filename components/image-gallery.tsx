@@ -38,12 +38,11 @@ export function ImageGallery({
       image: '',
     },
     retro: {
-      container:
-        'rounded-[32px] mb-22 bg-linear-to-r from-grey-300 via-gray-500 to-gray-700',
+      container: 'rounded-[32px] bg-linear-to-r from-grey-300 via-gray-500 to-gray-700',
       containerFullscreen: 'bg-orange-500/80 backdrop-blur-md shadow-lg',
       button: 'rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80',
-      thumbnail: 'border-orange-300/40 rounded-lg',
-      thumbnailActive: 'border-2 border-orange-300 rounded-lg',
+      thumbnail: 'border-gray-700/40 rounded-lg',
+      thumbnailActive: 'border-2 border-gray-700 rounded-lg',
       backdrop: 'bg-orange-400 backdrop-blur-md',
       image: 'rounded-[32px]',
     },

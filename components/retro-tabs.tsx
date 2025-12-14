@@ -26,10 +26,10 @@ export function RetroTabs({ tabs }: RetroTabsProps) {
             onClick={() => setActiveTab(tab.id)}
             className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-all ${
               index === 0 ? 'rounded-tl-[32px]' : index === tabs.length - 1 ? 'rounded-tr-[32px]' : ''
-            } ${
-              index < tabs.length - 1 ? 'border-r border-orange-300/40' : ''
-            } ${
-              activeTab === tab.id ? 'bg-orange-600 text-white rounded-t-[32px]' : 'bg-transparent text-white/80 hover:bg-orange-500/50'
+            }  ${
+              activeTab === tab.id
+                ? 'bg-orange-600 text-white rounded-t-[32px]'
+                : 'bg-transparent text-white/80 hover:bg-orange-500/50 hover:rounded-t-[32px]'
             }`}
           >
             {tab.label}

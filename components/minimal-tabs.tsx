@@ -28,7 +28,7 @@ export function MinimalTabs({ tabs }: MinimalTabsProps) {
               index < tabs.length - 1 ? 'border-r border-black/60' : ''
             } ${
               activeTab === tab.id
-                ? 'bg-foreground text-background border-b border-foreground'
+                ? 'bg-foreground text-background'
                 : 'bg-transparent text-foreground hover:bg-foreground/5'
             }`}
           >

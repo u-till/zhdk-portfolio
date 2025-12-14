@@ -4,7 +4,13 @@ import { HandIcon } from '@/components/hand-icon';
 import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+
+declare global {
+  interface Window {
+    __restartWelcomePreview?: () => void;
+  }
+}
 
 const PROJECT_IMAGES: Record<string, string[]> = {
   'under-construction': [
@@ -23,7 +29,6 @@ const PROJECT_IMAGES: Record<string, string[]> = {
   'amped-up': [
     '/amped-up/preview.jpg',
     '/amped-up/speaker-1.jpg',
-    '/amped-up/speaker-2.jpg',
     '/amped-up/speaker-3.jpg',
     '/amped-up/speaker-4.jpg',
     '/amped-up/speaker-5.jpg',
@@ -43,103 +48,102 @@ const PROJECT_IMAGES: Record<string, string[]> = {
 };
 
 export function Welcome() {
-  const { hoveredProject } = useActiveSectionContext();
+  const { hoveredProject, setHoveredProject } = useActiveSectionContext();
   const [currentImageIndex, setCurrentImageIndex] = useState<Record<string, number>>({});
-  const [isMobile, setIsMobile] = useState(false);
   const [autoPlayProject, setAutoPlayProject] = useState<string | null>(null);
-  const [isPreviewMode, setIsPreviewMode] = useState(false);
-  const [previewProject, setPreviewProject] = useState<string | null>(null);
+  const [restartTrigger, setRestartTrigger] = useState(0);
+  const lastAutoProjectRef = useRef<string | null>(null);
+  const hoveredProjectRef = useRef<string | null>(null);
 
-  // Detect mobile
+  // Keep refs in sync
   useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+    hoveredProjectRef.current = hoveredProject;
+  }, [hoveredProject]);
+
+  // Expose restart function globally
+  useEffect(() => {
+    window.__restartWelcomePreview = () => setRestartTrigger((prev) => prev + 1);
+    return () => {
+      delete window.__restartWelcomePreview;
+    };
   }, []);
 
-  // Auto-cycle through projects on mobile
+  // Auto-cycle through projects - plays once then returns to welcome
   useEffect(() => {
-    if (!isMobile) {
-      return;
-    }
-
-    const projectKeys = Object.keys(PROJECT_IMAGES).filter((key) => PROJECT_IMAGES[key].length > 0);
-    let currentIndex = 0;
+    const projectKeys = Object.keys(PROJECT_IMAGES);
+    const WELCOME_DURATION = 4000; // 4 seconds on welcome
+    const PROJECT_DURATION = 2500; // 2.5 seconds per project (1 image)
+    // If manually restarted (restartTrigger > 0), start immediately at first project
+    // Otherwise start at -1 to show welcome first
+    let currentIndex = restartTrigger > 0 ? 0 : -1;
+    let timeoutId: NodeJS.Timeout;
 
     const cycleProjects = () => {
-      setAutoPlayProject(projectKeys[currentIndex]);
-      currentIndex = (currentIndex + 1) % projectKeys.length;
-    };
-
-    cycleProjects(); // Start immediately
-    const interval = setInterval(cycleProjects, 6000); // Change project every 6 seconds
-
-    return () => {
-      clearInterval(interval);
-      setAutoPlayProject(null);
-    };
-  }, [isMobile]);
-
-  // Preview mode - cycle through projects once and show project names
-  useEffect(() => {
-    if (!isPreviewMode) {
-      return;
-    }
-
-    const projectKeys = Object.keys(PROJECT_IMAGES).filter((key) => PROJECT_IMAGES[key].length > 0);
-    let currentIndex = 0;
-
-    const cyclePreview = () => {
-      if (currentIndex >= projectKeys.length) {
-        // Finished cycling through all projects, stop preview
-        setIsPreviewMode(false);
-        setPreviewProject(null);
-        return;
+      if (currentIndex === -1) {
+        // Show welcome
+        setAutoPlayProject(null);
+        // Only clear hoveredProject if it was set by auto-play
+        if (hoveredProjectRef.current === lastAutoProjectRef.current) {
+          setHoveredProject(null);
+        }
+        lastAutoProjectRef.current = null;
+        timeoutId = setTimeout(() => {
+          currentIndex = 0;
+          cycleProjects();
+        }, WELCOME_DURATION);
+      } else if (currentIndex < projectKeys.length) {
+        // Show current project
+        const project = projectKeys[currentIndex];
+        setAutoPlayProject(project);
+        // Only update hoveredProject if user isn't actively hovering
+        if (hoveredProjectRef.current === null || hoveredProjectRef.current === lastAutoProjectRef.current) {
+          setHoveredProject(project);
+        }
+        lastAutoProjectRef.current = project;
+        timeoutId = setTimeout(() => {
+          currentIndex++;
+          if (currentIndex >= projectKeys.length) {
+            // Go back to welcome after all projects shown
+            setAutoPlayProject(null);
+            if (hoveredProjectRef.current === lastAutoProjectRef.current) {
+              setHoveredProject(null);
+            }
+            lastAutoProjectRef.current = null;
+            return;
+          }
+          cycleProjects();
+        }, PROJECT_DURATION);
       }
-
-      const projectKey = projectKeys[currentIndex];
-      setPreviewProject(projectKey);
-      // Reset image index to show first image of each project
-      setCurrentImageIndex((prev) => ({ ...prev, [projectKey]: 0 }));
-      currentIndex = currentIndex + 1;
     };
 
-    cyclePreview(); // Start immediately
-    const interval = setInterval(cyclePreview, 3000); // Change project every 3 seconds
+    cycleProjects(); // Start the cycle
 
     return () => {
-      clearInterval(interval);
-      setPreviewProject(null);
+      clearTimeout(timeoutId);
     };
-  }, [isPreviewMode]);
+  }, [setHoveredProject, restartTrigger]);
 
-  // Cycle through images for current project (skip in preview mode)
+  // Cycle through images for current project (only when manually hovering, not during auto-play)
   useEffect(() => {
-    // Don't cycle images in preview mode - only show first image
-    if (isPreviewMode) {
-      return;
-    }
-
-    const activeProject = hoveredProject || autoPlayProject;
-    if (activeProject && PROJECT_IMAGES[activeProject]?.length > 0) {
+    // Only cycle images when user is hovering from navbar, not during auto-play
+    if (hoveredProject && hoveredProject !== autoPlayProject && PROJECT_IMAGES[hoveredProject]?.length > 0) {
       // Set up interval to cycle through images
       const interval = setInterval(() => {
         setCurrentImageIndex((prev) => {
-          const images = PROJECT_IMAGES[activeProject];
-          const currentIndex = prev[activeProject] ?? 0;
+          const images = PROJECT_IMAGES[hoveredProject];
+          const currentIndex = prev[hoveredProject] ?? 0;
           return {
             ...prev,
-            [activeProject]: (currentIndex + 1) % images.length,
+            [hoveredProject]: (currentIndex + 1) % images.length,
           };
         });
       }, 2500); // Change image every 2.5 seconds
 
       return () => clearInterval(interval);
     }
-  }, [hoveredProject, autoPlayProject, isPreviewMode]);
+  }, [hoveredProject, autoPlayProject]);
 
-  const activeProject = hoveredProject || previewProject || autoPlayProject;
+  const activeProject = hoveredProject || autoPlayProject;
   const currentImages = activeProject ? PROJECT_IMAGES[activeProject] : [];
   const hasImages = currentImages && currentImages.length > 0;
   const currentIndex = activeProject ? currentImageIndex[activeProject] ?? 0 : 0;
@@ -191,18 +195,22 @@ export function Welcome() {
       <div className={`text-center relative z-10 w-full ${activeProject ? 'mix-blend-difference text-white' : ''}`}>
         <AnimatePresence mode='wait'>
           <motion.h1
-            key={previewProject || 'welcome'}
+            key={activeProject || 'welcome'}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8 }}
-            className='font-bold mb-4'
+            onClick={() => {
+              if (!activeProject) {
+                setRestartTrigger((prev) => prev + 1);
+              }
+            }}
+            className={`font-bold mb-4 ${!activeProject ? 'cursor-pointer' : ''}`}
             style={{ fontSize: 'clamp(4rem, 8vw, 12rem)', lineHeight: 1 }}
           >
-            {previewProject ? getProjectName(previewProject) : 'Welcome'}
+            {activeProject ? getProjectName(activeProject) : 'Welcome'}
           </motion.h1>
         </AnimatePresence>
-        {!previewProject && <p className='text-3xl md:text-4xl font-medium mb-12'>to my portfolio</p>}
 
         {/* Navigation Instructions - Always visible */}
         <div className='mt-16 flex flex-col items-center justify-center'>
@@ -229,7 +237,7 @@ export function Welcome() {
                 <rect x='8' y='3' width='8' height='14' rx='4' />
                 <path d='M12 7v3' />
               </svg>
-              <span className='text-sm md:text-base font-medium uppercase tracking-wider text-center'>scroll</span>
+              <span className='text-sm md:text-base font-medium tracking-wider text-center'>scroll</span>
             </div>
 
             {/* Arrow Keys Icon */}
@@ -253,24 +261,9 @@ export function Welcome() {
                 {/* Right arrow key */}
                 <rect x='16' y='10.5' width='5' height='5' rx='1' />
               </svg>
-              <span className='text-sm md:text-base font-medium uppercase tracking-wider text-center'>keys</span>
+              <span className='text-sm md:text-base font-medium tracking-wider text-center'>keys</span>
             </div>
           </div>
-
-          {/* Preview Button */}
-          <button
-            onClick={() => setIsPreviewMode(true)}
-            disabled={isPreviewMode}
-            className={`mt-8 w-12 h-12 rounded-full border-2 transition-all flex items-center justify-center ${
-              isPreviewMode
-                ? 'bg-foreground/50 text-background border-foreground/50 cursor-not-allowed'
-                : 'bg-transparent border-foreground/40 hover:border-foreground hover:bg-foreground/10'
-            }`}
-          >
-            <svg width='20' height='20' viewBox='0 0 24 24' fill='currentColor'>
-              <path d='M8 5v14l11-7z' />
-            </svg>
-          </button>
         </div>
       </div>
     </section>

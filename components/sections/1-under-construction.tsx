@@ -14,7 +14,9 @@ const TABS = [
       <div className='space-y-6'>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Project Details</h3>
-          <p className='mt-4'>A filing cabinet built with planks from a construction site visualised with a 360° rotatable viewer.</p>
+          <p className='mt-4'>
+            A filing cabinet built with planks from a construction site visualised with a 360° rotatable viewer.
+          </p>
           <div className='grid grid-cols-2 gap-4 pt-4'>
             <div>
               <span className='font-bold block'>TYPE:</span>
@@ -100,7 +102,7 @@ export function Project1() {
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8'>
+      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
         {/* Column 1: 360 Viewer */}
         <div className='flex flex items-start justify-start'>
           <Viewer360
@@ -117,7 +119,7 @@ export function Project1() {
           <h2 className={`text-4xl lg:text-7xl font-bold ${allertaStencil.className}`}>
             under <br></br>construction
           </h2>
-          <div className='w-full h-full'>
+          <div className='w-full h-full pr-2'>
             <BrutalistTabs tabs={TABS} />
           </div>
         </div>
@@ -157,7 +159,7 @@ export function Project1() {
                 animate={{ x: 0 }}
                 exit={{ x: 'calc(100% + 1rem)' }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 overflow-hidden'
+                className='absolute inset-0'
               >
                 <BrutalistTabs tabs={TABS} />
               </motion.div>

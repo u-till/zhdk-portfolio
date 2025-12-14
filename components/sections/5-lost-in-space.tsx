@@ -17,7 +17,9 @@ const TABS = [
           <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
             Project Details
           </h3>
-          <p className='leading-relaxed mt-4'>An album i did toghether with my flatmate when we used to live in a studio.</p>
+          <p className='leading-relaxed mt-4'>
+            An album i did toghether with my flatmate when we used to live in a studio.
+          </p>
           <div className='grid grid-cols-2 gap-4 pt-4'>
             <div>
               <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
@@ -113,7 +115,7 @@ export function Project5() {
       <StarField />
 
       {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 relative z-10'>
+      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px] relative z-10'>
         {/* Column 1: 3D Album Viewer */}
         <div className='flex flex items-start justify-start'>
           <AlbumViewer3D

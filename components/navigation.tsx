@@ -87,7 +87,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 
 export function Navigation() {
   const pathname = usePathname();
-  const { activeSection, setHoveredProject } = useActiveSectionContext();
+  const { activeSection, hoveredProject, setHoveredProject } = useActiveSectionContext();
   const isHomePage = pathname === '/';
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -114,6 +114,10 @@ export function Navigation() {
             <button
               onClick={() => {
                 window.__scrollToSection?.(0);
+                // Restart preview after a short delay to ensure we're on welcome section
+                setTimeout(() => {
+                  window.__restartWelcomePreview?.();
+                }, 100);
                 setIsMobileMenuOpen(false);
               }}
               className={`text-base md:text-lg font-medium tracking-tight transition-colors ${config.brand} cursor-pointer`}
@@ -136,6 +140,7 @@ export function Navigation() {
             {NAVIGATION_LINKS.map((link) => {
               const linkSection = link.href.substring(1);
               const isActive = isHomePage && activeSection === linkSection;
+              const isHovered = isHomePage && activeSection === 'welcome' && hoveredProject === linkSection;
 
               return (
                 <li key={link.href}>
@@ -167,7 +172,7 @@ export function Navigation() {
                       }
                     }}
                     className={`relative text-sm font-medium transition-colors cursor-pointer py-2 px-2 whitespace-nowrap isolate ${
-                      isActive ? config.activeLink : config.link
+                      isActive ? config.activeLink : isHovered ? 'text-foreground' : config.link
                     }`}
                   >
                     {link.label}
@@ -208,6 +213,7 @@ export function Navigation() {
                 {NAVIGATION_LINKS.map((link) => {
                   const linkSection = link.href.substring(1);
                   const isActive = isHomePage && activeSection === linkSection;
+                  const isHovered = isHomePage && activeSection === 'welcome' && hoveredProject === linkSection;
 
                   return (
                     <li key={link.href}>
@@ -230,7 +236,7 @@ export function Navigation() {
                           setIsMobileMenuOpen(false);
                         }}
                         className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
-                          isActive ? config.activeLink : config.link
+                          isActive ? config.activeLink : isHovered ? 'text-foreground' : config.link
                         }`}
                       >
                         {link.label}

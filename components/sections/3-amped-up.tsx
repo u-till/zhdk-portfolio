@@ -9,7 +9,6 @@ import { useState } from 'react';
 const IMAGES = [
   '/amped-up/preview.jpg',
   '/amped-up/speaker-1.jpg',
-  '/amped-up/speaker-2.jpg',
   '/amped-up/speaker-3.jpg',
   '/amped-up/speaker-4.jpg',
   '/amped-up/speaker-5.jpg',
@@ -116,7 +115,7 @@ export function Project3() {
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8'>
+      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
         {/* Column 1: Image Gallery */}
         <div className='flex flex items-start justify-start'>
           <ImageGallery images={IMAGES} />
