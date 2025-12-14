@@ -81,7 +81,7 @@ export function Welcome() {
     };
   }, [isMobile]);
 
-  // Preview mode - cycle through projects and show project names
+  // Preview mode - cycle through projects once and show project names
   useEffect(() => {
     if (!isPreviewMode) {
       return;
@@ -91,11 +91,18 @@ export function Welcome() {
     let currentIndex = 0;
 
     const cyclePreview = () => {
+      if (currentIndex >= projectKeys.length) {
+        // Finished cycling through all projects, stop preview
+        setIsPreviewMode(false);
+        setPreviewProject(null);
+        return;
+      }
+
       const projectKey = projectKeys[currentIndex];
       setPreviewProject(projectKey);
       // Reset image index to show first image of each project
       setCurrentImageIndex((prev) => ({ ...prev, [projectKey]: 0 }));
-      currentIndex = (currentIndex + 1) % projectKeys.length;
+      currentIndex = currentIndex + 1;
     };
 
     cyclePreview(); // Start immediately
@@ -252,29 +259,17 @@ export function Welcome() {
 
           {/* Preview Button */}
           <button
-            onClick={() => setIsPreviewMode(!isPreviewMode)}
-            className={`mt-8 px-6 py-3 rounded-full border-2 transition-all font-medium flex items-center gap-2 ${
+            onClick={() => setIsPreviewMode(true)}
+            disabled={isPreviewMode}
+            className={`mt-8 w-12 h-12 rounded-full border-2 transition-all flex items-center justify-center ${
               isPreviewMode
-                ? 'bg-foreground text-background border-foreground'
-                : 'bg-transparent border-foreground/40 hover:border-foreground'
+                ? 'bg-foreground/50 text-background border-foreground/50 cursor-not-allowed'
+                : 'bg-transparent border-foreground/40 hover:border-foreground hover:bg-foreground/10'
             }`}
           >
-            {isPreviewMode ? (
-              <>
-                <svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor'>
-                  <rect x='6' y='5' width='4' height='14' rx='1' />
-                  <rect x='14' y='5' width='4' height='14' rx='1' />
-                </svg>
-                Stop Preview
-              </>
-            ) : (
-              <>
-                <svg width='16' height='16' viewBox='0 0 24 24' fill='currentColor'>
-                  <path d='M8 5v14l11-7z' />
-                </svg>
-                Preview
-              </>
-            )}
+            <svg width='20' height='20' viewBox='0 0 24 24' fill='currentColor'>
+              <path d='M8 5v14l11-7z' />
+            </svg>
           </button>
         </div>
       </div>

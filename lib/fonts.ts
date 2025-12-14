@@ -1,4 +1,5 @@
 import { Allerta_Stencil, Shrikhand, VT323, Doto, Orbitron, Courier_Prime } from 'next/font/google';
+import localFont from 'next/font/local';
 
 export const allertaStencil = Allerta_Stencil({
   weight: '400',
@@ -40,4 +41,26 @@ export const courierPrime = Courier_Prime({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-courier-prime',
+});
+
+export const dinNext = localFont({
+  src: [
+    {
+      path: '../public/toy-lexicon/din-next-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../public/toy-lexicon/din-next-medium.woff2',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../public/toy-lexicon/din-next-bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-din-next',
 });

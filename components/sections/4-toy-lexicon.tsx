@@ -2,7 +2,7 @@
 
 import { ImageGallery } from '@/components/image-gallery';
 import { PillTabs } from '@/components/pill-tabs';
-import { doto } from '@/lib/fonts';
+import { dinNext } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
@@ -104,7 +104,9 @@ export function Project4() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
 
   return (
-    <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
+    <section
+      className={`h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8 ${dinNext.className}`}
+    >
       {/* Desktop Layout */}
       <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8'>
         {/* Column 1: Image Gallery */}
@@ -114,7 +116,7 @@ export function Project4() {
 
         {/* Column 2: Tabs */}
         <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start'>
-          <h2 className={`text-4xl lg:text-7xl font-bold ${doto.className}`}>toy lexicon</h2>
+          <h2 className={`text-4xl lg:text-7xl uppercase font-bold ${dinNext.className}`}>toy lexicon</h2>
           <div className='w-full h-full'>
             <PillTabs tabs={TABS} />
           </div>
@@ -124,7 +126,7 @@ export function Project4() {
       {/* Mobile Layout */}
       <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4'>
         {/* Title - Always visible */}
-        <h2 className={`text-4xl text-center font-bold ${doto.className}`}>toy lexicon</h2>
+        <h2 className={`text-4xl text-center font-bold ${dinNext.className}`}>toy lexicon</h2>
 
         {/* Middle Content - Swipeable */}
         <div className='flex-1 relative'>
