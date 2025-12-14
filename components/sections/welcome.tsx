@@ -36,7 +36,7 @@ const PROJECT_IMAGES: Record<string, string[]> = {
     '/amped-up/speaker-7.jpg',
   ],
   'toy-lexicon': ['/toy-lexicon/cover.jpg', '/toy-lexicon/front-mockup.png'],
-  'lost-in-space': [], // Uses 3D viewer, no preview images
+  'lost-in-space': ['/lost-in-space/cover.jpg'], // Uses 3D viewer, no preview images
   saudade: [
     '/saudade/addis.jpg',
     '/saudade/hongkong-2.jpg',
@@ -44,7 +44,7 @@ const PROJECT_IMAGES: Record<string, string[]> = {
     '/saudade/taldyqorghan-kz.png',
     '/saudade/stolze-1.jpg',
   ],
-  dayjob: [], // Empty project
+  dayjob: ['/dayjob/bg.jpg'], // Empty project
 };
 
 export function Welcome() {

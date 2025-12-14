@@ -3,10 +3,10 @@ import Image from 'next/image';
 export function About() {
   return (
     <section className='h-screen flex flex-col px-4 md:px-8 py-24 md:py-28 overflow-y-auto relative'>
-      {/* Background Image */}
+      {/* Background Image 
       <div className='absolute inset-0 z-0'>
         <Image src='/about/bg.jpg' alt='Background' fill className='object-cover' priority />
-      </div>
+      </div>*/}
 
       <div className='w-full max-w-screen-2xl mx-auto py-8 relative z-10'>
         {/* Header with Profile Picture */}
