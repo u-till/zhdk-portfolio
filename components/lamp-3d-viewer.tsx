@@ -58,7 +58,7 @@ interface LampModelProps {
 }
 
 function LampModel({ intensity }: LampModelProps) {
-  const { scene } = useGLTF('/retrofitted/lamp-2.glb');
+  const { scene } = useGLTF('/retrofitted/lamp.glb');
   const spotLight2Ref = useRef<THREE.SpotLight>(null!);
 
   // Enable shadow casting and receiving for all meshes in the model
@@ -98,7 +98,7 @@ function LampModel({ intensity }: LampModelProps) {
             penumbra={0.5}
             intensity={intensity * 0}
             distance={12}
-            color='#ffa900'
+            color='#ffa600'
             decay={2}
           />
         )}
@@ -178,7 +178,7 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
       >
         <Suspense fallback={null}>
           {/* Ambient light for overall scene illumination */}
-          <ambientLight intensity={1.4} color='#fffbe1' />
+          <ambientLight intensity={1.4} color='#faf7e9ff' />
           {/* Key light from top-right */}
           <directionalLight position={[0, 5, 7]} intensity={0.2} castShadow color='#f67878' />
           {/* Fill light from left */}
@@ -221,4 +221,4 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
 }
 
 // Preload the model
-useGLTF.preload('/retrofitted/lamp-2.glb');
+useGLTF.preload('/retrofitted/lamp.glb');
