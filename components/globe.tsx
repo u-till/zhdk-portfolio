@@ -30,12 +30,12 @@ function LocationPin({ lat, lng }: { lat: number; lng: number }) {
       {/* Pin sphere */}
       <mesh position={[0, 0.15, 0]}>
         <sphereGeometry args={[0.08, 16, 16]} />
-        <meshStandardMaterial color='#ffffff' emissive='#ffffff' emissiveIntensity={0.3} />
+        <meshStandardMaterial color='#ff0000' emissive='#ff0000' emissiveIntensity={0.3} />
       </mesh>
       {/* Pin stick */}
       <mesh position={[0, -0.05, 0]}>
         <cylinderGeometry args={[0.015, 0.015, 0.3, 8]} />
-        <meshStandardMaterial color='#ffffff' emissive='#ffffff' emissiveIntensity={0.2} />
+        <meshStandardMaterial color='#ff0000' emissive='#ff0000' emissiveIntensity={0.2} />
       </mesh>
     </group>
   );

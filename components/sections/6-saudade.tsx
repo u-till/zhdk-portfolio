@@ -199,8 +199,8 @@ const PHOTOS = [
   },
   {
     src: '/saudade/stolze-1.jpg',
-    lat: 50.105,
-    lng: 223.366,
+    lat: 50.435,
+    lng: 188.546,
     title: 'Stolze Openair, Zürich',
     description: 'Once a year for two weeks, volunteers organize a festival in Zurich.',
   },
