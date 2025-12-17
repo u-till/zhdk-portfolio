@@ -1,21 +1,25 @@
 'use client';
 
-import { ImageGallery } from '@/components/image-gallery';
-import { MinimalTabs } from '@/components/minimal-tabs';
 import { vt323 } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
-const IMAGES = [
-  '/amped-up/preview.jpg',
-  '/amped-up/speaker-1.jpg',
-  '/amped-up/speaker-3.jpg',
-  '/amped-up/speaker-4.jpg',
-  '/amped-up/speaker-5.jpg',
-  '/amped-up/speaker-6.jpg',
-  '/amped-up/speaker-7.jpg',
-  '/amped-up/speaker-8.jpg',
-  '/amped-up/speaker-9.jpg',
+type ImageItem = {
+  src: string;
+  objectFit: 'cover' | 'contain';
+};
+
+const IMAGES: ImageItem[] = [
+  { src: '/amped-up/preview.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-1.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-3.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-5.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-6.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
 ];
 
 const TABS = [
@@ -109,68 +113,250 @@ const TABS = [
   },
 ];
 
-export function Project3() {
-  const [showMobileInfo, setShowMobileInfo] = useState(false);
+function AmpedUpTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => void }) {
+  const [activeTab, setActiveTab] = useState(tabs[0].id);
 
   return (
-    <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
-      {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
-        {/* Column 1: Image Gallery */}
-        <div className='flex flex items-start justify-start'>
-          <ImageGallery images={IMAGES} />
-        </div>
+    <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md'>
+      {/* Tab Headers */}
+      <div className='flex border-b border-black/60'>
+        <button
+          onClick={onClose}
+          className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-colors border-r border-black/60 bg-transparent text-foreground hover:bg-foreground/5'
+        >
+          ×
+        </button>
+        {tabs.map((tab, index) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`relative cursor-pointer flex-1 py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors ${
+              index < tabs.length - 1 ? 'border-r border-black/60' : ''
+            } ${
+              activeTab === tab.id
+                ? 'bg-foreground text-background'
+                : 'bg-transparent text-foreground hover:bg-foreground/5'
+            }`}
+          >
+            {tab.label}
+            {activeTab === tab.id && (
+              <motion.div
+                layoutId='activeAmpedTab'
+                className='absolute inset-0 bg-foreground -z-10'
+                transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
+              />
+            )}
+          </button>
+        ))}
+      </div>
 
-        {/* Column 2: Tabs */}
-        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start'>
-          <h2 className={`text-4xl lg:text-7xl font-bold ${vt323.className}`}>amped up</h2>
-          <div className='w-full h-full'>
-            <MinimalTabs tabs={TABS} />
-          </div>
+      {/* Tab Content */}
+      <div className='relative min-h-[300px] md:min-h-[400px] p-6 md:p-8 overflow-auto'>
+        <AnimatePresence mode='wait'>
+          {tabs.map(
+            (tab) =>
+              activeTab === tab.id && (
+                <motion.div
+                  key={tab.id}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3, ease: 'easeInOut' }}
+                  className='font-mono text-sm md:text-base leading-relaxed'
+                >
+                  {tab.content}
+                </motion.div>
+              )
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+}
+
+export function Project3() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [expandedPanel, setExpandedPanel] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const navigateToPhoto = useCallback((index: number) => {
+    if (scrollRef.current) {
+      const width = scrollRef.current.offsetWidth;
+      scrollRef.current.scrollTo({
+        left: width * index,
+        behavior: 'smooth',
+      });
+    }
+  }, []);
+
+  const handlePrev = useCallback(() => {
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : IMAGES.length - 1;
+    navigateToPhoto(newIndex);
+  }, [activeIndex, navigateToPhoto]);
+
+  const handleNext = useCallback(() => {
+    const newIndex = activeIndex < IMAGES.length - 1 ? activeIndex + 1 : 0;
+    navigateToPhoto(newIndex);
+  }, [activeIndex, navigateToPhoto]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (scrollRef.current) {
+        const scrollLeft = scrollRef.current.scrollLeft;
+        const width = scrollRef.current.offsetWidth;
+        const index = Math.round(scrollLeft / width);
+        setActiveIndex(index);
+      }
+    };
+
+    const scrollEl = scrollRef.current;
+    scrollEl?.addEventListener('scroll', handleScroll);
+    return () => scrollEl?.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') {
+        handlePrev();
+      } else if (e.key === 'ArrowRight') {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [handleNext, handlePrev]);
+
+  return (
+    <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
+      {/* Title */}
+      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
+        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
+          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${vt323.className}`}>
+            amped up
+          </h2>
         </div>
       </div>
 
-      {/* Mobile Layout */}
-      <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4  '>
-        {/* Title */}
-        <h2 className={`text-4xl text-center font-bold ${vt323.className}`}>amped up</h2>
+      {/* Scrolling Photos - Full Width */}
+      <div
+        ref={scrollRef}
+        className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
+      >
+        {IMAGES.map((image, index) => (
+          <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
+            <Image
+              src={image.src}
+              alt={`Amped Up ${index + 1}`}
+              fill
+              className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
+              priority={index === 0}
+              sizes='100vw'
+            />
+          </div>
+        ))}
+      </div>
 
-        {/* Middle Content - Swipeable */}
-        <div className='flex-1 relative'>
-          <AnimatePresence initial={false}>
-            {!showMobileInfo ? (
-              <motion.div
-                key='viewer'
-                initial={{ x: 'calc(-100% - 1rem)' }}
-                animate={{ x: 0 }}
-                exit={{ x: 'calc(-100% - 1rem)' }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 flex items-center justify-center w-full'
-              >
-                <ImageGallery images={IMAGES} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key='info'
-                initial={{ x: 'calc(100% + 1rem)' }}
-                animate={{ x: 0 }}
-                exit={{ x: 'calc(100% + 1rem)' }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 overflow-hidden'
-              >
-                <MinimalTabs tabs={TABS} />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-
-        {/* Button - Always visible */}
+      {/* Navigation Buttons - Desktop Only */}
+      <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
         <button
-          onClick={() => setShowMobileInfo(!showMobileInfo)}
-          className='w-full py-4 px-6 bg-background border border-black/60 backdrop-blur-md font-bold uppercase hover:bg-foreground/5 transition-colors'
+          onClick={handlePrev}
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5 transition-colors pointer-events-auto'
+          aria-label='Previous photo'
         >
-          {showMobileInfo ? 'Back' : 'More Infos'}
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={2}
+            stroke='currentColor'
+            className='w-6 h-6'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+          </svg>
         </button>
+        <button
+          onClick={handleNext}
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5 transition-colors pointer-events-auto'
+          aria-label='Next photo'
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            fill='none'
+            viewBox='0 0 24 24'
+            strokeWidth={2}
+            stroke='currentColor'
+            className='w-6 h-6'
+          >
+            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+          </svg>
+        </button>
+      </div>
+
+      {/* Thumbnail Strip - Bottom */}
+      <div className='absolute bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
+        {IMAGES.map((image, index) => (
+          <button
+            key={index}
+            onClick={() => navigateToPhoto(index)}
+            className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 border ${
+              activeIndex === index
+                ? 'border-2 border-black opacity-100'
+                : 'border-black/60 opacity-60 hover:opacity-100'
+            }`}
+          >
+            <Image
+              src={image.src}
+              alt={`Thumbnail ${index + 1}`}
+              fill
+              className={image.objectFit === 'contain' ? 'object-contain p-1' : 'object-cover'}
+            />
+          </button>
+        ))}
+      </div>
+
+      {/* Info Panel - Expandable */}
+      <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
+        <motion.div
+          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
+          animate={{
+            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
+            height: expandedPanel ? 'calc(100vh - 10rem)' : undefined,
+            top: expandedPanel ? '8rem' : undefined,
+            bottom: expandedPanel ? 'auto' : undefined,
+          }}
+          transition={{ duration: 0.4, ease: 'easeInOut' }}
+        >
+          {!expandedPanel ? (
+            <div className='w-full h-full relative border border-black/60 bg-background/90 backdrop-blur-md overflow-hidden'>
+              <button
+                onClick={() => setExpandedPanel(true)}
+                className='absolute cursor-pointer top-4 left-4 w-8 h-8 border border-black/60 bg-background/80 hover:bg-foreground/5 flex items-center justify-center transition-colors z-10 font-mono'
+              >
+                i
+              </button>
+              <Image
+                src='/amped-up/speaker-2.jpg'
+                alt='Speaker'
+                fill
+                className='object-cover cursor-pointer'
+                onClick={() => setExpandedPanel(true)}
+              />
+            </div>
+          ) : (
+            <div className='w-full h-full relative overflow-hidden'>
+              <AmpedUpTabs tabs={TABS} onClose={() => setExpandedPanel(false)} />
+            </div>
+          )}
+        </motion.div>
       </div>
     </section>
   );

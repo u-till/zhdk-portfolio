@@ -9,6 +9,8 @@ import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
 function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitControlsType | null> }) {
   const { camera } = useThree();
+
+  //CAMERA POSITION
   const initialPosition = useRef(new THREE.Vector3(2.74, 1.1, 0.9));
   const initialTarget = useRef(new THREE.Vector3(0, 0, 0));
   const isInteracting = useRef(false);
@@ -107,45 +109,21 @@ function LampModel({ intensity }: LampModelProps) {
   );
 }
 
-interface Lamp3DViewerProps {
-  variant?: 'minimal' | 'retro' | 'pill';
-}
-
-export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
+export function Lamp3DViewer() {
   const [intensity, setIntensity] = useState(0.77);
   const controlsRef = useRef<OrbitControlsType>(null);
 
-  const styles = {
-    minimal: {
-      container: 'border border-black/60 bg-background/90 backdrop-blur-md',
-      track: 'bg-black/20',
-      thumb: 'bg-foreground',
-    },
-    retro: {
-      container: 'rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md ',
-      track: 'bg-orange-300/30',
-      thumb: 'bg-orange-300',
-    },
-    pill: {
-      container: 'rounded-full bg-green-500/80 backdrop-blur-md border border-green-300/40',
-      track: 'bg-green-300/30',
-      thumb: 'bg-green-200',
-    },
-  };
-
-  const currentStyle = styles[variant];
-
   return (
-    <div className='relative w-full h-full bg-linear-to-r from-grey-200 via-gray-500 to-gray-700'>
+    <div className='relative w-full h-full'>
       {/* Light Dimmer Slider */}
-      <div className={`absolute bottom-4 right-4 px-4 py-3 z-10 flex items-center gap-3 ${currentStyle.container}`}>
+      <div className='absolute bottom-58 right-8 w-36 lg:w-48 px-2 py-2 z-10 flex items-center gap-1 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
-          width='16'
-          height='16'
+          width='12'
+          height='12'
           viewBox='0 0 24 24'
-          fill={intensity > 0.1 ? '#374151' : 'none'}
-          stroke='#374151'
+          fill={intensity > 0.1 ? '#fed7aa' : 'none'}
+          stroke='#fed7aa'
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -161,20 +139,25 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
           step='0.01'
           value={intensity}
           onChange={(e) => setIntensity(parseFloat(e.target.value))}
-          className='w-32 h-2 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gray-700 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-gray-700 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0'
+          className='flex-1 min-w-0 h-2 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-orange-300 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-orange-300 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0'
           aria-label='Light intensity'
           style={{
-            background: `linear-gradient(to right, #374151 ${intensity * 100}%, transparent ${intensity * 100}%)`,
+            background: `linear-gradient(to right, #fed7aa ${intensity * 100}%, rgba(251, 146, 60, 0.3) ${
+              intensity * 100
+            }%)`,
           }}
         />
-        <span className='text-sm font-medium w-8 text-right'>{Math.round(intensity * 100)}%</span>
+        <span className='text-xs font-medium text-white flex-shrink-0 w-7 text-right'>
+          {Math.round(intensity * 100)}%
+        </span>
       </div>
 
       {/* 3D Canvas */}
       <Canvas
-        camera={{ position: [2.74, 1.1, 0.9], fov: 50 }}
-        gl={{ antialias: true, toneMapping: THREE.ACESFilmicToneMapping }}
-        shadows
+        camera={{ position: [2.74, -11, 0.9], fov: 50 }}
+        gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping }}
+        shadows='soft'
+        frameloop='demand'
       >
         <Suspense fallback={null}>
           {/* Ambient light for overall scene illumination */}
@@ -201,17 +184,20 @@ export function Lamp3DViewer({ variant = 'minimal' }: Lamp3DViewerProps) {
             enableRotate={true}
             minDistance={1.5}
             maxDistance={8}
+            makeDefault
+            enableDamping={true}
+            dampingFactor={0.05}
           />
           <CameraReset controlsRef={controlsRef} />
 
-          {/* Bloom effect for realistic light glow */}
-          <EffectComposer>
+          {/* Bloom effect for realistic light glow - Optimized */}
+          <EffectComposer multisampling={0}>
             <Bloom
               intensity={intensity * 4}
-              luminanceThreshold={0.2}
-              luminanceSmoothing={0.3}
-              mipmapBlur
-              radius={0.8}
+              luminanceThreshold={0.3}
+              luminanceSmoothing={0.5}
+              radius={0.6}
+              levels={4}
             />
           </EffectComposer>
         </Suspense>

@@ -104,7 +104,7 @@ export function Project1() {
       {/* Desktop Layout */}
       <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
         {/* Column 1: 360 Viewer */}
-        <div className='flex flex items-start justify-start'>
+        <div className='flex flex-1 items-start justify-start'>
           <Viewer360
             imageFolder='under-construction/korpus-360'
             totalFrames={27}
