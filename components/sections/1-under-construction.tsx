@@ -4,12 +4,13 @@ import { BrutalistTabs } from '@/components/brutalist-tabs';
 import { Viewer360 } from '@/components/viewer-360';
 import { allertaStencil } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import Image from 'next/image';
+import { useCallback, useMemo, useState } from 'react';
 
-const TABS = [
+const getTabs = (onProcessImageClick?: (imageIndex: number) => void) => [
   {
-    id: 'info',
-    label: 'INFO',
+    id: 'infos',
+    label: 'INFOS',
     content: (
       <div className='space-y-6'>
         <div>
@@ -29,7 +30,7 @@ const TABS = [
           </div>
         </div>
         <div>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Specifications</h3>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Specifications</h3>
           <ul className='space-y-2 list-none mt-4'>
             <li className='border-l-4 border-red-600 pl-4'>
               <span className='font-bold'>FRAMES:</span> 27
@@ -45,6 +46,19 @@ const TABS = [
             </li>
           </ul>
         </div>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Credits</h3>
+          <div className='space-y-3 mt-4'>
+            <div>
+              <span className='font-bold block uppercase text-xs tracking-wider'>Solo Project</span>
+              <span>Till Solenthaler</span>
+            </div>
+            <div>
+              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
       </div>
     ),
   },
@@ -52,44 +66,30 @@ const TABS = [
     id: 'process',
     label: 'PROCESS',
     content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Development Process</h3>
-        <div className='space-y-3'>
-          <div className='bg-neutral-100 p-3 border-l-4 border-black'>
+      <div className='h-full flex flex-col'>
+        <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mb-4'>Development Process</h3>
+        <div className='space-y-3 flex-1 flex flex-col justify-start'>
+          <button
+            onClick={() => onProcessImageClick?.(0)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+          >
             <span className='font-bold block'>01. CAPTURE</span>
             <span className='text-sm'>360° photography setup</span>
-          </div>
-          <div className='bg-neutral-100 p-3 border-l-4 border-black'>
+          </button>
+          <button
+            onClick={() => onProcessImageClick?.(1)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+          >
             <span className='font-bold block'>02. PROCESS</span>
             <span className='text-sm'>Image normalization</span>
-          </div>
-          <div className='bg-neutral-100 p-3 border-l-4 border-black'>
+          </button>
+          <button
+            onClick={() => onProcessImageClick?.(2)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+          >
             <span className='font-bold block'>03. IMPLEMENT</span>
             <span className='text-sm'>Interactive viewer</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'credits',
-    label: 'CREDITS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Credits</h3>
-        <div className='space-y-3'>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Development</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-            <span>2025</span>
-          </div>
+          </button>
         </div>
       </div>
     ),
@@ -98,29 +98,58 @@ const TABS = [
 
 export function Project1() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
+  const [selectedProcessImage, setSelectedProcessImage] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
+
+  const handleProcessImageClick = useCallback((imageIndex: number) => {
+    setSelectedProcessImage(imageIndex);
+  }, []);
+
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as 'infos' | 'process');
+  }, []);
+
+  const tabs = useMemo(() => getTabs(handleProcessImageClick), [handleProcessImageClick]);
 
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
       <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
-        {/* Column 1: 360 Viewer */}
-        <div className='flex flex-1 items-start justify-start'>
-          <Viewer360
-            imageFolder='under-construction/korpus-360'
-            totalFrames={27}
-            imageFormat='png'
-            imagePrefix='normalized-'
-            imagePadding={2}
-          />
+        {/* Column 1: 360 Viewer / Process Image */}
+        <div className='flex flex-1 items-start justify-start relative'>
+          {selectedProcessImage !== null ? (
+            <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
+              <button
+                onClick={() => setSelectedProcessImage(null)}
+                className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
+              >
+                ×
+              </button>
+              <Image
+                src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
+                alt={`Process ${selectedProcessImage + 1}`}
+                fill
+                className='object-cover'
+              />
+            </div>
+          ) : (
+            <Viewer360
+              imageFolder='under-construction/korpus-360'
+              totalFrames={27}
+              imageFormat='png'
+              imagePrefix='normalized-'
+              imagePadding={2}
+            />
+          )}
         </div>
 
         {/* Column 2: Tabs */}
-        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start'>
+        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start relative group'>
           <h2 className={`text-4xl lg:text-7xl font-bold ${allertaStencil.className}`}>
             under <br></br>construction
           </h2>
-          <div className='w-full h-full pr-2'>
-            <BrutalistTabs tabs={TABS} />
+          <div className='w-full h-full pr-2 transition-transform duration-300 group-hover:-translate-y-[6rem] lg:group-hover:-translate-y-[11rem]'>
+            <BrutalistTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
           </div>
         </div>
       </div>
@@ -144,13 +173,30 @@ export function Project1() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className='absolute inset-0 flex items-center justify-center w-full'
               >
-                <Viewer360
-                  imageFolder='under-construction/korpus-360'
-                  totalFrames={27}
-                  imageFormat='png'
-                  imagePrefix='normalized-'
-                  imagePadding={2}
-                />
+                {selectedProcessImage !== null ? (
+                  <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
+                    <button
+                      onClick={() => setSelectedProcessImage(null)}
+                      className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
+                    >
+                      ×
+                    </button>
+                    <Image
+                      src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
+                      alt={`Process ${selectedProcessImage + 1}`}
+                      fill
+                      className='object-cover'
+                    />
+                  </div>
+                ) : (
+                  <Viewer360
+                    imageFolder='under-construction/korpus-360'
+                    totalFrames={27}
+                    imageFormat='png'
+                    imagePrefix='normalized-'
+                    imagePadding={2}
+                  />
+                )}
               </motion.div>
             ) : (
               <motion.div
@@ -161,7 +207,7 @@ export function Project1() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className='absolute inset-0'
               >
-                <BrutalistTabs tabs={TABS} />
+                <BrutalistTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
               </motion.div>
             )}
           </AnimatePresence>

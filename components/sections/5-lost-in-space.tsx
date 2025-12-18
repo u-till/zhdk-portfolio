@@ -7,108 +7,24 @@ import { orbitron } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
 
-const TABS = [
-  {
-    id: 'info',
-    label: 'INFO',
-    content: (
-      <div className='space-y-6 text-white'>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-            Project Details
-          </h3>
-          <p className='leading-relaxed mt-4'>
-            An album i did toghether with my flatmate when we used to live in a studio.
-          </p>
-          <div className='grid grid-cols-2 gap-4 pt-4'>
-            <div>
-              <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
-              <span>Music Album</span>
-            </div>
-            <div>
-              <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
-              <span>2019</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-            Specifications
-          </h3>
-          <ul className='space-y-2 list-none mt-4'>
-            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-              <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
-            </li>
-            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-              <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
-            </li>
-            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-              <span className='font-bold text-[#FF6B66]'>INTERACTION:</span> Mouse Tilt & Flip
-            </li>
-            <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-              <span className='font-bold text-[#FF6B66]'>ANIMATION:</span> CSS 3D Transform
-            </li>
-          </ul>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'process',
-    label: 'PROCESS',
-    content: (
-      <div className='space-y-4 text-white'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-          Creation Process
-        </h3>
-        <div className='space-y-3'>
-          <div className='bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60'>
-            <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
-            <span className='text-sm'>Album artwork and layout</span>
-          </div>
-          <div className='bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60'>
-            <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
-            <span className='text-sm'>3D transformation implementation</span>
-          </div>
-          <div className='bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60'>
-            <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-            <span className='text-sm'>Spotify player embedding</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'credits',
-    label: 'CREDITS',
-    content: (
-      <div className='space-y-4 text-white'>
-        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>Credits</h3>
-        <div className='space-y-3'>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Album Art</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Music Production</span>
-            <span>Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Development</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>Year</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
+const IMAGES = [
+  '/lost-in-space/cover.jpg',
+  '/lost-in-space/studio.jpeg',
+  '/lost-in-space/backside.jpg',
+  '/lost-in-space/backside.jpg',
 ];
 
 export function Project5() {
   const [showMobileInfo, setShowMobileInfo] = useState(false);
+  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId as 'infos' | 'process');
+    if (tabId === 'infos') {
+      setCurrentImageIndex(0);
+    }
+  };
 
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8 relative overflow-hidden'>
@@ -119,7 +35,7 @@ export function Project5() {
         {/* Column 1: 3D Album Viewer */}
         <div className='flex flex items-start justify-start'>
           <AlbumViewer3D
-            coverImage='/lost-in-space/cover.jpg'
+            coverImage={IMAGES[currentImageIndex]}
             spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
           />
         </div>
@@ -133,7 +49,112 @@ export function Project5() {
             LOST IN SPACE
           </h2>
           <div className='w-full h-full'>
-            <SpaceTabs tabs={TABS} />
+            <SpaceTabs
+              tabs={[
+                {
+                  id: 'infos',
+                  label: 'INFOS',
+                  content: (
+                    <div className='space-y-6 text-white'>
+                      <div>
+                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
+                          Project Details
+                        </h3>
+                        <p className='leading-relaxed mt-4'>
+                          An album i did toghether with my flatmate when we used to live in a studio.
+                        </p>
+                        <div className='grid grid-cols-2 gap-4 pt-4'>
+                          <div>
+                            <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
+                            <span>Music Album</span>
+                          </div>
+                          <div>
+                            <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
+                            <span>2019</span>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div>
+                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
+                          Specifications
+                        </h3>
+                        <ul className='space-y-2 list-none mt-4'>
+                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                            <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
+                          </li>
+                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                            <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
+                          </li>
+                        </ul>
+                      </div> */}
+                      <div>
+                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
+                          Credits
+                        </h3>
+                        <div className='space-y-3 mt-4'>
+                          <div>
+                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                              Album Art
+                            </span>
+                            <span>Till Solenthaler</span>
+                          </div>
+                          <div>
+                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                              Music Production
+                            </span>
+                            <span>
+                              Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
+                            </span>
+                          </div>
+                          <div>
+                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                              Year
+                            </span>
+                            <span>2024</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ),
+                },
+                {
+                  id: 'process',
+                  label: 'PROCESS',
+                  content: (
+                    <div className='space-y-4 text-white'>
+                      <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
+                        Creation Process
+                      </h3>
+                      <div className='space-y-3'>
+                        <button
+                          onClick={() => setCurrentImageIndex(1)}
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                        >
+                          <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
+                          <span className='text-sm'>Album artwork and layout</span>
+                        </button>
+                        <button
+                          onClick={() => setCurrentImageIndex(2)}
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                        >
+                          <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
+                          <span className='text-sm'>3D transformation implementation</span>
+                        </button>
+                        <button
+                          onClick={() => setCurrentImageIndex(3)}
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                        >
+                          <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
+                          <span className='text-sm'>Spotify player embedding</span>
+                        </button>
+                      </div>
+                    </div>
+                  ),
+                },
+              ]}
+              activeTab={activeTab}
+              onTabChange={handleTabChange}
+            />
           </div>
         </div>
       </div>
@@ -161,7 +182,7 @@ export function Project5() {
                 className='absolute inset-0 flex items-center justify-center w-full'
               >
                 <AlbumViewer3D
-                  coverImage='/lost-in-space/cover.jpg'
+                  coverImage={IMAGES[currentImageIndex]}
                   spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
                 />
               </motion.div>
@@ -174,7 +195,124 @@ export function Project5() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className='absolute inset-0 overflow-hidden'
               >
-                <SpaceTabs tabs={TABS} />
+                <SpaceTabs
+                  tabs={[
+                    {
+                      id: 'infos',
+                      label: 'INFOS',
+                      content: (
+                        <div className='space-y-6 text-white'>
+                          <div>
+                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
+                              Project Details
+                            </h3>
+                            <p className='leading-relaxed mt-4'>
+                              An album i did toghether with my flatmate when we used to live in a studio.
+                            </p>
+                            <div className='grid grid-cols-2 gap-4 pt-4'>
+                              <div>
+                                <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
+                                <span>Music Album</span>
+                              </div>
+                              <div>
+                                <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
+                                <span>2019</span>
+                              </div>
+                            </div>
+                          </div>
+                          {/* <div>
+                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
+                              Specifications
+                            </h3>
+                            <ul className='space-y-2 list-none mt-4'>
+                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                                <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
+                              </li>
+                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                                <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
+                              </li>
+                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                                <span className='font-bold text-[#FF6B66]'>INTERACTION:</span> Mouse Tilt & Flip
+                              </li>
+                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
+                                <span className='font-bold text-[#FF6B66]'>ANIMATION:</span> CSS 3D Transform
+                              </li>
+                            </ul>
+                          </div> */}
+                          <div>
+                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
+                              Credits
+                            </h3>
+                            <div className='space-y-3 mt-4'>
+                              <div>
+                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                                  Album Art
+                                </span>
+                                <span>Till Solenthaler</span>
+                              </div>
+                              <div>
+                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                                  Music Production
+                                </span>
+                                <span>
+                                  Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
+                                </span>
+                              </div>
+                              <div>
+                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                                  Development
+                                </span>
+                                <span>Till Solenthaler</span>
+                              </div>
+                              <div>
+                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
+                                  Year
+                                </span>
+                                <span>2024</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ),
+                    },
+                    {
+                      id: 'process',
+                      label: 'PROCESS',
+                      content: (
+                        <div className='space-y-4 text-white'>
+                          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
+                            Creation Process
+                          </h3>
+                          <div className='space-y-3'>
+                            <button
+                              onClick={() => setCurrentImageIndex(1)}
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                            >
+                              <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
+                              <span className='text-sm'>Album artwork and layout</span>
+                            </button>
+                            <button
+                              onClick={() => setCurrentImageIndex(2)}
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                            >
+                              <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
+                              <span className='text-sm'>3D transformation implementation</span>
+                            </button>
+                            <button
+                              onClick={() => setCurrentImageIndex(3)}
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                            >
+                              <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
+                              <span className='text-sm'>Spotify player embedding</span>
+                            </button>
+                          </div>
+                        </div>
+                      ),
+                    },
+                  ]}
+                  activeTab={activeTab}
+                  onTabChange={handleTabChange}
+                />
               </motion.div>
             )}
           </AnimatePresence>

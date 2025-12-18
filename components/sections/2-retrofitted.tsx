@@ -21,99 +21,26 @@ const IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
 ];
 
-const TABS = [
-  {
-    id: 'info',
-    label: 'INFO',
-    content: (
-      <div className='space-y-6'>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
-          <p className='mt-4'>
-            A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable battery
-            and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
-          </p>
-          <div className='grid grid-cols-2 gap-4 pt-4'>
-            <div>
-              <span className='font-bold block'>TYPE:</span>
-              <span>Lighting Design</span>
-            </div>
-            <div>
-              <span className='font-bold block'>YEAR:</span>
-              <span>2025</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Specifications</h3>
-          <ul className='space-y-2 list-none mt-4'>
-            <li className='border-l-2 border-orange-300 pl-4'>
-              <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
-            </li>
-            <li className='border-l-2 border-orange-300 pl-4'>
-              <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
-            </li>
-            <li className='border-l-2 border-orange-300 pl-4'>
-              <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
-            </li>
-            <li className='border-l-2 border-orange-300 pl-4'>
-              <span className='font-bold'>CONDITION:</span> Restored & Updated
-            </li>
-          </ul>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'process',
-    label: 'PROCESS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Restoration Process</h3>
-        <div className='space-y-3'>
-          <div className='bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg'>
-            <span className='font-bold block'>01. SOURCING</span>
-            <span className='text-sm'>Finding authentic 70s piece</span>
-          </div>
-          <div className='bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg'>
-            <span className='font-bold block'>02. RESTORATION</span>
-            <span className='text-sm'>Cleaning and repair work</span>
-          </div>
-          <div className='bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg'>
-            <span className='font-bold block'>03. MODERNIZATION</span>
-            <span className='text-sm'>LED retrofit installation</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'credits',
-    label: 'CREDITS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Credits</h3>
-        <div className='space-y-3'>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Restoration</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-];
+interface Tab {
+  id: string;
+  label: string;
+  content: React.ReactNode;
+}
 
-function RetrofittedTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => void }) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+function RetrofittedTabs({
+  tabs,
+  onClose,
+  activeTab,
+  onTabChange,
+}: {
+  tabs: Tab[];
+  onClose: () => void;
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+}) {
+  const handleTabChange = (tabId: string) => {
+    onTabChange(tabId);
+  };
 
   return (
     <div className='w-full h-full rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg'>
@@ -128,7 +55,7 @@ function RetrofittedTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => 
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
             className={`relative cursor-pointer flex-1 py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-all ${
               index === 0 ? 'rounded-tl-[32px]' : ''
             } ${
@@ -177,13 +104,11 @@ export function Project2() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as 'infos' | 'process');
   }, []);
 
   const navigateToPhoto = useCallback((index: number) => {
@@ -194,6 +119,13 @@ export function Project2() {
         behavior: 'smooth',
       });
     }
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handlePrev = useCallback(() => {
@@ -239,12 +171,10 @@ export function Project2() {
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
-        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}>
-            retrofitted
-          </h2>
-        </div>
+      <div className='absolute bottom-28 left-8 flex justify-start pointer-events-none z-10'>
+        <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}>
+          retrofitted
+        </h2>
       </div>
 
       {/* Scrolling Photos - Full Width */}
@@ -261,7 +191,11 @@ export function Project2() {
 
         {/* Rest of the images */}
         {IMAGES.map((image, index) => (
-          <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative`}>
+          <div
+            key={image.src}
+            className={`h-full min-w-full snap-center flex items-center justify-center relative`}
+            style={image.src === '/retrofitted/schematic.png' ? { backgroundColor: '#ffc19dff' } : undefined}
+          >
             <Image
               src={image.src}
               alt={`Retrofitted ${index + 1}`}
@@ -278,7 +212,7 @@ export function Project2() {
       <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
         <button
           onClick={handlePrev}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
           aria-label='Previous photo'
         >
           <svg
@@ -287,14 +221,14 @@ export function Project2() {
             viewBox='0 0 24 24'
             strokeWidth={2}
             stroke='currentColor'
-            className='w-6 h-6'
+            className='w-6 h-6 text-white/60 group-hover:text-white transition-colors'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
           </svg>
         </button>
         <button
           onClick={handleNext}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
           aria-label='Next photo'
         >
           <svg
@@ -303,7 +237,7 @@ export function Project2() {
             viewBox='0 0 24 24'
             strokeWidth={2}
             stroke='currentColor'
-            className='w-6 h-6'
+            className='w-6 h-6 text-white/60 group-hover:text-white transition-colors'
           >
             <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
           </svg>
@@ -390,7 +324,113 @@ export function Project2() {
             </div>
           ) : (
             <div className='w-full h-full relative rounded-[32px] overflow-hidden'>
-              <RetrofittedTabs tabs={TABS} onClose={() => setExpandedPanel(false)} />
+              <RetrofittedTabs
+                tabs={[
+                  {
+                    id: 'infos',
+                    label: 'INFOS',
+                    content: (
+                      <div className='space-y-6'>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
+                            Project Details
+                          </h3>
+                          <p className='mt-4'>
+                            A stunning space-age lamp from the 1970s, retrofitted with modern technology including a
+                            rechargable battery and a USB-C connector and a stepless dimmer, while preserving its iconic
+                            aesthetic.
+                          </p>
+                          <div className='grid grid-cols-2 gap-4 pt-4'>
+                            <div>
+                              <span className='font-bold block'>TYPE:</span>
+                              <span>Lighting Design</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block'>YEAR:</span>
+                              <span>2025</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>
+                            Specifications
+                          </h3>
+                          <ul className='space-y-2 list-none mt-4'>
+                            <li className='border-l-2 border-orange-300 pl-4'>
+                              <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
+                            </li>
+                            <li className='border-l-2 border-orange-300 pl-4'>
+                              <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
+                            </li>
+                            <li className='border-l-2 border-orange-300 pl-4'>
+                              <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
+                            </li>
+                            <li className='border-l-2 border-orange-300 pl-4'>
+                              <span className='font-bold'>CONDITION:</span> Restored & Updated
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>
+                            Credits
+                          </h3>
+                          <div className='space-y-3 mt-4'>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Restoration</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                              <span>2024</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: 'process',
+                    label: 'PROCESS',
+                    content: (
+                      <div className='space-y-4'>
+                        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
+                          Restoration Process
+                        </h3>
+                        <div className='space-y-3'>
+                          <button
+                            onClick={() => navigateToPhoto(5)}
+                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>01. SOURCING</span>
+                            <span className='text-sm'>Finding authentic 70s piece</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(6)}
+                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>02. RESTORATION</span>
+                            <span className='text-sm'>Cleaning and repair work</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(7)}
+                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>03. MODERNIZATION</span>
+                            <span className='text-sm'>LED retrofit installation</span>
+                          </button>
+                        </div>
+                      </div>
+                    ),
+                  },
+                ]}
+                onClose={() => setExpandedPanel(false)}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+              />
             </div>
           )}
         </motion.div>

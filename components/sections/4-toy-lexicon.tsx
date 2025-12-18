@@ -15,119 +15,45 @@ const IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/cover.jpg', objectFit: 'cover' },
 ];
 
-const TABS = [
-  {
-    id: 'info',
-    label: 'INFO',
-    content: (
-      <div className='space-y-6'>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
-          <p className='mt-4'>
-            A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
-            fathers hobby has been collecting and building with old construction kids for a long time. Now with two
-            friends of his, he photographed all his work and i made it into a book.
-          </p>
-          <div className='grid grid-cols-2 gap-4 pt-4'>
-            <div>
-              <span className='font-bold block'>TYPE:</span>
-              <span>Book Design</span>
-            </div>
-            <div>
-              <span className='font-bold block'>YEAR:</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Specifications</h3>
-          <ul className='space-y-2 list-none mt-4'>
-            <li className='border-l-2 border-green-500 pl-4'>
-              <span className='font-bold'>FORMAT:</span> Hardcover Book
-            </li>
-            <li className='border-l-2 border-green-500 pl-4'>
-              <span className='font-bold'>PAGES:</span> 120+
-            </li>
-            <li className='border-l-2 border-green-500 pl-4'>
-              <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
-            </li>
-            <li className='border-l-2 border-green-500 pl-4'>
-              <span className='font-bold'>LAYOUT:</span> Custom Design
-            </li>
-          </ul>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'process',
-    label: 'PROCESS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Creation Process</h3>
-        <div className='space-y-3'>
-          <div className='bg-green-500/10 p-3 border-l-2 border-green-500'>
-            <span className='font-bold block'>01. COLLECTION</span>
-            <span className='text-sm'>Curating childhood objects</span>
-          </div>
-          <div className='bg-green-500/10 p-3 border-l-2 border-green-500'>
-            <span className='font-bold block'>02. PHOTOGRAPHY</span>
-            <span className='text-sm'>Professional documentation</span>
-          </div>
-          <div className='bg-green-500/10 p-3 border-l-2 border-green-500'>
-            <span className='font-bold block'>03. DESIGN</span>
-            <span className='text-sm'>Book layout and typesetting</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'credits',
-    label: 'CREDITS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Credits</h3>
-        <div className='space-y-3'>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Design</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-];
+interface Tab {
+  id: string;
+  label: string;
+  content: React.ReactNode;
+}
 
-function ToyLexiconTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => void }) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+function ToyLexiconTabs({
+  tabs,
+  onClose,
+  activeTab,
+  onTabChange,
+}: {
+  tabs: Tab[];
+  onClose: () => void;
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+}) {
+  const handleTabChange = (tabId: string) => {
+    onTabChange(tabId);
+  };
 
   return (
-    <div className='w-full h-full rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md flex flex-col p-6 md:p-8'>
+    <div className='w-full h-full rounded-lg bg-white/95 border-2 border-green-500/60 backdrop-blur-md flex flex-col p-6 md:p-8'>
       {/* Close button and Tab Headers */}
       <div className='flex gap-2 mb-6'>
         <button
           onClick={onClose}
-          className='cursor-pointer w-8 h-8 rounded-full font-medium text-lg transition-colors bg-transparent text-foreground border border-green-500/40 hover:bg-green-500/10 flex items-center justify-center flex-shrink-0'
+          className='cursor-pointer w-8 h-8 rounded-full font-medium text-lg transition-colors bg-white/90 text-foreground border border-green-500/60 hover:bg-white flex items-center justify-center flex-shrink-0'
         >
           ×
         </button>
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
             className={`relative cursor-pointer py-2 px-4 rounded-full font-medium text-sm uppercase transition-colors ${
               activeTab === tab.id
                 ? 'bg-green-500 text-white'
-                : 'bg-transparent text-foreground border border-green-500/40 hover:bg-green-500/10'
+                : 'bg-white/90 text-foreground border border-green-500/60 hover:bg-white'
             }`}
           >
             {tab.label}
@@ -163,7 +89,12 @@ export function Project4() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const handleTabChange = (tabId: string) => {
+    setActiveTab(tabId as 'infos' | 'process');
+  };
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -320,10 +251,10 @@ export function Project4() {
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
           {!expandedPanel ? (
-            <div className='w-full h-full relative rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md overflow-hidden'>
+            <div className='w-full h-full relative rounded-lg bg-green-500/40 border-2 border-green-500/60 backdrop-blur-md overflow-hidden'>
               <button
                 onClick={() => setExpandedPanel(true)}
-                className='absolute cursor-pointer top-4 left-4 w-8 h-8 rounded-full bg-green-500/10 border-2 border-green-500/40 hover:bg-green-500/20 flex items-center justify-center transition-colors z-10 font-mono'
+                className='absolute cursor-pointer top-4 left-4 w-8 h-8 rounded-full bg-white/90 border-2 border-green-500/60 hover:bg-white flex items-center justify-center transition-colors z-10 font-mono'
               >
                 i
               </button>
@@ -337,7 +268,114 @@ export function Project4() {
             </div>
           ) : (
             <div className='w-full h-full relative overflow-hidden'>
-              <ToyLexiconTabs tabs={TABS} onClose={() => setExpandedPanel(false)} />
+              <ToyLexiconTabs
+                tabs={[
+                  {
+                    id: 'infos',
+                    label: 'INFOS',
+                    content: (
+                      <div className='space-y-6'>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>
+                            Project Details
+                          </h3>
+                          <p className='mt-4'>
+                            A book on visual exploration of the broad variety of kids construction kits from the last
+                            100 years. My fathers hobby has been collecting and building with old construction kids for
+                            a long time. Now with two friends of his, he photographed all his work and i made it into a
+                            book.
+                          </p>
+                          <div className='grid grid-cols-2 gap-4 pt-4'>
+                            <div>
+                              <span className='font-bold block'>TYPE:</span>
+                              <span>Book Design</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block'>YEAR:</span>
+                              <span>2024</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>
+                            Specifications
+                          </h3>
+                          <ul className='space-y-2 list-none mt-4'>
+                            <li className='border-l-2 border-green-500 pl-4'>
+                              <span className='font-bold'>FORMAT:</span> Hardcover Book
+                            </li>
+                            <li className='border-l-2 border-green-500 pl-4'>
+                              <span className='font-bold'>PAGES:</span> 120+
+                            </li>
+                            <li className='border-l-2 border-green-500 pl-4'>
+                              <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
+                            </li>
+                            <li className='border-l-2 border-green-500 pl-4'>
+                              <span className='font-bold'>LAYOUT:</span> Custom Design
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>
+                            Credits
+                          </h3>
+                          <div className='space-y-3 mt-4'>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Design</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                              <span>2024</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: 'process',
+                    label: 'PROCESS',
+                    content: (
+                      <div className='space-y-4'>
+                        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>
+                          Creation Process
+                        </h3>
+                        <div className='space-y-3'>
+                          <button
+                            onClick={() => navigateToPhoto(2)}
+                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                          >
+                            <span className='font-bold block'>01. COLLECTION</span>
+                            <span className='text-sm'>Curating childhood objects</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(3)}
+                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                          >
+                            <span className='font-bold block'>02. PHOTOGRAPHY</span>
+                            <span className='text-sm'>Professional documentation</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(4)}
+                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                          >
+                            <span className='font-bold block'>03. DESIGN</span>
+                            <span className='text-sm'>Book layout and typesetting</span>
+                          </button>
+                        </div>
+                      </div>
+                    ),
+                  },
+                ]}
+                onClose={() => setExpandedPanel(false)}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+              />
             </div>
           )}
         </motion.div>

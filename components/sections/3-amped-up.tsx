@@ -12,109 +12,36 @@ type ImageItem = {
 
 const IMAGES: ImageItem[] = [
   { src: '/amped-up/preview.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-1.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-3.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-1.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-3.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-5.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-6.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
 ];
 
-const TABS = [
-  {
-    id: 'info',
-    label: 'INFO',
-    content: (
-      <div className='space-y-6'>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
-          <p className='mt-4'>
-            An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
-            functionality like EQ / DSP / and Bluetooth.
-          </p>
-          <div className='grid grid-cols-2 gap-4 pt-4'>
-            <div>
-              <span className='font-bold block'>TYPE:</span>
-              <span>Audio Hardware</span>
-            </div>
-            <div>
-              <span className='font-bold block'>YEAR:</span>
-              <span>2024</span>
-            </div>
-          </div>
-        </div>
-        <div>
-          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Specifications</h3>
-          <ul className='space-y-2 list-none mt-4'>
-            <li className='border-l-2 border-foreground pl-4'>
-              <span className='font-bold'>DRIVERS:</span> Custom Selected
-            </li>
-            <li className='border-l-2 border-foreground pl-4'>
-              <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
-            </li>
-            <li className='border-l-2 border-foreground pl-4'>
-              <span className='font-bold'>FINISH:</span> Natural Wood
-            </li>
-            <li className='border-l-2 border-foreground pl-4'>
-              <span className='font-bold'>OUTPUT:</span> High Fidelity
-            </li>
-          </ul>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'process',
-    label: 'PROCESS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
-        <div className='space-y-3'>
-          <div className='bg-neutral-100 p-3 border-l-2 border-foreground'>
-            <span className='font-bold block'>01. DESIGN</span>
-            <span className='text-sm'>Enclosure planning and measurements</span>
-          </div>
-          <div className='bg-neutral-100 p-3 border-l-2 border-foreground'>
-            <span className='font-bold block'>02. BUILD</span>
-            <span className='text-sm'>Woodworking and assembly</span>
-          </div>
-          <div className='bg-neutral-100 p-3 border-l-2 border-foreground'>
-            <span className='font-bold block'>03. TUNE</span>
-            <span className='text-sm'>Audio calibration and testing</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-  {
-    id: 'credits',
-    label: 'CREDITS',
-    content: (
-      <div className='space-y-4'>
-        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Credits</h3>
-        <div className='space-y-3'>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-            <span>Till Solenthaler</span>
-          </div>
-          <div>
-            <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-            <span>2024</span>
-          </div>
-        </div>
-      </div>
-    ),
-  },
-];
+interface Tab {
+  id: string;
+  label: string;
+  content: React.ReactNode;
+}
 
-function AmpedUpTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => void }) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+function AmpedUpTabs({
+  tabs,
+  onClose,
+  activeTab,
+  onTabChange,
+}: {
+  tabs: Tab[];
+  onClose: () => void;
+  activeTab: string;
+  onTabChange: (tabId: string) => void;
+}) {
+  const handleTabChange = (tabId: string) => {
+    onTabChange(tabId);
+  };
 
   return (
     <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md'>
@@ -129,7 +56,7 @@ function AmpedUpTabs({ tabs, onClose }: { tabs: typeof TABS; onClose: () => void
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
             className={`relative cursor-pointer flex-1 py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors ${
               index < tabs.length - 1 ? 'border-r border-black/60' : ''
             } ${
@@ -178,13 +105,11 @@ export function Project3() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as 'infos' | 'process');
   }, []);
 
   const navigateToPhoto = useCallback((index: number) => {
@@ -195,6 +120,13 @@ export function Project3() {
         behavior: 'smooth',
       });
     }
+  }, []);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handlePrev = useCallback(() => {
@@ -240,7 +172,7 @@ export function Project3() {
       {/* Title */}
       <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
         <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${vt323.className}`}>
+          <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
             amped up
           </h2>
         </div>
@@ -353,7 +285,106 @@ export function Project3() {
             </div>
           ) : (
             <div className='w-full h-full relative overflow-hidden'>
-              <AmpedUpTabs tabs={TABS} onClose={() => setExpandedPanel(false)} />
+              <AmpedUpTabs
+                tabs={[
+                  {
+                    id: 'infos',
+                    label: 'INFOS',
+                    content: (
+                      <div className='space-y-6'>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
+                          <p className='mt-4'>
+                            An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This
+                            enables new functionality like EQ / DSP / and Bluetooth.
+                          </p>
+                          <div className='grid grid-cols-2 gap-4 pt-4'>
+                            <div>
+                              <span className='font-bold block'>TYPE:</span>
+                              <span>Audio Hardware</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block'>YEAR:</span>
+                              <span>2024</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>
+                            Specifications
+                          </h3>
+                          <ul className='space-y-2 list-none mt-4'>
+                            <li className='border-l-2 border-foreground pl-4'>
+                              <span className='font-bold'>DRIVERS:</span> Custom Selected
+                            </li>
+                            <li className='border-l-2 border-foreground pl-4'>
+                              <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
+                            </li>
+                            <li className='border-l-2 border-foreground pl-4'>
+                              <span className='font-bold'>FINISH:</span> Natural Wood
+                            </li>
+                            <li className='border-l-2 border-foreground pl-4'>
+                              <span className='font-bold'>OUTPUT:</span> High Fidelity
+                            </li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
+                          <div className='space-y-3 mt-4'>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                              <span>Till Solenthaler</span>
+                            </div>
+                            <div>
+                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                              <span>2024</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ),
+                  },
+                  {
+                    id: 'process',
+                    label: 'PROCESS',
+                    content: (
+                      <div className='space-y-4'>
+                        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
+                        <div className='space-y-3'>
+                          <button
+                            onClick={() => navigateToPhoto(6)}
+                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>01. DESIGN</span>
+                            <span className='text-sm'>Enclosure planning and measurements</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(7)}
+                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>02. BUILD</span>
+                            <span className='text-sm'>Woodworking and assembly</span>
+                          </button>
+                          <button
+                            onClick={() => navigateToPhoto(8)}
+                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                          >
+                            <span className='font-bold block'>03. TUNE</span>
+                            <span className='text-sm'>Audio calibration and testing</span>
+                          </button>
+                        </div>
+                      </div>
+                    ),
+                  },
+                ]}
+                onClose={() => setExpandedPanel(false)}
+                activeTab={activeTab}
+                onTabChange={handleTabChange}
+              />
             </div>
           )}
         </motion.div>

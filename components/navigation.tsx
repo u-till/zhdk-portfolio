@@ -76,8 +76,8 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
 const SECTION_BACKGROUNDS: Record<string, string> = {
   welcome: '#ffffff',
   'under-construction': '#ffdc51ff',
-  retrofitted: '#ffc19dff',
-  'amped-up': '#f9fafb',
+  retrofitted: '#3C4343',
+  'amped-up': '#ffffff',
   'toy-lexicon': '#eff6ff',
   'lost-in-space': '#000000ff',
   saudade: '#646464ff',

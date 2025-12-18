@@ -11,19 +11,30 @@ interface Tab {
 
 interface BrutalistTabsProps {
   tabs: Tab[];
+  activeTab?: string;
+  onTabChange?: (tabId: string) => void;
 }
 
-export function BrutalistTabs({ tabs }: BrutalistTabsProps) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+export function BrutalistTabs({ tabs, activeTab: externalActiveTab, onTabChange }: BrutalistTabsProps) {
+  const [internalActiveTab, setInternalActiveTab] = useState(tabs[0].id);
+  const activeTab = externalActiveTab || internalActiveTab;
+
+  const handleTabChange = (tabId: string) => {
+    if (onTabChange) {
+      onTabChange(tabId);
+    } else {
+      setInternalActiveTab(tabId);
+    }
+  };
 
   return (
     <div className='w-full h-full border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
       {/* Tab Headers */}
-      <div className='grid grid-cols-3 border-b-4 border-black'>
+      <div className={`grid ${tabs.length === 2 ? 'grid-cols-2' : 'grid-cols-3'} border-b-4 border-black`}>
         {tabs.map((tab, index) => (
           <button
             key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
+            onClick={() => handleTabChange(tab.id)}
             className={`relative cursor-pointer py-4 px-4 font-mono text-sm md:text-base font-bold uppercase transition-colors ${
               index < tabs.length - 1 ? 'border-r-4 border-black' : ''
             } ${

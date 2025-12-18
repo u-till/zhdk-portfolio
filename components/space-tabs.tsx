@@ -12,10 +12,21 @@ interface Tab {
 
 interface SpaceTabsProps {
   tabs: Tab[];
+  activeTab?: string;
+  onTabChange?: (tabId: string) => void;
 }
 
-export function SpaceTabs({ tabs }: SpaceTabsProps) {
-  const [activeTab, setActiveTab] = useState(tabs[0].id);
+export function SpaceTabs({ tabs, activeTab: externalActiveTab, onTabChange }: SpaceTabsProps) {
+  const [internalActiveTab, setInternalActiveTab] = useState(tabs[0].id);
+  const activeTab = externalActiveTab || internalActiveTab;
+
+  const handleTabChange = (tabId: string) => {
+    if (onTabChange) {
+      onTabChange(tabId);
+    } else {
+      setInternalActiveTab(tabId);
+    }
+  };
 
   return (
     <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl'>
@@ -26,7 +37,7 @@ export function SpaceTabs({ tabs }: SpaceTabsProps) {
           return (
             <button
               key={tab.id}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
               className={`relative cursor-pointer py-4 px-6 flex-1 text-xs md:text-sm font-medium uppercase transition-all border-r-0 last:border-r-0 border-r-foreground/20 ${
                 isActive ? 'text-[#FF6B66] bg-[#AA4742]' : 'text-white/80 hover:text-white hover:bg-[#AA4742]/20'
               } ${orbitron.className}`}
