@@ -222,7 +222,7 @@ export function Project4() {
       </div>
 
       {/* Thumbnail Strip - Bottom */}
-      <div className='absolute bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
+      <div className='absolute bottom-4 md:bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
         {IMAGES.map((image, index) => (
           <button
             key={index}
@@ -244,8 +244,8 @@ export function Project4() {
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
           animate={{
             width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? 'calc(100vh - 10rem)' : undefined,
-            top: expandedPanel ? '8rem' : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
+            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
             bottom: expandedPanel ? 'auto' : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}

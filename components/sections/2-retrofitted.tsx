@@ -105,6 +105,7 @@ export function Project2() {
   const [expandedPanel, setExpandedPanel] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
+  const [showThumbnails, setShowThumbnails] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const handleTabChange = useCallback((tabId: string) => {
@@ -145,15 +146,28 @@ export function Project2() {
       if (scrollRef.current) {
         const scrollLeft = scrollRef.current.scrollLeft;
         const width = scrollRef.current.offsetWidth;
-        const index = Math.round(scrollLeft / width);
-        setActiveIndex(index);
+        const newIndex = Math.round(scrollLeft / width);
+
+        setActiveIndex((prevIndex) => {
+          // Only update thumbnails if index actually changed
+          if (prevIndex !== newIndex) {
+            if (newIndex === 0) {
+              // Navigated to 3D viewer - close thumbnails
+              setShowThumbnails(false);
+            } else if (prevIndex === 0 && !isMobile) {
+              // Navigated from 3D to photo on desktop - open thumbnails
+              setShowThumbnails(true);
+            }
+          }
+          return newIndex;
+        });
       }
     };
 
     const scrollEl = scrollRef.current;
     scrollEl?.addEventListener('scroll', handleScroll);
     return () => scrollEl?.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -169,10 +183,12 @@ export function Project2() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
+    <section className='h-screen relative overflow-hidden pt-28 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute bottom-28 left-8 flex justify-start pointer-events-none z-10'>
-        <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}>
+      <div className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'>
+        <h2
+          className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
+        >
           retrofitted
         </h2>
       </div>
@@ -244,54 +260,100 @@ export function Project2() {
         </button>
       </div>
 
-      {/* Thumbnail Strip - Bottom */}
-      <div className='absolute bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
-        {/* First thumbnail: 3D icon */}
-        <button
-          onClick={() => navigateToPhoto(0)}
-          className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-lg border flex items-center justify-center bg-gradient-to-br from-orange-900 via-orange-800 to-orange-950 ${
-            activeIndex === 0
-              ? 'border-2 border-gray-700 opacity-100'
-              : 'border-gray-700/40 opacity-60 hover:opacity-100'
-          }`}
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-orange-300'
-          >
-            <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
-            <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
-            <line x1='12' y1='22.08' x2='12' y2='12' />
-          </svg>
-        </button>
+      {/* Album Controls - Bottom Left */}
+      <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 z-20 pointer-events-auto flex flex-col md:flex-row items-start md:items-end gap-2'>
+        {/* Thumbnails - Vertical on mobile, Horizontal on desktop */}
+        <AnimatePresence>
+          {showThumbnails && (
+            <motion.div
+              initial={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
+              animate={{ opacity: 1, x: 0, y: 0 }}
+              exit={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
+              transition={{ duration: 0.3 }}
+              className='order-first md:order-last flex flex-col md:flex-row gap-2 max-h-[calc(100vh-16rem)] md:max-h-none md:max-w-[calc(100vw-16rem)] overflow-y-auto md:overflow-y-visible md:overflow-x-auto scrollbar-hide p-1'
+            >
+              {IMAGES.map((image, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    navigateToPhoto(index + 1);
+                    if (!isMobile) {
+                      // Keep thumbnails open on desktop
+                    } else {
+                      setShowThumbnails(false);
+                    }
+                  }}
+                  className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/20 backdrop-blur-sm hover:bg-orange-600/30 ${
+                    activeIndex === index + 1 ? 'ring-2 ring-orange-300/60' : ''
+                  }`}
+                >
+                  <Image
+                    src={image.src}
+                    alt={`Thumbnail ${index + 1}`}
+                    fill
+                    className='object-cover rounded-full'
+                  />
+                </button>
+              ))}
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Rest of the thumbnails */}
-        {IMAGES.map((image, index) => (
+        {/* Control Buttons Row */}
+        <div className='flex gap-2'>
+          {/* Album/Photos Button - First on mobile */}
           <button
-            key={index}
-            onClick={() => navigateToPhoto(index + 1)}
-            className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-lg border ${
-              activeIndex === index + 1
-                ? 'border-2 border-gray-700 opacity-100'
-                : 'border-gray-700/40 opacity-60 hover:opacity-100'
+            onClick={() => setShowThumbnails(!showThumbnails)}
+            className={`md:order-2 relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
+              showThumbnails ? 'ring-2 ring-orange-300/60' : ''
             }`}
           >
-            <Image
-              src={image.src}
-              alt={`Thumbnail ${index + 1}`}
-              fill
-              className={image.objectFit === 'contain' ? 'object-contain p-1' : 'object-cover'}
-            />
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='28'
+              height='28'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              className='text-white'
+            >
+              <rect x='3' y='3' width='18' height='18' rx='2' ry='2' />
+              <circle cx='8.5' cy='8.5' r='1.5' />
+              <polyline points='21 15 16 10 5 21' />
+            </svg>
           </button>
-        ))}
+
+          {/* 3D Button - Second on mobile */}
+          <button
+            onClick={() => {
+              navigateToPhoto(0);
+              setShowThumbnails(false);
+            }}
+            className={`md:order-1 relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
+              activeIndex === 0 ? 'ring-2 ring-orange-300/60' : ''
+            }`}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='28'
+              height='28'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              className='text-white'
+            >
+              <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
+              <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
+              <line x1='12' y1='22.08' x2='12' y2='12' />
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Info Panel - Expandable */}
@@ -300,8 +362,8 @@ export function Project2() {
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
           animate={{
             width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? 'calc(100vh - 10rem)' : undefined,
-            top: expandedPanel ? '8rem' : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
+            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
             bottom: expandedPanel ? 'auto' : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}

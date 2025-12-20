@@ -145,10 +145,10 @@ export function Project1() {
 
         {/* Column 2: Tabs */}
         <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start relative group'>
-          <h2 className={`text-4xl lg:text-7xl font-bold ${allertaStencil.className}`}>
+          <h2 className={`text-4xl lg:text-7xl font-bold transition-opacity duration-300 ${allertaStencil.className}`}>
             under <br></br>construction
           </h2>
-          <div className='w-full h-full pr-2 transition-transform duration-300 group-hover:-translate-y-[6rem] lg:group-hover:-translate-y-[11rem]'>
+          <div className='absolute inset-0 pr-2 transition-all duration-300 pt-[160px] group-hover:pt-0'>
             <BrutalistTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
           </div>
         </div>
@@ -156,11 +156,6 @@ export function Project1() {
 
       {/* Mobile Layout */}
       <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4  '>
-        {/* Title - Always visible */}
-        <h2 className={`text-4xl font-bold ${allertaStencil.className}`}>
-          under <br></br>construction
-        </h2>
-
         {/* Middle Content - Swipeable */}
         <div className='flex-1 relative'>
           <AnimatePresence initial={false}>
@@ -171,32 +166,37 @@ export function Project1() {
                 animate={{ x: 0 }}
                 exit={{ x: 'calc(-100% - 1rem)' }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 flex items-center justify-center w-full'
+                className='absolute inset-0 flex flex-col gap-4 w-full'
               >
-                {selectedProcessImage !== null ? (
-                  <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
-                    <button
-                      onClick={() => setSelectedProcessImage(null)}
-                      className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
-                    >
-                      ×
-                    </button>
-                    <Image
-                      src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
-                      alt={`Process ${selectedProcessImage + 1}`}
-                      fill
-                      className='object-cover'
+                <h2 className={`text-4xl font-bold ${allertaStencil.className}`}>
+                  under <br></br>construction
+                </h2>
+                <div className='flex-1 flex items-center justify-center'>
+                  {selectedProcessImage !== null ? (
+                    <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
+                      <button
+                        onClick={() => setSelectedProcessImage(null)}
+                        className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
+                      >
+                        ×
+                      </button>
+                      <Image
+                        src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
+                        alt={`Process ${selectedProcessImage + 1}`}
+                        fill
+                        className='object-cover'
+                      />
+                    </div>
+                  ) : (
+                    <Viewer360
+                      imageFolder='under-construction/korpus-360'
+                      totalFrames={27}
+                      imageFormat='png'
+                      imagePrefix='normalized-'
+                      imagePadding={2}
                     />
-                  </div>
-                ) : (
-                  <Viewer360
-                    imageFolder='under-construction/korpus-360'
-                    totalFrames={27}
-                    imageFormat='png'
-                    imagePrefix='normalized-'
-                    imagePadding={2}
-                  />
-                )}
+                  )}
+                </div>
               </motion.div>
             ) : (
               <motion.div

@@ -234,25 +234,22 @@ export function Project3() {
       </div>
 
       {/* Thumbnail Strip - Bottom */}
-      <div className='absolute bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
+      <div className='absolute bottom-4 md:bottom-8 left-0 md:left-8 right-0 flex gap-2 justify-start overflow-x-auto px-4 md:pr-8 z-20 pointer-events-auto'>
         {IMAGES.map((image, index) => (
           <button
             key={index}
             onClick={() => navigateToPhoto(index)}
-            className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 border ${
+            className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-36 h-36 md:w-16 md:h-16 border ${
               activeIndex === index
                 ? 'border-2 border-black opacity-100'
                 : 'border-black/60 opacity-60 hover:opacity-100'
             }`}
           >
-            <Image
-              src={image.src}
-              alt={`Thumbnail ${index + 1}`}
-              fill
-              className={image.objectFit === 'contain' ? 'object-contain p-1' : 'object-cover'}
-            />
+            <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover' />
           </button>
         ))}
+        {/* Hidden spacer item */}
+        <div className='flex-shrink-0 w-36 h-36 md:w-16 md:h-16 opacity-0 pointer-events-none' />
       </div>
 
       {/* Info Panel - Expandable */}
@@ -261,8 +258,8 @@ export function Project3() {
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
           animate={{
             width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? 'calc(100vh - 10rem)' : undefined,
-            top: expandedPanel ? '8rem' : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
+            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
             bottom: expandedPanel ? 'auto' : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}

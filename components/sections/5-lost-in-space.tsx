@@ -161,14 +161,6 @@ export function Project5() {
 
       {/* Mobile Layout */}
       <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4 relative z-10'>
-        {/* Title - Always visible */}
-        <h2
-          className={`text-4xl text-center font-bold text-white ${orbitron.className}`}
-          style={{ transform: 'perspective(300px) rotateX(25deg)' }}
-        >
-          LOST IN SPACE
-        </h2>
-
         {/* Middle Content - Swipeable */}
         <div className='flex-1 relative'>
           <AnimatePresence initial={false}>
@@ -179,12 +171,20 @@ export function Project5() {
                 animate={{ x: 0 }}
                 exit={{ x: 'calc(-100% - 1rem)' }}
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 flex items-center justify-center w-full'
+                className='absolute inset-0 flex flex-col gap-4 w-full'
               >
-                <AlbumViewer3D
-                  coverImage={IMAGES[currentImageIndex]}
-                  spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
-                />
+                <h2
+                  className={`text-4xl text-center font-bold text-white ${orbitron.className}`}
+                  style={{ transform: 'perspective(300px) rotateX(25deg)' }}
+                >
+                  LOST IN SPACE
+                </h2>
+                <div className='flex-1 flex items-center justify-center'>
+                  <AlbumViewer3D
+                    coverImage={IMAGES[currentImageIndex]}
+                    spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
+                  />
+                </div>
               </motion.div>
             ) : (
               <motion.div

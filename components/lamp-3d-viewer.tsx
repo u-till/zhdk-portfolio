@@ -114,9 +114,21 @@ export function Lamp3DViewer() {
   const controlsRef = useRef<OrbitControlsType>(null);
 
   return (
-    <div className='relative w-full h-full'>
+    <div className='relative w-full h-full pt-8 md:pt-12'>
+      {/* Radial Gradient Light Effect */}
+      <div
+        className='absolute inset-0 pointer-events-none transition-opacity duration-300'
+        style={{
+          background: `radial-gradient(circle at center,
+            rgba(255, 255, 255, ${intensity * 0.4}) 0%,
+            rgba(200, 200, 200, ${intensity * 0.2}) 30%,
+            rgba(100, 100, 100, 0) 70%)`,
+          opacity: intensity > 0.1 ? 1 : 0,
+        }}
+      />
+
       {/* Light Dimmer Slider */}
-      <div className='absolute bottom-58 right-8 w-36 lg:w-48 px-2 py-2 z-10 flex items-center gap-1 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md'>
+      <div className='absolute bottom-42 md:bottom-58 right-4 md:right-8 w-36 lg:w-48 px-2 py-2 z-10 flex items-center gap-1 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='12'

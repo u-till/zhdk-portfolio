@@ -390,7 +390,7 @@ export function Project6() {
               >
                 <h3 className={`text-2xl font-bold ${courierPrime.className}`}>{PHOTOS[activeIndex].title}</h3>
                 <p className='text-sm leading-relaxed'>{PHOTOS[activeIndex].description}</p>
-                <div className='flex-1 min-h-[200px] flex items-center justify-center'>
+                <div className='flex-1 h-full flex items-center justify-center'>
                   <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
                 </div>
               </motion.div>
