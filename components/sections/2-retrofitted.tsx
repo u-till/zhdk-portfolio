@@ -4,7 +4,7 @@ import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
 import { shrikhand } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type ImageItem = {
   src: string;
@@ -181,6 +181,103 @@ export function Project2() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleNext, handlePrev]);
+
+  const tabs = useMemo(
+    () => [
+      {
+        id: 'infos',
+        label: 'INFOS',
+        content: (
+          <div className='space-y-6'>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
+              <p className='mt-4'>
+                A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable
+                battery and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
+              </p>
+              <div className='grid grid-cols-2 gap-4 pt-4'>
+                <div>
+                  <span className='font-bold block'>TYPE:</span>
+                  <span>Lighting Design</span>
+                </div>
+                <div>
+                  <span className='font-bold block'>YEAR:</span>
+                  <span>2025</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Specifications</h3>
+              <ul className='space-y-2 list-none mt-4'>
+                <li className='border-l-2 border-orange-300 pl-4'>
+                  <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
+                </li>
+                <li className='border-l-2 border-orange-300 pl-4'>
+                  <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
+                </li>
+                <li className='border-l-2 border-orange-300 pl-4'>
+                  <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
+                </li>
+                <li className='border-l-2 border-orange-300 pl-4'>
+                  <span className='font-bold'>CONDITION:</span> Restored & Updated
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Credits</h3>
+              <div className='space-y-3 mt-4'>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Restoration</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'process',
+        label: 'PROCESS',
+        content: (
+          <div className='space-y-4'>
+            <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Restoration Process</h3>
+            <div className='space-y-3'>
+              <button
+                onClick={() => navigateToPhoto(5)}
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+              >
+                <span className='font-bold block'>01. SOURCING</span>
+                <span className='text-sm'>Finding authentic 70s piece</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(6)}
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+              >
+                <span className='font-bold block'>02. RESTORATION</span>
+                <span className='text-sm'>Cleaning and repair work</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(7)}
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+              >
+                <span className='font-bold block'>03. MODERNIZATION</span>
+                <span className='text-sm'>LED retrofit installation</span>
+              </button>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [navigateToPhoto]
+  );
 
   return (
     <section className='h-screen relative overflow-hidden pt-28 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
@@ -387,108 +484,7 @@ export function Project2() {
           ) : (
             <div className='w-full h-full relative rounded-[32px] overflow-hidden'>
               <RetrofittedTabs
-                tabs={[
-                  {
-                    id: 'infos',
-                    label: 'INFOS',
-                    content: (
-                      <div className='space-y-6'>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
-                            Project Details
-                          </h3>
-                          <p className='mt-4'>
-                            A stunning space-age lamp from the 1970s, retrofitted with modern technology including a
-                            rechargable battery and a USB-C connector and a stepless dimmer, while preserving its iconic
-                            aesthetic.
-                          </p>
-                          <div className='grid grid-cols-2 gap-4 pt-4'>
-                            <div>
-                              <span className='font-bold block'>TYPE:</span>
-                              <span>Lighting Design</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block'>YEAR:</span>
-                              <span>2025</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>
-                            Specifications
-                          </h3>
-                          <ul className='space-y-2 list-none mt-4'>
-                            <li className='border-l-2 border-orange-300 pl-4'>
-                              <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
-                            </li>
-                            <li className='border-l-2 border-orange-300 pl-4'>
-                              <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
-                            </li>
-                            <li className='border-l-2 border-orange-300 pl-4'>
-                              <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
-                            </li>
-                            <li className='border-l-2 border-orange-300 pl-4'>
-                              <span className='font-bold'>CONDITION:</span> Restored & Updated
-                            </li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>
-                            Credits
-                          </h3>
-                          <div className='space-y-3 mt-4'>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Restoration</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-                              <span>2024</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ),
-                  },
-                  {
-                    id: 'process',
-                    label: 'PROCESS',
-                    content: (
-                      <div className='space-y-4'>
-                        <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
-                          Restoration Process
-                        </h3>
-                        <div className='space-y-3'>
-                          <button
-                            onClick={() => navigateToPhoto(5)}
-                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>01. SOURCING</span>
-                            <span className='text-sm'>Finding authentic 70s piece</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(6)}
-                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>02. RESTORATION</span>
-                            <span className='text-sm'>Cleaning and repair work</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(7)}
-                            className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>03. MODERNIZATION</span>
-                            <span className='text-sm'>LED retrofit installation</span>
-                          </button>
-                        </div>
-                      </div>
-                    ),
-                  },
-                ]}
+                tabs={tabs}
                 onClose={() => setExpandedPanel(false)}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}

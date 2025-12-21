@@ -9,6 +9,7 @@ interface Viewer360Props {
   imageFormat?: string; // e.g., 'jpg', 'png'
   imagePrefix?: string; // e.g., 'frame-' or empty for just numbers
   imagePadding?: number; // e.g., 3 for '001', '002'
+  backgroundImage?: string; // Background image path
   width?: number;
   height?: number;
 }
@@ -19,6 +20,7 @@ export function Viewer360({
   imageFormat = 'jpg',
   imagePrefix = '',
   imagePadding = 0,
+  backgroundImage = '/under-construction/korpus-360/uc-360-bg.jpg',
 }: Viewer360Props) {
   const [currentFrame, setCurrentFrame] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
@@ -28,10 +30,14 @@ export function Viewer360({
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
-  const getImagePath = (frameIndex: number) => {
-    const frameNumber = imagePadding > 0 ? String(frameIndex + 1).padStart(imagePadding, '0') : String(frameIndex + 1);
-    return `/${imageFolder}/${imagePrefix}${frameNumber}.${imageFormat}`;
-  };
+  const getImagePath = useCallback(
+    (frameIndex: number) => {
+      const frameNumber =
+        imagePadding > 0 ? String(frameIndex + 1).padStart(imagePadding, '0') : String(frameIndex + 1);
+      return `/${imageFolder}/${imagePrefix}${frameNumber}.${imageFormat}`;
+    },
+    [imageFolder, imagePrefix, imagePadding, imageFormat]
+  );
 
   const animateRotation = useCallback(
     (direction: number) => {
@@ -152,8 +158,7 @@ export function Viewer360({
     };
 
     loadImages();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [totalFrames, imageFolder]);
+  }, [totalFrames, imageFolder, getImagePath]);
 
   // Cleanup animation on unmount
   useEffect(() => {
@@ -192,7 +197,7 @@ export function Viewer360({
     >
       {/* Background image */}
       <Image
-        src='/under-construction/korpus-360/uc-360-bg.jpg'
+        src={backgroundImage}
         alt='360 viewer background'
         fill
         className='object-cover pointer-events-none'

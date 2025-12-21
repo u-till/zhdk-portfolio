@@ -54,21 +54,20 @@ export function BrutalistTabs({ tabs, activeTab: externalActiveTab, onTabChange 
       {/* Tab Content */}
       <div className='relative h-full p-6 md:p-8 overflow-auto'>
         <AnimatePresence mode='wait'>
-          {tabs.map(
-            (tab) =>
-              activeTab === tab.id && (
-                <motion.div
-                  key={tab.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className='font-mono text-sm md:text-base leading-relaxed'
-                >
-                  {tab.content}
-                </motion.div>
-              )
-          )}
+          {tabs
+            .filter((tab) => activeTab === tab.id)
+            .map((tab) => (
+              <motion.div
+                key={tab.id}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -20 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='font-mono text-sm md:text-base leading-relaxed'
+              >
+                {tab.content}
+              </motion.div>
+            ))}
         </AnimatePresence>
       </div>
     </div>

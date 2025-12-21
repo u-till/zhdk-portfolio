@@ -64,12 +64,14 @@ function LampModel({ intensity }: LampModelProps) {
   const spotLight2Ref = useRef<THREE.SpotLight>(null!);
 
   // Enable shadow casting and receiving for all meshes in the model
-  scene.traverse((child) => {
-    if (child instanceof THREE.Mesh) {
-      child.castShadow = true;
-      child.receiveShadow = true;
-    }
-  });
+  useEffect(() => {
+    scene.traverse((child) => {
+      if (child instanceof THREE.Mesh) {
+        child.castShadow = true;
+        child.receiveShadow = true;
+      }
+    });
+  }, [scene]);
 
   return (
     <group position={[-0.4, -1.8, -0.3]} rotation={[0, -1.8, 0]}>

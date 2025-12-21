@@ -7,7 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useState } from 'react';
 
-const getTabs = (onProcessImageClick?: (imageIndex: number) => void) => [
+const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void) => [
   {
     id: 'infos',
     label: 'INFOS',
@@ -109,7 +109,7 @@ export function Project1() {
     setActiveTab(tabId as 'infos' | 'process');
   }, []);
 
-  const tabs = useMemo(() => getTabs(handleProcessImageClick), [handleProcessImageClick]);
+  const tabs = useMemo(() => getTabsContent(handleProcessImageClick), [handleProcessImageClick]);
 
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>

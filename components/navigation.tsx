@@ -16,6 +16,18 @@ const NAVIGATION_LINKS = [
   { href: 'dayjob', label: 'dayjob' },
 ];
 
+const SECTION_ORDER = [
+  'welcome',
+  'under-construction',
+  'retrofitted',
+  'amped-up',
+  'toy-lexicon',
+  'lost-in-space',
+  'saudade',
+  'dayjob',
+  'about',
+];
+
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
   welcome: {
     navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-1',
@@ -151,17 +163,7 @@ export function Navigation() {
                   <li key={link.href}>
                     <button
                       onClick={() => {
-                        const sectionIndex = [
-                          'welcome',
-                          'under-construction',
-                          'retrofitted',
-                          'amped-up',
-                          'toy-lexicon',
-                          'lost-in-space',
-                          'saudade',
-                          'dayjob',
-                          'about',
-                        ].indexOf(linkSection);
+                        const sectionIndex = SECTION_ORDER.indexOf(linkSection);
                         if (sectionIndex !== -1) {
                           window.__scrollToSection?.(sectionIndex);
                         }
@@ -228,17 +230,7 @@ export function Navigation() {
                       <li key={link.href}>
                         <button
                           onClick={() => {
-                            const sectionIndex = [
-                              'welcome',
-                              'under-construction',
-                              'retrofitted',
-                              'amped-up',
-                              'toy-lexicon',
-                              'lost-in-space',
-                              'saudade',
-                              'dayjob',
-                              'about',
-                            ].indexOf(linkSection);
+                            const sectionIndex = SECTION_ORDER.indexOf(linkSection);
                             if (sectionIndex !== -1) {
                               window.__scrollToSection?.(sectionIndex);
                             }

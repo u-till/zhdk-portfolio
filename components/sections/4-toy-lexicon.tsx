@@ -3,7 +3,7 @@
 import { dinNext } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type ImageItem = {
   src: string;
@@ -92,9 +92,9 @@ export function Project4() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleTabChange = (tabId: string) => {
+  const handleTabChange = useCallback((tabId: string) => {
     setActiveTab(tabId as 'infos' | 'process');
-  };
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -150,6 +150,104 @@ export function Project4() {
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleNext, handlePrev]);
+
+  const tabs = useMemo(
+    () => [
+      {
+        id: 'infos',
+        label: 'INFOS',
+        content: (
+          <div className='space-y-6'>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
+              <p className='mt-4'>
+                A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
+                fathers hobby has been collecting and building with old construction kids for a long time. Now with two
+                friends of his, he photographed all his work and i made it into a book.
+              </p>
+              <div className='grid grid-cols-2 gap-4 pt-4'>
+                <div>
+                  <span className='font-bold block'>TYPE:</span>
+                  <span>Book Design</span>
+                </div>
+                <div>
+                  <span className='font-bold block'>YEAR:</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Specifications</h3>
+              <ul className='space-y-2 list-none mt-4'>
+                <li className='border-l-2 border-green-500 pl-4'>
+                  <span className='font-bold'>FORMAT:</span> Hardcover Book
+                </li>
+                <li className='border-l-2 border-green-500 pl-4'>
+                  <span className='font-bold'>PAGES:</span> 120+
+                </li>
+                <li className='border-l-2 border-green-500 pl-4'>
+                  <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
+                </li>
+                <li className='border-l-2 border-green-500 pl-4'>
+                  <span className='font-bold'>LAYOUT:</span> Custom Design
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Credits</h3>
+              <div className='space-y-3 mt-4'>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Design</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'process',
+        label: 'PROCESS',
+        content: (
+          <div className='space-y-4'>
+            <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Creation Process</h3>
+            <div className='space-y-3'>
+              <button
+                onClick={() => navigateToPhoto(2)}
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+              >
+                <span className='font-bold block'>01. COLLECTION</span>
+                <span className='text-sm'>Curating childhood objects</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(3)}
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+              >
+                <span className='font-bold block'>02. PHOTOGRAPHY</span>
+                <span className='text-sm'>Professional documentation</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(4)}
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+              >
+                <span className='font-bold block'>03. DESIGN</span>
+                <span className='text-sm'>Book layout and typesetting</span>
+              </button>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [navigateToPhoto]
+  );
 
   return (
     <section
@@ -269,109 +367,7 @@ export function Project4() {
           ) : (
             <div className='w-full h-full relative overflow-hidden'>
               <ToyLexiconTabs
-                tabs={[
-                  {
-                    id: 'infos',
-                    label: 'INFOS',
-                    content: (
-                      <div className='space-y-6'>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>
-                            Project Details
-                          </h3>
-                          <p className='mt-4'>
-                            A book on visual exploration of the broad variety of kids construction kits from the last
-                            100 years. My fathers hobby has been collecting and building with old construction kids for
-                            a long time. Now with two friends of his, he photographed all his work and i made it into a
-                            book.
-                          </p>
-                          <div className='grid grid-cols-2 gap-4 pt-4'>
-                            <div>
-                              <span className='font-bold block'>TYPE:</span>
-                              <span>Book Design</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block'>YEAR:</span>
-                              <span>2024</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>
-                            Specifications
-                          </h3>
-                          <ul className='space-y-2 list-none mt-4'>
-                            <li className='border-l-2 border-green-500 pl-4'>
-                              <span className='font-bold'>FORMAT:</span> Hardcover Book
-                            </li>
-                            <li className='border-l-2 border-green-500 pl-4'>
-                              <span className='font-bold'>PAGES:</span> 120+
-                            </li>
-                            <li className='border-l-2 border-green-500 pl-4'>
-                              <span className='font-bold'>PHOTOGRAPHY:</span> High Quality
-                            </li>
-                            <li className='border-l-2 border-green-500 pl-4'>
-                              <span className='font-bold'>LAYOUT:</span> Custom Design
-                            </li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>
-                            Credits
-                          </h3>
-                          <div className='space-y-3 mt-4'>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Design</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-                              <span>2024</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ),
-                  },
-                  {
-                    id: 'process',
-                    label: 'PROCESS',
-                    content: (
-                      <div className='space-y-4'>
-                        <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>
-                          Creation Process
-                        </h3>
-                        <div className='space-y-3'>
-                          <button
-                            onClick={() => navigateToPhoto(2)}
-                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
-                          >
-                            <span className='font-bold block'>01. COLLECTION</span>
-                            <span className='text-sm'>Curating childhood objects</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(3)}
-                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
-                          >
-                            <span className='font-bold block'>02. PHOTOGRAPHY</span>
-                            <span className='text-sm'>Professional documentation</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(4)}
-                            className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
-                          >
-                            <span className='font-bold block'>03. DESIGN</span>
-                            <span className='text-sm'>Book layout and typesetting</span>
-                          </button>
-                        </div>
-                      </div>
-                    ),
-                  },
-                ]}
+                tabs={tabs}
                 onClose={() => setExpandedPanel(false)}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}

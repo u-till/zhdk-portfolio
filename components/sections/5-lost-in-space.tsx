@@ -5,7 +5,7 @@ import { SpaceTabs } from '@/components/space-tabs';
 import { StarField } from '@/components/star-field';
 import { orbitron } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 const IMAGES = [
   '/lost-in-space/cover.jpg',
@@ -19,12 +19,12 @@ export function Project5() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handleTabChange = (tabId: string) => {
+  const handleTabChange = useCallback((tabId: string) => {
     setActiveTab(tabId as 'infos' | 'process');
     if (tabId === 'infos') {
       setCurrentImageIndex(0);
     }
-  };
+  }, []);
 
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8 relative overflow-hidden'>

@@ -3,7 +3,7 @@
 import { vt323 } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 type ImageItem = {
   src: string;
@@ -167,6 +167,103 @@ export function Project3() {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [handleNext, handlePrev]);
 
+  const tabs = useMemo(
+    () => [
+      {
+        id: 'infos',
+        label: 'INFOS',
+        content: (
+          <div className='space-y-6'>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
+              <p className='mt-4'>
+                An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables
+                new functionality like EQ / DSP / and Bluetooth.
+              </p>
+              <div className='grid grid-cols-2 gap-4 pt-4'>
+                <div>
+                  <span className='font-bold block'>TYPE:</span>
+                  <span>Audio Hardware</span>
+                </div>
+                <div>
+                  <span className='font-bold block'>YEAR:</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Specifications</h3>
+              <ul className='space-y-2 list-none mt-4'>
+                <li className='border-l-2 border-foreground pl-4'>
+                  <span className='font-bold'>DRIVERS:</span> Custom Selected
+                </li>
+                <li className='border-l-2 border-foreground pl-4'>
+                  <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
+                </li>
+                <li className='border-l-2 border-foreground pl-4'>
+                  <span className='font-bold'>FINISH:</span> Natural Wood
+                </li>
+                <li className='border-l-2 border-foreground pl-4'>
+                  <span className='font-bold'>OUTPUT:</span> High Fidelity
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
+              <div className='space-y-3 mt-4'>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                  <span>Till Solenthaler</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        id: 'process',
+        label: 'PROCESS',
+        content: (
+          <div className='space-y-4'>
+            <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
+            <div className='space-y-3'>
+              <button
+                onClick={() => navigateToPhoto(6)}
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+              >
+                <span className='font-bold block'>01. DESIGN</span>
+                <span className='text-sm'>Enclosure planning and measurements</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(7)}
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+              >
+                <span className='font-bold block'>02. BUILD</span>
+                <span className='text-sm'>Woodworking and assembly</span>
+              </button>
+              <button
+                onClick={() => navigateToPhoto(8)}
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+              >
+                <span className='font-bold block'>03. TUNE</span>
+                <span className='text-sm'>Audio calibration and testing</span>
+              </button>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [navigateToPhoto]
+  );
+
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
@@ -283,101 +380,7 @@ export function Project3() {
           ) : (
             <div className='w-full h-full relative overflow-hidden'>
               <AmpedUpTabs
-                tabs={[
-                  {
-                    id: 'infos',
-                    label: 'INFOS',
-                    content: (
-                      <div className='space-y-6'>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
-                          <p className='mt-4'>
-                            An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This
-                            enables new functionality like EQ / DSP / and Bluetooth.
-                          </p>
-                          <div className='grid grid-cols-2 gap-4 pt-4'>
-                            <div>
-                              <span className='font-bold block'>TYPE:</span>
-                              <span>Audio Hardware</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block'>YEAR:</span>
-                              <span>2024</span>
-                            </div>
-                          </div>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>
-                            Specifications
-                          </h3>
-                          <ul className='space-y-2 list-none mt-4'>
-                            <li className='border-l-2 border-foreground pl-4'>
-                              <span className='font-bold'>DRIVERS:</span> Custom Selected
-                            </li>
-                            <li className='border-l-2 border-foreground pl-4'>
-                              <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
-                            </li>
-                            <li className='border-l-2 border-foreground pl-4'>
-                              <span className='font-bold'>FINISH:</span> Natural Wood
-                            </li>
-                            <li className='border-l-2 border-foreground pl-4'>
-                              <span className='font-bold'>OUTPUT:</span> High Fidelity
-                            </li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
-                          <div className='space-y-3 mt-4'>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-                              <span>Till Solenthaler</span>
-                            </div>
-                            <div>
-                              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-                              <span>2024</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    ),
-                  },
-                  {
-                    id: 'process',
-                    label: 'PROCESS',
-                    content: (
-                      <div className='space-y-4'>
-                        <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
-                        <div className='space-y-3'>
-                          <button
-                            onClick={() => navigateToPhoto(6)}
-                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>01. DESIGN</span>
-                            <span className='text-sm'>Enclosure planning and measurements</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(7)}
-                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>02. BUILD</span>
-                            <span className='text-sm'>Woodworking and assembly</span>
-                          </button>
-                          <button
-                            onClick={() => navigateToPhoto(8)}
-                            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
-                          >
-                            <span className='font-bold block'>03. TUNE</span>
-                            <span className='text-sm'>Audio calibration and testing</span>
-                          </button>
-                        </div>
-                      </div>
-                    ),
-                  },
-                ]}
+                tabs={tabs}
                 onClose={() => setExpandedPanel(false)}
                 activeTab={activeTab}
                 onTabChange={handleTabChange}
