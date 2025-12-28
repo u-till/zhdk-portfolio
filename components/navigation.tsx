@@ -120,7 +120,7 @@ export function Navigation() {
 
   return (
     <div className={`fixed top-4 md:top-8 w-full z-50 flex justify-start`}>
-      <nav className={`flex flex-col max-w-screen-2xl mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
+      <nav className={`flex flex-col mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
         <div className='flex items-center justify-between px-4 gap-4 md:px-6 py-3 md:py-4'>
           <div className='flex items-baseline gap-2'>
             <button

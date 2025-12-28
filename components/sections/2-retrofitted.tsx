@@ -108,10 +108,6 @@ export function Project2() {
   const [showThumbnails, setShowThumbnails] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as 'infos' | 'process');
-  }, []);
-
   const navigateToPhoto = useCallback((index: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
@@ -121,6 +117,18 @@ export function Project2() {
       });
     }
   }, []);
+
+  const handleTabChange = useCallback(
+    (tabId: string) => {
+      setActiveTab(tabId as 'infos' | 'process');
+      if (tabId === 'infos') {
+        navigateToPhoto(0);
+      } else if (tabId === 'process') {
+        navigateToPhoto(5);
+      }
+    },
+    [navigateToPhoto]
+  );
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -252,31 +260,64 @@ export function Project2() {
             <div className='space-y-3'>
               <button
                 onClick={() => navigateToPhoto(5)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>01. SOURCING</span>
-                <span className='text-sm'>Finding authentic 70s piece</span>
+                {IMAGES[4] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 5 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[4].src} alt='Sourcing step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>01. SOURCING</span>
+                  <span className='text-sm'>Finding authentic 70s piece</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(6)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>02. RESTORATION</span>
-                <span className='text-sm'>Cleaning and repair work</span>
+                {IMAGES[5] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 6 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[5].src} alt='Restoration step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>02. RESTORATION</span>
+                  <span className='text-sm'>Cleaning and repair work</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(7)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left'
+                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>03. MODERNIZATION</span>
-                <span className='text-sm'>LED retrofit installation</span>
+                {IMAGES[6] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 7 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[6].src} alt='Modernization step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>03. MODERNIZATION</span>
+                  <span className='text-sm'>LED retrofit installation</span>
+                </div>
               </button>
             </div>
           </div>
         ),
       },
     ],
-    [navigateToPhoto]
+    [navigateToPhoto, activeIndex]
   );
 
   return (

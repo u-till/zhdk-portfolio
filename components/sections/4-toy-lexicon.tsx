@@ -92,17 +92,6 @@ export function Project4() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as 'infos' | 'process');
-  }, []);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
   const navigateToPhoto = useCallback((index: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
@@ -111,6 +100,25 @@ export function Project4() {
         behavior: 'smooth',
       });
     }
+  }, []);
+
+  const handleTabChange = useCallback(
+    (tabId: string) => {
+      setActiveTab(tabId as 'infos' | 'process');
+      if (tabId === 'infos') {
+        navigateToPhoto(0);
+      } else if (tabId === 'process') {
+        navigateToPhoto(2);
+      }
+    },
+    [navigateToPhoto]
+  );
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
   }, []);
 
   const handlePrev = useCallback(() => {
@@ -163,7 +171,11 @@ export function Project4() {
               <p className='mt-4'>
                 A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
                 fathers hobby has been collecting and building with old construction kids for a long time. Now with two
-                friends of his, he photographed all his work and i made it into a book.
+                friends of his, he photographed all his work and asked me if i can help him make it into a book.
+                <br />
+                This turned out to be way harder than excpected because the Projects have been photographed over a long
+                timespan, so some images where missing and other infos as well. Because my Dad is not very good with
+                computers, i created a custom website where we could work together to complete the data.
               </p>
               <div className='grid grid-cols-2 gap-4 pt-4'>
                 <div>
@@ -222,31 +234,64 @@ export function Project4() {
             <div className='space-y-3'>
               <button
                 onClick={() => navigateToPhoto(2)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>01. COLLECTION</span>
-                <span className='text-sm'>Curating childhood objects</span>
+                {IMAGES[2] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 2 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[2].src} alt='Collection step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>01. COLLECTION</span>
+                  <span className='text-sm'>Curating childhood objects</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(3)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>02. PHOTOGRAPHY</span>
-                <span className='text-sm'>Professional documentation</span>
+                {IMAGES[3] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 3 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[3].src} alt='Photography step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>02. PHOTOGRAPHY</span>
+                  <span className='text-sm'>Professional documentation</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(4)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left'
+                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>03. DESIGN</span>
-                <span className='text-sm'>Book layout and typesetting</span>
+                {IMAGES[4] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 4 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
+                    }`}
+                  >
+                    <Image src={IMAGES[4].src} alt='Design step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>03. DESIGN</span>
+                  <span className='text-sm'>Book layout and typesetting</span>
+                </div>
               </button>
             </div>
           </div>
         ),
       },
     ],
-    [navigateToPhoto]
+    [navigateToPhoto, activeIndex]
   );
 
   return (

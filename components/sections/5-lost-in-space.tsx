@@ -5,6 +5,7 @@ import { SpaceTabs } from '@/components/space-tabs';
 import { StarField } from '@/components/star-field';
 import { orbitron } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { useCallback, useState } from 'react';
 
 const IMAGES = [
@@ -23,6 +24,8 @@ export function Project5() {
     setActiveTab(tabId as 'infos' | 'process');
     if (tabId === 'infos') {
       setCurrentImageIndex(0);
+    } else if (tabId === 'process') {
+      setCurrentImageIndex(1);
     }
   }, []);
 
@@ -33,7 +36,7 @@ export function Project5() {
       {/* Desktop Layout */}
       <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px] relative z-10'>
         {/* Column 1: 3D Album Viewer */}
-        <div className='flex flex items-start justify-start'>
+        <div className='flex flex items-start justify-start '>
           <AlbumViewer3D
             coverImage={IMAGES[currentImageIndex]}
             spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
@@ -128,24 +131,51 @@ export function Project5() {
                       <div className='space-y-3'>
                         <button
                           onClick={() => setCurrentImageIndex(1)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                         >
-                          <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
-                          <span className='text-sm'>Album artwork and layout</span>
+                          <div
+                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                              currentImageIndex === 1 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                            }`}
+                          >
+                            <Image src={IMAGES[1]} alt='Design step' fill className='object-cover' />
+                          </div>
+                          <div className='flex-1'>
+                            <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
+                            <span className='text-sm'>Album artwork and layout</span>
+                          </div>
                         </button>
                         <button
                           onClick={() => setCurrentImageIndex(2)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                         >
-                          <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
-                          <span className='text-sm'>3D transformation implementation</span>
+                          <div
+                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                              currentImageIndex === 2 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                            }`}
+                          >
+                            <Image src={IMAGES[2]} alt='Development step' fill className='object-cover' />
+                          </div>
+                          <div className='flex-1'>
+                            <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
+                            <span className='text-sm'>3D transformation implementation</span>
+                          </div>
                         </button>
                         <button
                           onClick={() => setCurrentImageIndex(3)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                         >
-                          <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-                          <span className='text-sm'>Spotify player embedding</span>
+                          <div
+                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                              currentImageIndex === 3 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                            }`}
+                          >
+                            <Image src={IMAGES[3]} alt='Integration step' fill className='object-cover' />
+                          </div>
+                          <div className='flex-1'>
+                            <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
+                            <span className='text-sm'>Spotify player embedding</span>
+                          </div>
                         </button>
                       </div>
                     </div>
@@ -286,24 +316,51 @@ export function Project5() {
                           <div className='space-y-3'>
                             <button
                               onClick={() => setCurrentImageIndex(1)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                             >
-                              <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
-                              <span className='text-sm'>Album artwork and layout</span>
+                              <div
+                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                  currentImageIndex === 1 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                }`}
+                              >
+                                <Image src={IMAGES[1]} alt='Design step' fill className='object-cover' />
+                              </div>
+                              <div className='flex-1'>
+                                <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
+                                <span className='text-sm'>Album artwork and layout</span>
+                              </div>
                             </button>
                             <button
                               onClick={() => setCurrentImageIndex(2)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                             >
-                              <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
-                              <span className='text-sm'>3D transformation implementation</span>
+                              <div
+                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                  currentImageIndex === 2 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                }`}
+                              >
+                                <Image src={IMAGES[2]} alt='Development step' fill className='object-cover' />
+                              </div>
+                              <div className='flex-1'>
+                                <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
+                                <span className='text-sm'>3D transformation implementation</span>
+                              </div>
                             </button>
                             <button
                               onClick={() => setCurrentImageIndex(3)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left'
+                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                             >
-                              <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-                              <span className='text-sm'>Spotify player embedding</span>
+                              <div
+                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                  currentImageIndex === 3 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                }`}
+                              >
+                                <Image src={IMAGES[3]} alt='Integration step' fill className='object-cover' />
+                              </div>
+                              <div className='flex-1'>
+                                <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
+                                <span className='text-sm'>Spotify player embedding</span>
+                              </div>
                             </button>
                           </div>
                         </div>

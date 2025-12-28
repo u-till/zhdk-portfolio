@@ -7,7 +7,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useState } from 'react';
 
-const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void) => [
+const getTabsContent = (
+  onProcessImageClick?: (imageIndex: number) => void,
+  selectedProcessImage?: number | null
+) => [
   {
     id: 'infos',
     label: 'INFOS',
@@ -71,24 +74,66 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void) => [
         <div className='space-y-3 flex-1 flex flex-col justify-start'>
           <button
             onClick={() => onProcessImageClick?.(0)}
-            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
           >
-            <span className='font-bold block'>01. CAPTURE</span>
-            <span className='text-sm'>360° photography setup</span>
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 0 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-0.jpg'
+                alt='Capture step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>01. CAPTURE</span>
+              <span className='text-sm'>360° photography setup</span>
+            </div>
           </button>
           <button
             onClick={() => onProcessImageClick?.(1)}
-            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
           >
-            <span className='font-bold block'>02. PROCESS</span>
-            <span className='text-sm'>Image normalization</span>
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 1 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-1.jpg'
+                alt='Process step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>02. PROCESS</span>
+              <span className='text-sm'>Image normalization</span>
+            </div>
           </button>
           <button
             onClick={() => onProcessImageClick?.(2)}
-            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left'
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
           >
-            <span className='font-bold block'>03. IMPLEMENT</span>
-            <span className='text-sm'>Interactive viewer</span>
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 2 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-2.jpg'
+                alt='Implement step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>03. IMPLEMENT</span>
+              <span className='text-sm'>Interactive viewer</span>
+            </div>
           </button>
         </div>
       </div>
@@ -107,9 +152,17 @@ export function Project1() {
 
   const handleTabChange = useCallback((tabId: string) => {
     setActiveTab(tabId as 'infos' | 'process');
+    if (tabId === 'infos') {
+      setSelectedProcessImage(null);
+    } else if (tabId === 'process') {
+      setSelectedProcessImage(0);
+    }
   }, []);
 
-  const tabs = useMemo(() => getTabsContent(handleProcessImageClick), [handleProcessImageClick]);
+  const tabs = useMemo(
+    () => getTabsContent(handleProcessImageClick, selectedProcessImage),
+    [handleProcessImageClick, selectedProcessImage]
+  );
 
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>

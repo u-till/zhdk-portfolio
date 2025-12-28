@@ -108,10 +108,6 @@ export function Project3() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as 'infos' | 'process');
-  }, []);
-
   const navigateToPhoto = useCallback((index: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
@@ -121,6 +117,18 @@ export function Project3() {
       });
     }
   }, []);
+
+  const handleTabChange = useCallback(
+    (tabId: string) => {
+      setActiveTab(tabId as 'infos' | 'process');
+      if (tabId === 'infos') {
+        navigateToPhoto(0);
+      } else if (tabId === 'process') {
+        navigateToPhoto(6);
+      }
+    },
+    [navigateToPhoto]
+  );
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -237,31 +245,64 @@ export function Project3() {
             <div className='space-y-3'>
               <button
                 onClick={() => navigateToPhoto(6)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>01. DESIGN</span>
-                <span className='text-sm'>Enclosure planning and measurements</span>
+                {IMAGES[6] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 6 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
+                    }`}
+                  >
+                    <Image src={IMAGES[6].src} alt='Design step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>01. DESIGN</span>
+                  <span className='text-sm'>Enclosure planning and measurements</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(7)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>02. BUILD</span>
-                <span className='text-sm'>Woodworking and assembly</span>
+                {IMAGES[7] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 7 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
+                    }`}
+                  >
+                    <Image src={IMAGES[7].src} alt='Build step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>02. BUILD</span>
+                  <span className='text-sm'>Woodworking and assembly</span>
+                </div>
               </button>
               <button
                 onClick={() => navigateToPhoto(8)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left'
+                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
               >
-                <span className='font-bold block'>03. TUNE</span>
-                <span className='text-sm'>Audio calibration and testing</span>
+                {IMAGES[8] && (
+                  <div
+                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                      activeIndex === 8 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
+                    }`}
+                  >
+                    <Image src={IMAGES[8].src} alt='Tune step' fill className='object-cover' />
+                  </div>
+                )}
+                <div className='flex-1'>
+                  <span className='font-bold block'>03. TUNE</span>
+                  <span className='text-sm'>Audio calibration and testing</span>
+                </div>
               </button>
             </div>
           </div>
         ),
       },
     ],
-    [navigateToPhoto]
+    [navigateToPhoto, activeIndex]
   );
 
   return (
