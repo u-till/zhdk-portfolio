@@ -1,15 +1,13 @@
 'use client';
 
+import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
+import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { dinNext } from '@/lib/fonts';
+import { ImageItem } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-
-type ImageItem = {
-  src: string;
-  objectFit: 'cover' | 'contain';
-};
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 const IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/front-mockup.png', objectFit: 'contain' },
@@ -125,33 +123,8 @@ export function Project4() {
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const width = scrollRef.current.offsetWidth;
-        const index = Math.round(scrollLeft / width);
-        setActiveIndex(index);
-      }
-    };
-
-    const scrollEl = scrollRef.current;
-    scrollEl?.addEventListener('scroll', handleScroll);
-    return () => scrollEl?.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        handlePrev();
-      } else if (e.key === 'ArrowRight') {
-        handleNext();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  useCarouselScroll(scrollRef, setActiveIndex);
+  useCarouselKeyboard(handlePrev, handleNext);
 
   const tabs = useMemo(
     () => [

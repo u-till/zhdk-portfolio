@@ -1,17 +1,13 @@
 'use client';
 
 import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
+import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
+import { ImageItem } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-
-type ImageItem = {
-  src: string;
-  objectFit: 'cover' | 'contain';
-  bg?: string;
-};
 
 const IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
@@ -172,18 +168,7 @@ export function Project2() {
     return () => scrollEl?.removeEventListener('scroll', handleScroll);
   }, [isMobile]);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') {
-        handlePrev();
-      } else if (e.key === 'ArrowRight') {
-        handleNext();
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [handleNext, handlePrev]);
+  useCarouselKeyboard(handlePrev, handleNext);
 
   const tabs = useMemo(
     () => [

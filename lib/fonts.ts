@@ -1,5 +1,15 @@
-import { Allerta_Stencil, Shrikhand, VT323, Doto, Orbitron, Courier_Prime } from 'next/font/google';
+import { Allerta_Stencil, Courier_Prime, Geist, Geist_Mono, Orbitron, Shrikhand, VT323 } from 'next/font/google';
 import localFont from 'next/font/local';
+
+export const geistSans = Geist({
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
+});
+
+export const geistMono = Geist_Mono({
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
+});
 
 export const allertaStencil = Allerta_Stencil({
   weight: '400',
@@ -20,13 +30,6 @@ export const vt323 = VT323({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-vt323',
-});
-
-export const doto = Doto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-doto',
 });
 
 export const orbitron = Orbitron({

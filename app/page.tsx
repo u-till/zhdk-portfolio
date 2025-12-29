@@ -9,11 +9,11 @@ import { Project5 } from '@/components/sections/5-lost-in-space';
 import { Project6 } from '@/components/sections/6-saudade';
 import { Project7 } from '@/components/sections/7-dayjob';
 import { About } from '@/components/sections/about';
-import { FullPageScroll } from '@/components/fullpage-scroll-motion';
+import { SectionNavigator } from '@/components/section-navigator';
 
 export default function Home() {
   return (
-    <FullPageScroll>
+    <SectionNavigator>
       <Welcome />
       <Project1 />
       <Project2 />
@@ -23,6 +23,6 @@ export default function Home() {
       <Project6 />
       <Project7 />
       <About />
-    </FullPageScroll>
+    </SectionNavigator>
   );
 }

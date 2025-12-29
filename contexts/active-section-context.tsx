@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 const ActiveSectionContext = createContext<{
   activeSection: string;
@@ -15,15 +15,16 @@ const ActiveSectionContext = createContext<{
 });
 
 export function ActiveSectionProvider({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSection] = useState('welcome');
+  const [activeSection, setActiveSectionState] = useState('welcome');
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
-  // Clear hovered project when leaving welcome section
-  useEffect(() => {
-    if (activeSection !== 'welcome') {
+  // Wrapper that clears hovered project when leaving welcome section
+  const setActiveSection = (section: string) => {
+    setActiveSectionState(section);
+    if (section !== 'welcome') {
       setHoveredProject(null);
     }
-  }, [activeSection]);
+  };
 
   return (
     <ActiveSectionContext.Provider value={{ activeSection, setActiveSection, hoveredProject, setHoveredProject }}>
