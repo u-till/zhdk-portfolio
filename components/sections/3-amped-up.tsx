@@ -1,5 +1,6 @@
 'use client';
 
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import { vt323 } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -20,6 +21,7 @@ const IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
 
 interface Tab {
@@ -104,7 +106,7 @@ function AmpedUpTabs({
 export function Project3() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(768);
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -129,13 +131,6 @@ export function Project3() {
     },
     [navigateToPhoto]
   );
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handlePrev = useCallback(() => {
     const newIndex = activeIndex > 0 ? activeIndex - 1 : IMAGES.length - 1;
@@ -185,8 +180,8 @@ export function Project3() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
               <p className='mt-4'>
-                An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables
-                new functionality like EQ / DSP / and Bluetooth.
+                An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
+                functionality like EQ / DSP / and Bluetooth.
               </p>
               <div className='grid grid-cols-2 gap-4 pt-4'>
                 <div>
@@ -308,13 +303,22 @@ export function Project3() {
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
-        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-          <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
-            amped up
-          </h2>
-        </div>
-      </div>
+      <AnimatePresence>
+        {activeIndex !== 9 && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'
+          >
+            <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
+              <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
+                amped up
+              </h2>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Scrolling Photos - Full Width */}
       <div

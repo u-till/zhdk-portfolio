@@ -1,5 +1,6 @@
 'use client';
 
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import { dinNext } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -88,7 +89,7 @@ function ToyLexiconTabs({
 export function Project4() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(768);
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -113,13 +114,6 @@ export function Project4() {
     },
     [navigateToPhoto]
   );
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handlePrev = useCallback(() => {
     const newIndex = activeIndex > 0 ? activeIndex - 1 : IMAGES.length - 1;

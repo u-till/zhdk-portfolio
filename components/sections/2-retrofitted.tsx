@@ -1,6 +1,7 @@
 'use client';
 
 import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -9,13 +10,14 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 type ImageItem = {
   src: string;
   objectFit: 'cover' | 'contain';
+  bg?: string;
 };
 
 const IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-2.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-3.png', objectFit: 'contain' },
-  { src: '/retrofitted/schematic.png', objectFit: 'contain' },
+  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff' },
   { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
@@ -103,7 +105,7 @@ function RetrofittedTabs({
 export function Project2() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+  const isMobile = useIsMobile(768);
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const [showThumbnails, setShowThumbnails] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -129,13 +131,6 @@ export function Project2() {
     },
     [navigateToPhoto]
   );
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const handlePrev = useCallback(() => {
     const totalItems = IMAGES.length + 1; // +1 for 3D viewer
@@ -348,7 +343,7 @@ export function Project2() {
           <div
             key={image.src}
             className={`h-full min-w-full snap-center flex items-center justify-center relative`}
-            style={image.src === '/retrofitted/schematic.png' ? { backgroundColor: '#ffc19dff' } : undefined}
+            style={image.bg ? { backgroundColor: image.bg } : undefined}
           >
             <Image
               src={image.src}
@@ -425,12 +420,7 @@ export function Project2() {
                     activeIndex === index + 1 ? 'ring-2 ring-orange-300/60' : ''
                   }`}
                 >
-                  <Image
-                    src={image.src}
-                    alt={`Thumbnail ${index + 1}`}
-                    fill
-                    className='object-cover rounded-full'
-                  />
+                  <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover rounded-full' />
                 </button>
               ))}
             </motion.div>
