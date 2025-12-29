@@ -11,7 +11,7 @@ import { useCallback, useState } from 'react';
 const IMAGES = [
   '/lost-in-space/cover.jpg',
   '/lost-in-space/studio.jpeg',
-  '/lost-in-space/backside.jpg',
+  '/lost-in-space/studio-analog-2.jpg',
   '/lost-in-space/backside.jpg',
 ];
 
