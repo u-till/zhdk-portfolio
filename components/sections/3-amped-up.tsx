@@ -4,7 +4,7 @@ import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { vt323 } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
+import { ImageItem, Tab } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
@@ -21,12 +21,6 @@ const IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
-
-interface Tab {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
 
 function AmpedUpTabs({
   tabs,

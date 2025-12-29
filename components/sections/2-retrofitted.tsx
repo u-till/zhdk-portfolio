@@ -4,7 +4,7 @@ import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
+import { ImageItem, Tab } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -18,12 +18,6 @@ const IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
 ];
-
-interface Tab {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
 
 function RetrofittedTabs({
   tabs,

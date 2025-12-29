@@ -1,14 +1,9 @@
 'use client';
 
 import { orbitron } from '@/lib/fonts';
+import { Tab } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-
-interface Tab {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
 
 interface SpaceTabsProps {
   tabs: Tab[];

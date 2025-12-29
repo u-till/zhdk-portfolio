@@ -1,13 +1,8 @@
 'use client';
 
+import { Tab } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-
-interface Tab {
-  id: string;
-  label: string;
-  content: React.ReactNode;
-}
 
 interface BrutalistTabsProps {
   tabs: Tab[];
