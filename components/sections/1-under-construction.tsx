@@ -7,15 +7,12 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useState } from 'react';
 
-const getTabsContent = (
-  onProcessImageClick?: (imageIndex: number) => void,
-  selectedProcessImage?: number | null
-) => [
+const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, selectedProcessImage?: number | null) => [
   {
     id: 'infos',
     label: 'INFOS',
     content: (
-      <div className='space-y-6'>
+      <div className='space-y-6 pb-16'>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Project Details</h3>
           <p className='mt-4'>
@@ -36,16 +33,10 @@ const getTabsContent = (
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Specifications</h3>
           <ul className='space-y-2 list-none mt-4'>
             <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>FRAMES:</span> 27
+              <span className='font-bold'>SIZE:</span> 27cm x 100cm x 120cm
             </li>
             <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>FORMAT:</span> PNG
-            </li>
-            <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>RESOLUTION:</span> High Quality
-            </li>
-            <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>INTERACTION:</span> Drag & Click
+              <span className='font-bold'>MATEIAL:</span> Wood
             </li>
           </ul>
         </div>
@@ -60,6 +51,19 @@ const getTabsContent = (
               <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
               <span>2025</span>
             </div>
+            <div>
+              <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
+              <span>Nano Banana for the background image</span>
+            </div>
+          </div>
+        </div>
+        <div className='pb-4'>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Possible Improvements</h3>
+          <div className='space-y-3 mt-4'>
+            <ul className='list-disc list-inside'>
+              <li>Use Kreissäge anstatt Stichsäge</li>
+              <li>Use sandpaper</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -81,15 +85,10 @@ const getTabsContent = (
                 selectedProcessImage === 0 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
               }`}
             >
-              <Image
-                src='/under-construction/korpus-process-0.jpg'
-                alt='Capture step'
-                fill
-                className='object-cover'
-              />
+              <Image src='/under-construction/korpus-process-0.jpg' alt='Capture step' fill className='object-cover' />
             </div>
             <div className='flex-1'>
-              <span className='font-bold block'>01. CAPTURE</span>
+              <span className='font-bold block'>01. DESIGN</span>
               <span className='text-sm'>360° photography setup</span>
             </div>
           </button>
@@ -102,15 +101,10 @@ const getTabsContent = (
                 selectedProcessImage === 1 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
               }`}
             >
-              <Image
-                src='/under-construction/korpus-process-1.jpg'
-                alt='Process step'
-                fill
-                className='object-cover'
-              />
+              <Image src='/under-construction/korpus-process-1.jpg' alt='Process step' fill className='object-cover' />
             </div>
             <div className='flex-1'>
-              <span className='font-bold block'>02. PROCESS</span>
+              <span className='font-bold block'>02. SOURCE</span>
               <span className='text-sm'>Image normalization</span>
             </div>
           </button>
@@ -131,8 +125,71 @@ const getTabsContent = (
               />
             </div>
             <div className='flex-1'>
-              <span className='font-bold block'>03. IMPLEMENT</span>
+              <span className='font-bold block'>03. BUILD</span>
               <span className='text-sm'>Interactive viewer</span>
+            </div>
+          </button>
+          <button
+            onClick={() => onProcessImageClick?.(2)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
+          >
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 2 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-2.jpg'
+                alt='Implement step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>04. FINALIZE</span>
+              <span className='text-sm'>Image of finished product</span>
+            </div>
+          </button>
+          <button
+            onClick={() => onProcessImageClick?.(2)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
+          >
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 2 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-2.jpg'
+                alt='Implement step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>05. CAPTURE</span>
+              <span className='text-sm'>Image of capturing process</span>
+            </div>
+          </button>
+          <button
+            onClick={() => onProcessImageClick?.(2)}
+            className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
+          >
+            <div
+              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                selectedProcessImage === 2 ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
+              }`}
+            >
+              <Image
+                src='/under-construction/korpus-process-2.jpg'
+                alt='Implement step'
+                fill
+                className='object-cover'
+              />
+            </div>
+            <div className='flex-1'>
+              <span className='font-bold block'>06. PUT TO USE</span>
+              <span className='text-sm'>image of how it is used</span>
             </div>
           </button>
         </div>

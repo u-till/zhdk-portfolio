@@ -1,92 +1,118 @@
 'use client';
 
-import { DesktopIcon } from '@/components/macos/desktop-icon';
-import { Dock } from '@/components/macos/dock';
-import { MobileGrid } from '@/components/macos/mobile-grid';
-import { Window } from '@/components/macos/window';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { DockItem, WindowState } from '@/types/macos';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
+import { DesktopIcon } from './desktop-icon';
+import { Dock } from './dock';
+import { MobileGrid } from './mobile-grid';
+import { Window } from './window';
 
-const WEBSITES: WindowState[] = [
+export const DOCK_ITEMS: DockItem[] = [
   {
     id: 'hannibal',
+    label: 'Hannibal',
+    icon: '/dayjob/icons/icon.png',
     url: 'https://hannibal.ch',
-    title: 'hannibal.ch',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 100, y: 100 },
-    size: { width: 1400, height: 700 },
-    type: 'browser',
   },
   {
     id: 'fabio',
+    label: 'Fabio Tozzo',
+    icon: '/dayjob/icons/icon.png',
     url: 'https://fabiotozzo.com',
-    title: 'fabiotozzo.com',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 120, y: 100 },
-    size: { width: 1200, height: 700 },
-    type: 'browser',
   },
   {
     id: 'swing',
+    label: 'Swing',
+    icon: '/dayjob/icons/icon.png',
     url: 'https://swing.ch',
-    title: 'swing.ch',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 140, y: 100 },
-    size: { width: 1200, height: 700 },
-    type: 'browser',
   },
   {
     id: 'narrative',
+    label: 'Another Narrative',
+    icon: '/dayjob/icons/icon.png',
     url: 'https://anothernarrative.studio',
-    title: 'anothernarrative.studio',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 160, y: 120 },
-    size: { width: 1200, height: 700 },
-    type: 'browser',
   },
   {
     id: 'brooke',
+    label: 'Brooke Jackson',
+    icon: '/dayjob/icons/icon.png',
     url: 'https://brookejackson.ch',
-    title: 'brookejackson.ch',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 180, y: 140 },
-    size: { width: 1000, height: 700 },
-    type: 'browser',
-  },
-  {
-    id: 'info',
-    title: 'info.txt',
-    isOpen: false,
-    isMinimized: false,
-    isMaximized: false,
-    zIndex: 10,
-    position: { x: 200, y: 160 },
-    size: { width: 600, height: 400 },
-    type: 'text',
   },
 ];
 
-export function Project7() {
+export function Desktop() {
   const isMobile = useIsMobile(768);
   const [highestZIndex, setHighestZIndex] = useState(10);
-  const [windows, setWindows] = useState<WindowState[]>(WEBSITES);
+
+  const [windows, setWindows] = useState<WindowState[]>([
+    {
+      id: 'hannibal',
+      url: 'https://hannibal.ch',
+      title: 'hannibal.ch',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 100, y: 100 },
+      size: { width: 1000, height: 700 },
+      type: 'browser',
+    },
+    {
+      id: 'fabio',
+      url: 'https://fabiotozzo.com',
+      title: 'fabiotozzo.com',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 120, y: 100 },
+      size: { width: 1000, height: 700 },
+      type: 'browser',
+    },
+    {
+      id: 'swing',
+      url: 'https://swing.ch',
+      title: 'swing.ch',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 140, y: 100 },
+      size: { width: 1000, height: 700 },
+      type: 'browser',
+    },
+    {
+      id: 'narrative',
+      url: 'https://anothernarrative.studio',
+      title: 'anothernarrative.studio',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 160, y: 120 },
+      size: { width: 1000, height: 700 },
+      type: 'browser',
+    },
+    {
+      id: 'brooke',
+      url: 'https://brookejackson.ch',
+      title: 'brookejackson.ch',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 180, y: 140 },
+      size: { width: 1000, height: 700 },
+      type: 'browser',
+    },
+    {
+      id: 'info',
+      title: 'info.txt',
+      isOpen: false,
+      isMinimized: false,
+      zIndex: 10,
+      position: { x: 200, y: 160 },
+      size: { width: 600, height: 400 },
+      type: 'text',
+    },
+  ]);
 
   const openWindow = useCallback(
     (id: string) => {
@@ -123,26 +149,8 @@ export function Project7() {
     setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, isMinimized: true } : w)));
   }, []);
 
-  const maximizeWindow = useCallback((id: string) => {
-    setWindows((prev) =>
-      prev.map((w) => (w.id === id ? { ...w, isMaximized: !w.isMaximized } : w))
-    );
-  }, []);
-
-  const resizeWindow = useCallback((id: string, size: { width: number; height: number }) => {
-    setWindows((prev) => prev.map((w) => (w.id === id ? { ...w, size } : w)));
-  }, []);
-
-  // Convert windows to dock items (filter out info.txt)
-  const dockItems: DockItem[] = WEBSITES.filter((w) => w.type === 'browser').map((w) => ({
-    id: w.id,
-    label: w.title,
-    icon: '/dayjob/icons/icon.png',
-    url: w.url,
-  }));
-
   if (isMobile) {
-    return <MobileGrid items={dockItems} />;
+    return <MobileGrid items={DOCK_ITEMS} />;
   }
 
   return (
@@ -168,17 +176,14 @@ export function Project7() {
               position={window.position}
               size={window.size}
               zIndex={window.zIndex}
-              isMaximized={window.isMaximized}
               onClose={() => closeWindow(window.id)}
               onFocus={() => focusWindow(window.id)}
               onMinimize={() => minimizeWindow(window.id)}
-              onMaximize={() => maximizeWindow(window.id)}
-              onResize={(size) => resizeWindow(window.id, size)}
             />
           ))}
 
         {/* Dock */}
-        <Dock items={dockItems} onItemClick={openWindow} />
+        <Dock items={DOCK_ITEMS} onItemClick={openWindow} />
       </div>
     </section>
   );

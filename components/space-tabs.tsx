@@ -24,9 +24,9 @@ export function SpaceTabs({ tabs, activeTab: externalActiveTab, onTabChange }: S
   };
 
   return (
-    <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl'>
+    <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl flex flex-col'>
       {/* Tab Headers - Vertical Layout */}
-      <div className='flex border-b-4 border-foreground/20'>
+      <div className='flex border-b-4 border-foreground/20 flex-shrink-0'>
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id;
           return (
@@ -65,7 +65,7 @@ export function SpaceTabs({ tabs, activeTab: externalActiveTab, onTabChange }: S
       </div>
 
       {/* Tab Content */}
-      <div className='relative min-h-[300px] md:min-h-[400px] p-6 md:p-8 overflow-auto'>
+      <div className='relative flex-1 p-6 md:p-8 overflow-auto space-scrollbar'>
         <AnimatePresence mode='wait'>
           {tabs.map(
             (tab) =>

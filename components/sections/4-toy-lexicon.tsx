@@ -11,7 +11,9 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 const IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/front-mockup.png', objectFit: 'contain' },
-  { src: '/toy-lexicon/cover.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/cover.jpg', objectFit: 'contain' },
+  { src: '/toy-lexicon/work-in-progress.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/cms.jpg', objectFit: 'cover' },
 ];
 
 function ToyLexiconTabs({

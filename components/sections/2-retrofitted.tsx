@@ -35,9 +35,9 @@ function RetrofittedTabs({
   };
 
   return (
-    <div className='w-full h-full rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg'>
+    <div className='w-full h-full rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md shadow-lg flex flex-col'>
       {/* Tab Headers */}
-      <div className='flex border-b border-orange-300/40'>
+      <div className='flex border-b border-orange-300/40 flex-shrink-0'>
         <button
           onClick={onClose}
           className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-all rounded-tr-[32px] bg-transparent text-white/80 hover:bg-orange-500/50'
@@ -69,7 +69,7 @@ function RetrofittedTabs({
       </div>
 
       {/* Tab Content */}
-      <div className='relative h-[calc(100%-4rem)] p-6 md:p-8 overflow-auto'>
+      <div className='relative flex-1 p-6 md:p-8 overflow-auto retro-scrollbar min-h-0'>
         <AnimatePresence mode='wait'>
           {tabs.map(
             (tab) =>

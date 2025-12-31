@@ -363,7 +363,7 @@ export function Project6() {
             onClick={() => setExpandedPanel(expandedPanel === 'globe' ? null : 'globe')}
             className='absolute cursor-pointer top-2 left-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10 font-mono'
           >
-            {expandedPanel === 'globe' ? 'x' : 'i'}
+            {expandedPanel === 'globe' ? '×' : 'i'}
           </button>
 
           <AnimatePresence mode='wait'>

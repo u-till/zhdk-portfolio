@@ -10,9 +10,10 @@ import { useCallback, useState } from 'react';
 
 const IMAGES = [
   '/lost-in-space/cover.jpg',
-  '/lost-in-space/studio.jpeg',
-  '/lost-in-space/studio-analog-2.jpg',
-  '/lost-in-space/backside.jpg',
+  '/lost-in-space/backside-1.jpg',
+  '/lost-in-space/backside-2.jpg',
+  '/lost-in-space/backside-3.jpg',
+  '/lost-in-space/backside-4.jpg',
 ];
 
 export function Project5() {
@@ -51,7 +52,7 @@ export function Project5() {
           >
             LOST IN SPACE
           </h2>
-          <div className='w-full h-full'>
+          <div className='w-full flex-1 min-h-0'>
             <SpaceTabs
               tabs={[
                 {
@@ -141,8 +142,11 @@ export function Project5() {
                             <Image src={IMAGES[1]} alt='Design step' fill className='object-cover' />
                           </div>
                           <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
-                            <span className='text-sm'>Album artwork and layout</span>
+                            <span className='font-bold block text-[#FF6B66]'>01. COVER ART</span>
+                            <span className='text-sm'>
+                              The whole project actually started, because i created the cover art. We then searched for
+                              fitting beats and also produced a few tracks specifically to this space theme.
+                            </span>
                           </div>
                         </button>
                         <button
@@ -157,8 +161,14 @@ export function Project5() {
                             <Image src={IMAGES[2]} alt='Development step' fill className='object-cover' />
                           </div>
                           <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
-                            <span className='text-sm'>3D transformation implementation</span>
+                            <span className='font-bold block text-[#FF6B66]'>02. PRODUCTION</span>
+                            <span className='text-sm'>
+                              Vogelsang was a Projekt Interim Building that housed many creatives, mainly in music. My
+                              closest collaborators at that time were Lars (Dirty Uludag) and Julian (July). This Album
+                              / Beattape was mostly made by me and Lars. I used Ableton and Lars used Fruity Loops. We
+                              also would often work on the same tracks. Someone created a sample and the other the drums
+                              and vice-versa.
+                            </span>
                           </div>
                         </button>
                         <button
@@ -171,6 +181,22 @@ export function Project5() {
                             }`}
                           >
                             <Image src={IMAGES[3]} alt='Integration step' fill className='object-cover' />
+                          </div>
+                          <div className='flex-1'>
+                            <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
+                            <span className='text-sm'>Spotify player embedding</span>
+                          </div>
+                        </button>
+                        <button
+                          onClick={() => setCurrentImageIndex(4)}
+                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
+                        >
+                          <div
+                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                              currentImageIndex === 4 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                            }`}
+                          >
+                            <Image src={IMAGES[4]} alt='Integration step' fill className='object-cover' />
                           </div>
                           <div className='flex-1'>
                             <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
