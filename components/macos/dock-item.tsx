@@ -1,70 +1,59 @@
 'use client';
 
+import { DockItem } from '@/types/macos';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { DockItem } from '@/types/macos';
+import React, { useState } from 'react';
 
 interface DockItemProps {
   item: DockItem;
-  index: number;
-  hoveredIndex: number | null;
-  onHoverStart: () => void;
-  onHoverEnd: () => void;
   onClick: () => void;
 }
 
-function getScale(index: number, hoveredIndex: number | null): number {
-  if (hoveredIndex === null) return 1;
-  const distance = Math.abs(index - hoveredIndex);
-  if (distance === 0) return 1.6; // Hovered item
-  if (distance === 1) return 1.3; // Adjacent
-  if (distance === 2) return 1.1; // Next adjacent
-  return 1; // Rest
-}
-
-export function DockItemComponent({
-  item,
-  index,
-  hoveredIndex,
-  onHoverStart,
-  onHoverEnd,
-  onClick,
-}: DockItemProps) {
-  const scale = getScale(index, hoveredIndex);
-  const isHovered = hoveredIndex === index;
+export const DockItemComponent = React.memo(function DockItemComponent({ item, onClick }: DockItemProps) {
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <motion.button
-      animate={{
-        scale,
-        y: isHovered ? -8 : 0,
-      }}
-      transition={{ type: 'spring', stiffness: 400, damping: 25 }}
-      onHoverStart={onHoverStart}
-      onHoverEnd={onHoverEnd}
+    <button
       onClick={onClick}
-      className="relative flex items-end justify-center origin-bottom"
-      style={{ height: '64px', width: '64px' }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className='cursor-pointer relative flex items-end justify-center w-14 h-14'
       aria-label={`Open ${item.label}`}
     >
       <Image
         src={item.icon}
         alt={item.label}
-        width={64}
-        height={64}
-        className="rounded-lg"
+        width={56}
+        height={56}
+        className='w-full h-full rounded-xl object-contain'
+        draggable={false}
       />
 
       {/* Tooltip */}
       {isHovered && (
         <motion.div
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 5 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute -top-10 bg-neutral-800/90 text-white text-xs px-2 py-1 rounded whitespace-nowrap pointer-events-none"
+          exit={{ opacity: 0, y: 5 }}
+          transition={{ duration: 0.15 }}
+          className='absolute -top-12 left-1/2 -translate-x-1/2 text-white text-xs px-2.5 py-1.5 rounded-md whitespace-nowrap pointer-events-none shadow-lg'
+          style={{ backgroundColor: '#565758' }}
         >
           {item.label}
+          {/* Pointer triangle */}
+          <div
+            className='absolute left-1/2 -translate-x-1/2 -bottom-1'
+            style={{
+              width: 0,
+              height: 0,
+              borderLeft: '4px solid transparent',
+              borderRight: '4px solid transparent',
+              borderTop: '4px solid #565758',
+            }}
+          />
         </motion.div>
       )}
-    </motion.button>
+    </button>
   );
-}
+});

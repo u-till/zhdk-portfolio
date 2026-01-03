@@ -72,7 +72,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   dayjob: {
-    navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/90 backdrop-blur-md shadow-2xl',
+    navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
@@ -93,7 +93,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
   'toy-lexicon': '#eff6ff',
   'lost-in-space': '#000000ff',
   saudade: '#646464ff',
-  dayjob: '#1f2937',
+  dayjob: '#EAEAE8',
   about: '#f9fafb',
 };
 

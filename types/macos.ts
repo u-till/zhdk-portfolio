@@ -2,13 +2,14 @@ export interface WindowState {
   id: string;
   url?: string;
   title: string;
+  icon?: string;
   isOpen: boolean;
   isMinimized: boolean;
   isMaximized: boolean;
   zIndex: number;
   position: { x: number; y: number };
   size: { width: number; height: number };
-  type: 'browser' | 'text';
+  type: 'browser' | 'text' | 'terminal';
 }
 
 export interface DockItem {
@@ -22,7 +23,7 @@ export interface WindowProps {
   id: string;
   title: string;
   url?: string;
-  type: 'browser' | 'text';
+  type: 'browser' | 'text' | 'terminal';
   position: { x: number; y: number };
   size: { width: number; height: number };
   zIndex: number;
