@@ -1,8 +1,8 @@
 'use client';
 
-import { AlbumViewer3D } from '@/components/album-viewer-3d';
-import { SpaceTabs } from '@/components/space-tabs';
-import { StarField } from '@/components/star-field';
+import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
+import { SpaceTabs } from '@/components/lost-in-space/space-tabs';
+import { StarField } from '@/components/lost-in-space/star-field';
 import { orbitron } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -14,6 +14,29 @@ const IMAGES = [
   '/lost-in-space/backside-2.jpg',
   '/lost-in-space/backside-3.jpg',
   '/lost-in-space/backside-4.jpg',
+];
+
+const PROCESS_STEPS = [
+  {
+    imageIndex: 1,
+    title: '01. COVER ART',
+    text: 'The whole project actually started, because i created the cover art. We then searched for fitting beats and also produced a few tracks specifically to this space theme.',
+  },
+  {
+    imageIndex: 2,
+    title: '02. PRODUCTION',
+    text: 'Vogelsang was a Projekt Interim Building that housed many creatives, mainly in music. My closest collaborators at that time were Lars (Dirty Uludag) and Julian (July). This Album / Beattape was mostly made by me and Lars. I used Ableton and Lars used Fruity Loops. We also would often work on the same tracks. Someone created a sample and the other the drums and vice-versa.',
+  },
+  {
+    imageIndex: 3,
+    title: '03. INTEGRATION',
+    text: 'Spotify player embedding',
+  },
+  {
+    imageIndex: 4,
+    title: '04. FINALIZATION',
+    text: 'Final album preparation',
+  },
 ];
 
 export function Project5() {
@@ -130,79 +153,25 @@ export function Project5() {
                         Creation Process
                       </h3>
                       <div className='space-y-3'>
-                        <button
-                          onClick={() => setCurrentImageIndex(1)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                        >
-                          <div
-                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                              currentImageIndex === 1 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                            }`}
+                        {PROCESS_STEPS.map((step) => (
+                          <button
+                            key={step.imageIndex}
+                            onClick={() => setCurrentImageIndex(step.imageIndex)}
+                            className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                           >
-                            <Image src={IMAGES[1]} alt='Design step' fill className='object-cover' />
-                          </div>
-                          <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>01. COVER ART</span>
-                            <span className='text-sm'>
-                              The whole project actually started, because i created the cover art. We then searched for
-                              fitting beats and also produced a few tracks specifically to this space theme.
-                            </span>
-                          </div>
-                        </button>
-                        <button
-                          onClick={() => setCurrentImageIndex(2)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                        >
-                          <div
-                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                              currentImageIndex === 2 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                            }`}
-                          >
-                            <Image src={IMAGES[2]} alt='Development step' fill className='object-cover' />
-                          </div>
-                          <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>02. PRODUCTION</span>
-                            <span className='text-sm'>
-                              Vogelsang was a Projekt Interim Building that housed many creatives, mainly in music. My
-                              closest collaborators at that time were Lars (Dirty Uludag) and Julian (July). This Album
-                              / Beattape was mostly made by me and Lars. I used Ableton and Lars used Fruity Loops. We
-                              also would often work on the same tracks. Someone created a sample and the other the drums
-                              and vice-versa.
-                            </span>
-                          </div>
-                        </button>
-                        <button
-                          onClick={() => setCurrentImageIndex(3)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                        >
-                          <div
-                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                              currentImageIndex === 3 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                            }`}
-                          >
-                            <Image src={IMAGES[3]} alt='Integration step' fill className='object-cover' />
-                          </div>
-                          <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-                            <span className='text-sm'>Spotify player embedding</span>
-                          </div>
-                        </button>
-                        <button
-                          onClick={() => setCurrentImageIndex(4)}
-                          className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                        >
-                          <div
-                            className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                              currentImageIndex === 4 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                            }`}
-                          >
-                            <Image src={IMAGES[4]} alt='Integration step' fill className='object-cover' />
-                          </div>
-                          <div className='flex-1'>
-                            <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-                            <span className='text-sm'>Spotify player embedding</span>
-                          </div>
-                        </button>
+                            <div
+                              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                currentImageIndex === step.imageIndex ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                              }`}
+                            >
+                              <Image src={IMAGES[step.imageIndex]} alt={`${step.title} step`} fill className='object-cover' />
+                            </div>
+                            <div className='flex-1'>
+                              <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
+                              <span className='text-sm'>{step.text}</span>
+                            </div>
+                          </button>
+                        ))}
                       </div>
                     </div>
                   ),
@@ -340,54 +309,25 @@ export function Project5() {
                             Creation Process
                           </h3>
                           <div className='space-y-3'>
-                            <button
-                              onClick={() => setCurrentImageIndex(1)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                            >
-                              <div
-                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                                  currentImageIndex === 1 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                                }`}
+                            {PROCESS_STEPS.map((step) => (
+                              <button
+                                key={step.imageIndex}
+                                onClick={() => setCurrentImageIndex(step.imageIndex)}
+                                className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                               >
-                                <Image src={IMAGES[1]} alt='Design step' fill className='object-cover' />
-                              </div>
-                              <div className='flex-1'>
-                                <span className='font-bold block text-[#FF6B66]'>01. DESIGN</span>
-                                <span className='text-sm'>Album artwork and layout</span>
-                              </div>
-                            </button>
-                            <button
-                              onClick={() => setCurrentImageIndex(2)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                            >
-                              <div
-                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                                  currentImageIndex === 2 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                                }`}
-                              >
-                                <Image src={IMAGES[2]} alt='Development step' fill className='object-cover' />
-                              </div>
-                              <div className='flex-1'>
-                                <span className='font-bold block text-[#FF6B66]'>02. DEVELOPMENT</span>
-                                <span className='text-sm'>3D transformation implementation</span>
-                              </div>
-                            </button>
-                            <button
-                              onClick={() => setCurrentImageIndex(3)}
-                              className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                            >
-                              <div
-                                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                                  currentImageIndex === 3 ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
-                                }`}
-                              >
-                                <Image src={IMAGES[3]} alt='Integration step' fill className='object-cover' />
-                              </div>
-                              <div className='flex-1'>
-                                <span className='font-bold block text-[#FF6B66]'>03. INTEGRATION</span>
-                                <span className='text-sm'>Spotify player embedding</span>
-                              </div>
-                            </button>
+                                <div
+                                  className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                    currentImageIndex === step.imageIndex ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                  }`}
+                                >
+                                  <Image src={IMAGES[step.imageIndex]} alt={`${step.title} step`} fill className='object-cover' />
+                                </div>
+                                <div className='flex-1'>
+                                  <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
+                                  <span className='text-sm'>{step.text}</span>
+                                </div>
+                              </button>
+                            ))}
                           </div>
                         </div>
                       ),

@@ -1,6 +1,6 @@
 'use client';
 
-import { Lamp3DViewer } from '@/components/lamp-3d-viewer';
+import { Lamp3DViewer } from '@/components/retrofitted/lamp-3d-viewer';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
@@ -17,6 +17,24 @@ const IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
+];
+
+const PROCESS_STEPS = [
+  {
+    imageIndex: 4,
+    title: '01. SOURCING',
+    text: 'Finding authentic 70s piece',
+  },
+  {
+    imageIndex: 5,
+    title: '02. RESTORATION',
+    text: 'Cleaning and repair work',
+  },
+  {
+    imageIndex: 6,
+    title: '03. MODERNIZATION',
+    text: 'LED retrofit installation',
+  },
 ];
 
 function RetrofittedTabs({
@@ -232,60 +250,27 @@ export function Project2() {
           <div className='space-y-4'>
             <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Restoration Process</h3>
             <div className='space-y-3'>
-              <button
-                onClick={() => navigateToPhoto(5)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[4] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 5 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[4].src} alt='Sourcing step' fill className='object-cover' />
+              {PROCESS_STEPS.map((step) => (
+                <button
+                  key={step.imageIndex}
+                  onClick={() => navigateToPhoto(step.imageIndex + 1)}
+                  className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
+                >
+                  {IMAGES[step.imageIndex] && (
+                    <div
+                      className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                        activeIndex === step.imageIndex + 1 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                      }`}
+                    >
+                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                    </div>
+                  )}
+                  <div className='flex-1'>
+                    <span className='font-bold block'>{step.title}</span>
+                    <span className='text-sm'>{step.text}</span>
                   </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>01. SOURCING</span>
-                  <span className='text-sm'>Finding authentic 70s piece</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(6)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[5] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 6 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[5].src} alt='Restoration step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>02. RESTORATION</span>
-                  <span className='text-sm'>Cleaning and repair work</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(7)}
-                className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[6] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 7 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[6].src} alt='Modernization step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>03. MODERNIZATION</span>
-                  <span className='text-sm'>LED retrofit installation</span>
-                </div>
-              </button>
+                </button>
+              ))}
             </div>
           </div>
         ),

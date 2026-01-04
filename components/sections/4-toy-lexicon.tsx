@@ -16,6 +16,24 @@ const IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/cms.jpg', objectFit: 'cover' },
 ];
 
+const PROCESS_STEPS = [
+  {
+    imageIndex: 2,
+    title: '01. COLLECTION',
+    text: 'Curating childhood objects',
+  },
+  {
+    imageIndex: 3,
+    title: '02. PHOTOGRAPHY',
+    text: 'Professional documentation',
+  },
+  {
+    imageIndex: 4,
+    title: '03. DESIGN',
+    text: 'Book layout and typesetting',
+  },
+];
+
 function ToyLexiconTabs({
   tabs,
   onClose,
@@ -195,60 +213,27 @@ export function Project4() {
           <div className='space-y-4'>
             <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Creation Process</h3>
             <div className='space-y-3'>
-              <button
-                onClick={() => navigateToPhoto(2)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[2] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 2 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[2].src} alt='Collection step' fill className='object-cover' />
+              {PROCESS_STEPS.map((step) => (
+                <button
+                  key={step.imageIndex}
+                  onClick={() => navigateToPhoto(step.imageIndex)}
+                  className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
+                >
+                  {IMAGES[step.imageIndex] && (
+                    <div
+                      className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                        activeIndex === step.imageIndex ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
+                      }`}
+                    >
+                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                    </div>
+                  )}
+                  <div className='flex-1'>
+                    <span className='font-bold block'>{step.title}</span>
+                    <span className='text-sm'>{step.text}</span>
                   </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>01. COLLECTION</span>
-                  <span className='text-sm'>Curating childhood objects</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(3)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[3] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 3 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[3].src} alt='Photography step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>02. PHOTOGRAPHY</span>
-                  <span className='text-sm'>Professional documentation</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(4)}
-                className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[4] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 4 ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
-                    }`}
-                  >
-                    <Image src={IMAGES[4].src} alt='Design step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>03. DESIGN</span>
-                  <span className='text-sm'>Book layout and typesetting</span>
-                </div>
-              </button>
+                </button>
+              ))}
             </div>
           </div>
         ),

@@ -1,15 +1,17 @@
 'use client';
 
-import { BrowserWindow } from '@/components/macos/browser-window';
-import { DesktopIcon } from '@/components/macos/desktop-icon';
-import { Dock } from '@/components/macos/dock';
-import { MobileGrid } from '@/components/macos/mobile-grid';
-import { TerminalWindow } from '@/components/macos/terminal-window';
-import { TextWindow } from '@/components/macos/text-window';
+import { BrowserWindow } from '@/components/dayjob/browser-window';
+import { DesktopIcon } from '@/components/dayjob/desktop-icon';
+import { Dock } from '@/components/dayjob/dock';
+import { MobileGrid } from '@/components/dayjob/mobile-grid';
+import { TerminalWindow } from '@/components/dayjob/terminal-window';
+import { TextWindow } from '@/components/dayjob/text-window';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { DockItem, WindowState } from '@/types/macos';
 import Image from 'next/image';
 import { useCallback, useState } from 'react';
+
+const MAX_WINDOW_Z_INDEX = 99; // Dock is at z-100
 
 const WINDOW_CONFIGS: WindowState[] = [
   // Browser windows (appear in dock)
@@ -126,25 +128,22 @@ const DOCK_ITEMS: DockItem[] = WINDOW_CONFIGS.filter((w) => w.type === 'browser'
 
 export function Project7() {
   const isMobile = useIsMobile(768);
-  const [highestZIndex, setHighestZIndex] = useState(51);
   const [windows, setWindows] = useState<WindowState[]>(WINDOW_CONFIGS);
 
   const openWindow = useCallback((id: string) => {
-    setHighestZIndex((prev) => {
-      const newZ = prev + 1;
-      setWindows((prevWindows) =>
-        prevWindows.map((w) =>
-          w.id === id
-            ? {
-                ...w,
-                isOpen: true,
-                isMinimized: false,
-                zIndex: newZ,
-              }
-            : w
-        )
+    setWindows((prevWindows) => {
+      const maxZ = Math.max(...prevWindows.map((w) => w.zIndex));
+      const newZ = Math.min(maxZ + 1, MAX_WINDOW_Z_INDEX);
+      return prevWindows.map((w) =>
+        w.id === id
+          ? {
+              ...w,
+              isOpen: true,
+              isMinimized: false,
+              zIndex: newZ,
+            }
+          : w
       );
-      return newZ;
     });
   }, []);
 
@@ -153,10 +152,10 @@ export function Project7() {
   }, []);
 
   const focusWindow = useCallback((id: string) => {
-    setHighestZIndex((prev) => {
-      const newZ = prev + 1;
-      setWindows((prevWindows) => prevWindows.map((w) => (w.id === id ? { ...w, zIndex: newZ } : w)));
-      return newZ;
+    setWindows((prevWindows) => {
+      const maxZ = Math.max(...prevWindows.map((w) => w.zIndex));
+      const newZ = Math.min(maxZ + 1, MAX_WINDOW_Z_INDEX);
+      return prevWindows.map((w) => (w.id === id ? { ...w, zIndex: newZ } : w));
     });
   }, []);
 

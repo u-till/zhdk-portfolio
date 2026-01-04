@@ -1,6 +1,6 @@
 'use client';
 
-import { Globe } from '@/components/globe';
+import { Globe } from '@/components/saudade/globe';
 import { courierPrime } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';

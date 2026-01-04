@@ -22,6 +22,24 @@ const IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
 
+const PROCESS_STEPS = [
+  {
+    imageIndex: 6,
+    title: '01. DESIGN',
+    text: 'Enclosure planning and measurements',
+  },
+  {
+    imageIndex: 7,
+    title: '02. BUILD',
+    text: 'Woodworking and assembly',
+  },
+  {
+    imageIndex: 8,
+    title: '03. TUNE',
+    text: 'Audio calibration and testing',
+  },
+];
+
 function AmpedUpTabs({
   tabs,
   onClose,
@@ -205,60 +223,27 @@ export function Project3() {
           <div className='space-y-4'>
             <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
             <div className='space-y-3'>
-              <button
-                onClick={() => navigateToPhoto(6)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[6] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 6 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
-                    }`}
-                  >
-                    <Image src={IMAGES[6].src} alt='Design step' fill className='object-cover' />
+              {PROCESS_STEPS.map((step) => (
+                <button
+                  key={step.imageIndex}
+                  onClick={() => navigateToPhoto(step.imageIndex)}
+                  className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
+                >
+                  {IMAGES[step.imageIndex] && (
+                    <div
+                      className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                        activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
+                      }`}
+                    >
+                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                    </div>
+                  )}
+                  <div className='flex-1'>
+                    <span className='font-bold block'>{step.title}</span>
+                    <span className='text-sm'>{step.text}</span>
                   </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>01. DESIGN</span>
-                  <span className='text-sm'>Enclosure planning and measurements</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(7)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[7] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 7 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
-                    }`}
-                  >
-                    <Image src={IMAGES[7].src} alt='Build step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>02. BUILD</span>
-                  <span className='text-sm'>Woodworking and assembly</span>
-                </div>
-              </button>
-              <button
-                onClick={() => navigateToPhoto(8)}
-                className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
-              >
-                {IMAGES[8] && (
-                  <div
-                    className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                      activeIndex === 8 ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
-                    }`}
-                  >
-                    <Image src={IMAGES[8].src} alt='Tune step' fill className='object-cover' />
-                  </div>
-                )}
-                <div className='flex-1'>
-                  <span className='font-bold block'>03. TUNE</span>
-                  <span className='text-sm'>Audio calibration and testing</span>
-                </div>
-              </button>
+                </button>
+              ))}
             </div>
           </div>
         ),

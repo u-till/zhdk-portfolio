@@ -124,7 +124,7 @@ export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProp
             <div className='absolute inset-0 pt-3 p-4'>
               <button
                 onClick={handleFlip}
-                className='absolute rotate-90 origin-bottom top-8 md:top-14 -right-3 md:right-0 z-10 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm'
+                className='cursor-pointer absolute rotate-90 origin-bottom top-8 md:top-14 -right-3 md:right-0 z-10 bg-white/20 hover:bg-white/30 text-white px-3 py-1 rounded text-sm'
               >
                 Flip Back
               </button>
