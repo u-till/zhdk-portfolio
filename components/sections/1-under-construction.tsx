@@ -160,42 +160,48 @@ export function Project1() {
   return (
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px]'>
-        {/* Column 1: 360 Viewer / Process Image */}
-        <div className='flex flex-1 items-start justify-start relative'>
-          {selectedProcessImage !== null ? (
-            <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
-              <button
-                onClick={() => setSelectedProcessImage(null)}
-                className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
-              >
-                ×
-              </button>
-              <Image
-                src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
-                alt={`Process ${selectedProcessImage + 1}`}
-                fill
-                className='object-cover'
-              />
-            </div>
-          ) : (
-            <Viewer360
-              imageFolder='under-construction/korpus-360'
-              totalFrames={27}
-              imageFormat='png'
-              imagePrefix='normalized-'
-              imagePadding={2}
-            />
-          )}
-        </div>
+      <div className='hidden lg:flex flex-1 items-start justify-center w-full overflow-hidden pb-8'>
+        <div className='grid grid-cols-2 gap-8 pt-8 h-full w-auto'>
+          {/* Column 1: 360 Viewer / Process Image */}
+          <div className='flex items-start justify-start relative h-full aspect-square'>
+            {selectedProcessImage !== null ? (
+              <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+                <button
+                  onClick={() => setSelectedProcessImage(null)}
+                  className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
+                >
+                  ×
+                </button>
+                <Image
+                  src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
+                  alt={`Process ${selectedProcessImage + 1}`}
+                  fill
+                  className='object-cover'
+                />
+              </div>
+            ) : (
+              <div className='w-full h-full'>
+                <Viewer360
+                  imageFolder='under-construction/korpus-360'
+                  totalFrames={27}
+                  imageFormat='png'
+                  imagePrefix='normalized-'
+                  imagePadding={2}
+                />
+              </div>
+            )}
+          </div>
 
-        {/* Column 2: Tabs */}
-        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-start justify-start relative group'>
-          <h2 className={`text-4xl lg:text-7xl font-bold transition-opacity duration-300 ${allertaStencil.className}`}>
-            under <br></br>construction
-          </h2>
-          <div className='absolute inset-0 pr-2 transition-all duration-300 pt-[160px] group-hover:pt-0'>
-            <BrutalistTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
+          {/* Column 2: Title & Tabs */}
+          <div className='flex flex-col gap-8 items-start justify-start relative group w-full'>
+            <h2
+              className={`text-4xl lg:text-7xl w-full text-right font-bold transition-opacity duration-300 ${allertaStencil.className}`}
+            >
+              under <br></br>construction
+            </h2>
+            <div className='absolute inset-0 pr-2 transition-all duration-300 pt-[160px] group-hover:pt-0'>
+              <BrutalistTabs tabs={tabs} activeTab={activeTab} onTabChange={handleTabChange} />
+            </div>
           </div>
         </div>
       </div>
@@ -214,7 +220,7 @@ export function Project1() {
                 transition={{ duration: 0.4, ease: 'easeInOut' }}
                 className='absolute inset-0 flex flex-col gap-4 w-full'
               >
-                <h2 className={`text-4xl font-bold ${allertaStencil.className}`}>
+                <h2 className={`text-4xl font-bold  ${allertaStencil.className}`}>
                   under<br></br>construction
                 </h2>
                 <div className='flex-1 flex items-center justify-center'>

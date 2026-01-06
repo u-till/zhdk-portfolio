@@ -9,12 +9,17 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-const IMAGES: ImageItem[] = [
+const GALLERY_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/front-mockup.png', objectFit: 'contain' },
   { src: '/toy-lexicon/cover.jpg', objectFit: 'contain' },
+];
+
+const PROCESS_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/work-in-progress.jpg', objectFit: 'cover' },
   { src: '/toy-lexicon/cms.jpg', objectFit: 'cover' },
 ];
+
+const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
 
 const PROCESS_STEPS = [
   {
@@ -26,11 +31,6 @@ const PROCESS_STEPS = [
     imageIndex: 3,
     title: '02. PHOTOGRAPHY',
     text: 'Professional documentation',
-  },
-  {
-    imageIndex: 4,
-    title: '03. DESIGN',
-    text: 'Book layout and typesetting',
   },
 ];
 
@@ -128,12 +128,12 @@ export function Project4() {
   );
 
   const handlePrev = useCallback(() => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : IMAGES.length - 1;
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : ALL_IMAGES.length - 1;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
   const handleNext = useCallback(() => {
-    const newIndex = activeIndex < IMAGES.length - 1 ? activeIndex + 1 : 0;
+    const newIndex = activeIndex < ALL_IMAGES.length - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
@@ -219,13 +219,13 @@ export function Project4() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
                 >
-                  {IMAGES[step.imageIndex] && (
+                  {ALL_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
                       }`}
                     >
-                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                      <Image src={ALL_IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
                     </div>
                   )}
                   <div className='flex-1'>
@@ -262,7 +262,7 @@ export function Project4() {
         ref={scrollRef}
         className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
-        {IMAGES.map((image, index) => (
+        {ALL_IMAGES.map((image, index) => (
           <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
             <Image
               src={image.src}
@@ -314,7 +314,7 @@ export function Project4() {
 
       {/* Thumbnail Strip - Bottom */}
       <div className='absolute bottom-4 md:bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
-        {IMAGES.map((image, index) => (
+        {GALLERY_IMAGES.map((image, index) => (
           <button
             key={index}
             onClick={() => navigateToPhoto(index)}

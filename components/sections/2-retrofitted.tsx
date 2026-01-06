@@ -9,30 +9,48 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-const IMAGES: ImageItem[] = [
+const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-2.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-3.png', objectFit: 'contain' },
-  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff' },
-  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
 ];
 
+const PROCESS_IMAGES: ImageItem[] = [
+  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff' }, // index 5 - DESIGN
+  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' }, // index 6 - SOURCING
+  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' }, // index 7 - RESTORATION
+  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' }, // index 8 - MODERNIZATION
+  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' }, // index 9 - MODERNIZATION
+];
+
+const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
+
 const PROCESS_STEPS = [
   {
-    imageIndex: 4,
-    title: '01. SOURCING',
-    text: 'Finding authentic 70s piece',
-  },
-  {
     imageIndex: 5,
-    title: '02. RESTORATION',
-    text: 'Cleaning and repair work',
+    title: '01. DESIGN',
+    text: 'Schematic and planning',
   },
   {
     imageIndex: 6,
-    title: '03. MODERNIZATION',
+    title: '02. SOURCING',
+    text: 'Finding authentic 70s piece',
+  },
+  {
+    imageIndex: 7,
+    title: '03. RESTORATION',
+    text: 'Cleaning and repair work',
+  },
+  {
+    imageIndex: 8,
+    title: '04. MODERNIZATION',
+    text: 'LED retrofit installation',
+  },
+  {
+    imageIndex: 9,
+    title: '05. MODERNIZATION',
     text: 'LED retrofit installation',
   },
 ];
@@ -141,13 +159,13 @@ export function Project2() {
   );
 
   const handlePrev = useCallback(() => {
-    const totalItems = IMAGES.length + 1; // +1 for 3D viewer
+    const totalItems = ALL_IMAGES.length + 1; // +1 for 3D viewer
     const newIndex = activeIndex > 0 ? activeIndex - 1 : totalItems - 1;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
   const handleNext = useCallback(() => {
-    const totalItems = IMAGES.length + 1; // +1 for 3D viewer
+    const totalItems = ALL_IMAGES.length + 1; // +1 for 3D viewer
     const newIndex = activeIndex < totalItems - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
@@ -248,7 +266,7 @@ export function Project2() {
         label: 'PROCESS',
         content: (
           <div className='space-y-4'>
-            <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Restoration Process</h3>
+            <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Process</h3>
             <div className='space-y-3'>
               {PROCESS_STEPS.map((step) => (
                 <button
@@ -256,13 +274,18 @@ export function Project2() {
                   onClick={() => navigateToPhoto(step.imageIndex + 1)}
                   className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
                 >
-                  {IMAGES[step.imageIndex] && (
+                  {ALL_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex + 1 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
                       }`}
                     >
-                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                      <Image
+                        src={ALL_IMAGES[step.imageIndex].src}
+                        alt={`${step.title} step`}
+                        fill
+                        className='object-cover'
+                      />
                     </div>
                   )}
                   <div className='flex-1'>
@@ -282,13 +305,22 @@ export function Project2() {
   return (
     <section className='h-screen relative overflow-hidden pt-28 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'>
-        <h2
-          className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
-        >
-          retrofitted
-        </h2>
-      </div>
+      <AnimatePresence>
+        {activeIndex !== 1 && (
+          <motion.div
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'
+          >
+            <h2
+              className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
+            >
+              retrofitted
+            </h2>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Scrolling Photos - Full Width */}
       <div
@@ -303,7 +335,7 @@ export function Project2() {
         </div>
 
         {/* Rest of the images */}
-        {IMAGES.map((image, index) => (
+        {ALL_IMAGES.map((image, index) => (
           <div
             key={image.src}
             className={`h-full min-w-full snap-center flex items-center justify-center relative`}
@@ -369,7 +401,7 @@ export function Project2() {
               transition={{ duration: 0.3 }}
               className='order-first md:order-last flex flex-col md:flex-row gap-2 max-h-[calc(100vh-16rem)] md:max-h-none md:max-w-[calc(100vw-16rem)] overflow-y-auto md:overflow-y-visible md:overflow-x-auto scrollbar-hide p-1'
             >
-              {IMAGES.map((image, index) => (
+              {GALLERY_IMAGES.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => {

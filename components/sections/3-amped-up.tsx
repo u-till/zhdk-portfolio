@@ -9,18 +9,23 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
-const IMAGES: ImageItem[] = [
+const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/preview.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-1.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-3.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-5.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-6.jpg', objectFit: 'contain' },
+];
+
+const PROCESS_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
+
+const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
 
 const PROCESS_STEPS = [
   {
@@ -37,6 +42,11 @@ const PROCESS_STEPS = [
     imageIndex: 8,
     title: '03. TUNE',
     text: 'Audio calibration and testing',
+  },
+  {
+    imageIndex: 9,
+    title: '04. SCHEMATIC',
+    text: 'Technical documentation',
   },
 ];
 
@@ -143,12 +153,12 @@ export function Project3() {
   );
 
   const handlePrev = useCallback(() => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : IMAGES.length - 1;
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : ALL_IMAGES.length - 1;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
   const handleNext = useCallback(() => {
-    const newIndex = activeIndex < IMAGES.length - 1 ? activeIndex + 1 : 0;
+    const newIndex = activeIndex < ALL_IMAGES.length - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto]);
 
@@ -201,7 +211,7 @@ export function Project3() {
               <div className='space-y-3 mt-4'>
                 <div>
                   <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
-                  <span>Till Solenthaler</span>
+                  <span>Till Solenthaler & Julian Fehr</span>
                 </div>
                 <div>
                   <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
@@ -229,13 +239,18 @@ export function Project3() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
                 >
-                  {IMAGES[step.imageIndex] && (
+                  {ALL_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
                       }`}
                     >
-                      <Image src={IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                      <Image
+                        src={ALL_IMAGES[step.imageIndex].src}
+                        alt={`${step.title} step`}
+                        fill
+                        className='object-cover'
+                      />
                     </div>
                   )}
                   <div className='flex-1'>
@@ -277,7 +292,7 @@ export function Project3() {
         ref={scrollRef}
         className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
-        {IMAGES.map((image, index) => (
+        {ALL_IMAGES.map((image, index) => (
           <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
             <Image
               src={image.src}
@@ -329,7 +344,7 @@ export function Project3() {
 
       {/* Thumbnail Strip - Bottom */}
       <div className='absolute bottom-4 md:bottom-8 left-0 md:left-8 right-0 flex gap-2 justify-start overflow-x-auto px-4 md:pr-8 z-20 pointer-events-auto'>
-        {IMAGES.map((image, index) => (
+        {GALLERY_IMAGES.map((image, index) => (
           <button
             key={index}
             onClick={() => navigateToPhoto(index)}
