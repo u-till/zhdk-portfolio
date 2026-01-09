@@ -10,13 +10,13 @@ import { useCallback, useMemo, useState } from 'react';
 const PROCESS_STEPS = [
   {
     image: '/under-construction/korpus-process-0.jpg',
-    title: '01. DESIGN',
+    title: '01. DESIGN & CONCEPT',
     text: 'I created the design in sketchup, because it is very easy and quick to use with real measurements. This then let me calculate how many planks, screws and corner-brackets i need for two pieces. I made sure the width fits a RAKO box and the heigth is ideal for a keyboard.',
   },
   {
     image: '/under-construction/korpus-process-1.jpg',
     title: '02. SOURCE MATERIALS',
-    text: 'Luckily the construction workers from the construction site next to my flat gave me some old planks they had, which were partially cut up into pieces and somewhat useless to them. ',
+    text: 'Luckily the workers from the construction site next doors gave me some planks they had, because they were already cut up into non-standard length. ',
   },
   {
     image: '/under-construction/korpus-process-2.jpg',
@@ -47,31 +47,49 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
     content: (
       <div className='space-y-6 pb-16'>
         <div>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Project Details</h3>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Brief</h3>
           <p className='mt-4'>
-            A filing cabinet built with planks from a construction site visualised with a 360° rotatable viewer.
+            Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
+            change and reusing materials in a different context. When is something truly done? Everything is in
+            perpetual development and keeps on changing its form.
           </p>
-          <div className='grid grid-cols-2 gap-4 pt-4'>
-            <div>
-              <span className='font-bold block'>TYPE:</span>
-              <span>Furniture</span>
-            </div>
-            <div>
-              <span className='font-bold block'>YEAR:</span>
-              <span>2025</span>
-            </div>
-          </div>
         </div>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Specifications</h3>
           <ul className='space-y-2 list-none mt-4'>
             <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>SIZE:</span> 27cm x 100cm x 120cm
+              <span className='font-bold'>YEAR:</span> 2025
             </li>
             <li className='border-l-4 border-red-600 pl-4'>
-              <span className='font-bold'>MATEIAL:</span> Wood
+              <span className='font-bold'>FOR:</span> Personal Project
+            </li>
+            <li className='border-l-4 border-red-600 pl-4'>
+              <span className='font-bold'>TYPE:</span> Furniture
+            </li>
+            <li className='border-l-4 border-red-600 pl-4'>
+              <span className='font-bold'>SIZE (W x D x H):</span> 343mm x 414mm x 640mm
+            </li>
+            <li className='border-l-4 border-red-600 pl-4'>
+              <span className='font-bold'>MATERIAL:</span> Wood & Metal
             </li>
           </ul>
+        </div>
+        <div>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Idea</h3>
+          <p className='mt-4'>
+            We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
+            livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
+            would be the best due to cost and exactly fitting our specifications.
+          </p>
+        </div>
+        <div className='pb-4'>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Learnings</h3>
+          <div className='space-y-3 mt-4'>
+            <ul className='list-disc list-inside'>
+              <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
+              <li>Use sandpaper to refine the edges</li>
+            </ul>
+          </div>
         </div>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Credits</h3>
@@ -81,22 +99,9 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
               <span>Till Solenthaler</span>
             </div>
             <div>
-              <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-              <span>2025</span>
-            </div>
-            <div>
               <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
               <span>Nano Banana for the background image</span>
             </div>
-          </div>
-        </div>
-        <div className='pb-4'>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Possible Improvements</h3>
-          <div className='space-y-3 mt-4'>
-            <ul className='list-disc list-inside'>
-              <li>Use Kreissäge anstatt Stichsäge</li>
-              <li>Use sandpaper</li>
-            </ul>
           </div>
         </div>
       </div>
@@ -166,12 +171,6 @@ export function Project1() {
           <div className='flex items-start justify-start relative h-full aspect-square'>
             {selectedProcessImage !== null ? (
               <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
-                <button
-                  onClick={() => setSelectedProcessImage(null)}
-                  className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
-                >
-                  ×
-                </button>
                 <Image
                   src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
                   alt={`Process ${selectedProcessImage + 1}`}
@@ -226,12 +225,6 @@ export function Project1() {
                 <div className='flex-1 flex items-center justify-center'>
                   {selectedProcessImage !== null ? (
                     <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] aspect-square'>
-                      <button
-                        onClick={() => setSelectedProcessImage(null)}
-                        className='absolute top-4 right-4 z-10 cursor-pointer w-10 h-10 bg-white border-4 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all font-bold'
-                      >
-                        ×
-                      </button>
                       <Image
                         src={`/under-construction/korpus-process-${selectedProcessImage}.jpg`}
                         alt={`Process ${selectedProcessImage + 1}`}

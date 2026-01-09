@@ -30,7 +30,7 @@ const SECTION_ORDER = [
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
   welcome: {
-    navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-1',
+    navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground opacity-0',
     activeLink: 'text-foreground',
@@ -78,7 +78,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   about: {
-    navbar: 'w-full rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-1',
+    navbar: 'w-full rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
     activeLink: 'text-foreground',

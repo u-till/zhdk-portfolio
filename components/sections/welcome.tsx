@@ -6,14 +6,17 @@ import { useEffect, useState } from 'react';
 
 const PROJECT_IMAGES: Record<string, string[]> = {
   'under-construction': [
-    '/under-construction/korpus-process-4.jpg',
+    '/under-construction/korpus-process-3.jpg',
     '/under-construction/korpus-process-0.jpg',
     '/under-construction/korpus-process-1.jpg',
     '/under-construction/korpus-process-2.jpg',
     '/under-construction/korpus-process-3.jpg',
+    '/under-construction/korpus-process-4.jpg',
+    '/under-construction/korpus-process-5.jpg',
   ],
   retrofitted: [
     '/retrofitted/lamp-process.jpg',
+    '/retrofitted/lamp-process-11.jpg',
     '/retrofitted/lamp-mood.jpg',
     '/retrofitted/lamp-mood-2.jpg',
     '/retrofitted/schematic.png',
@@ -21,14 +24,18 @@ const PROJECT_IMAGES: Record<string, string[]> = {
   'amped-up': [
     '/amped-up/preview.jpg',
     '/amped-up/speaker-1.jpg',
-    '/amped-up/speaker-3.jpg',
-    '/amped-up/speaker-4.jpg',
     '/amped-up/speaker-5.jpg',
     '/amped-up/speaker-6.jpg',
     '/amped-up/speaker-7.jpg',
   ],
-  'toy-lexicon': ['/toy-lexicon/cover.jpg', '/toy-lexicon/front-mockup.png'],
-  'lost-in-space': ['/lost-in-space/cover.jpg'],
+  'toy-lexicon': ['/toy-lexicon/cover.jpg', '/toy-lexicon/front-mockup.png', '/toy-lexicon/book-process-1.jpg'],
+  'lost-in-space': [
+    '/lost-in-space/cover.jpg',
+    '/lost-in-space/backside-1.jpg',
+    '/lost-in-space/backside-2.jpg',
+    '/lost-in-space/backside-3.jpg',
+    '/lost-in-space/backside-4.jpg',
+  ],
   saudade: [
     '/saudade/addis.jpg',
     '/saudade/hongkong-2.jpg',
@@ -36,12 +43,19 @@ const PROJECT_IMAGES: Record<string, string[]> = {
     '/saudade/taldyqorghan-kz.png',
     '/saudade/stolze-1.jpg',
   ],
-  dayjob: ['/dayjob/bg.jpg'],
+  dayjob: [
+    '/dayjob/bg.jpg',
+    '/dayjob/screenshots/hannibal-screenshot.jpg',
+    '/dayjob/screenshots/fabiotozzo-screenshot.jpg',
+    '/dayjob/screenshots/njk-screenshot.jpg',
+    '/dayjob/screenshots/anothernarrative-screenshot.jpg',
+    '/dayjob/screenshots/brookejackson-screenshot.jpg',
+  ],
 };
 
 export function Welcome() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const [currentImageIndex, setCurrentImageIndex] = useState<Record<string, number>>({});
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   // Cycle through images for hovered project
   useEffect(() => {
@@ -49,11 +63,7 @@ export function Welcome() {
       const interval = setInterval(() => {
         setCurrentImageIndex((prev) => {
           const images = PROJECT_IMAGES[hoveredProject];
-          const currentIndex = prev[hoveredProject] ?? 0;
-          return {
-            ...prev,
-            [hoveredProject]: (currentIndex + 1) % images.length,
-          };
+          return (prev + 1) % images.length;
         });
       }, 2500);
 
@@ -63,7 +73,7 @@ export function Welcome() {
 
   const currentImages = hoveredProject ? PROJECT_IMAGES[hoveredProject] : [];
   const hasImages = currentImages && currentImages.length > 0;
-  const currentIndex = hoveredProject ? currentImageIndex[hoveredProject] ?? 0 : 0;
+  const currentIndex = currentImageIndex;
 
   // Format project name for display
   const getProjectName = (key: string) => {
@@ -85,7 +95,7 @@ export function Welcome() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.1 }}
             className='absolute inset-0 z-0'
           >
             <AnimatePresence initial={false}>
@@ -94,7 +104,7 @@ export function Welcome() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1.2 }}
+                transition={{ duration: 0.2 }}
                 className='absolute inset-0'
               >
                 <Image
@@ -122,8 +132,13 @@ export function Welcome() {
           return (
             <motion.h1
               key={projectKey}
-              onMouseEnter={() => setHoveredProject(projectKey)}
-              onMouseLeave={() => setHoveredProject(null)}
+              onMouseEnter={() => {
+                setHoveredProject(projectKey);
+                setCurrentImageIndex(0);
+              }}
+              onMouseLeave={() => {
+                setHoveredProject(null);
+              }}
               onClick={() => {
                 const sectionIndex = [
                   'welcome',
@@ -140,7 +155,7 @@ export function Welcome() {
                   window.__scrollToSection?.(sectionIndex);
                 }
               }}
-              className={`font-bold cursor-pointer transition-opacity duration-300 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b border-black group-hover:border-white pb-0 md:pb-2 ${
+              className={`font-bold cursor-pointer transition-opacity flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black group-hover:border-white pb-0 md:pb-2 ${
                 shouldHide ? 'opacity-0' : ''
               }`}
               style={{ fontSize: 'clamp(1.75rem, 5vw, 8rem)', lineHeight: 1 }}

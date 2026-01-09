@@ -25,31 +25,34 @@ const PROCESS_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' }, // index 9 - MODERNIZATION
 ];
 
-const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
-
 const PROCESS_STEPS = [
   {
-    imageIndex: 5,
+    imageIndex: 1, // First image after 3D viewer
+    processImageIndex: 0, // Index in PROCESS_IMAGES array
     title: '01. DESIGN',
     text: 'Schematic and planning',
   },
   {
-    imageIndex: 6,
+    imageIndex: 2,
+    processImageIndex: 1,
     title: '02. SOURCING',
     text: 'Finding authentic 70s piece',
   },
   {
-    imageIndex: 7,
+    imageIndex: 3,
+    processImageIndex: 2,
     title: '03. RESTORATION',
     text: 'Cleaning and repair work',
   },
   {
-    imageIndex: 8,
+    imageIndex: 4,
+    processImageIndex: 3,
     title: '04. MODERNIZATION',
     text: 'LED retrofit installation',
   },
   {
-    imageIndex: 9,
+    imageIndex: 5,
+    processImageIndex: 4,
     title: '05. MODERNIZATION',
     text: 'LED retrofit installation',
   },
@@ -149,26 +152,28 @@ export function Project2() {
   const handleTabChange = useCallback(
     (tabId: string) => {
       setActiveTab(tabId as 'infos' | 'process');
-      if (tabId === 'infos') {
-        navigateToPhoto(0);
-      } else if (tabId === 'process') {
-        navigateToPhoto(5);
+      if (tabId === 'process') {
+        navigateToPhoto(1); // Go to first process image
+      } else {
+        navigateToPhoto(0); // Go to 3D viewer for infos
       }
     },
     [navigateToPhoto]
   );
 
+  const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
+
   const handlePrev = useCallback(() => {
-    const totalItems = ALL_IMAGES.length + 1; // +1 for 3D viewer
+    const totalItems = activeImages.length + 1; // +1 for 3D viewer
     const newIndex = activeIndex > 0 ? activeIndex - 1 : totalItems - 1;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   const handleNext = useCallback(() => {
-    const totalItems = ALL_IMAGES.length + 1; // +1 for 3D viewer
+    const totalItems = activeImages.length + 1; // +1 for 3D viewer
     const newIndex = activeIndex < totalItems - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -208,53 +213,95 @@ export function Project2() {
         content: (
           <div className='space-y-6'>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Project Details</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Brief</h3>
               <p className='mt-4'>
-                A stunning space-age lamp from the 1970s, retrofitted with modern technology including a rechargable
-                battery and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic.
+                An old lamp from the 70s which broke so i retrofitted it with modern technology including a rechargable
+                battery and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic. This project
+                embodies my passion for repairs and sustainability. With the right tools and motivation, old objects
+                cannot just be repaired but also improved with modern technology.
               </p>
-              <div className='grid grid-cols-2 gap-4 pt-4'>
-                <div>
-                  <span className='font-bold block'>TYPE:</span>
-                  <span>Lighting Design</span>
-                </div>
-                <div>
-                  <span className='font-bold block'>YEAR:</span>
-                  <span>2025</span>
-                </div>
-              </div>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-orange-300 pl-4'>
-                  <span className='font-bold'>STYLE:</span> Space Age / Atomic Era
+                  <span className='font-bold'>YEAR:</span> 2025
                 </li>
                 <li className='border-l-2 border-orange-300 pl-4'>
-                  <span className='font-bold'>LIGHTING:</span> Modern LED Retrofit
+                  <span className='font-bold'>FOR:</span> Personal Project
                 </li>
                 <li className='border-l-2 border-orange-300 pl-4'>
-                  <span className='font-bold'>MATERIALS:</span> Acrylic & Metal
+                  <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
                 </li>
                 <li className='border-l-2 border-orange-300 pl-4'>
-                  <span className='font-bold'>CONDITION:</span> Restored & Updated
+                  <span className='font-bold'>MODEL:</span> Solis Typ 82 / 220V 25W Wired Power with Transformer / Lamp
+                  12V 21W / 3 Step Dimmer
+                </li>
+                <li className='border-l-2 border-orange-300 pl-4'>
+                  <span className='font-bold'>UPGRADES:</span>{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://de.aliexpress.com/item/1005006005453774.html'
+                  >
+                    USB-C Connector
+                  </a>{' '}
+                  /{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://de.aliexpress.com/item/1005004192388691.html'
+                  >
+                    10&apos;500mAh Li-Ion Battery (6-7h power)
+                  </a>{' '}
+                  /{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://de.aliexpress.com/item/1005005579072790.html'
+                  >
+                    LED 12V 5W
+                  </a>{' '}
+                  /{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://de.aliexpress.com/item/1005007384516556.html'
+                  >
+                    Stepless Dimmer
+                  </a>
                 </li>
               </ul>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Idea</h3>
+              <p className='mt-4'>
+                One day my favorite nightlight broke, so i thought i want to repair it. Upon opening it, i saw the
+                tranformer and thought this space would be better off with batteries.
+              </p>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Learnings</h3>
+              <p className='mt-4'>
+                One day my favorite nightlight broke, so i thought i want to repair it. Upon opening it, i saw the
+                tranformer and thought this space would be better off with batteries.
+              </p>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Credits</h3>
               <div className='space-y-3 mt-4'>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Restoration</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Solo Project</span>
                   <span>Till Solenthaler</span>
                 </div>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
-                  <span>Till Solenthaler</span>
-                </div>
-                <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-                  <span>2024</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
+                  <div className='space-y-3 mt-2'>
+                    <ul className='list-disc list-inside'>
+                      <li>ChatGPT for consultation on circuit design</li>
+                      <li>Google Nano Banana for stylizing parts on schematic</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -271,17 +318,17 @@ export function Project2() {
               {PROCESS_STEPS.map((step) => (
                 <button
                   key={step.imageIndex}
-                  onClick={() => navigateToPhoto(step.imageIndex + 1)}
+                  onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
                 >
-                  {ALL_IMAGES[step.imageIndex] && (
+                  {PROCESS_IMAGES[step.processImageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                        activeIndex === step.imageIndex + 1 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                        activeIndex === step.imageIndex ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
                       }`}
                     >
                       <Image
-                        src={ALL_IMAGES[step.imageIndex].src}
+                        src={PROCESS_IMAGES[step.processImageIndex].src}
                         alt={`${step.title} step`}
                         fill
                         className='object-cover'
@@ -305,37 +352,28 @@ export function Project2() {
   return (
     <section className='h-screen relative overflow-hidden pt-28 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <AnimatePresence>
-        {activeIndex !== 1 && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'
-          >
-            <h2
-              className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
-            >
-              retrofitted
-            </h2>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'>
+        <h2
+          className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
+        >
+          retrofitted
+        </h2>
+      </div>
 
       {/* Scrolling Photos - Full Width */}
       <div
         ref={scrollRef}
         className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
-        {/* First item: 3D Lamp Viewer */}
+        {/* First item: 3D Lamp Viewer (available in both tabs) */}
         <div className='h-full min-w-full snap-center flex items-center justify-center relative'>
           <div className='w-full h-full'>
             <Lamp3DViewer />
           </div>
         </div>
 
-        {/* Rest of the images */}
-        {ALL_IMAGES.map((image, index) => (
+        {/* Active gallery images */}
+        {activeImages.map((image, index) => (
           <div
             key={image.src}
             className={`h-full min-w-full snap-center flex items-center justify-center relative`}
@@ -401,11 +439,11 @@ export function Project2() {
               transition={{ duration: 0.3 }}
               className='order-first md:order-last flex flex-col md:flex-row gap-2 max-h-[calc(100vh-16rem)] md:max-h-none md:max-w-[calc(100vw-16rem)] overflow-y-auto md:overflow-y-visible md:overflow-x-auto scrollbar-hide p-1'
             >
-              {GALLERY_IMAGES.map((image, index) => (
+              {activeImages.map((image, index) => (
                 <button
                   key={index}
                   onClick={() => {
-                    navigateToPhoto(index + 1);
+                    navigateToPhoto(index + 1); // +1 because 3D viewer is at 0
                     if (!isMobile) {
                       // Keep thumbnails open on desktop
                     } else {

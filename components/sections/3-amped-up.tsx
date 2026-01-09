@@ -25,26 +25,28 @@ const PROCESS_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
 
-const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
-
 const PROCESS_STEPS = [
   {
-    imageIndex: 6,
+    imageIndex: 0,
+    processImageIndex: 0,
     title: '01. DESIGN',
     text: 'Enclosure planning and measurements',
   },
   {
-    imageIndex: 7,
+    imageIndex: 1,
+    processImageIndex: 1,
     title: '02. BUILD',
     text: 'Woodworking and assembly',
   },
   {
-    imageIndex: 8,
+    imageIndex: 2,
+    processImageIndex: 2,
     title: '03. TUNE',
     text: 'Audio calibration and testing',
   },
   {
-    imageIndex: 9,
+    imageIndex: 3,
+    processImageIndex: 3,
     title: '04. SCHEMATIC',
     text: 'Technical documentation',
   },
@@ -143,24 +145,22 @@ export function Project3() {
   const handleTabChange = useCallback(
     (tabId: string) => {
       setActiveTab(tabId as 'infos' | 'process');
-      if (tabId === 'infos') {
-        navigateToPhoto(0);
-      } else if (tabId === 'process') {
-        navigateToPhoto(6);
-      }
+      navigateToPhoto(0);
     },
     [navigateToPhoto]
   );
 
+  const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
+
   const handlePrev = useCallback(() => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : ALL_IMAGES.length - 1;
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : activeImages.length - 1;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   const handleNext = useCallback(() => {
-    const newIndex = activeIndex < ALL_IMAGES.length - 1 ? activeIndex + 1 : 0;
+    const newIndex = activeIndex < activeImages.length - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   useCarouselScroll(scrollRef, setActiveIndex);
   useCarouselKeyboard(handlePrev, handleNext);
@@ -239,14 +239,14 @@ export function Project3() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
                 >
-                  {ALL_IMAGES[step.imageIndex] && (
+                  {PROCESS_IMAGES[step.processImageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
                       }`}
                     >
                       <Image
-                        src={ALL_IMAGES[step.imageIndex].src}
+                        src={PROCESS_IMAGES[step.processImageIndex].src}
                         alt={`${step.title} step`}
                         fill
                         className='object-cover'
@@ -270,29 +270,20 @@ export function Project3() {
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <AnimatePresence>
-        {activeIndex !== 9 && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'
-          >
-            <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-              <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
-                amped up
-              </h2>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
+        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
+          <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
+            amped up
+          </h2>
+        </div>
+      </div>
 
       {/* Scrolling Photos - Full Width */}
       <div
         ref={scrollRef}
         className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
-        {ALL_IMAGES.map((image, index) => (
+        {activeImages.map((image, index) => (
           <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
             <Image
               src={image.src}
@@ -344,7 +335,7 @@ export function Project3() {
 
       {/* Thumbnail Strip - Bottom */}
       <div className='absolute bottom-4 md:bottom-8 left-0 md:left-8 right-0 flex gap-2 justify-start overflow-x-auto px-4 md:pr-8 z-20 pointer-events-auto'>
-        {GALLERY_IMAGES.map((image, index) => (
+        {activeImages.map((image, index) => (
           <button
             key={index}
             onClick={() => navigateToPhoto(index)}

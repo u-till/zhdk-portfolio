@@ -19,16 +19,16 @@ const PROCESS_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/cms.jpg', objectFit: 'cover' },
 ];
 
-const ALL_IMAGES = [...GALLERY_IMAGES, ...PROCESS_IMAGES];
-
 const PROCESS_STEPS = [
   {
-    imageIndex: 2,
+    imageIndex: 0,
+    processImageIndex: 0,
     title: '01. COLLECTION',
     text: 'Curating childhood objects',
   },
   {
-    imageIndex: 3,
+    imageIndex: 1,
+    processImageIndex: 1,
     title: '02. PHOTOGRAPHY',
     text: 'Professional documentation',
   },
@@ -118,24 +118,22 @@ export function Project4() {
   const handleTabChange = useCallback(
     (tabId: string) => {
       setActiveTab(tabId as 'infos' | 'process');
-      if (tabId === 'infos') {
-        navigateToPhoto(0);
-      } else if (tabId === 'process') {
-        navigateToPhoto(2);
-      }
+      navigateToPhoto(0);
     },
     [navigateToPhoto]
   );
 
+  const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
+
   const handlePrev = useCallback(() => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : ALL_IMAGES.length - 1;
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : activeImages.length - 1;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   const handleNext = useCallback(() => {
-    const newIndex = activeIndex < ALL_IMAGES.length - 1 ? activeIndex + 1 : 0;
+    const newIndex = activeIndex < activeImages.length - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto]);
+  }, [activeIndex, navigateToPhoto, activeImages.length]);
 
   useCarouselScroll(scrollRef, setActiveIndex);
   useCarouselKeyboard(handlePrev, handleNext);
@@ -219,13 +217,18 @@ export function Project4() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
                 >
-                  {ALL_IMAGES[step.imageIndex] && (
+                  {PROCESS_IMAGES[step.processImageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
                       }`}
                     >
-                      <Image src={ALL_IMAGES[step.imageIndex].src} alt={`${step.title} step`} fill className='object-cover' />
+                      <Image
+                        src={PROCESS_IMAGES[step.processImageIndex].src}
+                        alt={`${step.title} step`}
+                        fill
+                        className='object-cover'
+                      />
                     </div>
                   )}
                   <div className='flex-1'>
@@ -262,7 +265,7 @@ export function Project4() {
         ref={scrollRef}
         className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
       >
-        {ALL_IMAGES.map((image, index) => (
+        {activeImages.map((image, index) => (
           <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
             <Image
               src={image.src}
@@ -314,7 +317,7 @@ export function Project4() {
 
       {/* Thumbnail Strip - Bottom */}
       <div className='absolute bottom-4 md:bottom-8 left-8 right-8 flex gap-2 justify-start overflow-x-auto scrollbar-hide z-20 pointer-events-auto'>
-        {GALLERY_IMAGES.map((image, index) => (
+        {activeImages.map((image, index) => (
           <button
             key={index}
             onClick={() => navigateToPhoto(index)}
