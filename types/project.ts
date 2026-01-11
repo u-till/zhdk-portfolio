@@ -4,6 +4,7 @@ export type ImageItem = {
   src: string;
   objectFit: 'cover' | 'contain';
   bg?: string;
+  hideTitle?: boolean;
 };
 
 export interface Tab {

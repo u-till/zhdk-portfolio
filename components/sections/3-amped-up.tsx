@@ -11,44 +11,39 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/preview.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-1.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-3.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-11.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
+  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain', hideTitle: true },
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
 ];
 
 const PROCESS_STEPS = [
   {
     imageIndex: 0,
-    processImageIndex: 0,
-    title: '01. DESIGN',
-    text: 'Enclosure planning and measurements',
+    title: '01. RESEARCH & DESIGN',
+    text: 'In this phase, my flatmate Julian Fehr took the lead due to his expertise with speakers and amplifiers. Repairing the original amps proved impractical because replacement parts were likely unavailable, so we chose WONDOM digital amplifiers. These were fitted into the left speaker enclosure, using a main board for mids and highs and a separate board for the lows.',
   },
   {
     imageIndex: 1,
-    processImageIndex: 1,
-    title: '02. BUILD',
-    text: 'Woodworking and assembly',
+    title: '02. TEST CIRCUIT & BUILD ENCLOSURE',
+    text: 'In order to mount the new amps, i created a simple backplate with a power connector, power switch, aux connector and audio cable terminals for the second speaker. Before mounting everything to the new enclosure, we connected everything first to test it.',
   },
   {
     imageIndex: 2,
-    processImageIndex: 2,
-    title: '03. TUNE',
-    text: 'Audio calibration and testing',
+    title: '03. MOUNT CIRCUIT TO ENCLOSURE',
+    text: 'After sucessfully testing the new circuit, i mounted all the components to the enclosure and screwed the cover back onto the speaker.',
   },
   {
     imageIndex: 3,
-    processImageIndex: 3,
-    title: '04. SCHEMATIC',
-    text: 'Technical documentation',
+    title: '04. CAPTURE',
+    text: 'To create high quality images for this portfolio i also used my backdrop setup with the studio lights. I tried to take pictures in a continuously more disassembled state, to create an unpacking effect.',
   },
 ];
 
@@ -68,9 +63,9 @@ function AmpedUpTabs({
   };
 
   return (
-    <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md'>
+    <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md flex flex-col'>
       {/* Tab Headers */}
-      <div className='flex border-b border-black/60'>
+      <div className='flex border-b border-black/60 flex-shrink-0'>
         <button
           onClick={onClose}
           className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-colors border-r border-black/60 bg-transparent text-foreground hover:bg-foreground/5'
@@ -102,7 +97,7 @@ function AmpedUpTabs({
       </div>
 
       {/* Tab Content */}
-      <div className='relative min-h-[300px] md:min-h-[400px] p-6 md:p-8 overflow-auto'>
+      <div className='relative flex-1 p-6 md:p-8 overflow-auto min-h-0'>
         <AnimatePresence mode='wait'>
           {tabs.map(
             (tab) =>
@@ -132,11 +127,11 @@ export function Project3() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const navigateToPhoto = useCallback((index: number) => {
+  const navigateToPhoto = useCallback((imageIndex: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
       scrollRef.current.scrollTo({
-        left: width * index,
+        left: width * imageIndex,
         behavior: 'smooth',
       });
     }
@@ -173,53 +168,86 @@ export function Project3() {
         content: (
           <div className='space-y-6'>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Project Details</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>BRIEF</h3>
               <p className='mt-4'>
-                An old Klein+Hummel speaker where i replaced the analogue amplifier with a digital one. This enables new
-                functionality like EQ / DSP / and Bluetooth.
+                An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
+                enables new functionality like EQ / DSP / and Bluetooth.
               </p>
-              <div className='grid grid-cols-2 gap-4 pt-4'>
-                <div>
-                  <span className='font-bold block'>TYPE:</span>
-                  <span>Audio Hardware</span>
-                </div>
-                <div>
-                  <span className='font-bold block'>YEAR:</span>
-                  <span>2024</span>
-                </div>
-              </div>
             </div>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Specifications</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>SPEFICICATIONS</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-foreground pl-4'>
-                  <span className='font-bold'>DRIVERS:</span> Custom Selected
+                  <span className='font-bold'>YEAR:</span> 2024-2025
                 </li>
                 <li className='border-l-2 border-foreground pl-4'>
-                  <span className='font-bold'>ENCLOSURE:</span> Wooden Cabinet
+                  <span className='font-bold'>FOR:</span> Collaborative Project
                 </li>
                 <li className='border-l-2 border-foreground pl-4'>
-                  <span className='font-bold'>FINISH:</span> Natural Wood
+                  <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
                 </li>
                 <li className='border-l-2 border-foreground pl-4'>
-                  <span className='font-bold'>OUTPUT:</span> High Fidelity
+                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W
+                  AMP / XLR Connectors
+                </li>
+                <li className='border-l-2 border-foreground pl-4'>
+                  <span className='font-bold'>UPGRADES:</span>{' '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/757'>
+                    Wondom 4x 30W Amp with Bluetooth and DSP
+                  </a>{' '}
+                  /{' '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/804'>
+                    Wondom 2x 50W Amp
+                  </a>{' '}
+                  /{' '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/726'>
+                    WONDOM ICP5 In-circuit Programmer
+                  </a>{' '}
+                  /{' '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
+                  >
+                    Meanwell LRS 200 -15
+                  </a>
                 </li>
               </ul>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>IDEA</h3>
+              <p className='mt-4'>
+                The idea came originally from my flatmate Julian Fehr, because he acquired these speakers with one
+                broken amp and they were sitting around unused for a long time so we brainstormed how we could bring new
+                life into these speakers. We thought of repairing the existing amps but opted for replacing them because
+                this would give us new possibilities and is easier to implement.
+              </p>
+            </div>
+            <div>
+              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Learnings & Improvements</h3>
+              <p className='mt-4'>
+                A good idea to improve the sound further, would be to measure the frequency response of the room and
+                then programm that response curve onto the board (room correction).
+              </p>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
               <div className='space-y-3 mt-4'>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Design & Build</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Idea & Concept</span>
                   <span>Till Solenthaler & Julian Fehr</span>
                 </div>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Build</span>
                   <span>Till Solenthaler</span>
                 </div>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Year</span>
-                  <span>2024</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
+                  <div className='space-y-3 mt-2'>
+                    <ul className='list-disc list-inside'>
+                      <li>No AI tools used</li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
@@ -239,14 +267,14 @@ export function Project3() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
                 >
-                  {PROCESS_IMAGES[step.processImageIndex] && (
+                  {PROCESS_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
                       }`}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.processImageIndex].src}
+                        src={PROCESS_IMAGES[step.imageIndex].src}
                         alt={`${step.title} step`}
                         fill
                         className='object-cover'
@@ -270,7 +298,11 @@ export function Project3() {
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
+      <div
+        className={`absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10 transition-opacity duration-300 ${
+          activeImages[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
         <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
           <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
             amped up
@@ -381,7 +413,7 @@ export function Project3() {
               />
             </div>
           ) : (
-            <div className='w-full h-full relative overflow-hidden'>
+            <div className='w-full h-full relative'>
               <AmpedUpTabs
                 tabs={tabs}
                 onClose={() => setExpandedPanel(false)}

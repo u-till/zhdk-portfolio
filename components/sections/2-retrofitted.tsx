@@ -2,6 +2,7 @@
 
 import { Lamp3DViewer } from '@/components/retrofitted/lamp-3d-viewer';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
+import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
 import { ImageItem, Tab } from '@/types/project';
@@ -18,43 +19,38 @@ const GALLERY_IMAGES: ImageItem[] = [
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff' }, // index 5 - DESIGN
-  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' }, // index 6 - SOURCING
-  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' }, // index 7 - RESTORATION
-  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' }, // index 8 - MODERNIZATION
-  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' }, // index 9 - MODERNIZATION
+  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff', hideTitle: true }, // index 5
+  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' }, // index 6
+  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' }, // index 7
+  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' }, // index 8
+  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' }, // index 9
 ];
 
 const PROCESS_STEPS = [
   {
-    imageIndex: 1, // First image after 3D viewer
-    processImageIndex: 0, // Index in PROCESS_IMAGES array
-    title: '01. DESIGN',
-    text: 'Schematic and planning',
+    imageIndex: 0,
+    title: '01. RESEARCH & DESIGN',
+    text: 'With the help of ChatGPT i drafted a schematic and a shopping list. I visualized the schematic with the app Fritzing and ordered the parts off Aliexpress. ',
+  },
+  {
+    imageIndex: 1,
+    title: '02. SALVAGE & UPGRADE',
+    text: 'Once the parts arrived, i opened the lamp and removed the old transformer and power cable. Next i started building the different blocks to later combine them. The base with the charging board and the usb-c extender, the middle part with the dimmer and the batteries and the top part with the new bulb and the connectors to it. Some of the casing had to be modified to fit the new parts.',
   },
   {
     imageIndex: 2,
-    processImageIndex: 1,
-    title: '02. SOURCING',
-    text: 'Finding authentic 70s piece',
+    title: '03. FINALIZE, TESTING AND ASSEMBLE',
+    text: 'After finishing the circuit in a dissassembled state, i tested all the voltages on the circuit, if the battery charges and if the lamp works. After that i could finally assemble the lamp back toghether again.',
   },
   {
     imageIndex: 3,
-    processImageIndex: 2,
-    title: '03. RESTORATION',
-    text: 'Cleaning and repair work',
+    title: '04. 3D CAPTURE',
+    text: 'To capture the lamp as a 3D model i used the mobile app Polycam with my backdrop setup for optimal lighting.',
   },
   {
     imageIndex: 4,
-    processImageIndex: 3,
-    title: '04. MODERNIZATION',
-    text: 'LED retrofit installation',
-  },
-  {
-    imageIndex: 5,
-    processImageIndex: 4,
-    title: '05. MODERNIZATION',
-    text: 'LED retrofit installation',
+    title: '05. ENHANCE',
+    text: 'To crop, retouch and give the 3D Model a bottom i used Blender. Some corners had to be improved as well as the texture in some spots.',
   },
 ];
 
@@ -139,11 +135,11 @@ export function Project2() {
   const [showThumbnails, setShowThumbnails] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const navigateToPhoto = useCallback((index: number) => {
+  const navigateToPhoto = useCallback((imageIndex: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
       scrollRef.current.scrollTo({
-        left: width * index,
+        left: width * imageIndex,
         behavior: 'smooth',
       });
     }
@@ -153,7 +149,7 @@ export function Project2() {
     (tabId: string) => {
       setActiveTab(tabId as 'infos' | 'process');
       if (tabId === 'process') {
-        navigateToPhoto(1); // Go to first process image
+        navigateToPhoto(1); // Go to first process image (after 3D viewer)
       } else {
         navigateToPhoto(0); // Go to 3D viewer for infos
       }
@@ -175,35 +171,20 @@ export function Project2() {
     navigateToPhoto(newIndex);
   }, [activeIndex, navigateToPhoto, activeImages.length]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (scrollRef.current) {
-        const scrollLeft = scrollRef.current.scrollLeft;
-        const width = scrollRef.current.offsetWidth;
-        const newIndex = Math.round(scrollLeft / width);
-
-        setActiveIndex((prevIndex) => {
-          // Only update thumbnails if index actually changed
-          if (prevIndex !== newIndex) {
-            if (newIndex === 0) {
-              // Navigated to 3D viewer - close thumbnails
-              setShowThumbnails(false);
-            } else if (prevIndex === 0 && !isMobile) {
-              // Navigated from 3D to photo on desktop - open thumbnails
-              setShowThumbnails(true);
-            }
-          }
-          return newIndex;
-        });
-      }
-    };
-
-    const scrollEl = scrollRef.current;
-    scrollEl?.addEventListener('scroll', handleScroll);
-    return () => scrollEl?.removeEventListener('scroll', handleScroll);
-  }, [isMobile]);
-
+  useCarouselScroll(scrollRef, setActiveIndex);
   useCarouselKeyboard(handlePrev, handleNext);
+
+  // Handle thumbnail visibility based on active index
+  useEffect(() => {
+    if (activeIndex === 0) {
+      // Navigated to 3D viewer - close thumbnails
+      setShowThumbnails(false);
+    } else if (!isMobile && !showThumbnails) {
+      // On photo (not 3D viewer) on desktop - open thumbnails if not already open
+      setShowThumbnails(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeIndex, isMobile]);
 
   const tabs = useMemo(
     () => [
@@ -215,10 +196,10 @@ export function Project2() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Brief</h3>
               <p className='mt-4'>
-                An old lamp from the 70s which broke so i retrofitted it with modern technology including a rechargable
-                battery and a USB-C connector and a stepless dimmer, while preserving its iconic aesthetic. This project
-                embodies my passion for repairs and sustainability. With the right tools and motivation, old objects
-                cannot just be repaired but also improved with modern technology.
+                An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
+                connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
+                project embodies my passion for repairs and sustainability. With the right tools and motivation, old
+                objects cannot just be repaired but also improved with modern technology.
               </p>
             </div>
             <div>
@@ -276,15 +257,19 @@ export function Project2() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Idea</h3>
               <p className='mt-4'>
-                One day my favorite nightlight broke, so i thought i want to repair it. Upon opening it, i saw the
-                tranformer and thought this space would be better off with batteries.
+                My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
+                this space could be used to fit a battery instead, so the project went from repair to upgrade.
               </p>
             </div>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>Learnings</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
+                Learnings & Improvements
+              </h3>
               <p className='mt-4'>
-                One day my favorite nightlight broke, so i thought i want to repair it. Upon opening it, i saw the
-                tranformer and thought this space would be better off with batteries.
+                The mounting of the batteries inside the base proved to be quite tricky. Considering this during the
+                planing phase would have been helpful, possibly even designing a mount and using a 3d printer to print
+                it. Also it would be cool to animate the dimmer knob in the 3d viewer and map it to the brightness
+                slider.
               </p>
             </div>
             <div>
@@ -318,17 +303,17 @@ export function Project2() {
               {PROCESS_STEPS.map((step) => (
                 <button
                   key={step.imageIndex}
-                  onClick={() => navigateToPhoto(step.imageIndex)}
+                  onClick={() => navigateToPhoto(step.imageIndex + 1)}
                   className='w-full cursor-pointer bg-orange-600/30 p-3 border-l-2 border-orange-300 rounded-lg hover:bg-orange-600/50 transition-colors text-left flex items-center gap-3'
                 >
-                  {PROCESS_IMAGES[step.processImageIndex] && (
+                  {PROCESS_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                        activeIndex === step.imageIndex ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
+                        activeIndex === step.imageIndex + 1 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
                       }`}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.processImageIndex].src}
+                        src={PROCESS_IMAGES[step.imageIndex].src}
                         alt={`${step.title} step`}
                         fill
                         className='object-cover'
@@ -352,7 +337,11 @@ export function Project2() {
   return (
     <section className='h-screen relative overflow-hidden pt-28 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10'>
+      <div
+        className={`absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10 transition-opacity duration-300 ${
+          activeIndex > 0 && activeImages[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
         <h2
           className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
         >

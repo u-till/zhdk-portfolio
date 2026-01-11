@@ -11,7 +11,7 @@ import { useCallback, useMemo, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/front-mockup.png', objectFit: 'contain' },
-  { src: '/toy-lexicon/cover.jpg', objectFit: 'contain' },
+  { src: '/toy-lexicon/cover.jpg', objectFit: 'contain', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
@@ -22,13 +22,11 @@ const PROCESS_IMAGES: ImageItem[] = [
 const PROCESS_STEPS = [
   {
     imageIndex: 0,
-    processImageIndex: 0,
     title: '01. COLLECTION',
     text: 'Curating childhood objects',
   },
   {
     imageIndex: 1,
-    processImageIndex: 1,
     title: '02. PHOTOGRAPHY',
     text: 'Professional documentation',
   },
@@ -105,11 +103,11 @@ export function Project4() {
   const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
   const scrollRef = useRef<HTMLDivElement>(null);
 
-  const navigateToPhoto = useCallback((index: number) => {
+  const navigateToPhoto = useCallback((imageIndex: number) => {
     if (scrollRef.current) {
       const width = scrollRef.current.offsetWidth;
       scrollRef.current.scrollTo({
-        left: width * index,
+        left: width * imageIndex,
         behavior: 'smooth',
       });
     }
@@ -146,7 +144,7 @@ export function Project4() {
         content: (
           <div className='space-y-6'>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Project Details</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Brief</h3>
               <p className='mt-4'>
                 A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
                 fathers hobby has been collecting and building with old construction kids for a long time. Now with two
@@ -156,19 +154,11 @@ export function Project4() {
                 timespan, so some images where missing and other infos as well. Because my Dad is not very good with
                 computers, i created a custom website where we could work together to complete the data.
               </p>
-              <div className='grid grid-cols-2 gap-4 pt-4'>
-                <div>
-                  <span className='font-bold block'>TYPE:</span>
-                  <span>Book Design</span>
-                </div>
-                <div>
-                  <span className='font-bold block'>YEAR:</span>
-                  <span>2024</span>
-                </div>
-              </div>
             </div>
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Specifications</h3>
+              <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>
+                Project Specifications
+              </h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-green-500 pl-4'>
                   <span className='font-bold'>FORMAT:</span> Hardcover Book
@@ -217,14 +207,14 @@ export function Project4() {
                   onClick={() => navigateToPhoto(step.imageIndex)}
                   className='w-full cursor-pointer bg-white/80 p-3 border-l-2 border-green-500 rounded-lg hover:bg-white transition-colors text-left flex items-center gap-3'
                 >
-                  {PROCESS_IMAGES[step.processImageIndex] && (
+                  {PROCESS_IMAGES[step.imageIndex] && (
                     <div
                       className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
                       }`}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.processImageIndex].src}
+                        src={PROCESS_IMAGES[step.imageIndex].src}
                         alt={`${step.title} step`}
                         fill
                         className='object-cover'
@@ -247,17 +237,17 @@ export function Project4() {
 
   return (
     <section
-      className={`h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center ${dinNext.className}`}
+      className={`h-screen relative overflow-hidden pt-32 md:pt-32 px-4 md:px-8 flex flex-col items-center ${dinNext.className}`}
     >
       {/* Title */}
-      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
-        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-          <h2
-            className={`text-5xl lg:text-7xl uppercase font-bold text-black mix-blend-difference ${dinNext.className}`}
-          >
-            toy lexicon
-          </h2>
-        </div>
+      <div
+        className={`absolute inset-x-0 top-32 md:top-34 left-4 right-4 md:left-8 md:right-8 flex justify-start pointer-events-none z-10 transition-opacity duration-300 ${
+          activeImages[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <h2 className={`text-5xl lg:text-7xl uppercase font-bold text-black mix-blend-difference ${dinNext.className}`}>
+          toy lexicon
+        </h2>
       </div>
 
       {/* Scrolling Photos - Full Width */}

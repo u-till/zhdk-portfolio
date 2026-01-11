@@ -83,7 +83,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
           </p>
         </div>
         <div className='pb-4'>
-          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Learnings</h3>
+          <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Learnings & Improvements</h3>
           <div className='space-y-3 mt-4'>
             <ul className='list-disc list-inside'>
               <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
