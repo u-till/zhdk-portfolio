@@ -10,13 +10,17 @@ import Image from 'next/image';
 import { useCallback, useMemo, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
-  { src: '/toy-lexicon/front-mockup.png', objectFit: 'contain' },
-  { src: '/toy-lexicon/cover.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/toy-lexicon/mockup-1.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/mockup-2.png', objectFit: 'contain', hideTitle: true },
+  { src: '/toy-lexicon/mockup-3.png', objectFit: 'contain', hideTitle: true },
+  { src: '/toy-lexicon/mockup-4.png', objectFit: 'contain', hideTitle: true },
+  { src: '/toy-lexicon/mockup-5.png', objectFit: 'contain', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/toy-lexicon/work-in-progress.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/cms.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/book-process-2.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/book-process-3.jpg', objectFit: 'cover' },
 ];
 
 const PROCESS_STEPS = [
