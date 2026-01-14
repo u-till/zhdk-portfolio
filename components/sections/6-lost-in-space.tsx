@@ -336,10 +336,10 @@ export function Project6() {
                               <button
                                 key={step.imageIndex}
                                 onClick={() => setCurrentImageIndex(step.imageIndex)}
-                                className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
+                                className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex flex-col gap-3'
                               >
                                 <div
-                                  className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                                  className={`relative w-full aspect-square flex-shrink-0 rounded overflow-hidden ${
                                     currentImageIndex === step.imageIndex ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
                                   }`}
                                 >
