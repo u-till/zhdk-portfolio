@@ -14,6 +14,13 @@ const PROJECT_IMAGES: Record<string, string[]> = {
     '/under-construction/korpus-process-4.jpg',
     '/under-construction/korpus-process-5.jpg',
   ],
+  saudade: [
+    '/saudade/addis.jpg',
+    '/saudade/hongkong-2.jpg',
+    '/saudade/kunming.jpg',
+    '/saudade/taldyqorghan-kz.png',
+    '/saudade/stolze-1.jpg',
+  ],
   retrofitted: [
     '/retrofitted/lamp-process.jpg',
     '/retrofitted/lamp-process-11.jpg',
@@ -23,25 +30,24 @@ const PROJECT_IMAGES: Record<string, string[]> = {
   ],
   'amped-up': [
     '/amped-up/preview.jpg',
-    '/amped-up/speaker-1.jpg',
+    '/amped-up/speaker-11.jpg',
     '/amped-up/speaker-5.jpg',
     '/amped-up/speaker-6.jpg',
     '/amped-up/speaker-7.jpg',
   ],
-  'toy-lexicon': ['/toy-lexicon/cover.jpg', '/toy-lexicon/front-mockup.png', '/toy-lexicon/book-process-1.jpg'],
+  'toy-lexicon': [
+    '/toy-lexicon/mockup-2.png',
+    '/toy-lexicon/mockup-3.png',
+    '/toy-lexicon/book-process-1.jpg',
+    '/toy-lexicon/book-process-2.jpg',
+    '/toy-lexicon/book-process-3.jpg',
+  ],
   'lost-in-space': [
     '/lost-in-space/cover.jpg',
     '/lost-in-space/backside-1.jpg',
     '/lost-in-space/backside-2.jpg',
     '/lost-in-space/backside-3.jpg',
     '/lost-in-space/backside-4.jpg',
-  ],
-  saudade: [
-    '/saudade/addis.jpg',
-    '/saudade/hongkong-2.jpg',
-    '/saudade/kunming.jpg',
-    '/saudade/taldyqorghan-kz.png',
-    '/saudade/stolze-1.jpg',
   ],
   dayjob: [
     '/dayjob/bg.jpg',
@@ -56,6 +62,16 @@ const PROJECT_IMAGES: Record<string, string[]> = {
 export function Welcome() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Preload first image of each project
+  useEffect(() => {
+    Object.values(PROJECT_IMAGES).forEach((images) => {
+      if (images[0]) {
+        const img = new window.Image();
+        img.src = images[0];
+      }
+    });
+  }, []);
 
   // Cycle through images for hovered project
   useEffect(() => {
@@ -143,11 +159,11 @@ export function Welcome() {
                 const sectionIndex = [
                   'welcome',
                   'under-construction',
+                  'saudade',
                   'retrofitted',
                   'amped-up',
                   'toy-lexicon',
                   'lost-in-space',
-                  'saudade',
                   'dayjob',
                   'about',
                 ].indexOf(projectKey);

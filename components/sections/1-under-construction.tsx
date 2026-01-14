@@ -119,10 +119,10 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
             <button
               key={index}
               onClick={() => onProcessImageClick?.(index)}
-              className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex items-center gap-3'
+              className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex flex-col md:flex-row md:items-center gap-3'
             >
               <div
-                className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                className={`relative w-full aspect-video md:aspect-square md:w-16 flex-shrink-0 rounded overflow-hidden ${
                   selectedProcessImage === index ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
                 }`}
               >

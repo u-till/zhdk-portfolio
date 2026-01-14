@@ -8,22 +8,22 @@ import { useEffect, useState } from 'react';
 
 const NAVIGATION_LINKS = [
   { href: 'under-construction', label: 'under construction' },
+  { href: 'saudade', label: 'saudade' },
   { href: 'retrofitted', label: 'retrofitted' },
   { href: 'amped-up', label: 'amped up' },
   { href: 'toy-lexicon', label: 'toy lexicon' },
   { href: 'lost-in-space', label: 'lost in space' },
-  { href: 'saudade', label: 'saudade' },
   { href: 'dayjob', label: 'dayjob' },
 ];
 
 const SECTION_ORDER = [
   'welcome',
   'under-construction',
+  'saudade',
   'retrofitted',
   'amped-up',
   'toy-lexicon',
   'lost-in-space',
-  'saudade',
   'dayjob',
   'about',
 ];
@@ -48,7 +48,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   'amped-up': {
-    navbar: 'w-full rounded-[0px] border border-black/60 bg-background/90 backdrop-blur-md',
+    navbar: 'w-full rounded-[0px] border border-black/60 bg-background backdrop-blur-md',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
     activeLink: 'text-foreground',
@@ -138,7 +138,11 @@ export function Navigation() {
                 setIsMobileMenuOpen(false);
               }}
               className={`text-xs transition-colors cursor-pointer ${
-                currentSection === 'welcome' ? 'text-muted-foreground hover:text-foreground' : config.link
+                currentSection === 'welcome'
+                  ? 'text-muted-foreground hover:text-foreground'
+                  : currentSection === 'under-construction'
+                  ? 'text-black hover:text-red-600'
+                  : config.link
               }`}
             >
               about
@@ -179,17 +183,18 @@ export function Navigation() {
                         }
                       }}
                       className={`relative text-sm font-medium transition-colors cursor-pointer pt-2 pb-2 px-2 whitespace-nowrap isolate ${
-                        isActive ? config.activeLink : isHovered ? 'text-foreground' : config.link
+                        isActive
+                          ? linkSection === 'under-construction'
+                            ? 'text-red-600'
+                            : config.activeLink
+                          : currentSection === 'under-construction'
+                          ? 'text-black hover:text-red-600'
+                          : isHovered
+                          ? 'text-foreground'
+                          : config.link
                       }`}
                     >
                       {link.label}
-                      {isActive && linkSection === 'under-construction' && (
-                        <motion.div
-                          layoutId='activeNavLink'
-                          className='absolute inset-x-0 -inset-y-2 md:-inset-y-3 bg-red-600 z-[-1]'
-                          transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                        />
-                      )}
                     </button>
                   </li>
                 );
@@ -217,7 +222,7 @@ export function Navigation() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className='overflow-hidden lg:hidden'
+              className={`overflow-hidden lg:hidden ${currentSection === 'under-construction' ? 'bg-white' : ''}`}
             >
               {currentSection !== 'welcome' && (
                 <ul className='flex flex-col gap-2 px-4 pb-4'>
@@ -237,17 +242,18 @@ export function Navigation() {
                             setIsMobileMenuOpen(false);
                           }}
                           className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
-                            isActive ? config.activeLink : isHovered ? 'text-foreground' : config.link
+                            isActive
+                              ? linkSection === 'under-construction'
+                                ? 'text-red-600'
+                                : config.activeLink
+                              : currentSection === 'under-construction'
+                              ? 'text-black hover:text-red-600'
+                              : isHovered
+                              ? 'text-foreground'
+                              : config.link
                           }`}
                         >
                           {link.label}
-                          {isActive && linkSection === 'under-construction' && (
-                            <motion.div
-                              layoutId='activeNavLinkMobile'
-                              className='absolute inset-x-0 inset-y-0 bg-red-600 z-[-1]'
-                              transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-                            />
-                          )}
                         </button>
                       </li>
                     );

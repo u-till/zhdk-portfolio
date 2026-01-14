@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useRouter } from 'next/navigation';
 
-const SECTION_IDS = ['welcome', 'under-construction', 'retrofitted', 'amped-up', 'toy-lexicon', 'lost-in-space', 'saudade', 'dayjob', 'about'];
+const SECTION_IDS = ['welcome', 'under-construction', 'saudade', 'retrofitted', 'amped-up', 'toy-lexicon', 'lost-in-space', 'dayjob', 'about'];
 
 interface Props {
   children: ReactNode[];
