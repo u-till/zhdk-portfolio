@@ -130,7 +130,7 @@ export function Lamp3DViewer() {
       />
 
       {/* Light Dimmer Slider */}
-      <div className='absolute bottom-42 md:bottom-58 right-4 md:right-8 w-36 lg:w-48 px-2 py-2 z-10 flex items-center gap-1 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md'>
+      <div className='absolute bottom-42 md:bottom-46 right-4 md:right-8 w-36 lg:w-64 px-2 py-2 z-10 flex items-center gap-1 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md'>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='12'

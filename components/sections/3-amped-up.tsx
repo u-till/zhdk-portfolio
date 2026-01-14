@@ -15,11 +15,14 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-4.jpg', objectFit: 'cover', hideTitle: true },
   { src: '/amped-up/speaker-5.jpg', objectFit: 'contain', hideTitle: true },
   { src: '/amped-up/speaker-6.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/amped-up/speaker-7.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-7.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
   { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
 ];
@@ -63,12 +66,12 @@ function AmpedUpTabs({
   };
 
   return (
-    <div className='w-full h-full border border-black/60 bg-background/90 backdrop-blur-md flex flex-col'>
+    <div className='w-full h-full border border-black/60 bg-background backdrop-blur-md flex flex-col'>
       {/* Tab Headers */}
       <div className='flex border-b border-black/60 flex-shrink-0'>
         <button
           onClick={onClose}
-          className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-colors border-r border-black/60 bg-transparent text-foreground hover:bg-foreground/5'
+          className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-colors border-r border-black/60 bg-transparent text-foreground hover:bg-neutral-100'
         >
           ×
         </button>
@@ -81,7 +84,7 @@ function AmpedUpTabs({
             } ${
               activeTab === tab.id
                 ? 'bg-foreground text-background'
-                : 'bg-transparent text-foreground hover:bg-foreground/5'
+                : 'bg-transparent text-foreground hover:bg-neutral-100'
             }`}
           >
             {tab.label}
@@ -108,7 +111,7 @@ function AmpedUpTabs({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className='font-mono text-sm md:text-base leading-relaxed'
+                  className='font-mono text-sm leading-relaxed'
                 >
                   {tab.content}
                 </motion.div>
@@ -225,10 +228,12 @@ export function Project3() {
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Learnings & Improvements</h3>
-              <p className='mt-4'>
-                A good idea to improve the sound further, would be to measure the frequency response of the room and
-                then programm that response curve onto the board (room correction).
-              </p>
+              <div className='space-y-3 mt-4'>
+                <ul className='list-disc list-inside'>
+                  <li>Implement room correction onto DSP Board</li>
+                  <li>Connect front LED to DSP Board to use as bluetooth status LED</li>
+                </ul>
+              </div>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
@@ -333,7 +338,7 @@ export function Project3() {
       <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
         <button
           onClick={handlePrev}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
           aria-label='Previous photo'
         >
           <svg
@@ -349,7 +354,7 @@ export function Project3() {
         </button>
         <button
           onClick={handleNext}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background/90 backdrop-blur-md hover:bg-foreground/5 transition-colors pointer-events-auto'
+          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
           aria-label='Next photo'
         >
           <svg
@@ -387,7 +392,7 @@ export function Project3() {
       {/* Info Panel - Expandable */}
       <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
         <motion.div
-          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
+          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
           animate={{
             width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
             height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
@@ -397,20 +402,37 @@ export function Project3() {
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
           {!expandedPanel ? (
-            <div className='w-full h-full relative border border-black/60 bg-background/90 backdrop-blur-md overflow-hidden'>
-              <button
-                onClick={() => setExpandedPanel(true)}
-                className='absolute cursor-pointer top-4 left-4 w-8 h-8 border border-black/60 bg-background/80 hover:bg-foreground/5 flex items-center justify-center transition-colors z-10 font-mono'
-              >
-                i
-              </button>
-              <Image
-                src='/amped-up/speaker-2.jpg'
-                alt='Speaker'
-                fill
-                className='object-cover cursor-pointer'
-                onClick={() => setExpandedPanel(true)}
-              />
+            <div className='w-full h-full relative overflow-hidden'>
+              <div className='flex flex-row w-full h-full gap-2'>
+                <button
+                  onClick={() => {
+                    handleTabChange('infos');
+                    setExpandedPanel(true);
+                  }}
+                  className={`flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-colors bg-background backdrop-blur-md hover:bg-neutral-100 border border-black/60 border-b-2 ${
+                    activeTab === 'infos' ? 'border-b-foreground' : 'border-b-black/60 hover:border-b-foreground'
+                  }`}
+                >
+                  <div className='relative w-full h-full'>
+                    <Image src='/amped-up/speaker-transparent.png' alt='Speaker' fill className='object-cover' />
+                  </div>
+                  <p className='text-foreground font-mono text-sm md:text-base font-medium uppercase'>INFOS</p>
+                </button>
+                <button
+                  onClick={() => {
+                    handleTabChange('process');
+                    setExpandedPanel(true);
+                  }}
+                  className={`flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-colors bg-background backdrop-blur-md hover:bg-neutral-100 border border-black/60 border-b-2 ${
+                    activeTab === 'process' ? 'border-b-foreground' : 'border-b-black/60 hover:border-b-foreground'
+                  }`}
+                >
+                  <div className='relative w-full h-full'>
+                    <Image src='/amped-up/screwdriver.png' alt='Screwdriver' fill className='object-cover' />
+                  </div>
+                  <p className='text-foreground font-mono text-sm md:text-base font-medium uppercase'>PROCESS</p>
+                </button>
+              </div>
             </div>
           ) : (
             <div className='w-full h-full relative'>

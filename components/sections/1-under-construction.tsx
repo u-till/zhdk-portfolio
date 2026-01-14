@@ -88,6 +88,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
             <ul className='list-disc list-inside'>
               <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
               <li>Use sandpaper to refine the edges</li>
+              <li>Use live view on external screen to spot out of focus shots</li>
             </ul>
           </div>
         </div>
@@ -100,7 +101,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
             </div>
             <div>
               <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
-              <span>Nano Banana for the background image</span>
+              <span>Nano Banana for the background image of the 360° viewer</span>
             </div>
           </div>
         </div>

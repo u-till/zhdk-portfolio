@@ -56,9 +56,7 @@ export function About() {
               </div>
               <div>
                 <h3 className='text-base font-semibold'>EFZ System Engineer, Informatik</h3>
-                <p className='text-sm text-muted-foreground'>
-                  TBZ Technische Berufsschule Zürich · Education · 2013 - 2017
-                </p>
+                <p className='text-sm text-muted-foreground'>TBZ · Education · 2013 - 2017</p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>Engineering Apprentice</h3>

@@ -14,16 +14,16 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-2.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-3.png', objectFit: 'contain' },
-  { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover' },
-  { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover' },
+  { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff', hideTitle: true }, // index 5
-  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' }, // index 6
-  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' }, // index 7
-  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' }, // index 8
-  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' }, // index 9
+  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover', hideTitle: true }, // index 6
+  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover', hideTitle: true }, // index 7
+  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover', hideTitle: true }, // index 8
+  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover', hideTitle: true }, // index 9
 ];
 
 const PROCESS_STEPS = [
@@ -83,9 +83,9 @@ function RetrofittedTabs({
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
-            className={`relative cursor-pointer flex-1 py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-all ${
-              index === 0 ? 'rounded-tl-[32px]' : ''
-            } ${
+            className={`relative cursor-pointer flex-1 py-4 px-4 ${
+              shrikhand.className
+            } text-sm md:text-base font-medium uppercase transition-all ${index === 0 ? 'rounded-tl-[32px]' : ''} ${
               activeTab === tab.id
                 ? 'bg-orange-600 text-white rounded-t-[32px]'
                 : 'bg-transparent text-white/80 hover:bg-orange-500/50 hover:rounded-t-[32px]'
@@ -115,7 +115,7 @@ function RetrofittedTabs({
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className='font-mono text-sm md:text-base leading-relaxed text-white'
+                  className='text-sm leading-relaxed text-white'
                 >
                   {tab.content}
                 </motion.div>
@@ -265,12 +265,13 @@ export function Project2() {
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2'>
                 Learnings & Improvements
               </h3>
-              <p className='mt-4'>
-                The mounting of the batteries inside the base proved to be quite tricky. Considering this during the
-                planing phase would have been helpful, possibly even designing a mount and using a 3d printer to print
-                it. Also it would be cool to animate the dimmer knob in the 3d viewer and map it to the brightness
-                slider.
-              </p>
+              <div className='space-y-3 mt-4'>
+                <ul className='list-disc list-inside'>
+                  <li>Use 3d printed mount for parts inside</li>
+                  <li>Implement custom charging indicator</li>
+                  <li>Animate dimmer knob in 3d model to match set brightness in UI</li>
+                </ul>
+              </div>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-orange-300/40 pb-2 mt-6'>Credits</h3>
@@ -510,7 +511,7 @@ export function Project2() {
       {/* Info Panel - Expandable */}
       <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
         <motion.div
-          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-48 lg:h-48'
+          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
           animate={{
             width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
             height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
@@ -520,20 +521,34 @@ export function Project2() {
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
           {!expandedPanel ? (
-            <div className='w-full h-full relative rounded-[32px] bg-orange-500/80 backdrop-blur-md overflow-hidden'>
-              <button
-                onClick={() => setExpandedPanel(true)}
-                className='absolute cursor-pointer top-4 left-4 w-8 h-8 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center transition-colors z-10 font-mono text-white'
-              >
-                i
-              </button>
-              <Image
-                src='/retrofitted/lamp-1.png'
-                alt='Lamp'
-                fill
-                className='object-cover cursor-pointer rounded-[32px]'
-                onClick={() => setExpandedPanel(true)}
-              />
+            <div className='w-full h-full relative rounded-[32px] bg-orange-500/80 backdrop-blur-md overflow-hidden border border-orange-300/40'>
+              <div className='flex flex-row w-full h-full'>
+                <button
+                  onClick={() => {
+                    handleTabChange('infos');
+                    setExpandedPanel(true);
+                  }}
+                  className='flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-all hover:bg-orange-600/50'
+                >
+                  <div className='relative w-full h-full'>
+                    <Image src='/retrofitted/lamp-1.png' alt='Lamp' fill className='object-cover' />
+                  </div>
+                  <p className={`text-white ${shrikhand.className} md:text-base font-medium uppercase`}>INFOS</p>
+                </button>
+                <div className='w-px bg-orange-300/40' />
+                <button
+                  onClick={() => {
+                    handleTabChange('process');
+                    setExpandedPanel(true);
+                  }}
+                  className='flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-all hover:bg-orange-600/50'
+                >
+                  <div className='relative w-full h-full'>
+                    <Image src='/retrofitted/soldering-iron.png' alt='Soldering Iron' fill className='object-cover' />
+                  </div>
+                  <p className={`text-white ${shrikhand.className} md:text-base font-medium uppercase`}>PROCESS</p>
+                </button>
+              </div>
             </div>
           ) : (
             <div className='w-full h-full relative rounded-[32px] overflow-hidden'>
