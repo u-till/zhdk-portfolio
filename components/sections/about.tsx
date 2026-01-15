@@ -16,11 +16,11 @@ export function About() {
           </div>
           <div className='flex-1 text-center md:text-left'>
             <h1 className='text-3xl md:text-4xl font-bold mb-2'>Till Solenthaler</h1>
-            <p className='text-xl text-muted-foreground mb-3'>Web Developer & Consultant</p>
-            <p className='text-sm text-foreground/80 leading-relaxed'>
+            <p className='text-xl text-muted-foreground mb-3'>Web Designer & Developer</p>
+            {/* <p className='text-sm text-foreground/80 leading-relaxed'>
               Helping SMEs create and renew their digital presence and develop strategies for their online presence.
               Experienced in full-stack development, system engineering, and automation.
-            </p>
+            </p> */}
           </div>
         </div>
 
@@ -31,7 +31,7 @@ export function About() {
             <h2 className='text-xl font-bold mb-3'>Background</h2>
             <div className='space-y-2'>
               <div>
-                <h3 className='text-base font-semibold'>Web Developer & Consultant</h3>
+                <h3 className='text-base font-semibold'>Web Designer & Developer</h3>
                 <p className='text-sm text-muted-foreground'>utill.ch · Self-employed · Aug 2021 - Present</p>
               </div>
               <div>
@@ -73,19 +73,19 @@ export function About() {
               <div className='space-y-2'>
                 <div>
                   <h3 className='font-semibold'>Development</h3>
-                  <p className='text-sm text-muted-foreground'>React, Redux, Next.js, TypeScript, Python, Django</p>
+                  <p className='text-sm text-muted-foreground'>React, Tailwind, Next.js, TypeScript, Python, Django</p>
                 </div>
                 <div>
-                  <h3 className='font-semibold'>Infrastructure & DevOps</h3>
-                  <p className='text-sm text-muted-foreground'>Docker, Linux (Red Hat, SuSE), SaltStack, Ansible</p>
+                  <h3 className='font-semibold'>Creative Tools</h3>
+                  <p className='text-sm text-muted-foreground'>
+                    Photoshop, Illustrator, InDesign, Premiere / Davinci , Ableton, Three.js / Blender
+                  </p>
                 </div>
                 <div>
-                  <h3 className='font-semibold'>Monitoring & Automation</h3>
-                  <p className='text-sm text-muted-foreground'>Grafana, Graphite, Bash Scripting, CI/CD</p>
-                </div>
-                <div>
-                  <h3 className='font-semibold'>Networking & Security</h3>
-                  <p className='text-sm text-muted-foreground'>Web Application Firewalls, SSO, API Integration</p>
+                  <h3 className='font-semibold'>Infrastructure & Networking</h3>
+                  <p className='text-sm text-muted-foreground'>
+                    Docker, Linux, Ansible, Grafana, CI/CD, Web Application Firewalls
+                  </p>
                 </div>
               </div>
             </div>
@@ -97,10 +97,10 @@ export function About() {
                 <p className='text-sm'>
                   <span className='font-semibold'>Email:</span>{' '}
                   <a
-                    href='mailto:till@example.com'
+                    href='mailto:tillsolenthaler@gmail.com'
                     className='text-muted-foreground hover:text-foreground transition-colors'
                   >
-                    till@example.com
+                    tillsolenthaler@gmail.com
                   </a>
                 </p>
                 <p className='text-sm'>

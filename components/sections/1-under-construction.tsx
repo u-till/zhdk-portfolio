@@ -79,7 +79,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
           <p className='mt-4'>
             We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
             livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
-            would be the best due to cost and exactly fitting our specifications.
+            would be the best so we could have it to our exact specifications.
           </p>
         </div>
         <div className='pb-4'>

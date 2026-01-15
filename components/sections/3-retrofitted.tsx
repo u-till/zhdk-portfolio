@@ -147,14 +147,16 @@ export function Project3() {
 
   const handleTabChange = useCallback(
     (tabId: string) => {
-      setActiveTab(tabId as 'infos' | 'process');
-      if (tabId === 'process') {
-        navigateToPhoto(1); // Go to first process image (after 3D viewer)
-      } else {
-        navigateToPhoto(0); // Go to 3D viewer for infos
+      if (tabId !== activeTab) {
+        setActiveTab(tabId as 'infos' | 'process');
+        if (tabId === 'process') {
+          navigateToPhoto(1); // Go to first process image (after 3D viewer)
+        } else {
+          navigateToPhoto(0); // Go to 3D viewer for infos
+        }
       }
     },
-    [navigateToPhoto]
+    [navigateToPhoto, activeTab]
   );
 
   const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;

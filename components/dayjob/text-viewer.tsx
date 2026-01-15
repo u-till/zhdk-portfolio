@@ -7,33 +7,43 @@ export function TextViewer() {
         <h1 className='text-2xl font-bold mb-4'>Dayjob</h1>
 
         <p className='mb-4'>
-          This section contains a personal statement about the dayjob work and projects featured on this page.
+          Since 2021, I have been working as a freelance webdesigner and developer under the name utill. My work
+          primarily focuses on creating online identities by designing and developing websites for a variety of clients.
+          I enjoy collaborating closely with my clients to understand their vision and bring it to life through unique
+          design and user-friendly web experiences. To showcase my work, i have selected a few projects below that
+          highlight my skills.
         </p>
 
         <h2 className='text-xl font-semibold mt-6 mb-3'>Projects</h2>
 
         <ul className='space-y-2'>
           <li>
-            <strong>Hannibal</strong> - Brand identity and web presence
+            <strong>utill</strong> - Complete design and development of my personal website with Next.js
           </li>
           <li>
-            <strong>Fabio Tozzo</strong> - Portfolio website design
+            <strong>Hannibal</strong> - Complete design and development of the website for a second hand furniture store
+            with Wordpress
           </li>
           <li>
-            <strong>Swing</strong> - Creative digital experience
+            <strong>Fabio Tozzo</strong> - Portfolio website designed in collaboration with Noel Oppliger and developed
+            with Next.js
           </li>
           <li>
-            <strong>Another Narrative</strong> - Studio website and branding
+            <strong>Swing</strong> - Complete design and development of the website for a dance school with Wordpress
           </li>
           <li>
-            <strong>Brooke Jackson</strong> - Personal portfolio
+            <strong>Nicolai Kager</strong> - Portfolio website designed in collaboration with customer and developed
+            with Wordpress
+          </li>
+          <li>
+            <strong>Another Narrative</strong> - Agency website designed in collaboration with customer and developed
+            with Wordpress
+          </li>
+          <li>
+            <strong>Brooke Jackson</strong> - Portfolio website designed in collaboration with customer and developed
+            with Wordpress
           </li>
         </ul>
-
-        <p className='mt-6 text-neutral-600 italic'>
-          [Replace this placeholder content with your personal statement about your dayjob work, philosophy, and these
-          specific projects.]
-        </p>
       </div>
     </div>
   );

@@ -29,13 +29,13 @@ const PROCESS_STEPS = [
   },
   {
     imageIndex: 3,
-    title: '03. INTEGRATION',
-    text: 'Spotify player embedding',
+    title: '03. RELEASE',
+    text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and Soundcloud.',
   },
   {
     imageIndex: 4,
-    title: '04. FINALIZATION',
-    text: 'Final album preparation',
+    title: '04. OUTREACH TO ARTISTS',
+    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
   },
 ];
 
@@ -88,9 +88,8 @@ export function Project6() {
                           Brief
                         </h3>
                         <p className='leading-relaxed mt-4'>
-                          An album i did toghether with my flatmate when we used to live in a studio. We produced beats
-                          and invited friends to rap on them. The space theme came from the cover art which i created
-                          first.
+                          An album i did toghether with my friends when i used to live in a house full of musicians.
+                          Combining productions under the theme of space, with cover art created by me.
                         </p>
                       </div>
                       <div>
@@ -102,13 +101,14 @@ export function Project6() {
                             <span className='font-bold'>YEAR:</span> 2019
                           </li>
                           <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>FOR:</span> Personal Project
+                            <span className='font-bold'>FOR:</span> Collaborative Project
                           </li>
                           <li className='border-l-2 border-[#AA4742]/60 pl-4'>
                             <span className='font-bold'>TYPE:</span> Music Album / Cover Art
                           </li>
                           <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>PLATFORM:</span> Spotify, Apple Music
+                            <span className='font-bold'>METHODOLOGY:</span> Recording instruments / sounds, sampling and
+                            programming MIDI with Ableton and FL Studio.
                           </li>
                         </ul>
                       </div>
@@ -117,8 +117,11 @@ export function Project6() {
                           Idea
                         </h3>
                         <p className='leading-relaxed mt-4'>
-                          The whole project actually started because I created the cover art. We then searched for
-                          fitting beats and also produced a few tracks specifically to match this space theme.
+                          The whole project started because I created the cover art. This gave us a scope of what to
+                          include and in which direction the production would go. We then searched for fitting beats and
+                          also produced a few tracks specifically to match this space theme. The original idea also
+                          included collaborating with different artists for each track to record vocals, which
+                          unfortunately never materialized.
                         </p>
                       </div>
                       <div>
@@ -127,9 +130,7 @@ export function Project6() {
                         </h3>
                         <div className='space-y-3 mt-4'>
                           <ul className='list-disc list-inside'>
-                            <li>Create more cohesive album artwork across all tracks</li>
-                            <li>Add animated visualizers for each track</li>
-                            <li>Build a dedicated landing page with interactive 3D elements</li>
+                            <li>Outreach to more artists for collaboration</li>
                           </ul>
                         </div>
                       </div>
@@ -184,10 +185,17 @@ export function Project6() {
                           >
                             <div
                               className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
-                                currentImageIndex === step.imageIndex ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                currentImageIndex === step.imageIndex
+                                  ? 'ring-4 ring-[#FF6B66]'
+                                  : 'ring-1 ring-[#AA4742]/40'
                               }`}
                             >
-                              <Image src={IMAGES[step.imageIndex]} alt={`${step.title} step`} fill className='object-cover' />
+                              <Image
+                                src={IMAGES[step.imageIndex]}
+                                alt={`${step.title} step`}
+                                fill
+                                className='object-cover'
+                              />
                             </div>
                             <div className='flex-1'>
                               <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
@@ -340,10 +348,17 @@ export function Project6() {
                               >
                                 <div
                                   className={`relative w-full aspect-square flex-shrink-0 rounded overflow-hidden ${
-                                    currentImageIndex === step.imageIndex ? 'ring-4 ring-[#FF6B66]' : 'ring-1 ring-[#AA4742]/40'
+                                    currentImageIndex === step.imageIndex
+                                      ? 'ring-4 ring-[#FF6B66]'
+                                      : 'ring-1 ring-[#AA4742]/40'
                                   }`}
                                 >
-                                  <Image src={IMAGES[step.imageIndex]} alt={`${step.title} step`} fill className='object-cover' />
+                                  <Image
+                                    src={IMAGES[step.imageIndex]}
+                                    alt={`${step.title} step`}
+                                    fill
+                                    className='object-cover'
+                                  />
                                 </div>
                                 <div className='flex-1'>
                                   <span className='font-bold block text-[#FF6B66]'>{step.title}</span>

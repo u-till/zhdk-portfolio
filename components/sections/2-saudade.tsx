@@ -6,28 +6,14 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-const PHOTOS = [
-  {
-    src: '/saudade/addis.jpg',
-    lat: 12.035,
-    lng: 215.006,
-    title: 'Addis Ababa, Ethiopia',
-    description: 'Turtle transport captured in front of the national museum.',
-  },
-  {
-    src: '/saudade/ambalavao-mdg.png',
-    lat: -18.925,
-    lng: 226.976,
-    title: 'Ambalavao, Magagascar',
-    description: 'A scenic landscape in the south of the country.',
-  },
-  {
-    src: '/saudade/hanoi-3.jpg',
-    lat: 24.075,
-    lng: 284.046,
-    title: 'Hanoi, Vietnam',
-    description: 'A fishermen and his buddy at lake Hồ Tây',
-  },
+const PHOTOS: {
+  src: string;
+  lat: number;
+  lng: number;
+  title: string;
+  description: string;
+  hideTitle?: boolean;
+}[] = [
   {
     src: '/saudade/ambalavao-mdg-2.png',
     lat: -18.895,
@@ -36,25 +22,51 @@ const PHOTOS = [
     description: 'Inside of the home of a Peacecorps volunteer who lived in Ambalavao.',
   },
   {
+    src: '/saudade/addis.jpg',
+    lat: 12.035,
+    lng: 215.006,
+    title: 'Addis Ababa, Ethiopia',
+    description: 'Turtle transport captured in front of the national museum.',
+    hideTitle: true,
+  },
+  {
+    src: '/saudade/ambalavao-mdg.png',
+    lat: -18.925,
+    lng: 226.976,
+    title: 'Ambalavao, Magagascar',
+    description: 'A scenic landscape in the south of the country.',
+    hideTitle: true,
+  },
+  {
+    src: '/saudade/hanoi-3.jpg',
+    lat: 24.075,
+    lng: 284.046,
+    title: 'Hanoi, Vietnam',
+    description: 'A fishermen and his buddy at lake Hồ Tây',
+    hideTitle: true,
+  },
+  {
     src: '/saudade/addis-2.jpg',
     lat: 11.985,
     lng: 214.956,
     title: 'Addis Ababa, Ethiopia',
     description: 'The farmers school of Selam Village, an orphanage in the middle of Addis',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/angkor-wat.jpg',
-    lat: 16.435,
-    lng: 281.876,
-    title: 'Angkor Wat, Cambodia',
-    description: 'A luxury import market in Siem Reap, symbolic for the mass tourism.',
-  },
+  // {
+  //   src: '/saudade/angkor-wat.jpg',
+  //   lat: 16.435,
+  //   lng: 281.876,
+  //   title: 'Angkor Wat, Cambodia',
+  //   description: 'A luxury import market in Siem Reap, symbolic for the mass tourism.',
+  // },
   {
     src: '/saudade/hanoi-2.jpg',
     lat: 24.135,
     lng: 284.106,
     title: 'Hanoi, Vietnam',
-    description: 'Two young women looking out of the Thăng Long Citadel.',
+    description: 'Two students looking out of the Thăng Long Citadel.',
+    hideTitle: true,
   },
   {
     src: '/saudade/addis-3.jpg',
@@ -62,6 +74,7 @@ const PHOTOS = [
     lng: 215.056,
     title: 'Addis Ababa, Ethiopia',
     description: 'A church with the classic pan-african colors in the east of Addis.',
+    hideTitle: true,
   },
   {
     src: '/saudade/almaty-kz.jpg',
@@ -69,55 +82,59 @@ const PHOTOS = [
     lng: 253.235,
     title: 'Taldyqorghan, Kazakhstan',
     description: 'A busy markethall in the remote town of Taldyqorghan.',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/addis-4.jpg',
-    lat: 12.005,
-    lng: 214.986,
-    title: 'Addis Ababa, Ethiopia',
-    description: 'Tomoca Coffee, a family owned coffee roasting business founded in 1953.',
-  },
+  // {
+  //   src: '/saudade/addis-4.jpg',
+  //   lat: 12.005,
+  //   lng: 214.986,
+  //   title: 'Addis Ababa, Ethiopia',
+  //   description: 'Tomoca Coffee, a family owned coffee roasting business founded in 1953.',
+  //   hideTitle: true,
+  // },
   {
     src: '/saudade/ankavandra-mdg.png',
     lat: -15.795,
     lng: 225.416,
     title: 'Ankavandra, Madagascar',
     description: 'A team of doctors on their way to an isolated village.',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/bkk.jpg',
-    lat: 16.765,
-    lng: 280.556,
-    title: 'Bangkok, Thailand',
-    description: 'Temples also need to be vacuumed from time to time.',
-  },
-  {
-    src: '/saudade/bokor-hill.jpg',
-    lat: 13.565,
-    lng: 281.876,
-    title: 'Bokor Hill, Cambodia',
-    description: 'A haunting building which used to be a scamming compound.',
-  },
-  {
-    src: '/saudade/chiang-mai.jpg',
-    lat: 21.325,
-    lng: 279.906,
-    title: 'Chiang Mai, Thailand',
-    description: 'An old computer shop in the outskirts of Chiang Mai.',
-  },
-  {
-    src: '/saudade/hanoi.jpg',
-    lat: 24.105,
-    lng: 284.076,
-    title: 'Hanoi, Vietnam',
-    description: 'Vendors inside a markethall passing time.',
-  },
+  // {
+  //   src: '/saudade/bkk.jpg',
+  //   lat: 16.765,
+  //   lng: 280.556,
+  //   title: 'Bangkok, Thailand',
+  //   description: 'Temples also need to be vacuumed from time to time.',
+  // },
+  // {
+  //   src: '/saudade/bokor-hill.jpg',
+  //   lat: 13.565,
+  //   lng: 281.876,
+  //   title: 'Bokor Hill, Cambodia',
+  //   description: 'A haunting building which used to be a scamming compound.',
+  // },
+  // {
+  //   src: '/saudade/chiang-mai.jpg',
+  //   lat: 21.325,
+  //   lng: 279.906,
+  //   title: 'Chiang Mai, Thailand',
+  //   description: 'An old computer shop in the outskirts of Chiang Mai.',
+  // },
+  // {
+  //   src: '/saudade/hanoi.jpg',
+  //   lat: 24.105,
+  //   lng: 284.076,
+  //   title: 'Hanoi, Vietnam',
+  //   description: 'Vendors inside a markethall passing time.',
+  // },
   {
     src: '/saudade/hongkong-2.jpg',
     lat: 25.325,
     lng: 290.436,
     title: 'Hongkong',
     description: 'Inside the maze of staircases and hallways of a block in Hongkong.',
+    hideTitle: true,
   },
   {
     src: '/saudade/hanoi-4.jpg',
@@ -125,20 +142,23 @@ const PHOTOS = [
     lng: 284.126,
     title: 'Hanoi, Vietnam',
     description: 'Construction workers in stylish jeans-only workwear.',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/ho-chi-min.jpg',
-    lat: 13.755,
-    lng: 286.696,
-    title: 'Ho Chi Minh, Vietnam',
-    description: 'A cute bike shop in the outskirts of Saigon as the locals call it.',
-  },
+  // {
+  //   src: '/saudade/ho-chi-min.jpg',
+  //   lat: 13.755,
+  //   lng: 286.696,
+  //   title: 'Ho Chi Minh, Vietnam',
+  //   description: 'A cute bike shop in the outskirts of Saigon as the locals call it.',
+  //   hideTitle: true,
+  // },
   {
     src: '/saudade/hongkong-1.jpg',
     lat: 25.325,
     lng: 290.436,
     title: 'Hongkong',
     description: 'A red facade of one of the gigantic blocks in Hongkong.',
+    hideTitle: true,
   },
   {
     src: '/saudade/kunming.jpg',
@@ -146,6 +166,7 @@ const PHOTOS = [
     lng: 278.986,
     title: 'Kunming, China',
     description: 'A temple in Kunming, but maybe it was in Chengdu, not sure.',
+    hideTitle: true,
   },
   {
     src: '/saudade/hongkong-3.jpg',
@@ -153,6 +174,7 @@ const PHOTOS = [
     lng: 290.436,
     title: 'Hongkong',
     description: 'Inside the museum of Kowloon Walled City.',
+    hideTitle: true,
   },
   {
     src: '/saudade/kuala-lumpur.jpg',
@@ -160,14 +182,31 @@ const PHOTOS = [
     lng: 277.956,
     title: 'Kuala Lumpur, Malaysia',
     description: 'A sportscar being admired next to the Petronas Tower.',
+    hideTitle: true,
   },
-
+  {
+    src: '/saudade/kathmandu.jpg',
+    lat: 30.7,
+    lng: 265.3,
+    title: 'Kathmandu, Nepal',
+    description: 'View over the city from a hill on the outskirts.',
+    hideTitle: true,
+  },
+  {
+    src: '/saudade/rio-1.jpg',
+    lat: -19.9,
+    lng: 136.8,
+    title: 'Rio de Janeiro, Brazil',
+    description: "Oscar Niemeyer's Art Museum in Niterói.",
+    hideTitle: true,
+  },
   {
     src: '/saudade/mesocco.jpg',
     lat: 49.535,
     lng: 189.126,
     title: 'Mesocco, Switzerland',
     description: 'Maiensäss near Mesocco, an italian speaking village in Grisons.',
+    hideTitle: true,
   },
   {
     src: '/saudade/phnompenh.jpg',
@@ -175,6 +214,7 @@ const PHOTOS = [
     lng: 281.196,
     title: 'Phnom Penh, Cambodia',
     description: 'A scooter dealer waiting for customers among his many motorbikes.',
+    hideTitle: true,
   },
   {
     src: '/saudade/rome.jpg',
@@ -182,6 +222,15 @@ const PHOTOS = [
     lng: 192.466,
     title: 'Rome',
     description: 'Really cool facade of a administrative building outside in Rome.',
+    hideTitle: true,
+  },
+  {
+    src: '/saudade/annapurna.jpg',
+    lat: 31.5,
+    lng: 263.9,
+    title: 'Annapurna, Nepal',
+    description: 'On the way to Annapurna Basecamp, high up in the Himalayas.',
+    hideTitle: true,
   },
   {
     src: '/saudade/sambava-mdg.png',
@@ -189,20 +238,22 @@ const PHOTOS = [
     lng: 230.006,
     title: 'Sambava, Madagascar',
     description: 'Aerial surveillance in a rural town after a cyclone to map out damages.',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/sihanoukville.jpg',
-    lat: 13.355,
-    lng: 281.676,
-    title: 'Sihanoukville, Cambodia',
-    description: 'A shady port city, hosting many illicit casinos & businesses.',
-  },
+  // {
+  //   src: '/saudade/sihanoukville.jpg',
+  //   lat: 13.355,
+  //   lng: 281.676,
+  //   title: 'Sihanoukville, Cambodia',
+  //   description: 'A shady port city, hosting many illicit casinos & businesses.',
+  // },
   {
     src: '/saudade/stolze-1.jpg',
     lat: 50.435,
     lng: 188.546,
     title: 'Stolze Openair, Zürich',
     description: 'Once a year for two weeks, volunteers organize a festival in Zurich.',
+    hideTitle: true,
   },
   {
     src: '/saudade/taldyqorghan-kz.png',
@@ -210,14 +261,15 @@ const PHOTOS = [
     lng: 253.016,
     title: 'Taldyqorghan, Kazakhstan',
     description: 'The two families gathering together, a day before the wedding.',
+    hideTitle: true,
   },
-  {
-    src: '/saudade/zurich.jpg',
-    lat: 50.435,
-    lng: 188.546,
-    title: 'Zurich, Switzerland',
-    description: 'My humble abode on a quiet day in June.',
-  },
+  // {
+  //   src: '/saudade/zurich.jpg',
+  //   lat: 50.435,
+  //   lng: 188.546,
+  //   title: 'Zurich, Switzerland',
+  //   description: 'My humble abode on a quiet day in June.',
+  // },
 ];
 
 export function Project2() {
@@ -299,7 +351,11 @@ export function Project2() {
   return (
     <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
       {/* Title */}
-      <div className='absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10'>
+      <div
+        className={`absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10 transition-opacity duration-300 ${
+          PHOTOS[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
         <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
           <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
             saudade
@@ -318,7 +374,7 @@ export function Project2() {
               src={photo.src}
               alt={`Saudade ${index + 1}`}
               fill
-              className='object-cover'
+              className='object-contain'
               priority={index === 0}
               sizes='100vw'
             />
@@ -462,9 +518,14 @@ export function Project2() {
               >
                 <h3 className={`text-2xl font-bold ${courierPrime.className}`}>Photography</h3>
                 <p className='text-sm leading-relaxed'>
-                  I bought my first proper camera when i was about 12, a Canon EOS 60D and filled my SD card with an
-                  abundance of photos. Later i discovered the appeal of analogue photography, especially
-                  streetphotography. I mostly take pictures when i am travelling.
+                  I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
+                  photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
+                  nature of film. I especially enjoy taking pictures in the context of street photography and
+                  architecture. Therefore, I mostly take photographs when I am traveling.{' '}
+                </p>{' '}
+                <p className='text-sm leading-relaxed'>
+                  Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
+                  This then also often involves a lot of post-processing in software like Photoshop.
                 </p>
                 <div className='space-y-2 text-sm'>
                   <div className='border-l-2 border-white/40 pl-3'>
@@ -472,12 +533,12 @@ export function Project2() {
                     <span>2009-Ongoing</span>
                   </div>
                   <div className='border-l-2 border-white/40 pl-3'>
-                    <span className='font-bold block'>Type:</span>
-                    <span>Photography</span>
+                    <span className='font-bold block'>Cameras:</span>
+                    <span>Olympus XA2 / Lomo LC-A / Canon EOS 60D</span>
                   </div>
                   <div className='border-l-2 border-white/40 pl-3'>
-                    <span className='font-bold block'>Legacy:</span>
-                    <span>Capturing memories across continents</span>
+                    <span className='font-bold block'>Favorite subjects:</span>
+                    <span>Cities, Architecture, People, Nature</span>
                   </div>
                 </div>
               </motion.div>

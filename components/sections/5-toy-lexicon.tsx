@@ -20,32 +20,32 @@ const GALLERY_IMAGES: ImageItem[] = [
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-2.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-3.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-4.jpg', objectFit: 'cover' },
+  { src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/toy-lexicon/book-process-2.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/toy-lexicon/book-process-3.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/toy-lexicon/book-process-4.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
 const PROCESS_STEPS = [
   {
     imageIndex: 0,
-    title: '01. COLLECTION',
-    text: 'Curating childhood objects',
+    title: '01. COVER DESIGN',
+    text: 'I started this project by designing the cover of the book, experimenting with different layouts and typography. This would then set the tone for the rest of the book. I defined a grid system, which would help to create a consistent layout throughout the book.',
   },
   {
     imageIndex: 1,
-    title: '02. PHOTOGRAPHY',
-    text: 'Professional documentation',
+    title: '02. RESEARCH AND CATALOGING',
+    text: 'My father provided me with some other books on construction kits, which i used for inspiration. I also created a database of all the kits, including information such as the manufacturer, country and title as a JSON file to later programmatically import into InDesign. Thats when i noticed that a lot of the data was missing or incomplete.',
   },
   {
     imageIndex: 2,
-    title: '03. PHOTOGRAPHY',
-    text: 'Professional documentation',
+    title: '03. CMS FOR CONTENT',
+    text: 'I realized that going over the content and completing it would be a challenge as my father is not very tech-savvy. So I built a custom CMS that would allow him and his two friends to easily add, edit, and organize the content of the book without any technical knowledge.',
   },
   {
     imageIndex: 3,
-    title: '04. PHOTOGRAPHY',
-    text: 'Professional documentation',
+    title: '04. INDESIGN AUTOMATION',
+    text: 'I developed an InDesign ExtendScript that would automatically layout the content from the JSON database into InDesign, using a template that has labeled fields for each data point. This allows me to quickly generate a consistent and professional-looking layout which then can be refined and adjusted.',
   },
 ];
 
@@ -132,10 +132,12 @@ export function Project5() {
 
   const handleTabChange = useCallback(
     (tabId: string) => {
-      setActiveTab(tabId as 'infos' | 'process');
-      navigateToPhoto(0);
+      if (tabId !== activeTab) {
+        setActiveTab(tabId as 'infos' | 'process');
+        navigateToPhoto(0);
+      }
     },
-    [navigateToPhoto]
+    [navigateToPhoto, activeTab]
   );
 
   const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
@@ -163,21 +165,26 @@ export function Project5() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Brief</h3>
               <p className='mt-4'>
-                A book on visual exploration of the broad variety of kids construction kits from the last 100 years. My
+                A book on visual exploration of the broad variety of construction kits from the last 100 years. My
                 fathers hobby has been collecting and building with old construction kits for a long time. Now with two
                 friends of his, he photographed all his work and asked me if i can help him make it into a book.
                 <br />
                 <br />
-                This turned out to be way harder than excpected because the Projects have been photographed over a long
-                timespan, so some images where missing and other infos as well. Because my Dad is not very good with
-                computers, i created a custom website where we could work together to complete the data.
+                This turned out to be way harder than excpected because the objects have been photographed over a long
+                timespan, so some images where missing and other infos as well. Because my dad is not very good with
+                computers, i created a custom website where we could work together to complete the data into one central
+                JSON database.
+                <br />
+                <br />
+                With this JSON database ready, I then created an InDesign ExtendScript that would automatically layout
+                all the content into InDesign, following the grid system and styles defined earlier.
               </p>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-green-500 pl-4'>
-                  <span className='font-bold'>YEAR:</span> 2025
+                  <span className='font-bold'>YEAR:</span> 2025-Ongoing
                 </li>
                 <li className='border-l-2 border-green-500 pl-4'>
                   <span className='font-bold'>FOR:</span> My father
@@ -208,9 +215,10 @@ export function Project5() {
               </h3>
               <div className='space-y-3 mt-4'>
                 <ul className='list-disc list-inside'>
-                  <li>Build a custom CMS for collaborative editing with non-technical users</li>
-                  <li>Implement automated layout generation for consistent page designs</li>
-                  <li>Add print-ready export functionality</li>
+                  <li>Align vision before starting</li>
+                  <li>Make sure source material is complete and consistent</li>
+                  <li>Invest more time in gathering inspiration for layouting</li>
+                  <li>Allocate more time for experimentation</li>
                 </ul>
               </div>
             </div>
@@ -218,18 +226,26 @@ export function Project5() {
               <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2 mt-6'>Credits</h3>
               <div className='space-y-3 mt-4'>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Collaborative Project</span>
-                  <span>Till Solenthaler</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Models and Curation</span>
+                  <span>Peter Leutenegger</span>
                 </div>
                 <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Contributors</span>
-                  <span>Jürg Solenthaler, Friends</span>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Photography</span>
+                  <span>Alex Colle</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Collages</span>
+                  <span>Kurt Kleinert</span>
+                </div>
+                <div>
+                  <span className='font-bold block uppercase text-xs tracking-wider'>Layout and CMS</span>
+                  <span>Till Solenthaler</span>
                 </div>
                 <div>
                   <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
                   <div className='space-y-3 mt-2'>
                     <ul className='list-disc list-inside'>
-                      <li>ChatGPT for text editing and proofreading</li>
+                      <li>Claude Code for co-programming CMS and InDesign ExtendScript</li>
                     </ul>
                   </div>
                 </div>

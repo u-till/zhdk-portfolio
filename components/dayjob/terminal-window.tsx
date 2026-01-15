@@ -1,8 +1,8 @@
 'use client';
 
-import { WindowProps } from '@/types/macos';
 import { ANIMATIONS } from '@/constants/macos';
 import { useWindowResize } from '@/hooks/use-window-resize';
+import { WindowProps } from '@/types/macos';
 import { motion } from 'framer-motion';
 import React, { useRef } from 'react';
 import { TrafficLights } from './traffic-lights';
@@ -70,8 +70,19 @@ export const TerminalWindow = React.memo(function TerminalWindow({
         className='w-full bg-[#1e1e1ee1] text-[#00FF00] backdrop-blur-md font-mono text-sm p-4 overflow-auto'
         style={{ height: 'calc(100% - 2rem)' }}
       >
-        <div className='space-y-2'>
+        <div className='space-y-4'>
           <div>Last login: {new Date().toLocaleString()}</div>
+
+          {/* MOTD */}
+          <div className='text-gray-400 border-l-2 border-gray-600 pl-3 py-1'>
+            <p className='mb-2'>
+              My approach to web development is driven by open source software. I primarily build with{' '}
+              <span className='text-[#00AAFF]'>Next.js</span> for projects that are more complex, require animations or
+              3d integrations. For smaller projects, i use <span className='text-[#00AAFF]'>WordPress</span> because it
+              has a big community which guarantees long-term support and easy maintenance for my clients.
+            </p>
+          </div>
+
           <div className='flex items-center gap-2'>
             <span className='text-[#00AAFF]'>user@portfolio</span>
             <span className='text-white'>~</span>

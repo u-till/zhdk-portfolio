@@ -24,7 +24,7 @@ export function SpaceTabs({ tabs, activeTab: externalActiveTab, onTabChange }: S
   };
 
   return (
-    <div className='w-full h-full bg-neutral-600/60 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl flex flex-col'>
+    <div className='w-full h-full bg-neutral-800/90 backdrop-blur-md border-4 border-foreground/20 rounded-lg overflow-hidden shadow-xl flex flex-col'>
       {/* Tab Headers - Vertical Layout */}
       <div className='flex border-b-4 border-foreground/20 flex-shrink-0'>
         {tabs.map((tab) => {

@@ -16,37 +16,47 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-5.jpg', objectFit: 'contain', hideTitle: true },
   { src: '/amped-up/speaker-6.jpg', objectFit: 'contain', hideTitle: true },
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-process-9.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-process-12.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
 const PROCESS_STEPS = [
   {
     imageIndex: 0,
     title: '01. RESEARCH & DESIGN',
-    text: 'In this phase, my flatmate Julian Fehr took the lead due to his expertise with speakers and amplifiers. Repairing the original amps proved impractical because replacement parts were likely unavailable, so we chose WONDOM digital amplifiers. These were fitted into the left speaker enclosure, using a main board for mids and highs and a separate board for the lows.',
+    text: 'In this phase, my flatmate Julian Fehr took the lead due to his expertise with speakers and amplifiers. We opted for replacing the analog amps with a digital amps because this would give us DSP functionality. These were fitted into the left speaker enclosure, using a main board for mids and highs and a separate board for the lows.',
   },
   {
     imageIndex: 1,
-    title: '02. TEST CIRCUIT & BUILD ENCLOSURE',
-    text: 'In order to mount the new amps, i created a simple backplate with a power connector, power switch, aux connector and audio cable terminals for the second speaker. Before mounting everything to the new enclosure, we connected everything first to test it.',
+    title: '02. REMOVE OLD AMPS',
+    text: 'Before installing the new amps, i first had to remove the old analogue amplifiers from the speaker enclosure. This was very straightforward as i just had to unscrew a few screws and unplug the cables. Unfortunaltey i forgot to take a picture of the old amps before removing them, so i attached a screenshot of the manual.',
   },
   {
     imageIndex: 2,
-    title: '03. MOUNT CIRCUIT TO ENCLOSURE',
-    text: 'After sucessfully testing the new circuit, i mounted all the components to the enclosure and screwed the cover back onto the speaker.',
+    title: '03. TEST CIRCUIT & BUILD ENCLOSURE',
+    text: 'In order to mount the new amps, i created a simple backplate with a power connector, power switch, aux connector and audio cable terminals for the second speaker. Before mounting everything to the new enclosure, we connected everything first to test it.',
   },
   {
     imageIndex: 3,
-    title: '04. CAPTURE',
-    text: 'To create high quality images for this portfolio i also used my backdrop setup with the studio lights. I tried to take pictures in a continuously more disassembled state, to create an unpacking effect.',
+    title: '04. MOUNT CIRCUIT TO ENCLOSURE',
+    text: 'After sucessfully testing the new circuit, i mounted all the components to the enclosure and screwed the cover back onto the speaker.',
+  },
+  {
+    imageIndex: 4,
+    title: '05. CONNECT AND TEST',
+    text: 'At this point i connected everything together and tested the functionality. The amps worked well and we could connect via bluetooth and adjust the EQ settings via the DSP software.',
+  },
+  {
+    imageIndex: 5,
+    title: '06. CAPTURE IMAGES',
+    text: 'To create high quality images for this portfolio i also used my backdrop setup with the studio lights.',
   },
 ];
 
@@ -142,10 +152,12 @@ export function Project4() {
 
   const handleTabChange = useCallback(
     (tabId: string) => {
-      setActiveTab(tabId as 'infos' | 'process');
-      navigateToPhoto(0);
+      if (tabId !== activeTab) {
+        setActiveTab(tabId as 'infos' | 'process');
+        navigateToPhoto(0);
+      }
     },
-    [navigateToPhoto]
+    [navigateToPhoto, activeTab]
   );
 
   const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
@@ -212,7 +224,7 @@ export function Project4() {
                     rel='noopener noreferrer'
                     href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
                   >
-                    Meanwell LRS 200 -15
+                    Meanwell LRS 200-15 PSU
                   </a>
                 </li>
               </ul>
@@ -222,16 +234,18 @@ export function Project4() {
               <p className='mt-4'>
                 The idea came originally from my flatmate Julian Fehr, because he acquired these speakers with one
                 broken amp and they were sitting around unused for a long time so we brainstormed how we could bring new
-                life into these speakers. We thought of repairing the existing amps but opted for replacing them because
-                this would give us new possibilities and is easier to implement.
+                life into these speakers. To make them more versatile and usable with modern devices, we decided to
+                replace the analogue amps with digital amps that support bluetooth and DSP functionality. This way we
+                are able to control the speakers frequency response to tweak the sound of the individual drivers and
+                also adapt it to the room acoustics.
               </p>
             </div>
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Learnings & Improvements</h3>
               <div className='space-y-3 mt-4'>
                 <ul className='list-disc list-inside'>
-                  <li>Implement room correction onto DSP Board</li>
-                  <li>Connect front LED to DSP Board to use as bluetooth status LED</li>
+                  <li>Implement room correction onto DSP board</li>
+                  <li>Connect front LED to DSP board to use as bluetooth status LED</li>
                 </ul>
               </div>
             </div>

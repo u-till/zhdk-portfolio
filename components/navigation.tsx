@@ -54,9 +54,9 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-foreground',
   },
   'toy-lexicon': {
-    navbar: 'w-full rounded-[32px] border-2 border-green-500/40 bg-green-500/20 backdrop-blur-md shadow-sm',
+    navbar: 'w-full rounded-lg border-2 border-green-500/60 bg-green-500/40 backdrop-blur-md shadow-sm',
     brand: 'hover:text-foreground/80',
-    link: 'text-muted-foreground hover:text-foreground',
+    link: 'text-neutral-600 hover:text-foreground',
     activeLink: 'text-foreground',
   },
   'lost-in-space': {
@@ -92,7 +92,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
   'amped-up': '#ffffff',
   'toy-lexicon': '#eff6ff',
   'lost-in-space': '#000000ff',
-  saudade: '#646464ff',
+  saudade: 'rgb(0, 0, 0)',
   dayjob: '#EAEAE8',
   about: '#f9fafb',
 };
