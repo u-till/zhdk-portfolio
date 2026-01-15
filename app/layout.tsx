@@ -1,6 +1,7 @@
 import { Navigation } from '@/components/navigation';
 import { ActiveSectionProvider } from '@/contexts/active-section-context';
 import { geistMono, geistSans } from '@/lib/fonts';
+import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
 import './globals.css';
 
@@ -21,6 +22,7 @@ export default function RootLayout({
           <Navigation />
           <main>{children}</main>
         </ActiveSectionProvider>
+        <Analytics />
       </body>
     </html>
   );
