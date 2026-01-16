@@ -30,22 +30,22 @@ const PROCESS_STEPS = [
   {
     imageIndex: 0,
     title: '01. COVER DESIGN',
-    text: 'I started this project by designing the cover of the book, experimenting with different layouts and typography. This would then set the tone for the rest of the book. I defined a grid system, which would help to create a consistent layout throughout the book.',
+    text: 'Designed the cover first, experimenting with layouts and typography to set the tone. Defined a grid system for consistent layout throughout.',
   },
   {
     imageIndex: 1,
     title: '02. RESEARCH AND CATALOGING',
-    text: 'My father provided me with some other books on construction kits, which i used for inspiration. I also created a database of all the kits, including information such as the manufacturer, country and title as a JSON file to later programmatically import into InDesign. Thats when i noticed that a lot of the data was missing or incomplete.',
+    text: 'Used reference books for inspiration. Created a JSON database of all kits with manufacturer, country and title for InDesign import. Found lots of missing data.',
   },
   {
     imageIndex: 2,
     title: '03. CMS FOR CONTENT',
-    text: 'I realized that going over the content and completing it would be a challenge as my father is not very tech-savvy. So I built a custom CMS that would allow him and his two friends to easily add, edit, and organize the content of the book without any technical knowledge.',
+    text: 'Built a custom CMS so my father and his friends could easily add, edit and organize content without technical knowledge.',
   },
   {
     imageIndex: 3,
     title: '04. INDESIGN AUTOMATION',
-    text: 'I developed an InDesign ExtendScript that would automatically layout the content from the JSON database into InDesign, using a template that has labeled fields for each data point. This allows me to quickly generate a consistent and professional-looking layout which then can be refined and adjusted.',
+    text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. Enables quick generation of consistent layouts for refinement.',
   },
 ];
 
@@ -165,19 +165,12 @@ export function Project5() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-green-500/40 pb-2'>Brief</h3>
               <p className='mt-4'>
-                A book on visual exploration of the broad variety of construction kits from the last 100 years. My
-                fathers hobby has been collecting and building with old construction kits for a long time. Now with two
-                friends of his, he photographed all his work and asked me if i can help him make it into a book.
+                A book exploring construction kits from the last 100 years. My father and two friends photographed his
+                collection and asked me to make it into a book.
                 <br />
                 <br />
-                This turned out to be way harder than excpected because the objects have been photographed over a long
-                timespan, so some images where missing and other infos as well. Because my dad is not very good with
-                computers, i created a custom website where we could work together to complete the data into one central
-                JSON database.
-                <br />
-                <br />
-                With this JSON database ready, I then created an InDesign ExtendScript that would automatically layout
-                all the content into InDesign, following the grid system and styles defined earlier.
+                Since images were taken over years with missing data, I built a custom CMS for collaborative editing
+                into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
               </p>
             </div>
             <div>
@@ -269,7 +262,7 @@ export function Project5() {
                 >
                   {PROCESS_IMAGES[step.imageIndex] && (
                     <div
-                      className={`relative w-full aspect-video md:aspect-square md:w-16 flex-shrink-0 rounded overflow-hidden ${
+                      className={`relative w-full aspect-video md:aspect-square md:w-32 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-green-500' : 'ring-1 ring-green-500/40'
                       }`}
                     >
@@ -387,10 +380,8 @@ export function Project5() {
         <motion.div
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
           animate={{
-            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
-            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
-            bottom: expandedPanel ? 'auto' : undefined,
+            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'min(600px, calc(50vw - 2rem))') : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'min(800px, calc(100vh - 10rem))') : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >

@@ -30,27 +30,27 @@ const PROCESS_STEPS = [
   {
     imageIndex: 0,
     title: '01. RESEARCH & DESIGN',
-    text: 'With the help of ChatGPT i drafted a schematic and a shopping list. I visualized the schematic with the app Fritzing and ordered the parts off Aliexpress. ',
+    text: 'Drafted a schematic and shopping list with ChatGPT. Visualized in Fritzing and ordered parts from Aliexpress.',
   },
   {
     imageIndex: 1,
     title: '02. SALVAGE & UPGRADE',
-    text: 'Once the parts arrived, i opened the lamp and removed the old transformer and power cable. Next i started building the different blocks to later combine them. The base with the charging board and the usb-c extender, the middle part with the dimmer and the batteries and the top part with the new bulb and the connectors to it. Some of the casing had to be modified to fit the new parts.',
+    text: 'Removed the old transformer and power cable. Built separate blocks: base with charging board and USB-C, middle with dimmer and batteries, top with new LED bulb. Modified some casing to fit.',
   },
   {
     imageIndex: 2,
     title: '03. FINALIZE, TESTING AND ASSEMBLE',
-    text: 'After finishing the circuit in a dissassembled state, i tested all the voltages on the circuit, if the battery charges and if the lamp works. After that i could finally assemble the lamp back toghether again.',
+    text: 'Tested all voltages, battery charging and lamp function while disassembled. Then assembled everything back together.',
   },
   {
     imageIndex: 3,
     title: '04. 3D CAPTURE',
-    text: 'To capture the lamp as a 3D model i used the mobile app Polycam with my backdrop setup for optimal lighting.',
+    text: 'Captured as 3D model using Polycam app with backdrop setup for optimal lighting.',
   },
   {
     imageIndex: 4,
     title: '05. ENHANCE',
-    text: 'To crop, retouch and give the 3D Model a bottom i used Blender. Some corners had to be improved as well as the texture in some spots.',
+    text: 'Used Blender to crop, retouch, add a bottom, and fix corners and texture spots.',
   },
 ];
 
@@ -311,7 +311,7 @@ export function Project3() {
                 >
                   {PROCESS_IMAGES[step.imageIndex] && (
                     <div
-                      className={`relative w-full aspect-video md:aspect-square md:w-16 flex-shrink-0 rounded overflow-hidden ${
+                      className={`relative w-full aspect-video md:aspect-square md:w-32 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex + 1 ? 'ring-4 ring-orange-300' : 'ring-1 ring-orange-300/40'
                       }`}
                     >
@@ -515,10 +515,8 @@ export function Project3() {
         <motion.div
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
           animate={{
-            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
-            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
-            bottom: expandedPanel ? 'auto' : undefined,
+            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'min(600px, calc(50vw - 2rem))') : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'min(800px, calc(100vh - 10rem))') : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >

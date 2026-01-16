@@ -11,32 +11,32 @@ const PROCESS_STEPS = [
   {
     image: '/under-construction/korpus-process-0.jpg',
     title: '01. DESIGN & CONCEPT',
-    text: 'I created the design in sketchup, because it is very easy and quick to use with real measurements. This then let me calculate how many planks, screws and corner-brackets i need for two pieces. I made sure the width fits a RAKO box and the heigth is ideal for a keyboard.',
+    text: 'Created the design in SketchUp with real measurements to calculate planks, screws and corner-brackets needed. Sized to fit RAKO boxes with ideal keyboard height.',
   },
   {
     image: '/under-construction/korpus-process-1.jpg',
     title: '02. SOURCE MATERIALS',
-    text: 'Luckily the workers from the construction site next doors gave me some planks they had, because they were already cut up into non-standard length. ',
+    text: 'Workers from the construction site next door gave me planks they had cut to non-standard lengths.',
   },
   {
     image: '/under-construction/korpus-process-2.jpg',
     title: '03. BUILD',
-    text: 'The build process was pretty straight forward, i just cut up the planks into the four lenghts i had in sketchup and then used the corner-brackets and wheels to mount the planks together.',
+    text: 'Cut planks to the four lengths from SketchUp, then assembled using corner-brackets and wheels.',
   },
   {
     image: '/under-construction/korpus-process-3.jpg',
     title: '04. CAPTURE',
-    text: 'I then set up a makeshift white backdrop and studio-lights to capture it 360° around.',
+    text: 'Set up a makeshift white backdrop and studio lights to capture 360° photos.',
   },
   {
     image: '/under-construction/korpus-process-4.jpg',
     title: '05. EDIT',
-    text: 'After taking all the photos, i then used photoshops batch processing capabilites to mass-edit the images in order to get the right light temperature, crop and remove the background.',
+    text: 'Used Photoshop batch processing to adjust light temperature, crop, and remove backgrounds.',
   },
   {
     image: '/under-construction/korpus-process-5.jpg',
     title: '06. PUT TO USE',
-    text: 'Now the two cabinets where set up for their final use: To mount the keyboard and have it on wheels, while also creating storage.',
+    text: 'Final setup: mobile keyboard stand on wheels with storage space.',
   },
 ];
 
@@ -48,7 +48,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
       <div className='space-y-6 pb-16'>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Brief</h3>
-          <p className='mt-4'>
+          <p className='mt-4 max-w-[600px]'>
             Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
             change and reusing materials in a different context. When is something truly done? Everything is in
             perpetual development and keeps on changing its form.
@@ -56,7 +56,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
         </div>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Specifications</h3>
-          <ul className='space-y-2 list-none mt-4'>
+          <ul className='space-y-2 list-none mt-4 max-w-[600px]'>
             <li className='border-l-4 border-red-600 pl-4'>
               <span className='font-bold'>YEAR:</span> 2025
             </li>
@@ -76,7 +76,7 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
         </div>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2'>Idea</h3>
-          <p className='mt-4'>
+          <p className='mt-4 max-w-[600px]'>
             We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
             livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
             would be the best so we could have it to our exact specifications.
@@ -84,17 +84,15 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
         </div>
         <div className='pb-4'>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Learnings & Improvements</h3>
-          <div className='space-y-3 mt-4'>
-            <ul className='list-disc list-inside'>
-              <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
-              <li>Use sandpaper to refine the edges</li>
-              <li>Use live view on external screen to spot out of focus shots</li>
-            </ul>
-          </div>
+          <ul className='list-disc list-inside mt-4 max-w-[600px]'>
+            <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
+            <li>Use sandpaper to refine the edges</li>
+            <li>Use live view on external screen to spot out of focus shots</li>
+          </ul>
         </div>
         <div>
           <h3 className='text-lg font-bold uppercase border-b-2 border-black pb-2 mt-6'>Credits</h3>
-          <div className='space-y-3 mt-4'>
+          <div className='space-y-3 mt-4 max-w-[600px]'>
             <div>
               <span className='font-bold block uppercase text-xs tracking-wider'>Solo Project</span>
               <span>Till Solenthaler</span>
@@ -122,13 +120,13 @@ const getTabsContent = (onProcessImageClick?: (imageIndex: number) => void, sele
               className='w-full cursor-pointer bg-neutral-100 p-3 border-l-4 border-black hover:bg-neutral-200 transition-colors text-left flex flex-col md:flex-row md:items-center gap-3'
             >
               <div
-                className={`relative w-full aspect-square md:w-16 flex-shrink-0 rounded overflow-hidden ${
+                className={`relative w-full aspect-square md:w-32 flex-shrink-0 rounded overflow-hidden ${
                   selectedProcessImage === index ? 'ring-4 ring-black' : 'ring-1 ring-black/20'
                 }`}
               >
                 <Image src={step.image} alt={`${step.title} step`} fill className='object-cover' />
               </div>
-              <div className='flex-1'>
+              <div className='flex-1 max-w-[600px]'>
                 <span className='font-bold block'>{step.title}</span>
                 <span className='text-sm'>{step.text}</span>
               </div>
@@ -167,9 +165,9 @@ export function Project1() {
     <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8'>
       {/* Desktop Layout */}
       <div className='hidden lg:flex flex-1 items-start justify-center w-full overflow-hidden pb-8'>
-        <div className='grid grid-cols-2 gap-8 pt-8 h-full w-auto'>
+        <div className='flex gap-8 pt-8 h-full w-full '>
           {/* Column 1: 360 Viewer / Process Image */}
-          <div className='flex items-start justify-start relative h-full aspect-square'>
+          <div className='relative h-full aspect-square'>
             {selectedProcessImage !== null ? (
               <div className='w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
                 <Image
@@ -193,7 +191,7 @@ export function Project1() {
           </div>
 
           {/* Column 2: Title & Tabs */}
-          <div className='flex flex-col gap-8 items-start justify-start relative group w-full'>
+          <div className='flex-1 flex flex-col gap-8 items-start justify-start relative group'>
             <h2
               className={`text-4xl lg:text-7xl w-full text-right font-bold transition-opacity duration-300 ${allertaStencil.className}`}
             >

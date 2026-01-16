@@ -27,42 +27,143 @@ export function About() {
         {/* CV Content */}
         <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
           {/* Timeline - Combined Education & Experience */}
-          <div className='md:col-span-2 bg-background/80 backdrop-blur-md rounded-lg p-6'>
+          <div className='bg-background/80 backdrop-blur-md rounded-lg p-6'>
             <h2 className='text-xl font-bold mb-3'>Background</h2>
             <div className='space-y-2'>
               <div>
                 <h3 className='text-base font-semibold'>Web Designer & Developer</h3>
-                <p className='text-sm text-muted-foreground'>utill.ch · Self-employed · Aug 2021 - Present</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://utill.ch'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    utill.ch
+                  </a>{' '}
+                  · Self-employed · Aug 2021 - Present
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>Software Engineer Automation</h3>
-                <p className='text-sm text-muted-foreground'>SIX · Oct 2020 - Aug 2021</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://www.six-group.com'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    SIX
+                  </a>{' '}
+                  · Oct 2020 - Aug 2021
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>Full Stack Developer</h3>
-                <p className='text-sm text-muted-foreground'>Constructor Nexademy · Education · 2020</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://constructor.org'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    Constructor Academy
+                  </a>{' '}
+                  · Education · 2020
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>IT Manager</h3>
-                <p className='text-sm text-muted-foreground'>MAF Madagascar · Civil Service · Oct 2019 - Mar 2020</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://madagascar.mafint.org/'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    MAF Madagascar
+                  </a>{' '}
+                  · Civil Service · Oct 2019 - Mar 2020
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>System Engineer</h3>
-                <p className='text-sm text-muted-foreground'>nexpert AG · Dec 2018 - May 2019</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://nexpert.ch'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    nexpert
+                  </a>{' '}
+                  · Dec 2018 - May 2019
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>System Engineer</h3>
-                <p className='text-sm text-muted-foreground'>SIX Group · Aug 2017 - Dec 2018</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://www.six-group.com'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    SIX
+                  </a>{' '}
+                  · Aug 2017 - Dec 2018
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>EFZ System Engineer, Informatik</h3>
-                <p className='text-sm text-muted-foreground'>TBZ · Education · 2013 - 2017</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://tbz.ch'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    TBZ
+                  </a>{' '}
+                  · Education · 2013 - 2017
+                </p>
               </div>
               <div>
                 <h3 className='text-base font-semibold'>Engineering Apprentice</h3>
-                <p className='text-sm text-muted-foreground'>SIX Group · Aug 2013 - Aug 2017</p>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://www.six-group.com'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    SIX
+                  </a>{' '}
+                  · Aug 2013 - Aug 2017
+                </p>
+              </div>
+              <hr className='border-foreground/10 my-2' />
+              <div>
+                <h3 className='text-base font-semibold'>Booking & Production and Web</h3>
+                <p className='text-sm text-muted-foreground'>
+                  <a
+                    href='https://stolze-openair.ch'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className='hover:text-foreground transition-colors'
+                  >
+                    Stolze Openair
+                  </a>{' '}
+                  · 2018-present
+                </p>
               </div>
             </div>
+          </div>
+
+          {/* About Text */}
+          <div className='bg-background/80 backdrop-blur-md rounded-lg p-6'>
+            <h2 className='text-xl font-bold mb-3'>About</h2>
+            <p className='text-sm text-foreground/80 leading-relaxed'>Add your text paragraph here.</p>
           </div>
 
           {/* Skills & Contact Column */}
@@ -73,19 +174,19 @@ export function About() {
               <div className='space-y-2'>
                 <div>
                   <h3 className='font-semibold'>Development</h3>
-                  <p className='text-sm text-muted-foreground'>React, Tailwind, Next.js, TypeScript, Python, Django</p>
+                  <p className='text-sm text-muted-foreground'>
+                    React, Tailwind, Next.js, TypeScript, Python, Wordpress
+                  </p>
                 </div>
                 <div>
                   <h3 className='font-semibold'>Creative Tools</h3>
                   <p className='text-sm text-muted-foreground'>
-                    Photoshop, Illustrator, InDesign, Premiere / Davinci , Ableton, Three.js / Blender
+                    Photoshop, Illustrator, Figma, InDesign, Premiere / Davinci , Ableton, Three.js / Blender
                   </p>
                 </div>
                 <div>
                   <h3 className='font-semibold'>Infrastructure & Networking</h3>
-                  <p className='text-sm text-muted-foreground'>
-                    Docker, Linux, Ansible, Grafana, CI/CD, Web Application Firewalls
-                  </p>
+                  <p className='text-sm text-muted-foreground'>Linux, Docker, Infra as code, Networks, Security</p>
                 </div>
               </div>
             </div>

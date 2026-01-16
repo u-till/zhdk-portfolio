@@ -25,7 +25,7 @@ const PROCESS_STEPS = [
   {
     imageIndex: 2,
     title: '02. PRODUCTION',
-    text: 'Vogelsang was a Projekt Interim Building that housed many creatives, mainly in music. My closest collaborators at that time were Lars (Dirty Uludag) and Julian (July). This Album / Beattape was mostly made by me and Lars. I used Ableton and Lars used Fruity Loops. We also would often work on the same tracks. Someone created a sample and the other the drums and vice-versa.',
+    text: 'Made at Vogelsang, a creative interim building. Mostly produced by me (Ableton) and Lars (FL Studio). We often collaborated on tracks - one creating samples, the other drums.',
   },
   {
     imageIndex: 3,
@@ -117,11 +117,9 @@ export function Project6() {
                           Idea
                         </h3>
                         <p className='leading-relaxed mt-4'>
-                          The whole project started because I created the cover art. This gave us a scope of what to
-                          include and in which direction the production would go. We then searched for fitting beats and
-                          also produced a few tracks specifically to match this space theme. The original idea also
-                          included collaborating with different artists for each track to record vocals, which
-                          unfortunately never materialized.
+                          Started with the cover art, which set the direction. We searched for fitting beats and produced
+                          tracks to match the space theme. Original plan included vocal collaborations for each track,
+                          which never materialized.
                         </p>
                       </div>
                       <div>
@@ -184,7 +182,7 @@ export function Project6() {
                             className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
                           >
                             <div
-                              className={`relative w-16 h-16 flex-shrink-0 rounded overflow-hidden ${
+                              className={`relative w-32 h-32 flex-shrink-0 rounded overflow-hidden ${
                                 currentImageIndex === step.imageIndex
                                   ? 'ring-4 ring-[#FF6B66]'
                                   : 'ring-1 ring-[#AA4742]/40'

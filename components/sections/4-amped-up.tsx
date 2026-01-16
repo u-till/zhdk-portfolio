@@ -31,32 +31,32 @@ const PROCESS_STEPS = [
   {
     imageIndex: 0,
     title: '01. RESEARCH & DESIGN',
-    text: 'In this phase, my flatmate Julian Fehr took the lead due to his expertise with speakers and amplifiers. We opted for replacing the analog amps with a digital amps because this would give us DSP functionality. These were fitted into the left speaker enclosure, using a main board for mids and highs and a separate board for the lows.',
+    text: 'Julian led this phase due to his speaker expertise. We chose digital amps for DSP functionality, fitted into the left enclosure with separate boards for mids/highs and lows.',
   },
   {
     imageIndex: 1,
     title: '02. REMOVE OLD AMPS',
-    text: 'Before installing the new amps, i first had to remove the old analogue amplifiers from the speaker enclosure. This was very straightforward as i just had to unscrew a few screws and unplug the cables. Unfortunaltey i forgot to take a picture of the old amps before removing them, so i attached a screenshot of the manual.',
+    text: 'Removed old analogue amplifiers by unscrewing and unplugging cables. Screenshot of the manual shown as reference since no photo was taken.',
   },
   {
     imageIndex: 2,
     title: '03. TEST CIRCUIT & BUILD ENCLOSURE',
-    text: 'In order to mount the new amps, i created a simple backplate with a power connector, power switch, aux connector and audio cable terminals for the second speaker. Before mounting everything to the new enclosure, we connected everything first to test it.',
+    text: 'Created a backplate with power connector, switch, aux input and speaker terminals for the second speaker. Tested everything before mounting.',
   },
   {
     imageIndex: 3,
     title: '04. MOUNT CIRCUIT TO ENCLOSURE',
-    text: 'After sucessfully testing the new circuit, i mounted all the components to the enclosure and screwed the cover back onto the speaker.',
+    text: 'Mounted all components to the enclosure and screwed the cover back onto the speaker.',
   },
   {
     imageIndex: 4,
     title: '05. CONNECT AND TEST',
-    text: 'At this point i connected everything together and tested the functionality. The amps worked well and we could connect via bluetooth and adjust the EQ settings via the DSP software.',
+    text: 'Connected everything and tested functionality. Bluetooth worked and EQ settings could be adjusted via DSP software.',
   },
   {
     imageIndex: 5,
     title: '06. CAPTURE IMAGES',
-    text: 'To create high quality images for this portfolio i also used my backdrop setup with the studio lights.',
+    text: 'Used backdrop setup with studio lights to create portfolio images.',
   },
 ];
 
@@ -232,12 +232,9 @@ export function Project4() {
             <div>
               <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>IDEA</h3>
               <p className='mt-4'>
-                The idea came originally from my flatmate Julian Fehr, because he acquired these speakers with one
-                broken amp and they were sitting around unused for a long time so we brainstormed how we could bring new
-                life into these speakers. To make them more versatile and usable with modern devices, we decided to
-                replace the analogue amps with digital amps that support bluetooth and DSP functionality. This way we
-                are able to control the speakers frequency response to tweak the sound of the individual drivers and
-                also adapt it to the room acoustics.
+                Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
+                features: digital amps with bluetooth and DSP for frequency response control and room acoustic
+                adaptation.
               </p>
             </div>
             <div>
@@ -288,7 +285,7 @@ export function Project4() {
                 >
                   {PROCESS_IMAGES[step.imageIndex] && (
                     <div
-                      className={`relative w-full aspect-video md:aspect-square md:w-16 flex-shrink-0 rounded overflow-hidden ${
+                      className={`relative w-full aspect-video md:aspect-square md:w-32 flex-shrink-0 rounded overflow-hidden ${
                         activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
                       }`}
                     >
@@ -408,10 +405,8 @@ export function Project4() {
         <motion.div
           className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
           animate={{
-            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'calc(50vw - 2rem)') : undefined,
-            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'calc(100vh - 10rem)') : undefined,
-            top: expandedPanel ? (isMobile ? '6rem' : '8rem') : undefined,
-            bottom: expandedPanel ? 'auto' : undefined,
+            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'min(600px, calc(50vw - 2rem))') : undefined,
+            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'min(800px, calc(100vh - 10rem))') : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
