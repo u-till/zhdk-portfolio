@@ -120,7 +120,7 @@ export function StarField() {
   return (
     <canvas
       ref={canvasRef}
-      className='absolute inset-0 w-full h-full bg-black'
+      className='fixed inset-0 w-full h-full bg-black'
       id='star-field'
       style={{ willChange: 'transform' }}
     />

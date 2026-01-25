@@ -1,12 +1,9 @@
 'use client';
 
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
-import { SpaceTabs } from '@/components/lost-in-space/space-tabs';
 import { StarField } from '@/components/lost-in-space/star-field';
-import { orbitron } from '@/lib/fonts';
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 
 const IMAGES = [
   '/lost-in-space/cover.jpg',
@@ -40,350 +37,175 @@ const PROCESS_STEPS = [
 ];
 
 export function Project6() {
-  const [showMobileInfo, setShowMobileInfo] = useState(false);
-  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as 'infos' | 'process');
-    if (tabId === 'infos') {
-      setCurrentImageIndex(0);
-    } else if (tabId === 'process') {
-      setCurrentImageIndex(1);
-    }
-  }, []);
+  const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
-    <section className='h-screen flex flex-col items-center pt-24 md:pt-28 gap-4 md:gap-8 px-4 md:px-8 relative overflow-hidden'>
+    <section className='h-screen overflow-y-auto overflow-x-hidden relative'>
       <StarField />
 
-      {/* Desktop Layout */}
-      <div className='hidden lg:flex flex-1 flex-row gap-4 md:gap-8 max-w-screen-2xl mx-0 md:pt-8 w-full overflow-hidden pb-8 max-h-[1000px] relative z-10'>
-        {/* Column 1: 3D Album Viewer */}
-        <div className='flex flex items-start justify-start '>
+      {/* First View: Album Viewer */}
+      <div className='h-screen relative overflow-hidden flex flex-col items-center px-4 md:px-8 pt-32 md:pt-36 pb-8'>
+        {/* Album Viewer */}
+        <div className='w-full h-full flex items-center justify-center z-10'>
           <AlbumViewer3D
-            coverImage={IMAGES[currentImageIndex]}
+            coverImage={IMAGES[0]}
             spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
           />
         </div>
 
-        {/* Column 2: Tabs */}
-        <div className='flex flex-1 w-full flex-col gap-4 md:gap-8 items-center justify-start'>
-          <h2
-            className={`text-4xl lg:text-7xl font-bold text-white text-center ${orbitron.className}`}
-            style={{ transform: 'perspective(300px) rotateX(25deg)' }}
+        {/* Scroll Down Arrow */}
+        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='32'
+            height='32'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='text-white/30 animate-bounce'
           >
-            LOST IN SPACE
-          </h2>
-          <div className='w-full flex-1 min-h-0'>
-            <SpaceTabs
-              tabs={[
-                {
-                  id: 'infos',
-                  label: 'INFOS',
-                  content: (
-                    <div className='space-y-6 text-white'>
-                      <div>
-                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-                          Brief
-                        </h3>
-                        <p className='leading-relaxed mt-4'>
-                          An album i did toghether with my friends when i used to live in a house full of musicians.
-                          Combining productions under the theme of space, with cover art created by me.
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                          Specifications
-                        </h3>
-                        <ul className='space-y-2 list-none mt-4'>
-                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>YEAR:</span> 2019
-                          </li>
-                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>FOR:</span> Collaborative Project
-                          </li>
-                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>TYPE:</span> Music Album / Cover Art
-                          </li>
-                          <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                            <span className='font-bold'>METHODOLOGY:</span> Recording instruments / sounds, sampling and
-                            programming MIDI with Ableton and FL Studio.
-                          </li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                          Idea
-                        </h3>
-                        <p className='leading-relaxed mt-4'>
-                          Started with the cover art, which set the direction. We searched for fitting beats and produced
-                          tracks to match the space theme. Original plan included vocal collaborations for each track,
-                          which never materialized.
-                        </p>
-                      </div>
-                      <div>
-                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                          Learnings & Improvements
-                        </h3>
-                        <div className='space-y-3 mt-4'>
-                          <ul className='list-disc list-inside'>
-                            <li>Outreach to more artists for collaboration</li>
-                          </ul>
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                          Credits
-                        </h3>
-                        <div className='space-y-3 mt-4'>
-                          <div>
-                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                              Album Art
-                            </span>
-                            <span>Till Solenthaler</span>
-                          </div>
-                          <div>
-                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                              Music Production
-                            </span>
-                            <span>
-                              Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
-                            </span>
-                          </div>
-                          <div>
-                            <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                              AI Declaration
-                            </span>
-                            <div className='space-y-3 mt-2'>
-                              <ul className='list-disc list-inside'>
-                                <li>No AI was used in this project</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ),
-                },
-                {
-                  id: 'process',
-                  label: 'PROCESS',
-                  content: (
-                    <div className='space-y-4 text-white'>
-                      <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-                        Creation Process
-                      </h3>
-                      <div className='space-y-3'>
-                        {PROCESS_STEPS.map((step) => (
-                          <button
-                            key={step.imageIndex}
-                            onClick={() => setCurrentImageIndex(step.imageIndex)}
-                            className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex items-center gap-3'
-                          >
-                            <div
-                              className={`relative w-32 h-32 flex-shrink-0 rounded overflow-hidden ${
-                                currentImageIndex === step.imageIndex
-                                  ? 'ring-4 ring-[#FF6B66]'
-                                  : 'ring-1 ring-[#AA4742]/40'
-                              }`}
-                            >
-                              <Image
-                                src={IMAGES[step.imageIndex]}
-                                alt={`${step.title} step`}
-                                fill
-                                className='object-cover'
-                              />
-                            </div>
-                            <div className='flex-1'>
-                              <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
-                              <span className='text-sm'>{step.text}</span>
-                            </div>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  ),
-                },
-              ]}
-              activeTab={activeTab}
-              onTabChange={handleTabChange}
-            />
+            <path d='M12 5v14M5 12l7 7 7-7' />
+          </svg>
+        </div>
+      </div>
+
+      {/* Info Content - 3 Columns */}
+      <div className='px-4 md:px-8 pt-16 pb-16 relative z-10'>
+        <div>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-white'>
+            {/* Column 1: Brief & Idea */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Brief</h3>
+                <p className='mt-4 leading-relaxed'>
+                  An album i did toghether with my friends when i used to live in a house full of musicians. Combining
+                  productions under the theme of space, with cover art created by me.
+                </p>
+              </div>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Idea</h3>
+                <p className='mt-4 leading-relaxed'>
+                  Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
+                  to match the space theme. Original plan included vocal collaborations for each track, which never
+                  materialized.
+                </p>
+              </div>
+            </div>
+
+            {/* Column 2: Specifications */}
+            <div>
+              <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>
+                Specifications
+              </h3>
+              <ul className='space-y-2 list-none mt-4'>
+                <li className='border-l-2 border-[#AA4742] pl-3 py-1'>
+                  <span className='font-bold text-[#FF6B66]'>YEAR:</span> 2019
+                </li>
+                <li className='border-l-2 border-[#AA4742] pl-3 py-1'>
+                  <span className='font-bold text-[#FF6B66]'>FOR:</span> Collaborative Project
+                </li>
+                <li className='border-l-2 border-[#AA4742] pl-3 py-1'>
+                  <span className='font-bold text-[#FF6B66]'>TYPE:</span> Music Album / Cover Art
+                </li>
+                <li className='border-l-2 border-[#AA4742] pl-3 py-1'>
+                  <span className='font-bold text-[#FF6B66]'>METHODOLOGY:</span> Recording instruments / sounds,
+                  sampling and programming MIDI with Ableton and FL Studio.
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Learnings & Credits */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>
+                  Learnings
+                </h3>
+                <ul className='list-disc list-inside mt-4 space-y-1'>
+                  <li>Outreach to more artists for collaboration</li>
+                  <li>Maintain momentum on long-term projects</li>
+                </ul>
+              </div>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Credits</h3>
+                <div className='space-y-4 mt-4'>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider text-[#FF6B66]'>Album Art</span>
+                    <span>Till Solenthaler</span>
+                  </div>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider text-[#FF6B66]'>
+                      Music Production
+                    </span>
+                    <span>Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik</span>
+                  </div>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider text-[#FF6B66]'>
+                      AI Declaration
+                    </span>
+                    <span>No AI was used in this project</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Layout */}
-      <div className='lg:hidden flex-1 flex flex-col gap-4 max-w-screen-2xl mx-auto px-0 w-full overflow-visible pb-4 relative z-10'>
-        {/* Middle Content - Swipeable */}
-        <div className='flex-1 relative'>
-          <AnimatePresence initial={false}>
-            {!showMobileInfo ? (
-              <motion.div
-                key='viewer'
-                initial={{ x: 'calc(-100% - 1rem)' }}
-                animate={{ x: 0 }}
-                exit={{ x: 'calc(-100% - 1rem)' }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 flex flex-col gap-4 w-full'
-              >
-                <h2
-                  className={`text-4xl text-center font-bold text-white ${orbitron.className}`}
-                  style={{ transform: 'perspective(300px) rotateX(25deg)' }}
-                >
-                  LOST IN SPACE
-                </h2>
-                <div className='flex-1 flex items-center justify-center'>
-                  <AlbumViewer3D
-                    coverImage={IMAGES[currentImageIndex]}
-                    spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
-                  />
-                </div>
-              </motion.div>
-            ) : (
-              <motion.div
-                key='info'
-                initial={{ x: 'calc(100% + 1rem)' }}
-                animate={{ x: 0 }}
-                exit={{ x: 'calc(100% + 1rem)' }}
-                transition={{ duration: 0.4, ease: 'easeInOut' }}
-                className='absolute inset-0 overflow-hidden'
-              >
-                <SpaceTabs
-                  tabs={[
-                    {
-                      id: 'infos',
-                      label: 'INFOS',
-                      content: (
-                        <div className='space-y-6 text-white'>
-                          <div>
-                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-                              Project Details
-                            </h3>
-                            <p className='leading-relaxed mt-4'>
-                              An album i did toghether with my flatmate when we used to live in a studio.
-                            </p>
-                            <div className='grid grid-cols-2 gap-4 pt-4'>
-                              <div>
-                                <span className='font-bold block text-[#FF6B66]'>TYPE:</span>
-                                <span>Music Album</span>
-                              </div>
-                              <div>
-                                <span className='font-bold block text-[#FF6B66]'>YEAR:</span>
-                                <span>2019</span>
-                              </div>
-                            </div>
-                          </div>
-                          {/* <div>
-                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                              Specifications
-                            </h3>
-                            <ul className='space-y-2 list-none mt-4'>
-                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                                <span className='font-bold text-[#FF6B66]'>FORMAT:</span> 3D Interactive
-                              </li>
-                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                                <span className='font-bold text-[#FF6B66]'>PLATFORM:</span> Spotify
-                              </li>
-                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                                <span className='font-bold text-[#FF6B66]'>INTERACTION:</span> Mouse Tilt & Flip
-                              </li>
-                              <li className='border-l-2 border-[#AA4742]/60 pl-4'>
-                                <span className='font-bold text-[#FF6B66]'>ANIMATION:</span> CSS 3D Transform
-                              </li>
-                            </ul>
-                          </div> */}
-                          <div>
-                            <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66] mt-6'>
-                              Credits
-                            </h3>
-                            <div className='space-y-3 mt-4'>
-                              <div>
-                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                                  Album Art
-                                </span>
-                                <span>Till Solenthaler</span>
-                              </div>
-                              <div>
-                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                                  Music Production
-                                </span>
-                                <span>
-                                  Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
-                                </span>
-                              </div>
-                              <div>
-                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                                  Development
-                                </span>
-                                <span>Till Solenthaler</span>
-                              </div>
-                              <div>
-                                <span className='font-bold block uppercase text-xs tracking-wider text-[#FF6B66]'>
-                                  Year
-                                </span>
-                                <span>2024</span>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      ),
-                    },
-                    {
-                      id: 'process',
-                      label: 'PROCESS',
-                      content: (
-                        <div className='space-y-4 text-white'>
-                          <h3 className='text-lg font-bold uppercase border-b-2 border-[#AA4742]/40 pb-2 text-[#FF6B66]'>
-                            Creation Process
-                          </h3>
-                          <div className='space-y-3'>
-                            {PROCESS_STEPS.map((step) => (
-                              <button
-                                key={step.imageIndex}
-                                onClick={() => setCurrentImageIndex(step.imageIndex)}
-                                className='w-full cursor-pointer bg-[#AA4742]/10 p-3 border-l-2 border-[#AA4742]/60 hover:bg-[#AA4742]/20 transition-colors text-left flex flex-col gap-3'
-                              >
-                                <div
-                                  className={`relative w-full aspect-square flex-shrink-0 rounded overflow-hidden ${
-                                    currentImageIndex === step.imageIndex
-                                      ? 'ring-4 ring-[#FF6B66]'
-                                      : 'ring-1 ring-[#AA4742]/40'
-                                  }`}
-                                >
-                                  <Image
-                                    src={IMAGES[step.imageIndex]}
-                                    alt={`${step.title} step`}
-                                    fill
-                                    className='object-cover'
-                                  />
-                                </div>
-                                <div className='flex-1'>
-                                  <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
-                                  <span className='text-sm'>{step.text}</span>
-                                </div>
-                              </button>
-                            ))}
-                          </div>
-                        </div>
-                      ),
-                    },
-                  ]}
-                  activeTab={activeTab}
-                  onTabChange={handleTabChange}
-                />
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
+      {/* Process Section */}
+      <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
+        <div className='flex flex-col'>
+          <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-6 flex-shrink-0 text-[#FF6B66]'>
+            Process
+          </h3>
 
-        {/* Button - Always visible */}
-        <button
-          onClick={() => setShowMobileInfo(!showMobileInfo)}
-          className='w-full py-4 px-6 rounded-lg border border-white/20 bg-white/10 backdrop-blur-md text-white font-mono font-bold uppercase hover:bg-white/20 transition-colors'
-        >
-          {showMobileInfo ? 'Back' : 'More Infos'}
-        </button>
+          <div className='flex flex-col lg:flex-row gap-6'>
+            {/* Left: Process List (1/3 on desktop, full on mobile) */}
+            <div className='lg:w-1/3 space-y-2'>
+              {PROCESS_STEPS.map((step, index) => (
+                <div
+                  key={step.imageIndex}
+                  onClick={() => setSelectedProcessIndex(index)}
+                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-[#AA4742] bg-[#AA4742]/20 ${
+                    selectedProcessIndex !== index &&
+                    'lg:border-[#AA4742]/40 lg:bg-[#AA4742]/10 lg:hover:bg-[#AA4742]/20'
+                  }`}
+                >
+                  <div
+                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ring-2 ring-[#FF6B66] ${
+                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-[#AA4742]/40'
+                    }`}
+                  >
+                    <Image
+                      src={IMAGES[step.imageIndex]}
+                      alt={`${step.title} thumbnail`}
+                      fill
+                      className='object-cover'
+                    />
+                  </div>
+                  <div className='flex-1 text-white'>
+                    <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
+                    <span className='text-white/80 text-sm'>{step.text}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Selected Image (2/3) - Desktop only */}
+            <div className='hidden lg:block lg:w-2/3'>
+              <div className='aspect-square max-h-[80vh] relative w-full aspect-[4/3] rounded-lg overflow-hidden'>
+                <Image
+                  src={IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex] || IMAGES[0]}
+                  alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
+                  fill
+                  className='object-contain'
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );

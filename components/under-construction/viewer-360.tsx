@@ -27,6 +27,8 @@ export function Viewer360({
   const [startX, setStartX] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isHovering, setIsHovering] = useState(false);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
   const animationRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -81,6 +83,15 @@ export function Viewer360({
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
+    // Track mouse position relative to container
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    }
+
     if (!isDragging || isLoading) return;
 
     const deltaX = e.clientX - startX;
@@ -94,6 +105,14 @@ export function Viewer360({
       }
       setStartX(e.clientX);
     }
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -188,9 +207,11 @@ export function Viewer360({
   return (
     <div
       ref={containerRef}
-      className='overflow-hidden cursor-grab active:cursor-grabbing select-none border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] w-full h-full relative aspect-square'
+      className='overflow-hidden cursor-none select-none w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -211,7 +232,7 @@ export function Viewer360({
             src={getImagePath(currentFrame)}
             alt={`360 view frame ${currentFrame + 1}`}
             fill
-            className='object-cover pointer-events-none'
+            className='object-contain pointer-events-none'
             priority={currentFrame === 0}
             draggable={false}
           />
@@ -220,8 +241,35 @@ export function Viewer360({
 
       {/* Loading overlay */}
       {isLoading && (
-        <div className='absolute inset-0 bg-white/80 flex items-center justify-center z-20'>
-          <div className='text-black font-bold text-lg animate-pulse'>Loading...</div>
+        <div className='absolute inset-0 bg-black/50 flex items-center justify-center z-20'>
+          <div className='text-white font-bold text-lg animate-pulse'>Loading...</div>
+        </div>
+      )}
+
+      {/* Rotate hint - follows cursor */}
+      {!isLoading && isHovering && (
+        <div
+          className='absolute z-30 flex items-center justify-center bg-black/80 p-2 rounded-full pointer-events-none transition-opacity -translate-x-1/2 -translate-y-1/2'
+          style={{
+            left: mousePos.x,
+            top: mousePos.y,
+          }}
+        >
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='20'
+            height='20'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='text-white'
+          >
+            <path d='M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8' />
+            <path d='M3 3v5h5' />
+          </svg>
         </div>
       )}
     </div>

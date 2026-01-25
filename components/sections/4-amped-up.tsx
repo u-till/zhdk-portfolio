@@ -2,12 +2,10 @@
 
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
-import { useIsMobile } from '@/hooks/use-is-mobile';
 import { vt323 } from '@/lib/fonts';
-import { ImageItem, Tab } from '@/types/project';
-import { AnimatePresence, motion } from 'framer-motion';
+import { ImageItem } from '@/types/project';
 import Image from 'next/image';
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/preview.jpg', objectFit: 'cover' },
@@ -19,12 +17,12 @@ const GALLERY_IMAGES: ImageItem[] = [
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-process-9.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-process-12.jpg', objectFit: 'cover', hideTitle: true },
+  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-process-9.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-process-12.jpg', objectFit: 'cover' },
 ];
 
 const PROCESS_STEPS = [
@@ -60,84 +58,9 @@ const PROCESS_STEPS = [
   },
 ];
 
-function AmpedUpTabs({
-  tabs,
-  onClose,
-  activeTab,
-  onTabChange,
-}: {
-  tabs: Tab[];
-  onClose: () => void;
-  activeTab: string;
-  onTabChange: (tabId: string) => void;
-}) {
-  const handleTabChange = (tabId: string) => {
-    onTabChange(tabId);
-  };
-
-  return (
-    <div className='w-full h-full border border-black/60 bg-background backdrop-blur-md flex flex-col'>
-      {/* Tab Headers */}
-      <div className='flex border-b border-black/60 flex-shrink-0'>
-        <button
-          onClick={onClose}
-          className='relative cursor-pointer py-4 px-6 font-mono text-xl font-medium transition-colors border-r border-black/60 bg-transparent text-foreground hover:bg-neutral-100'
-        >
-          ×
-        </button>
-        {tabs.map((tab, index) => (
-          <button
-            key={tab.id}
-            onClick={() => handleTabChange(tab.id)}
-            className={`relative cursor-pointer flex-1 py-4 px-4 font-mono text-sm md:text-base font-medium uppercase transition-colors ${
-              index < tabs.length - 1 ? 'border-r border-black/60' : ''
-            } ${
-              activeTab === tab.id
-                ? 'bg-foreground text-background'
-                : 'bg-transparent text-foreground hover:bg-neutral-100'
-            }`}
-          >
-            {tab.label}
-            {activeTab === tab.id && (
-              <motion.div
-                layoutId='activeAmpedTab'
-                className='absolute inset-0 bg-foreground -z-10'
-                transition={{ type: 'spring', bounce: 0.2, duration: 0.6 }}
-              />
-            )}
-          </button>
-        ))}
-      </div>
-
-      {/* Tab Content */}
-      <div className='relative flex-1 p-6 md:p-8 overflow-auto min-h-0'>
-        <AnimatePresence mode='wait'>
-          {tabs.map(
-            (tab) =>
-              activeTab === tab.id && (
-                <motion.div
-                  key={tab.id}
-                  initial={{ opacity: 0, x: 20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -20 }}
-                  transition={{ duration: 0.3, ease: 'easeInOut' }}
-                  className='font-mono text-sm leading-relaxed'
-                >
-                  {tab.content}
-                </motion.div>
-              )
-          )}
-        </AnimatePresence>
-      </div>
-    </div>
-  );
-}
-
 export function Project4() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedPanel, setExpandedPanel] = useState(false);
-  const isMobile = useIsMobile(768);
-  const [activeTab, setActiveTab] = useState<'infos' | 'process'>('infos');
+  const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const navigateToPhoto = useCallback((imageIndex: number) => {
@@ -150,310 +73,269 @@ export function Project4() {
     }
   }, []);
 
-  const handleTabChange = useCallback(
-    (tabId: string) => {
-      if (tabId !== activeTab) {
-        setActiveTab(tabId as 'infos' | 'process');
-        navigateToPhoto(0);
-      }
-    },
-    [navigateToPhoto, activeTab]
-  );
-
-  const activeImages = activeTab === 'infos' ? GALLERY_IMAGES : PROCESS_IMAGES;
-
   const handlePrev = useCallback(() => {
-    const newIndex = activeIndex > 0 ? activeIndex - 1 : activeImages.length - 1;
+    const newIndex = activeIndex > 0 ? activeIndex - 1 : GALLERY_IMAGES.length - 1;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto, activeImages.length]);
+  }, [activeIndex, navigateToPhoto]);
 
   const handleNext = useCallback(() => {
-    const newIndex = activeIndex < activeImages.length - 1 ? activeIndex + 1 : 0;
+    const newIndex = activeIndex < GALLERY_IMAGES.length - 1 ? activeIndex + 1 : 0;
     navigateToPhoto(newIndex);
-  }, [activeIndex, navigateToPhoto, activeImages.length]);
+  }, [activeIndex, navigateToPhoto]);
 
   useCarouselScroll(scrollRef, setActiveIndex);
   useCarouselKeyboard(handlePrev, handleNext);
 
-  const tabs = useMemo(
-    () => [
-      {
-        id: 'infos',
-        label: 'INFOS',
-        content: (
-          <div className='space-y-6'>
-            <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>BRIEF</h3>
-              <p className='mt-4'>
-                An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
-                enables new functionality like EQ / DSP / and Bluetooth.
-              </p>
+  return (
+    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+      {/* First View: Gallery */}
+      <div className='h-screen relative overflow-hidden flex flex-col items-center'>
+        {/* Title */}
+        <div
+          className={`absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10 transition-opacity duration-300 ${
+            activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <h2
+            className={`text-6xl lg:text-8xl font-bold text-black text-center ${vt323.className}`}
+          >
+            amped up
+          </h2>
+        </div>
+
+        {/* Scrolling Photos - Full Width */}
+        <div
+          ref={scrollRef}
+          className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
+        >
+          {GALLERY_IMAGES.map((image, index) => (
+            <div
+              key={image.src}
+              className='h-full min-w-full snap-center flex items-center justify-center relative'
+            >
+              <Image
+                src={image.src}
+                alt={`Amped Up ${index + 1}`}
+                fill
+                className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
+                priority={index === 0}
+                sizes='100vw'
+              />
             </div>
+          ))}
+        </div>
+
+        {/* Navigation Buttons - Desktop Only */}
+        <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
+          <button
+            onClick={handlePrev}
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
+            aria-label='Previous photo'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={2}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
+            aria-label='Next photo'
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={2}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </button>
+        </div>
+
+        {/* Thumbnail Strip - Bottom Left */}
+        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 z-20 pointer-events-auto flex gap-2 overflow-x-auto max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-4rem)]'>
+          {GALLERY_IMAGES.map((image, index) => (
+            <button
+              key={index}
+              onClick={() => navigateToPhoto(index)}
+              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 border ${
+                activeIndex === index
+                  ? 'border-2 border-black opacity-100'
+                  : 'border-black/60 opacity-60 hover:opacity-100'
+              }`}
+            >
+              <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover' />
+            </button>
+          ))}
+        </div>
+
+        {/* Scroll Down Arrow */}
+        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='32'
+            height='32'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='text-foreground/30 animate-bounce'
+          >
+            <path d='M12 5v14M5 12l7 7 7-7' />
+          </svg>
+        </div>
+      </div>
+
+      {/* Info Content - 3 Columns */}
+      <div className='bg-gradient-to-b from-neutral-50 to-neutral-100 px-4 md:px-8 pt-16 pb-16'>
+        <div>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground font-mono'>
+            {/* Column 1: Brief & Idea */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Brief</h3>
+                <p className='mt-4 leading-relaxed'>
+                  An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
+                  enables new functionality like EQ / DSP / and Bluetooth.
+                </p>
+              </div>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Idea</h3>
+                <p className='mt-4 leading-relaxed'>
+                  Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
+                  features: digital amps with bluetooth and DSP for frequency response control and room acoustic
+                  adaptation.
+                </p>
+              </div>
+            </div>
+
+            {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>SPEFICICATIONS</h3>
+              <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-foreground pl-4'>
+                <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2024-2025
                 </li>
-                <li className='border-l-2 border-foreground pl-4'>
+                <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>FOR:</span> Collaborative Project
                 </li>
-                <li className='border-l-2 border-foreground pl-4'>
+                <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
                 </li>
-                <li className='border-l-2 border-foreground pl-4'>
-                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W
-                  AMP / XLR Connectors
+                <li className='border-l-2 border-foreground pl-3 py-1'>
+                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
                 </li>
-                <li className='border-l-2 border-foreground pl-4'>
+                <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>UPGRADES:</span>{' '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/757'>
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/757' className='underline hover:no-underline'>
                     Wondom 4x 30W Amp with Bluetooth and DSP
-                  </a>{' '}
-                  /{' '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/804'>
+                  </a>{' / '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/804' className='underline hover:no-underline'>
                     Wondom 2x 50W Amp
-                  </a>{' '}
-                  /{' '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/726'>
+                  </a>{' / '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/726' className='underline hover:no-underline'>
                     WONDOM ICP5 In-circuit Programmer
-                  </a>{' '}
-                  /{' '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
-                  >
+                  </a>{' / '}
+                  <a target='_blank' rel='noopener noreferrer' href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200' className='underline hover:no-underline'>
                     Meanwell LRS 200-15 PSU
                   </a>
                 </li>
               </ul>
             </div>
-            <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>IDEA</h3>
-              <p className='mt-4'>
-                Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
-                features: digital amps with bluetooth and DSP for frequency response control and room acoustic
-                adaptation.
-              </p>
-            </div>
-            <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Learnings & Improvements</h3>
-              <div className='space-y-3 mt-4'>
-                <ul className='list-disc list-inside'>
+
+            {/* Column 3: Learnings & Credits */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Learnings</h3>
+                <ul className='list-disc list-inside mt-4 space-y-1'>
                   <li>Implement room correction onto DSP board</li>
                   <li>Connect front LED to DSP board to use as bluetooth status LED</li>
                 </ul>
               </div>
-            </div>
-            <div>
-              <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2 mt-6'>Credits</h3>
-              <div className='space-y-3 mt-4'>
-                <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Idea & Concept</span>
-                  <span>Till Solenthaler & Julian Fehr</span>
-                </div>
-                <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>Build</span>
-                  <span>Till Solenthaler</span>
-                </div>
-                <div>
-                  <span className='font-bold block uppercase text-xs tracking-wider'>AI Declaration</span>
-                  <div className='space-y-3 mt-2'>
-                    <ul className='list-disc list-inside'>
-                      <li>No AI tools used</li>
-                    </ul>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Credits</h3>
+                <div className='space-y-4 mt-4'>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider'>Idea & Concept</span>
+                    <span>Till Solenthaler & Julian Fehr</span>
+                  </div>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider'>Build</span>
+                    <span>Till Solenthaler</span>
+                  </div>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
+                    <span>No AI tools used</span>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        ),
-      },
-      {
-        id: 'process',
-        label: 'PROCESS',
-        content: (
-          <div className='space-y-4'>
-            <h3 className='text-lg font-bold uppercase border-b border-black/60 pb-2'>Build Process</h3>
-            <div className='space-y-3'>
-              {PROCESS_STEPS.map((step) => (
-                <button
-                  key={step.imageIndex}
-                  onClick={() => navigateToPhoto(step.imageIndex)}
-                  className='w-full cursor-pointer bg-neutral-100 p-3 border-l-2 border-foreground hover:bg-neutral-200 transition-colors text-left flex flex-col md:flex-row md:items-center gap-3'
-                >
-                  {PROCESS_IMAGES[step.imageIndex] && (
-                    <div
-                      className={`relative w-full aspect-video md:aspect-square md:w-32 flex-shrink-0 rounded overflow-hidden ${
-                        activeIndex === step.imageIndex ? 'ring-4 ring-foreground' : 'ring-1 ring-foreground/20'
-                      }`}
-                    >
-                      <Image
-                        src={PROCESS_IMAGES[step.imageIndex].src}
-                        alt={`${step.title} step`}
-                        fill
-                        className='object-cover'
-                      />
-                    </div>
-                  )}
-                  <div className='flex-1'>
-                    <span className='font-bold block'>{step.title}</span>
-                    <span className='text-sm'>{step.text}</span>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        ),
-      },
-    ],
-    [navigateToPhoto, activeIndex]
-  );
-
-  return (
-    <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
-      {/* Title */}
-      <div
-        className={`absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10 transition-opacity duration-300 ${
-          activeImages[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
-        }`}
-      >
-        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
-          <h2 className={`text-6xl lg:text-8xl font-bold text-white mix-blend-difference ${vt323.className}`}>
-            amped up
-          </h2>
         </div>
       </div>
 
-      {/* Scrolling Photos - Full Width */}
-      <div
-        ref={scrollRef}
-        className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
-      >
-        {activeImages.map((image, index) => (
-          <div key={image.src} className={`h-full min-w-full snap-center flex items-center justify-center relative `}>
-            <Image
-              src={image.src}
-              alt={`Amped Up ${index + 1}`}
-              fill
-              className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
-              priority={index === 0}
-              sizes='100vw'
-            />
-          </div>
-        ))}
-      </div>
+      {/* Process Section */}
+      <div className='bg-neutral-100 px-4 md:px-8 pt-12 pb-16'>
+        <div className='flex flex-col font-mono'>
+          <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-6 flex-shrink-0'>Process</h3>
 
-      {/* Navigation Buttons - Desktop Only */}
-      <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
-        <button
-          onClick={handlePrev}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
-          aria-label='Previous photo'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
-          </svg>
-        </button>
-        <button
-          onClick={handleNext}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
-          aria-label='Next photo'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
-          >
-            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-          </svg>
-        </button>
-      </div>
-
-      {/* Thumbnail Strip - Bottom */}
-      <div className='absolute bottom-4 md:bottom-8 left-0 md:left-8 right-0 flex gap-2 justify-start overflow-x-auto px-4 md:pr-8 z-20 pointer-events-auto'>
-        {activeImages.map((image, index) => (
-          <button
-            key={index}
-            onClick={() => navigateToPhoto(index)}
-            className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-36 h-36 md:w-16 md:h-16 border ${
-              activeIndex === index
-                ? 'border-2 border-black opacity-100'
-                : 'border-black/60 opacity-60 hover:opacity-100'
-            }`}
-          >
-            <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover' />
-          </button>
-        ))}
-        {/* Hidden spacer item */}
-        <div className='flex-shrink-0 w-36 h-36 md:w-16 md:h-16 opacity-0 pointer-events-none' />
-      </div>
-
-      {/* Info Panel - Expandable */}
-      <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
-        <motion.div
-          className='absolute right-4 bottom-4 md:right-8 md:bottom-8 pointer-events-auto w-36 h-36 lg:w-64 lg:h-36'
-          animate={{
-            width: expandedPanel ? (isMobile ? 'calc(100vw - 2rem)' : 'min(600px, calc(50vw - 2rem))') : undefined,
-            height: expandedPanel ? (isMobile ? 'calc(100vh - 7rem)' : 'min(800px, calc(100vh - 10rem))') : undefined,
-          }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-        >
-          {!expandedPanel ? (
-            <div className='w-full h-full relative overflow-hidden'>
-              <div className='flex flex-row w-full h-full'>
-                <button
-                  onClick={() => {
-                    handleTabChange('infos');
-                    setExpandedPanel(true);
-                  }}
-                  className={`flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-colors bg-background backdrop-blur-md hover:bg-neutral-100 border border-black/60 border-r-0 border-b-3 ${
-                    activeTab === 'infos' ? 'border-b-foreground' : 'border-b-black/60 hover:border-b-foreground'
+          <div className='flex flex-col lg:flex-row gap-6'>
+            {/* Left: Process List (1/3 on desktop, full on mobile) */}
+            <div className='lg:w-1/3 space-y-2'>
+              {PROCESS_STEPS.map((step, index) => (
+                <div
+                  key={step.imageIndex}
+                  onClick={() => setSelectedProcessIndex(index)}
+                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-foreground bg-neutral-300/50 ${
+                    selectedProcessIndex !== index && 'lg:border-neutral-400 lg:bg-neutral-200/30 lg:hover:bg-neutral-200/60'
                   }`}
                 >
-                  <div className='relative w-full h-full'>
-                    <Image src='/amped-up/speaker-transparent.png' alt='Speaker' fill className='object-cover' />
+                  <div
+                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden ring-2 ring-foreground ${
+                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-neutral-400'
+                    }`}
+                  >
+                    <Image
+                      src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                      alt={`${step.title} thumbnail`}
+                      fill
+                      className='object-cover'
+                    />
                   </div>
-                  <p className='text-foreground font-mono text-sm md:text-base font-medium uppercase'>INFOS</p>
-                </button>
-                <button
-                  onClick={() => {
-                    handleTabChange('process');
-                    setExpandedPanel(true);
-                  }}
-                  className={`flex-1 relative flex flex-col justify-end p-4 cursor-pointer transition-colors bg-background backdrop-blur-md hover:bg-neutral-100 border border-black/60 border-b-3 ${
-                    activeTab === 'process' ? 'border-b-foreground' : 'border-b-black/60 hover:border-b-foreground'
-                  }`}
-                >
-                  <div className='relative w-full h-full'>
-                    <Image src='/amped-up/screwdriver.png' alt='Screwdriver' fill className='object-cover' />
+                  <div className='flex-1'>
+                    <span className='font-bold block'>{step.title}</span>
+                    <span className='text-foreground/80 text-sm'>{step.text}</span>
                   </div>
-                  <p className='text-foreground font-mono text-sm md:text-base font-medium uppercase'>PROCESS</p>
-                </button>
+                </div>
+              ))}
+            </div>
+
+            {/* Right: Selected Image (2/3) - Desktop only */}
+            <div className='hidden lg:block lg:w-2/3'>
+              <div
+                className='relative w-full aspect-[4/3] overflow-hidden border border-black/60'
+              >
+                <Image
+                  src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                  alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
+                  fill
+                  className={`${PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                />
               </div>
             </div>
-          ) : (
-            <div className='w-full h-full relative'>
-              <AmpedUpTabs
-                tabs={tabs}
-                onClose={() => setExpandedPanel(false)}
-                activeTab={activeTab}
-                onTabChange={handleTabChange}
-              />
-            </div>
-          )}
-        </motion.div>
+          </div>
+        </div>
       </div>
     </section>
   );
