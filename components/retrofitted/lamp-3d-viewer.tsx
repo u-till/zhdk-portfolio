@@ -155,9 +155,9 @@ export function Lamp3DViewer() {
         }}
       />
 
-      {/* Light Dimmer Slider */}
+      {/* Light Dimmer Slider - positioned above gallery icons */}
       <div
-        className='absolute bottom-4 md:bottom-8 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md cursor-auto'
+        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md cursor-auto'
         onMouseEnter={() => setIsOverSlider(true)}
         onMouseLeave={() => setIsOverSlider(false)}
         onMouseDown={(e) => e.stopPropagation()}

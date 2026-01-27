@@ -3,12 +3,10 @@
 import { Lamp3DViewer } from '@/components/retrofitted/lamp-3d-viewer';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
-import { useIsMobile } from '@/hooks/use-is-mobile';
 import { shrikhand } from '@/lib/fonts';
 import { ImageItem } from '@/types/project';
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
@@ -56,8 +54,6 @@ const PROCESS_STEPS = [
 
 export function Project3() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const isMobile = useIsMobile(768);
-  const [showThumbnails, setShowThumbnails] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
@@ -86,28 +82,18 @@ export function Project3() {
   useCarouselScroll(scrollRef, setActiveIndex);
   useCarouselKeyboard(handlePrev, handleNext);
 
-  // Handle thumbnail visibility based on active index
-  useEffect(() => {
-    if (activeIndex === 0) {
-      setShowThumbnails(false);
-    } else if (!isMobile && !showThumbnails) {
-      setShowThumbnails(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeIndex, isMobile]);
-
   return (
     <section className='h-screen overflow-y-auto overflow-x-hidden'>
       {/* First View: Gallery with 3D Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title */}
+        {/* Title - Bottom Left */}
         <div
-          className={`absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             activeIndex > 0 && GALLERY_IMAGES[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
           <h2
-            className={`text-5xl lg:text-7xl font-bold text-white text-center mix-blend-difference ${shrikhand.className}`}
+            className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}
           >
             retrofitted
           </h2>
@@ -180,93 +166,45 @@ export function Project3() {
           </button>
         </div>
 
-        {/* Album Controls - Bottom Left */}
-        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 z-20 pointer-events-auto flex flex-col md:flex-row items-start md:items-end gap-2'>
+        {/* Album Controls - Bottom Right */}
+        <div className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 pointer-events-auto flex gap-2 items-center'>
+          {/* 3D Button */}
+          <button
+            onClick={() => navigateToPhoto(0)}
+            className={`relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
+              activeIndex === 0 ? 'ring-2 ring-orange-300/60' : ''
+            }`}
+          >
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='28'
+              height='28'
+              viewBox='0 0 24 24'
+              fill='none'
+              stroke='currentColor'
+              strokeWidth='2'
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              className='text-white'
+            >
+              <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
+              <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
+              <line x1='12' y1='22.08' x2='12' y2='12' />
+            </svg>
+          </button>
+
           {/* Thumbnails */}
-          <AnimatePresence>
-            {showThumbnails && (
-              <motion.div
-                initial={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
-                animate={{ opacity: 1, x: 0, y: 0 }}
-                exit={{ opacity: 0, x: isMobile ? 0 : 20, y: isMobile ? 20 : 0 }}
-                transition={{ duration: 0.3 }}
-                className='order-first md:order-last flex flex-col md:flex-row gap-2 max-h-[calc(100vh-16rem)] md:max-h-none md:max-w-[calc(100vw-16rem)] overflow-y-auto md:overflow-y-visible md:overflow-x-auto scrollbar-hide p-1'
-              >
-                {GALLERY_IMAGES.map((image, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      navigateToPhoto(index + 1);
-                      if (isMobile) {
-                        setShowThumbnails(false);
-                      }
-                    }}
-                    className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/20 backdrop-blur-sm hover:bg-orange-600/30 ${
-                      activeIndex === index + 1 ? 'ring-2 ring-orange-300/60' : ''
-                    }`}
-                  >
-                    <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover rounded-full' />
-                  </button>
-                ))}
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          {/* Control Buttons Row */}
-          <div className='flex gap-2'>
-            {/* Album/Photos Button */}
+          {GALLERY_IMAGES.map((image, index) => (
             <button
-              onClick={() => setShowThumbnails(!showThumbnails)}
-              className={`md:order-2 relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
-                showThumbnails ? 'ring-2 ring-orange-300/60' : ''
+              key={index}
+              onClick={() => navigateToPhoto(index + 1)}
+              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/20 backdrop-blur-sm hover:bg-orange-600/30 ${
+                activeIndex === index + 1 ? 'ring-2 ring-orange-300/60' : ''
               }`}
             >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='28'
-                height='28'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-white'
-              >
-                <rect x='3' y='3' width='18' height='18' rx='2' ry='2' />
-                <circle cx='8.5' cy='8.5' r='1.5' />
-                <polyline points='21 15 16 10 5 21' />
-              </svg>
+              <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover rounded-full' />
             </button>
-
-            {/* 3D Button */}
-            <button
-              onClick={() => {
-                navigateToPhoto(0);
-                setShowThumbnails(false);
-              }}
-              className={`md:order-1 relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
-                activeIndex === 0 ? 'ring-2 ring-orange-300/60' : ''
-              }`}
-            >
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='28'
-                height='28'
-                viewBox='0 0 24 24'
-                fill='none'
-                stroke='currentColor'
-                strokeWidth='2'
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                className='text-white'
-              >
-                <path d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' />
-                <polyline points='3.27 6.96 12 12.01 20.73 6.96' />
-                <line x1='12' y1='22.08' x2='12' y2='12' />
-              </svg>
-            </button>
-          </div>
+          ))}
         </div>
 
         {/* Scroll Down Arrow */}

@@ -90,14 +90,14 @@ export function Project4() {
     <section className='h-screen overflow-y-auto overflow-x-hidden'>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title */}
+        {/* Title - Bottom Left */}
         <div
-          className={`absolute top-24 md:bottom-28 md:top-auto left-0 right-0 md:left-8 md:right-auto flex justify-center md:justify-start pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
           <h2
-            className={`text-6xl lg:text-8xl font-bold text-black text-center ${vt323.className}`}
+            className={`text-6xl lg:text-8xl font-bold text-black ${vt323.className}`}
           >
             amped up
           </h2>
@@ -161,8 +161,8 @@ export function Project4() {
           </button>
         </div>
 
-        {/* Thumbnail Strip - Bottom Left */}
-        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 z-20 pointer-events-auto flex gap-2 overflow-x-auto max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-4rem)]'>
+        {/* Thumbnail Strip - Bottom Right */}
+        <div className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 pointer-events-auto flex gap-2 overflow-x-auto max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-4rem)]'>
           {GALLERY_IMAGES.map((image, index) => (
             <button
               key={index}

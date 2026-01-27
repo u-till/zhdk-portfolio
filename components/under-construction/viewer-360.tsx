@@ -207,7 +207,7 @@ export function Viewer360({
   return (
     <div
       ref={containerRef}
-      className='overflow-hidden cursor-none select-none w-full h-full relative border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'
+      className='overflow-hidden cursor-none select-none w-full h-full relative'
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
@@ -226,7 +226,7 @@ export function Viewer360({
       />
 
       {/* 360 rotating image */}
-      <div className='absolute inset-0 flex items-center justify-center z-10 p-0'>
+      <div className='absolute inset-0 flex items-center justify-center z-10 pt-24 pb-32 md:pt-28 md:pb-36'>
         <div className='relative w-full h-full'>
           <Image
             src={getImagePath(currentFrame)}

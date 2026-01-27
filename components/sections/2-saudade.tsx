@@ -274,25 +274,8 @@ const PHOTOS: {
 
 export function Project2() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedPanel, setExpandedPanel] = useState<'globe' | 'olympus' | null>(null);
-  const [showFlash, setShowFlash] = useState(false);
-  const [isBlinking, setIsBlinking] = useState(false);
+  const [expandedPanel, setExpandedPanel] = useState<'globe' | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
-
-  const handleCameraClick = () => {
-    // Blink sequence: 3 blinks -> pause -> flash
-    setIsBlinking(true);
-    setTimeout(() => setIsBlinking(false), 150);
-    setTimeout(() => setIsBlinking(true), 300);
-    setTimeout(() => setIsBlinking(false), 450);
-    setTimeout(() => setIsBlinking(true), 600);
-    setTimeout(() => setIsBlinking(false), 750);
-    setTimeout(() => {
-      setShowFlash(true);
-      setTimeout(() => setShowFlash(false), 300);
-      setExpandedPanel(expandedPanel === 'olympus' ? null : 'olympus');
-    }, 900);
-  };
 
   const navigateToPhoto = useCallback((index: number) => {
     if (scrollRef.current) {
@@ -329,12 +312,6 @@ export function Project2() {
     return () => scrollEl?.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Preload blinking image for smooth animation
-  useEffect(() => {
-    const img = new window.Image();
-    img.src = '/saudade/olympus-blinking.png';
-  }, []);
-
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'ArrowLeft') {
@@ -349,19 +326,19 @@ export function Project2() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className='h-screen relative overflow-hidden pt-32 md:pt-42 px-4 md:px-8 flex flex-col items-center'>
-      {/* Title */}
-      <div
-        className={`absolute inset-x-0 top-32 md:top-42 flex justify-center pointer-events-none z-10 transition-opacity duration-300 ${
-          PHOTOS[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
-        }`}
-      >
-        <div className='max-w-screen-2xl mx-0 w-full flex justify-center'>
+    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+      {/* First View: Gallery */}
+      <div className='h-screen relative overflow-hidden flex flex-col items-center'>
+        {/* Title - Bottom Left */}
+        <div
+          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
+            PHOTOS[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
           <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
             saudade
           </h2>
         </div>
-      </div>
 
       {/* Scrolling Photos - Full Width */}
       <div
@@ -418,12 +395,10 @@ export function Project2() {
         </button>
       </div>
 
-      {/* Container for panels - constrained width */}
-      <div className='absolute inset-0 mx-0 pointer-events-none z-20'>
-        {/* Globe Panel - Bottom Left */}
+        {/* Globe Panel - Bottom Right */}
         <motion.div
-          className={`absolute left-4 md:left-8 bottom-4 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 ${
-            expandedPanel === 'globe' ? 'z-30' : 'z-10'
+          className={`absolute right-4 md:right-8 bottom-4 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
+            expandedPanel === 'globe' ? 'z-30' : ''
           }`}
           animate={{
             width: expandedPanel === 'globe' ? 'min(calc(100vw - 2rem), 512px)' : undefined,
@@ -433,7 +408,7 @@ export function Project2() {
         >
           <button
             onClick={() => setExpandedPanel(expandedPanel === 'globe' ? null : 'globe')}
-            className='absolute cursor-pointer top-2 left-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10 font-mono'
+            className='absolute cursor-pointer top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10 font-mono'
           >
             {expandedPanel === 'globe' ? '×' : 'i'}
           </button>
@@ -470,95 +445,94 @@ export function Project2() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Olympus Panel - Bottom Right */}
-        <motion.div
-          className={`absolute right-4 md:right-8 bottom-4 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 ${
-            expandedPanel === 'olympus' ? 'z-30' : 'z-10'
-          }`}
-          animate={{
-            width: expandedPanel === 'olympus' ? 'min(calc(100vw - 2rem), 512px)' : undefined,
-            height: expandedPanel === 'olympus' ? 'min(calc(100vw - 2rem), 512px)' : undefined,
-          }}
-          transition={{ duration: 0.4, ease: 'easeInOut' }}
-        >
-          <button
-            onClick={expandedPanel === 'olympus' ? () => setExpandedPanel(null) : handleCameraClick}
-            className='absolute cursor-pointer top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center z-10 transition-colors font-mono'
+        {/* Scroll Down Arrow */}
+        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='32'
+            height='32'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2.5'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+            className='text-foreground/30 animate-bounce'
           >
-            {expandedPanel === 'olympus' ? '×' : 'i'}
-          </button>
+            <path d='M12 5v14M5 12l7 7 7-7' />
+          </svg>
+        </div>
+      </div>
 
-          <AnimatePresence mode='wait'>
-            {!expandedPanel || expandedPanel !== 'olympus' ? (
-              <motion.div
-                key='olympus-collapsed'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2 }}
-                className='w-full h-full relative cursor-pointer'
-                onClick={handleCameraClick}
-              >
-                <Image
-                  src={isBlinking ? '/saudade/olympus-blinking.png' : '/saudade/olympus.png'}
-                  alt='Olympus'
-                  fill
-                  draggable={false}
-                  className='object-cover p-2 select-none'
-                />
-              </motion.div>
-            ) : (
-              <motion.div
-                key='olympus-expanded'
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, delay: 0.2 }}
-                className='w-full h-full p-6 text-white overflow-y-auto flex flex-col gap-4'
-              >
-                <h3 className={`text-2xl font-bold ${courierPrime.className}`}>Photography</h3>
-                <p className='text-sm leading-relaxed'>
+      {/* Info Content - 3 Columns */}
+      <div className='bg-gradient-to-b from-neutral-900 to-neutral-800 px-4 md:px-8 pt-16 pb-16'>
+        <div>
+          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-white'>
+            {/* Column 1: Brief & Motivation */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Brief</h3>
+                <p className='mt-4 leading-relaxed'>
+                  A collection of photographs taken during my travels around the world. The project explores the
+                  portuguese concept of &quot;saudade&quot; - a melancholic longing for places and moments that have
+                  passed.
+                </p>
+              </div>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Motivation</h3>
+                <p className='mt-4 leading-relaxed'>
                   I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
                   photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
                   nature of film. I especially enjoy taking pictures in the context of street photography and
-                  architecture. Therefore, I mostly take photographs when I am traveling.{' '}
-                </p>{' '}
-                <p className='text-sm leading-relaxed'>
+                  architecture.
+                </p>
+              </div>
+            </div>
+
+            {/* Column 2: Specifications */}
+            <div>
+              <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Specifications</h3>
+              <ul className='space-y-2 list-none mt-4'>
+                <li className='border-l-2 border-white/40 pl-3 py-1'>
+                  <span className='font-bold'>YEAR:</span> 2009-Ongoing
+                </li>
+                <li className='border-l-2 border-white/40 pl-3 py-1'>
+                  <span className='font-bold'>FOR:</span> Personal Project
+                </li>
+                <li className='border-l-2 border-white/40 pl-3 py-1'>
+                  <span className='font-bold'>TYPE:</span> Photography / Travel
+                </li>
+                <li className='border-l-2 border-white/40 pl-3 py-1'>
+                  <span className='font-bold'>CAMERAS:</span> Olympus XA2 / Lomo LC-A / Canon EOS 60D
+                </li>
+                <li className='border-l-2 border-white/40 pl-3 py-1'>
+                  <span className='font-bold'>SUBJECTS:</span> Cities, Architecture, People, Nature
+                </li>
+              </ul>
+            </div>
+
+            {/* Column 3: Context & Credits */}
+            <div className='space-y-6'>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Context</h3>
+                <p className='mt-4 leading-relaxed'>
                   Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
                   This then also often involves a lot of post-processing in software like Photoshop.
                 </p>
-                <div className='space-y-2 text-sm'>
-                  <div className='border-l-2 border-white/40 pl-3'>
-                    <span className='font-bold block'>Year:</span>
-                    <span>2009-Ongoing</span>
-                  </div>
-                  <div className='border-l-2 border-white/40 pl-3'>
-                    <span className='font-bold block'>Cameras:</span>
-                    <span>Olympus XA2 / Lomo LC-A / Canon EOS 60D</span>
-                  </div>
-                  <div className='border-l-2 border-white/40 pl-3'>
-                    <span className='font-bold block'>Favorite subjects:</span>
-                    <span>Cities, Architecture, People, Nature</span>
+              </div>
+              <div>
+                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Credits</h3>
+                <div className='space-y-4 mt-4'>
+                  <div>
+                    <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
+                    <span>Till Solenthaler</span>
                   </div>
                 </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </motion.div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Camera Flash Effect */}
-      <AnimatePresence>
-        {showFlash && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className='fixed inset-0 bg-white z-50 pointer-events-none'
-          />
-        )}
-      </AnimatePresence>
     </section>
   );
 }

@@ -44,18 +44,18 @@ export function Project1() {
   return (
     <section className='h-screen overflow-y-auto overflow-x-hidden bg-yellow-300'>
       {/* First View: Full-screen 360 Viewer */}
-      <div className='h-screen relative overflow-hidden flex flex-col items-center px-4 md:px-8 pt-32 md:pt-36 pb-8'>
-        {/* Title */}
-        <div className='absolute top-36 md:top-40 left-8 md:left-12 right-4 md:right-8 flex justify-center md:justify-start pointer-events-none z-10'>
+      <div className='h-screen relative overflow-hidden flex flex-col items-center'>
+        {/* Title - Bottom Left */}
+        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
           <h2
-            className={`text-5xl lg:text-7xl font-bold text-black text-center md:text-left ${allertaStencil.className}`}
+            className={`text-5xl lg:text-7xl font-bold text-black ${allertaStencil.className}`}
           >
             under<br />construction
           </h2>
         </div>
 
-        {/* 360 Viewer - Full Width with padding */}
-        <div className='w-full h-full'>
+        {/* 360 Viewer - Full Width */}
+        <div className='absolute inset-0'>
           <Viewer360
             imageFolder='under-construction/korpus-360'
             totalFrames={27}
