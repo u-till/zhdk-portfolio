@@ -52,7 +52,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-export function Project3() {
+export default function RetrofittedPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
@@ -233,7 +233,7 @@ export function Project3() {
             {/* Column 1: Brief & Idea */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Brief</h3>
                 <p className='mt-4 leading-relaxed'>
                   An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
                   connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
@@ -241,7 +241,7 @@ export function Project3() {
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2'>Idea</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Idea</h3>
                 <p className='mt-4 leading-relaxed'>
                   My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
                   this space could be used to fit a battery instead, so the project went from repair to upgrade.
@@ -251,7 +251,7 @@ export function Project3() {
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2'>Specifications</h3>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-orange-400 pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2025
@@ -278,7 +278,7 @@ export function Project3() {
             {/* Column 3: Learnings & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2'>Learnings</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Learnings</h3>
                 <ul className='list-disc list-inside mt-4 space-y-1'>
                   <li>Use 3d printed mount for parts inside</li>
                   <li>Implement custom charging indicator</li>
@@ -286,7 +286,7 @@ export function Project3() {
                 </ul>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Credits</h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
@@ -310,7 +310,7 @@ export function Project3() {
       {/* Process Section - flows after info */}
       <div className='bg-orange-100 px-4 md:px-8 pt-12 pb-16'>
         <div className='flex flex-col'>
-          <h3 className='text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-6 flex-shrink-0'>Process</h3>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-6 flex-shrink-0 ${shrikhand.className}`}>Process</h3>
 
           <div className='flex flex-col lg:flex-row gap-6'>
             {/* Left: Process List (1/3 on desktop, full on mobile) */}

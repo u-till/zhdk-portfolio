@@ -9,12 +9,12 @@ import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/mockup-1.png', objectFit: 'contain' },
-  { src: '/toy-lexicon/mockup-2.png', objectFit: 'contain', hideTitle: true },
-  { src: '/toy-lexicon/mockup-3.png', objectFit: 'contain', hideTitle: true },
-  { src: '/toy-lexicon/mockup-4.png', objectFit: 'contain', hideTitle: true },
-  { src: '/toy-lexicon/mockup-5.png', objectFit: 'contain', hideTitle: true },
-  { src: '/toy-lexicon/macbook-mockup-1.png', objectFit: 'contain', hideTitle: true },
-  { src: '/toy-lexicon/macbook-mockup-2.png', objectFit: 'contain', hideTitle: true },
+  { src: '/toy-lexicon/mockup-2.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/mockup-3.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/mockup-4.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/mockup-5.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/macbook-mockup-1.png', objectFit: 'contain' },
+  { src: '/toy-lexicon/macbook-mockup-2.png', objectFit: 'contain' },
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
@@ -47,7 +47,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-export function Project5() {
+export default function ToyLexiconPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -85,11 +85,7 @@ export function Project5() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
-            className={`text-5xl lg:text-7xl uppercase font-bold text-black ${dinNext.className}`}
-          >
-            toy lexicon
-          </h2>
+          <h2 className={`text-5xl lg:text-7xl uppercase font-bold text-black ${dinNext.className}`}>toy lexicon</h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -98,10 +94,7 @@ export function Project5() {
           className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
         >
           {GALLERY_IMAGES.map((image, index) => (
-            <div
-              key={image.src}
-              className='h-full min-w-full snap-center flex items-center justify-center relative'
-            >
+            <div key={image.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
               <Image
                 src={image.src}
                 alt={`Toy Lexicon ${index + 1}`}
@@ -193,28 +186,29 @@ export function Project5() {
             {/* Column 1: Brief & Idea */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Brief</h3>
                 <p className='mt-4 leading-relaxed'>
                   A book exploring construction kits from the last 100 years. My father and two friends photographed his
                   collection and asked me to make it into a book.
-                  <br /><br />
+                  <br />
+                  <br />
                   Since images were taken over years with missing data, I built a custom CMS for collaborative editing
                   into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2'>Idea</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Idea</h3>
                 <p className='mt-4 leading-relaxed'>
                   My father has been collecting and building with old construction kits for decades. When he asked me to
-                  help turn his collection into a book, I saw an opportunity to combine my design skills with his passion
-                  project.
+                  help turn his collection into a book, I saw an opportunity to combine my design skills with his
+                  passion project.
                 </p>
               </div>
             </div>
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2'>Specifications</h3>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-green-500 pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2025-Ongoing
@@ -243,7 +237,7 @@ export function Project5() {
             {/* Column 3: Learnings & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2'>Learnings</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Learnings</h3>
                 <ul className='list-disc list-inside mt-4 space-y-1'>
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
@@ -252,7 +246,7 @@ export function Project5() {
                 </ul>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Credits</h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider'>Models and Curation</span>
@@ -284,7 +278,7 @@ export function Project5() {
       {/* Process Section */}
       <div className='bg-white px-4 md:px-8 pt-12 pb-16'>
         <div className='flex flex-col'>
-          <h3 className='text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-6 flex-shrink-0'>Process</h3>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-6 flex-shrink-0 ${dinNext.className}`}>Process</h3>
 
           <div className='flex flex-col lg:flex-row gap-6'>
             {/* Left: Process List (1/3 on desktop, full on mobile) */}

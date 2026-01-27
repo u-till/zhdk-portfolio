@@ -1,5 +1,7 @@
 import { Navigation } from '@/components/navigation';
+import { PageTransition } from '@/components/page-transition';
 import { ActiveSectionProvider } from '@/contexts/active-section-context';
+import { NavigationProvider } from '@/contexts/navigation-context';
 import { geistMono, geistSans } from '@/lib/fonts';
 import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
@@ -18,10 +20,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <ActiveSectionProvider>
-          <Navigation />
-          <main>{children}</main>
-        </ActiveSectionProvider>
+        <NavigationProvider>
+          <ActiveSectionProvider>
+            <Navigation />
+            <main>
+              <PageTransition>{children}</PageTransition>
+            </main>
+          </ActiveSectionProvider>
+        </NavigationProvider>
         <Analytics />
       </body>
     </html>

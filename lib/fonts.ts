@@ -1,4 +1,4 @@
-import { Allerta_Stencil, Courier_Prime, Geist, Geist_Mono, Orbitron, Shrikhand, VT323 } from 'next/font/google';
+import { Allerta_Stencil, Archivo, Courier_Prime, Geist, Geist_Mono, Orbitron, Shrikhand, VT323 } from 'next/font/google';
 import localFont from 'next/font/local';
 
 export const geistSans = Geist({
@@ -44,6 +44,13 @@ export const courierPrime = Courier_Prime({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-courier-prime',
+});
+
+export const archivo = Archivo({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-archivo',
 });
 
 export const dinNext = localFont({

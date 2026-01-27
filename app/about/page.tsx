@@ -1,13 +1,8 @@
 import Image from 'next/image';
 
-export function About() {
+export default function AboutPage() {
   return (
     <section className='h-screen flex flex-col px-4 md:px-8 py-24 md:py-28 overflow-y-auto relative'>
-      {/* Background Image 
-      <div className='absolute inset-0 z-0'>
-        <Image src='/about/bg.jpg' alt='Background' fill className='object-cover' priority />
-      </div>*/}
-
       <div className='w-full max-w-screen-2xl mx-auto py-8 relative z-10'>
         {/* Header with Profile Picture */}
         <div className='flex flex-col md:flex-row gap-4 items-center md:items-start mb-6'>
@@ -17,10 +12,6 @@ export function About() {
           <div className='flex-1 text-center md:text-left'>
             <h1 className='text-3xl md:text-4xl font-bold mb-2'>Till Solenthaler</h1>
             <p className='text-xl text-muted-foreground mb-3'>Web Designer & Developer</p>
-            {/* <p className='text-sm text-foreground/80 leading-relaxed'>
-              Helping SMEs create and renew their digital presence and develop strategies for their online presence.
-              Experienced in full-stack development, system engineering, and automation.
-            </p> */}
           </div>
         </div>
 

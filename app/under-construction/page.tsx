@@ -38,7 +38,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-export function Project1() {
+export default function UnderConstructionPage() {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
@@ -91,7 +91,7 @@ export function Project1() {
             {/* Column 1: Brief & Idea */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Brief</h3>
                 <p className='mt-4 leading-relaxed'>
                   Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
                   change and reusing materials in a different context. When is something truly done? Everything is in
@@ -99,7 +99,7 @@ export function Project1() {
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2'>Idea</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Idea</h3>
                 <p className='mt-4 leading-relaxed'>
                   We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
                   livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
@@ -110,7 +110,7 @@ export function Project1() {
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2'>Specifications</h3>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Specifications</h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-black pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2025
@@ -133,7 +133,7 @@ export function Project1() {
             {/* Column 3: Learnings & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2'>Learnings</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Learnings</h3>
                 <ul className='list-disc list-inside mt-4 space-y-1'>
                   <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
                   <li>Use sandpaper to refine the edges</li>
@@ -141,7 +141,7 @@ export function Project1() {
                 </ul>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Credits</h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
@@ -161,7 +161,7 @@ export function Project1() {
       {/* Process Section */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-12 pb-16'>
         <div className='flex flex-col'>
-          <h3 className='text-xl font-bold uppercase border-b-2 border-black pb-2 mb-6 flex-shrink-0'>Process</h3>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-6 flex-shrink-0 ${allertaStencil.className}`}>Process</h3>
 
           <div className='flex flex-col lg:flex-row gap-6'>
             {/* Left: Process List (1/3 on desktop, full on mobile) */}

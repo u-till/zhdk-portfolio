@@ -1,33 +1,28 @@
 'use client';
 
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { getSectionFromPath } from '@/lib/routes';
+import { usePathname } from 'next/navigation';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 const ActiveSectionContext = createContext<{
   activeSection: string;
-  setActiveSection: (section: string) => void;
   hoveredProject: string | null;
   setHoveredProject: (project: string | null) => void;
 }>({
   activeSection: '',
-  setActiveSection: () => {},
   hoveredProject: null,
   setHoveredProject: () => {},
 });
 
 export function ActiveSectionProvider({ children }: { children: ReactNode }) {
-  const [activeSection, setActiveSectionState] = useState('welcome');
+  const pathname = usePathname();
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
-  // Wrapper that clears hovered project when leaving welcome section
-  const setActiveSection = (section: string) => {
-    setActiveSectionState(section);
-    if (section !== 'welcome') {
-      setHoveredProject(null);
-    }
-  };
+  // Derive activeSection from pathname
+  const activeSection = getSectionFromPath(pathname);
 
   return (
-    <ActiveSectionContext.Provider value={{ activeSection, setActiveSection, hoveredProject, setHoveredProject }}>
+    <ActiveSectionContext.Provider value={{ activeSection, hoveredProject, setHoveredProject }}>
       {children}
     </ActiveSectionContext.Provider>
   );

@@ -53,13 +53,6 @@ const PHOTOS: {
     description: 'The farmers school of Selam Village, an orphanage in the middle of Addis',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/angkor-wat.jpg',
-  //   lat: 16.435,
-  //   lng: 281.876,
-  //   title: 'Angkor Wat, Cambodia',
-  //   description: 'A luxury import market in Siem Reap, symbolic for the mass tourism.',
-  // },
   {
     src: '/saudade/hanoi-2.jpg',
     lat: 24.135,
@@ -84,14 +77,6 @@ const PHOTOS: {
     description: 'A busy markethall in the remote town of Taldyqorghan.',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/addis-4.jpg',
-  //   lat: 12.005,
-  //   lng: 214.986,
-  //   title: 'Addis Ababa, Ethiopia',
-  //   description: 'Tomoca Coffee, a family owned coffee roasting business founded in 1953.',
-  //   hideTitle: true,
-  // },
   {
     src: '/saudade/ankavandra-mdg.png',
     lat: -15.795,
@@ -100,34 +85,6 @@ const PHOTOS: {
     description: 'A team of doctors on their way to an isolated village.',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/bkk.jpg',
-  //   lat: 16.765,
-  //   lng: 280.556,
-  //   title: 'Bangkok, Thailand',
-  //   description: 'Temples also need to be vacuumed from time to time.',
-  // },
-  // {
-  //   src: '/saudade/bokor-hill.jpg',
-  //   lat: 13.565,
-  //   lng: 281.876,
-  //   title: 'Bokor Hill, Cambodia',
-  //   description: 'A haunting building which used to be a scamming compound.',
-  // },
-  // {
-  //   src: '/saudade/chiang-mai.jpg',
-  //   lat: 21.325,
-  //   lng: 279.906,
-  //   title: 'Chiang Mai, Thailand',
-  //   description: 'An old computer shop in the outskirts of Chiang Mai.',
-  // },
-  // {
-  //   src: '/saudade/hanoi.jpg',
-  //   lat: 24.105,
-  //   lng: 284.076,
-  //   title: 'Hanoi, Vietnam',
-  //   description: 'Vendors inside a markethall passing time.',
-  // },
   {
     src: '/saudade/hongkong-2.jpg',
     lat: 25.325,
@@ -144,14 +101,6 @@ const PHOTOS: {
     description: 'Construction workers in stylish jeans-only workwear.',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/ho-chi-min.jpg',
-  //   lat: 13.755,
-  //   lng: 286.696,
-  //   title: 'Ho Chi Minh, Vietnam',
-  //   description: 'A cute bike shop in the outskirts of Saigon as the locals call it.',
-  //   hideTitle: true,
-  // },
   {
     src: '/saudade/hongkong-1.jpg',
     lat: 25.325,
@@ -221,7 +170,7 @@ const PHOTOS: {
     lat: 44.895,
     lng: 192.466,
     title: 'Rome',
-    description: 'Really cool facade of a administrative building outside in Rome.',
+    description: 'Really cool facade of an administrative building outside in Rome.',
     hideTitle: true,
   },
   {
@@ -240,19 +189,12 @@ const PHOTOS: {
     description: 'Aerial surveillance in a rural town after a cyclone to map out damages.',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/sihanoukville.jpg',
-  //   lat: 13.355,
-  //   lng: 281.676,
-  //   title: 'Sihanoukville, Cambodia',
-  //   description: 'A shady port city, hosting many illicit casinos & businesses.',
-  // },
   {
     src: '/saudade/stolze-1.jpg',
     lat: 50.435,
     lng: 188.546,
     title: 'Stolze Openair, Zürich',
-    description: 'Once a year for two weeks, volunteers organize a festival in Zurich.',
+    description: 'Emi, the brain behind the production of the Stolze Openair.',
     hideTitle: true,
   },
   {
@@ -263,16 +205,9 @@ const PHOTOS: {
     description: 'The two families gathering together, a day before the wedding.',
     hideTitle: true,
   },
-  // {
-  //   src: '/saudade/zurich.jpg',
-  //   lat: 50.435,
-  //   lng: 188.546,
-  //   title: 'Zurich, Switzerland',
-  //   description: 'My humble abode on a quiet day in June.',
-  // },
 ];
 
-export function Project2() {
+export default function SaudadePage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [expandedPanel, setExpandedPanel] = useState<'globe' | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -340,60 +275,60 @@ export function Project2() {
           </h2>
         </div>
 
-      {/* Scrolling Photos - Full Width */}
-      <div
-        ref={scrollRef}
-        className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
-      >
-        {PHOTOS.map((photo, index) => (
-          <div key={photo.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
-            <Image
-              src={photo.src}
-              alt={`Saudade ${index + 1}`}
-              fill
-              className='object-contain'
-              priority={index === 0}
-              sizes='100vw'
-            />
-          </div>
-        ))}
-      </div>
+        {/* Scrolling Photos - Full Width */}
+        <div
+          ref={scrollRef}
+          className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
+        >
+          {PHOTOS.map((photo, index) => (
+            <div key={photo.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
+              <Image
+                src={photo.src}
+                alt={`Saudade ${index + 1}`}
+                fill
+                className='object-contain'
+                priority={index === 0}
+                sizes='100vw'
+              />
+            </div>
+          ))}
+        </div>
 
-      {/* Navigation Buttons - Desktop Only */}
-      <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
-        <button
-          onClick={handlePrev}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
-          aria-label='Previous photo'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
+        {/* Navigation Buttons - Desktop Only */}
+        <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
+          <button
+            onClick={handlePrev}
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
+            aria-label='Previous photo'
           >
-            <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
-          </svg>
-        </button>
-        <button
-          onClick={handleNext}
-          className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
-          aria-label='Next photo'
-        >
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            fill='none'
-            viewBox='0 0 24 24'
-            strokeWidth={2}
-            stroke='currentColor'
-            className='w-6 h-6'
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={2}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M15.75 19.5L8.25 12l7.5-7.5' />
+            </svg>
+          </button>
+          <button
+            onClick={handleNext}
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg border border-white/20 bg-black/40 backdrop-blur-md text-white hover:bg-black/60 transition-colors pointer-events-auto'
+            aria-label='Next photo'
           >
-            <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
-          </svg>
-        </button>
-      </div>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 24 24'
+              strokeWidth={2}
+              stroke='currentColor'
+              className='w-6 h-6'
+            >
+              <path strokeLinecap='round' strokeLinejoin='round' d='M8.25 4.5l7.5 7.5-7.5 7.5' />
+            </svg>
+          </button>
+        </div>
 
         {/* Globe Panel - Bottom Right */}
         <motion.div
@@ -471,7 +406,9 @@ export function Project2() {
             {/* Column 1: Brief & Motivation */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
+                  Brief
+                </h3>
                 <p className='mt-4 leading-relaxed'>
                   A collection of photographs taken during my travels around the world. The project explores the
                   portuguese concept of &quot;saudade&quot; - a melancholic longing for places and moments that have
@@ -479,7 +416,9 @@ export function Project2() {
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Motivation</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
+                  Motivation
+                </h3>
                 <p className='mt-4 leading-relaxed'>
                   I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
                   photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
@@ -491,7 +430,9 @@ export function Project2() {
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Specifications</h3>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
+                Specifications
+              </h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-white/40 pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2009-Ongoing
@@ -514,14 +455,18 @@ export function Project2() {
             {/* Column 3: Context & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Context</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
+                  Context
+                </h3>
                 <p className='mt-4 leading-relaxed'>
                   Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
                   This then also often involves a lot of post-processing in software like Photoshop.
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-white/40 pb-2'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
+                  Credits
+                </h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>

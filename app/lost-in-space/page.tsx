@@ -2,6 +2,7 @@
 
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
 import { StarField } from '@/components/lost-in-space/star-field';
+import { orbitron } from '@/lib/fonts';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -36,7 +37,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-export function Project6() {
+export default function LostInSpacePage() {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
@@ -44,9 +45,19 @@ export function Project6() {
       <StarField />
 
       {/* First View: Album Viewer */}
-      <div className='h-screen relative overflow-hidden flex flex-col items-center px-4 md:px-8 pt-32 md:pt-36 pb-8'>
+      <div className='h-screen relative overflow-hidden flex flex-col items-center'>
+        {/* Title - Bottom Left */}
+        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
+          <h2
+            className={`text-5xl uppercase lg:text-7xl font-bold text-white ${orbitron.className}`}
+            style={{ transform: 'perspective(300px) rotateX(25deg)' }}
+          >
+            lost in space
+          </h2>
+        </div>
+
         {/* Album Viewer */}
-        <div className='w-full h-full flex items-center justify-center z-10'>
+        <div className='absolute inset-0 flex items-center justify-center z-10'>
           <AlbumViewer3D
             coverImage={IMAGES[0]}
             spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
@@ -79,14 +90,14 @@ export function Project6() {
             {/* Column 1: Brief & Idea */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66] ${orbitron.className}`}>Brief</h3>
                 <p className='mt-4 leading-relaxed'>
                   An album i did toghether with my friends when i used to live in a house full of musicians. Combining
                   productions under the theme of space, with cover art created by me.
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Idea</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66] ${orbitron.className}`}>Idea</h3>
                 <p className='mt-4 leading-relaxed'>
                   Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
                   to match the space theme. Original plan included vocal collaborations for each track, which never
@@ -97,7 +108,7 @@ export function Project6() {
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66] ${orbitron.className}`}>
                 Specifications
               </h3>
               <ul className='space-y-2 list-none mt-4'>
@@ -120,7 +131,7 @@ export function Project6() {
             {/* Column 3: Learnings & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66] ${orbitron.className}`}>
                   Learnings
                 </h3>
                 <ul className='list-disc list-inside mt-4 space-y-1'>
@@ -129,7 +140,7 @@ export function Project6() {
                 </ul>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66]'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 text-[#FF6B66] ${orbitron.className}`}>Credits</h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider text-[#FF6B66]'>Album Art</span>
@@ -157,7 +168,7 @@ export function Project6() {
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
         <div className='flex flex-col'>
-          <h3 className='text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-6 flex-shrink-0 text-[#FF6B66]'>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-6 flex-shrink-0 text-[#FF6B66] ${orbitron.className}`}>
             Process
           </h3>
 

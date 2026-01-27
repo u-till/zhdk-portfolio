@@ -2,8 +2,8 @@
 
 import { MobileMenuToggle } from '@/components/mobile-menu-toggle';
 import { useActiveSectionContext } from '@/contexts/active-section-context';
+import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
-import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 const NAVIGATION_LINKS = [
@@ -14,18 +14,6 @@ const NAVIGATION_LINKS = [
   { href: 'toy-lexicon', label: 'toy lexicon' },
   { href: 'lost-in-space', label: 'lost in space' },
   { href: 'dayjob', label: 'dayjob' },
-];
-
-const SECTION_ORDER = [
-  'welcome',
-  'under-construction',
-  'saudade',
-  'retrofitted',
-  'amped-up',
-  'toy-lexicon',
-  'lost-in-space',
-  'dayjob',
-  'about',
 ];
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
@@ -98,9 +86,8 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 };
 
 export function Navigation() {
-  const pathname = usePathname();
   const { activeSection, hoveredProject, setHoveredProject } = useActiveSectionContext();
-  const isHomePage = pathname === '/';
+  const { navigateTo } = useNavigation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const currentSection = activeSection && NAVBAR_CONFIG[activeSection] ? activeSection : 'welcome';
@@ -125,7 +112,7 @@ export function Navigation() {
           <div className='flex items-baseline gap-2'>
             <button
               onClick={() => {
-                window.__scrollToSection?.(0);
+                navigateTo('/');
                 setIsMobileMenuOpen(false);
               }}
               className={`text-base md:text-lg py-1 font-medium tracking-tight transition-colors ${config.brand} cursor-pointer whitespace-nowrap`}
@@ -134,7 +121,7 @@ export function Navigation() {
             </button>
             <button
               onClick={() => {
-                window.__scrollToSection?.(8);
+                navigateTo('/about');
                 setIsMobileMenuOpen(false);
               }}
               className={`text-xs transition-colors cursor-pointer ${
@@ -160,17 +147,14 @@ export function Navigation() {
             >
               {NAVIGATION_LINKS.map((link) => {
                 const linkSection = link.href;
-                const isActive = isHomePage && activeSection === linkSection;
-                const isHovered = isHomePage && activeSection === 'welcome' && hoveredProject === linkSection;
+                const isActive = activeSection === linkSection;
+                const isHovered = activeSection === 'welcome' && hoveredProject === linkSection;
 
                 return (
                   <li key={link.href}>
                     <button
                       onClick={() => {
-                        const sectionIndex = SECTION_ORDER.indexOf(linkSection);
-                        if (sectionIndex !== -1) {
-                          window.__scrollToSection?.(sectionIndex);
-                        }
+                        navigateTo(`/${linkSection}`);
                       }}
                       onMouseEnter={() => {
                         if (activeSection === 'welcome') {
@@ -228,17 +212,14 @@ export function Navigation() {
                 <ul className='flex flex-col gap-2 px-4 pb-4'>
                   {NAVIGATION_LINKS.map((link) => {
                     const linkSection = link.href;
-                    const isActive = isHomePage && activeSection === linkSection;
-                    const isHovered = isHomePage && activeSection === 'welcome' && hoveredProject === linkSection;
+                    const isActive = activeSection === linkSection;
+                    const isHovered = activeSection === 'welcome' && hoveredProject === linkSection;
 
                     return (
                       <li key={link.href}>
                         <button
                           onClick={() => {
-                            const sectionIndex = SECTION_ORDER.indexOf(linkSection);
-                            if (sectionIndex !== -1) {
-                              window.__scrollToSection?.(sectionIndex);
-                            }
+                            navigateTo(`/${linkSection}`);
                             setIsMobileMenuOpen(false);
                           }}
                           className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${

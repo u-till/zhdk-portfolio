@@ -9,10 +9,10 @@ import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/preview.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-11.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain', hideTitle: true },
-  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain', hideTitle: true },
+  { src: '/amped-up/speaker-11.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
+  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain' },
+  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain' },
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
@@ -58,7 +58,7 @@ const PROCESS_STEPS = [
   },
 ];
 
-export function Project4() {
+export default function AmpedUpPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -96,11 +96,7 @@ export function Project4() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
-            className={`text-6xl lg:text-8xl font-bold text-black ${vt323.className}`}
-          >
-            amped up
-          </h2>
+          <h2 className={`text-6xl lg:text-8xl font-bold text-black ${vt323.className}`}>amped up</h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -109,10 +105,7 @@ export function Project4() {
           className='absolute inset-0 top-0 overflow-x-auto overflow-y-hidden snap-x snap-mandatory flex scrollbar-hide'
         >
           {GALLERY_IMAGES.map((image, index) => (
-            <div
-              key={image.src}
-              className='h-full min-w-full snap-center flex items-center justify-center relative'
-            >
+            <div key={image.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
               <Image
                 src={image.src}
                 alt={`Amped Up ${index + 1}`}
@@ -204,14 +197,18 @@ export function Project4() {
             {/* Column 1: Brief & Idea */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Brief</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
+                  Brief
+                </h3>
                 <p className='mt-4 leading-relaxed'>
                   An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
                   enables new functionality like EQ / DSP / and Bluetooth.
                 </p>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Idea</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
+                  Idea
+                </h3>
                 <p className='mt-4 leading-relaxed'>
                   Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
                   features: digital amps with bluetooth and DSP for frequency response control and room acoustic
@@ -222,7 +219,9 @@ export function Project4() {
 
             {/* Column 2: Specifications */}
             <div>
-              <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Specifications</h3>
+              <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
+                Specifications
+              </h3>
               <ul className='space-y-2 list-none mt-4'>
                 <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>YEAR:</span> 2024-2025
@@ -234,20 +233,44 @@ export function Project4() {
                   <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
                 </li>
                 <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
+                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W
+                  AMP / XLR Connectors
                 </li>
                 <li className='border-l-2 border-foreground pl-3 py-1'>
                   <span className='font-bold'>UPGRADES:</span>{' '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/757' className='underline hover:no-underline'>
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://store.sure-electronics.com/product/757'
+                    className='underline hover:no-underline'
+                  >
                     Wondom 4x 30W Amp with Bluetooth and DSP
-                  </a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/804' className='underline hover:no-underline'>
+                  </a>
+                  {' / '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://store.sure-electronics.com/product/804'
+                    className='underline hover:no-underline'
+                  >
                     Wondom 2x 50W Amp
-                  </a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://store.sure-electronics.com/product/726' className='underline hover:no-underline'>
+                  </a>
+                  {' / '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://store.sure-electronics.com/product/726'
+                    className='underline hover:no-underline'
+                  >
                     WONDOM ICP5 In-circuit Programmer
-                  </a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200' className='underline hover:no-underline'>
+                  </a>
+                  {' / '}
+                  <a
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
+                    className='underline hover:no-underline'
+                  >
                     Meanwell LRS 200-15 PSU
                   </a>
                 </li>
@@ -257,14 +280,18 @@ export function Project4() {
             {/* Column 3: Learnings & Credits */}
             <div className='space-y-6'>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Learnings</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
+                  Learnings
+                </h3>
                 <ul className='list-disc list-inside mt-4 space-y-1'>
                   <li>Implement room correction onto DSP board</li>
                   <li>Connect front LED to DSP board to use as bluetooth status LED</li>
                 </ul>
               </div>
               <div>
-                <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2'>Credits</h3>
+                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
+                  Credits
+                </h3>
                 <div className='space-y-4 mt-4'>
                   <div>
                     <span className='font-bold block uppercase text-sm tracking-wider'>Idea & Concept</span>
@@ -288,7 +315,11 @@ export function Project4() {
       {/* Process Section */}
       <div className='bg-neutral-100 px-4 md:px-8 pt-12 pb-16'>
         <div className='flex flex-col font-mono'>
-          <h3 className='text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-6 flex-shrink-0'>Process</h3>
+          <h3
+            className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-6 flex-shrink-0 ${vt323.className}`}
+          >
+            Process
+          </h3>
 
           <div className='flex flex-col lg:flex-row gap-6'>
             {/* Left: Process List (1/3 on desktop, full on mobile) */}
@@ -298,7 +329,8 @@ export function Project4() {
                   key={step.imageIndex}
                   onClick={() => setSelectedProcessIndex(index)}
                   className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-foreground bg-neutral-300/50 ${
-                    selectedProcessIndex !== index && 'lg:border-neutral-400 lg:bg-neutral-200/30 lg:hover:bg-neutral-200/60'
+                    selectedProcessIndex !== index &&
+                    'lg:border-neutral-400 lg:bg-neutral-200/30 lg:hover:bg-neutral-200/60'
                   }`}
                 >
                   <div
@@ -323,9 +355,7 @@ export function Project4() {
 
             {/* Right: Selected Image (2/3) - Desktop only */}
             <div className='hidden lg:block lg:w-2/3'>
-              <div
-                className='relative w-full aspect-[4/3] overflow-hidden border border-black/60'
-              >
+              <div className='relative w-full aspect-[4/3] overflow-hidden border border-black/60'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
