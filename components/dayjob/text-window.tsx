@@ -19,7 +19,7 @@ export const TextWindow = React.memo(function TextWindow({
   onMaximize,
   onResize,
   content,
-}: Omit<WindowProps, 'id' | 'type' | 'url' | 'onMinimize'>) {
+}: Omit<WindowProps, 'id' | 'type' | 'url'>) {
   const windowRef = useRef<HTMLDivElement>(null);
   const { isResizing, handleResizeStart } = useWindowResize(size, onResize);
 

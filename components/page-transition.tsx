@@ -1,6 +1,6 @@
 'use client';
 
-import { useNavigation } from '@/contexts/navigation-context';
+import { TRANSITION_DURATION, useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { usePathname } from 'next/navigation';
@@ -30,7 +30,7 @@ export function PageTransition({ children }: PageTransitionProps) {
           initial={{ y: direction > 0 ? '100%' : '-100%' }}
           animate={{ y: 0 }}
           exit={{ y: direction > 0 ? '-100%' : '100%' }}
-          transition={{ duration: 0.8, ease: [0.65, 0, 0.35, 1] }}
+          transition={{ duration: TRANSITION_DURATION / 1000, ease: [0.65, 0, 0.35, 1] }}
           className='absolute inset-0'
         >
           <FrozenRouter>{children}</FrozenRouter>

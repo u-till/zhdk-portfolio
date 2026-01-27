@@ -1,8 +1,11 @@
 'use client';
 
-import { getRouteIndex, ROUTES } from '@/lib/routes';
+import { getRouteIndex } from '@/lib/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, ReactNode, useCallback, useContext, useRef, useState } from 'react';
+
+// Animation duration in ms - must match PageTransition duration
+export const TRANSITION_DURATION = 800;
 
 interface NavigationContextType {
   direction: number;
@@ -43,7 +46,7 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
         setTimeout(() => {
           isNavigatingRef.current = false;
           setIsNavigating(false);
-        }, 900);
+        }, TRANSITION_DURATION + 100);
       }, 10);
     },
     [pathname, router],
@@ -56,9 +59,4 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
 
 export function useNavigation() {
   return useContext(NavigationContext);
-}
-
-// Helper to get route by index
-export function getRouteByIndex(index: number): string {
-  return ROUTES[index] || '/';
 }

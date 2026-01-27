@@ -18,7 +18,7 @@ export const BrowserWindow = React.memo(function BrowserWindow({
   onFocus,
   onMaximize,
   onResize,
-}: Omit<WindowProps, 'id' | 'type' | 'content' | 'onMinimize'>) {
+}: Omit<WindowProps, 'id' | 'type' | 'content'>) {
   const [iframeError, setIframeError] = useState(false);
   const windowRef = useRef<HTMLDivElement>(null);
   const { isResizing, handleResizeStart } = useWindowResize(size, onResize);

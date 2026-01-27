@@ -1,7 +1,13 @@
 'use client';
 
-import { Lamp3DViewer } from '@/components/retrofitted/lamp-3d-viewer';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
+import dynamic from 'next/dynamic';
+
+// Lazy load the 3D Lamp viewer to code-split three.js
+const Lamp3DViewer = dynamic(() => import('@/components/retrofitted/lamp-3d-viewer').then((mod) => mod.Lamp3DViewer), {
+  ssr: false,
+  loading: () => <div className='w-full h-full bg-[#3C4343]' />,
+});
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { shrikhand } from '@/lib/fonts';
 import { ImageItem } from '@/types/project';

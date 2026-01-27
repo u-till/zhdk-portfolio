@@ -4,7 +4,6 @@ export interface WindowState {
   title: string;
   icon?: string;
   isOpen: boolean;
-  isMinimized: boolean;
   isMaximized: boolean;
   zIndex: number;
   position: { x: number; y: number };
@@ -30,7 +29,6 @@ export interface WindowProps {
   isMaximized: boolean;
   onClose: () => void;
   onFocus: () => void;
-  onMinimize: () => void;
   onMaximize: () => void;
   onResize: (size: { width: number; height: number }) => void;
   content?: React.ReactNode;

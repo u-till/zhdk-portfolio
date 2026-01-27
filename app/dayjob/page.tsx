@@ -22,7 +22,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'utill.ch',
     icon: '/dayjob/icons/utill-logo.jpg',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 80, y: 80 },
@@ -35,7 +34,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'hannibal.ch',
     icon: '/dayjob/icons/hannibal-icon.png',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 100, y: 100 },
@@ -48,7 +46,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'fabiotozzo.com',
     icon: '/dayjob/icons/fabiotozzo-icon.png',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 120, y: 100 },
@@ -61,7 +58,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'swing.ch',
     icon: '/dayjob/icons/swing-icon.jpg',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 120, y: 100 },
@@ -74,7 +70,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'nicolaijaronkager.ch',
     icon: '/dayjob/icons/cropped-favicon-njk-2-192x192.png',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 140, y: 100 },
@@ -87,7 +82,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'anothernarrative.studio',
     icon: '/dayjob/icons/anothernarrative-icon.png',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 160, y: 120 },
@@ -100,7 +94,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     title: 'brookejackson.ch',
     icon: '/dayjob/icons/brookejackson-icon.png',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 180, y: 140 },
@@ -112,7 +105,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     id: 'info',
     title: 'infos.txt',
     isOpen: true,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 200, y: 160 },
@@ -123,7 +115,6 @@ const WINDOW_CONFIGS: WindowState[] = [
     id: 'process',
     title: 'process.app',
     isOpen: false,
-    isMinimized: false,
     isMaximized: false,
     zIndex: 51,
     position: { x: 250, y: 200 },
@@ -153,7 +144,6 @@ export default function DayjobPage() {
           ? {
               ...w,
               isOpen: true,
-              isMinimized: false,
               zIndex: newZ,
             }
           : w,
@@ -221,7 +211,7 @@ export default function DayjobPage() {
 
           {/* Windows */}
           {windows
-            .filter((w) => w.isOpen && !w.isMinimized)
+            .filter((w) => w.isOpen)
             .map((window) => {
               if (window.type === 'browser') {
                 return (

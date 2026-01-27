@@ -17,7 +17,7 @@ export const TerminalWindow = React.memo(function TerminalWindow({
   onFocus,
   onMaximize,
   onResize,
-}: Omit<WindowProps, 'id' | 'type' | 'url' | 'onMinimize' | 'content'>) {
+}: Omit<WindowProps, 'id' | 'type' | 'url' | 'content'>) {
   const windowRef = useRef<HTMLDivElement>(null);
   const { isResizing, handleResizeStart } = useWindowResize(size, onResize);
 

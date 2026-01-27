@@ -1,7 +1,13 @@
 'use client';
 
-import { Globe } from '@/components/saudade/globe';
 import { courierPrime } from '@/lib/fonts';
+import dynamic from 'next/dynamic';
+
+// Lazy load the 3D Globe to code-split three.js
+const Globe = dynamic(() => import('@/components/saudade/globe').then((mod) => mod.Globe), {
+  ssr: false,
+  loading: () => <div className='w-full h-full bg-black' />,
+});
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
