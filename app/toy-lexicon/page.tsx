@@ -161,7 +161,7 @@ export default function ToyLexiconPage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -187,11 +187,11 @@ export default function ToyLexiconPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               Brief
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   A book exploring construction kits from the last 100 years. My father and two friends photographed his
                   collection and asked me to make it into a book.
@@ -209,11 +209,11 @@ export default function ToyLexiconPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               Idea
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   My father has been collecting and building with old construction kits for decades. When he asked me to
                   help turn his collection into a book, I saw an opportunity to combine my design skills with his
@@ -228,31 +228,31 @@ export default function ToyLexiconPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               Specifications
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2025-Ongoing</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2025-Ongoing</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>My father</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>My father</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Book Layout / Web App</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Book Layout / Web App</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Format</div>
-              <div></div>
-              <div className='col-span-2'>Hardcover Book, 120+ pages</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Format</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Hardcover Book, 120+ pages</div>
 
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2 col-span-2'>
                 <a
                   href='https://adb-cms.vercel.app/'
                   target='_blank'
@@ -271,11 +271,11 @@ export default function ToyLexiconPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               Learnings
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
@@ -291,31 +291,31 @@ export default function ToyLexiconPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               Credits
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Models and Curation</div>
-              <div></div>
-              <div className='col-span-2'>Peter Leutenegger</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Models and Curation</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Peter Leutenegger</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Photography</div>
-              <div></div>
-              <div className='col-span-2'>Alex Colle</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Photography</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Alex Colle</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Collages</div>
-              <div></div>
-              <div className='col-span-2'>Kurt Kleinert</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Collages</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Kurt Kleinert</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Layout and CMS</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Layout and CMS</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>Claude Code for co-programming CMS and InDesign ExtendScript</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Claude Code for co-programming CMS and InDesign ExtendScript</div>
             </div>
           </div>
         </div>

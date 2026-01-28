@@ -214,7 +214,7 @@ export default function RetrofittedPage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -238,11 +238,11 @@ export default function RetrofittedPage() {
           {/* Brief Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Brief</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
                   connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
@@ -255,11 +255,11 @@ export default function RetrofittedPage() {
           {/* Idea Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Idea</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
                   this space could be used to fit a battery instead, so the project went from repair to upgrade.
@@ -271,31 +271,31 @@ export default function RetrofittedPage() {
           {/* Specifications Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Specifications</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2025</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2025</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>Personal Project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Personal Project</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Upcycling / Retrofitting</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Upcycling / Retrofitting</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Model</div>
-              <div></div>
-              <div className='col-span-2'>Solis Typ 82 / 220V 25W</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Model</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Solis Typ 82 / 220V 25W</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Upgrades</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Upgrades</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005006005453774.html' className='text-orange-600 hover:underline'>USB-C</a>{' / '}
                 <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005004192388691.html' className='text-orange-600 hover:underline'>10.5Ah Battery</a>{' / '}
                 <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005005579072790.html' className='text-orange-600 hover:underline'>LED 5W</a>{' / '}
@@ -307,11 +307,11 @@ export default function RetrofittedPage() {
           {/* Learnings Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Learnings</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Use 3d printed mount for parts inside</li>
                   <li>Implement custom charging indicator</li>
@@ -324,16 +324,16 @@ export default function RetrofittedPage() {
           {/* Credits Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Credits</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Solo Project</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Solo Project</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>ChatGPT for circuit design</li>
                   <li>Google Nano for schematic styling</li>

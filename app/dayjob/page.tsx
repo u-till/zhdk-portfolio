@@ -267,7 +267,7 @@ export default function DayjobPage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -291,11 +291,11 @@ export default function DayjobPage() {
           {/* Brief Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Brief</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   A selection of freelance web projects I have worked on over the years. These range from small
                   portfolio sites to larger business applications, showcasing my experience in web development and
@@ -308,11 +308,11 @@ export default function DayjobPage() {
           {/* Idea Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Idea</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   I started freelancing during my studies to gain practical experience and earn some money on the side.
                   Over time, it became a way to explore different technologies and work with diverse clients across
@@ -325,42 +325,42 @@ export default function DayjobPage() {
           {/* Specifications Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Specifications</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2018-Ongoing</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2018-Ongoing</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>Various Clients</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Various Clients</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Freelance Web Development</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Freelance Web Development</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Tech</div>
-              <div></div>
-              <div className='col-span-2'>React, Next.js, TypeScript, Tailwind, WordPress, PHP</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Tech</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>React, Next.js, TypeScript, Tailwind, WordPress, PHP</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Services</div>
-              <div></div>
-              <div className='col-span-2'>Design, Development, Hosting, Maintenance</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Services</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Design, Development, Hosting, Maintenance</div>
             </div>
           </div>
 
           {/* Learnings Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Learnings</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Client communication is as important as technical skills</li>
                   <li>Set clear boundaries and scope from the start</li>
@@ -374,16 +374,16 @@ export default function DayjobPage() {
           {/* Credits Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Credits</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Solo Projects</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Solo Projects</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>Claude Code for recent projects</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Claude Code for recent projects</div>
             </div>
           </div>
         </div>

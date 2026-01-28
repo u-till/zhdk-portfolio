@@ -66,7 +66,7 @@ export default function UnderConstructionPage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -90,11 +90,11 @@ export default function UnderConstructionPage() {
           {/* Brief Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Brief</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
                   change and reusing materials in a different context. When is something truly done? Everything is in
@@ -107,11 +107,11 @@ export default function UnderConstructionPage() {
           {/* Idea Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Idea</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
                   livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
@@ -124,42 +124,42 @@ export default function UnderConstructionPage() {
           {/* Specifications Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Specifications</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2025</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2025</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>Personal Project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Personal Project</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Furniture</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Furniture</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Size (W x D x H)</div>
-              <div></div>
-              <div className='col-span-2'>343mm x 414mm x 640mm</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Size (W x D x H)</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>343mm x 414mm x 640mm</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Material</div>
-              <div></div>
-              <div className='col-span-2'>Wood & Metal</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Material</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Wood & Metal</div>
             </div>
           </div>
 
           {/* Learnings Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Learnings</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
                   <li>Use sandpaper to refine the edges</li>
@@ -172,16 +172,16 @@ export default function UnderConstructionPage() {
           {/* Credits Section */}
           <div>
             <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Credits</h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Solo Project</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Solo Project</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>Nano Banana for the background image of the 360° viewer</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Nano Banana for the background image of the 360° viewer</div>
             </div>
           </div>
         </div>

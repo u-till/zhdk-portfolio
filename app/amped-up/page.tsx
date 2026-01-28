@@ -172,7 +172,7 @@ export default function AmpedUpPage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -198,11 +198,11 @@ export default function AmpedUpPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               Brief
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
                   enables new functionality like EQ / DSP / and Bluetooth.
@@ -216,11 +216,11 @@ export default function AmpedUpPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               Idea
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
                   features: digital amps with bluetooth and DSP for frequency response control and room acoustic
@@ -235,33 +235,33 @@ export default function AmpedUpPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               Specifications
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2024-2025</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2024-2025</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>Collaborative Project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Collaborative Project</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Upcycling / Retrofitting</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Upcycling / Retrofitting</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Model</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Model</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
               </div>
 
-              <div></div>
-              <div className='font-bold text-right'>Upgrades</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Upgrades</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <a
                   target='_blank'
                   rel='noopener noreferrer'
@@ -306,11 +306,11 @@ export default function AmpedUpPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               Learnings
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Implement room correction onto DSP board</li>
                   <li>Connect front LED to DSP board to use as bluetooth status LED</li>
@@ -324,21 +324,21 @@ export default function AmpedUpPage() {
             <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               Credits
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Idea & Concept</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler & Julian Fehr</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Idea & Concept</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler & Julian Fehr</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Build</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Build</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>No AI tools used</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>No AI tools used</div>
             </div>
           </div>
         </div>

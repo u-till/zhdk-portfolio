@@ -388,7 +388,7 @@ export default function SaudadePage() {
         </motion.div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -416,11 +416,11 @@ export default function SaudadePage() {
             >
               Brief
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   A collection of photographs taken during my travels around the world. The project explores the
                   portuguese concept of &quot;saudade&quot; - a melancholic longing for places and moments that have
@@ -437,11 +437,11 @@ export default function SaudadePage() {
             >
               Motivation
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
                   photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
@@ -459,31 +459,31 @@ export default function SaudadePage() {
             >
               Specifications
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2009-Ongoing</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2009-Ongoing</div>
 
-              <div></div>
-              <div className='font-bold text-right'>For</div>
-              <div></div>
-              <div className='col-span-2'>Personal Project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Personal Project</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Photography / Travel</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Photography / Travel</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Cameras</div>
-              <div></div>
-              <div className='col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Cameras</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D</div>
 
-              <div></div>
-              <div className='font-bold text-right'>Subjects</div>
-              <div></div>
-              <div className='col-span-2'>Cities, Architecture, People, Nature</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Subjects</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Cities, Architecture, People, Nature</div>
             </div>
           </div>
 
@@ -494,11 +494,11 @@ export default function SaudadePage() {
             >
               Context
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
                   This then also often involves a lot of post-processing in software like Photoshop.
@@ -514,11 +514,11 @@ export default function SaudadePage() {
             >
               Credits
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right'>Solo Project</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Solo Project</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
             </div>
           </div>
         </div>

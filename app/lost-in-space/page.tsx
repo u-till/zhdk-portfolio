@@ -60,7 +60,7 @@ export default function LostInSpacePage() {
         </div>
 
         {/* Scroll Down Arrow */}
-        <div className='absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             width='32'
@@ -88,11 +88,11 @@ export default function LostInSpacePage() {
             >
               Brief
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   An album i did toghether with my friends when i used to live in a house full of musicians. Combining
                   productions under the theme of space, with cover art created by me.
@@ -108,11 +108,11 @@ export default function LostInSpacePage() {
             >
               Idea
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
                   to match the space theme. Original plan included vocal collaborations for each track, which never
@@ -129,26 +129,26 @@ export default function LostInSpacePage() {
             >
               Specifications
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>Year</div>
-              <div></div>
-              <div className='col-span-2'>2019</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>Year</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>2019</div>
 
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>For</div>
-              <div></div>
-              <div className='col-span-2'>Collaborative Project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>For</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Collaborative Project</div>
 
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>Type</div>
-              <div></div>
-              <div className='col-span-2'>Music Album / Cover Art</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>Type</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Music Album / Cover Art</div>
 
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>Methodology</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>Methodology</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 Recording instruments / sounds, sampling and programming MIDI with Ableton and FL Studio.
               </div>
             </div>
@@ -161,11 +161,11 @@ export default function LostInSpacePage() {
             >
               Learnings
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div></div>
-              <div></div>
-              <div className='col-span-2'>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>Outreach to more artists for collaboration</li>
                   <li>Maintain momentum on long-term projects</li>
@@ -181,23 +181,23 @@ export default function LostInSpacePage() {
             >
               Credits
             </h3>
-            <div className='grid grid-cols-5 gap-y-2 text-sm'>
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>Album Art</div>
-              <div></div>
-              <div className='col-span-2'>Till Solenthaler</div>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>Album Art</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>Music Production</div>
-              <div></div>
-              <div className='col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>Music Production</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
                 Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
               </div>
 
-              <div></div>
-              <div className='font-bold text-right text-[#FF6B66]'>AI Declaration</div>
-              <div></div>
-              <div className='col-span-2'>No AI was used in this project</div>
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right text-[#FF6B66]'>AI Declaration</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>No AI was used in this project</div>
             </div>
           </div>
         </div>
