@@ -42,7 +42,7 @@ export default function UnderConstructionPage() {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden bg-yellow-300'>
+    <section className='h-screen overflow-y-auto bg-yellow-300'>
       {/* First View: Full-screen 360 Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}

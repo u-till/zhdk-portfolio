@@ -176,7 +176,7 @@ export default function DayjobPage() {
   }
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+    <section className='h-screen overflow-y-auto'>
       {/* First View: Desktop */}
       <div className='h-screen relative overflow-hidden'>
         {/* Background - Full Screen */}

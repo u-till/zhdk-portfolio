@@ -4,12 +4,13 @@ import { TRANSITION_DURATION, useNavigation } from '@/contexts/navigation-contex
 import { AnimatePresence, motion } from 'framer-motion';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { usePathname } from 'next/navigation';
-import { ReactNode, useContext, useRef } from 'react';
+import { ReactNode, useContext, useState } from 'react';
 
 // Freeze the router context to prevent re-renders during exit animation
 function FrozenRouter({ children }: { children: ReactNode }) {
   const context = useContext(LayoutRouterContext);
-  const frozen = useRef(context).current;
+  // useState captures the initial value and never updates - this freezes the context
+  const [frozen] = useState(context);
 
   return <LayoutRouterContext.Provider value={frozen}>{children}</LayoutRouterContext.Provider>;
 }

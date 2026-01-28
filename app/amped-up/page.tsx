@@ -87,7 +87,7 @@ export default function AmpedUpPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+    <section className='h-screen overflow-y-auto'>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
@@ -355,7 +355,7 @@ export default function AmpedUpPage() {
 
             {/* Right: Selected Image (2/3) - Desktop only */}
             <div className='hidden lg:block lg:w-2/3'>
-              <div className='relative w-full aspect-[4/3] overflow-hidden border border-black/60'>
+              <div className='relative w-full aspect-[4/3] overflow-hidden border border-black/60 bg-white'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}

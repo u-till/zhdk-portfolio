@@ -41,7 +41,7 @@ export default function LostInSpacePage() {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden relative'>
+    <section className='h-screen overflow-y-auto relative'>
       <StarField />
 
       {/* First View: Album Viewer */}

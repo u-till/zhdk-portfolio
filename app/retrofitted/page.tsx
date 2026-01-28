@@ -89,7 +89,7 @@ export default function RetrofittedPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+    <section className='h-screen overflow-y-auto'>
       {/* First View: Gallery with 3D Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}

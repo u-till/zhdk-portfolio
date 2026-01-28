@@ -76,7 +76,7 @@ export default function ToyLexiconPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className={`h-screen overflow-y-auto overflow-x-hidden bg-white ${dinNext.className}`}>
+    <section className={`h-screen overflow-y-auto bg-white ${dinNext.className}`}>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}

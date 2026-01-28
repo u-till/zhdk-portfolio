@@ -267,7 +267,7 @@ export default function SaudadePage() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className='h-screen overflow-y-auto overflow-x-hidden'>
+    <section className='h-screen overflow-y-auto'>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
