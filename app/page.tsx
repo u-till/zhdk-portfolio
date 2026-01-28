@@ -161,7 +161,7 @@ function Rotating360Preview() {
 
 export default function Home() {
   const { hoveredProject, setHoveredProject } = useActiveSectionContext();
-  const [hoveredY, setHoveredY] = useState<number>(0);
+  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const sectionRef = useRef<HTMLElement>(null);
   const { navigateTo } = useNavigation();
 
@@ -228,25 +228,26 @@ export default function Home() {
     }
   }, []);
 
-  const handleMouseEnter = useCallback(
-    (projectKey: string, element: HTMLElement) => {
-      setHoveredProject(projectKey);
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent) => {
       if (sectionRef.current) {
         const sectionRect = sectionRef.current.getBoundingClientRect();
-        const elementRect = element.getBoundingClientRect();
-        const relativeY = elementRect.top - sectionRect.top + elementRect.height / 2;
-        setHoveredY(relativeY);
+        setMousePos({
+          x: e.clientX - sectionRect.left,
+          y: e.clientY - sectionRect.top,
+        });
       }
     },
-    [setHoveredProject],
+    [],
   );
 
   return (
     <section
       ref={sectionRef}
+      onMouseMove={handleMouseMove}
       className='h-full flex items-start pt-32 justify-start relative overflow-hidden px-4 pb-4 md:pb-8 md:px-8'
     >
-      {/* Floating Preview */}
+      {/* Floating Preview - follows cursor */}
       <AnimatePresence mode='wait'>
         {hoveredProject && (
           <motion.div
@@ -255,8 +256,8 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className='absolute right-8 md:right-16 z-20 pointer-events-none -translate-y-1/2'
-            style={{ top: hoveredY }}
+            className='absolute z-20 pointer-events-none -translate-y-1/2'
+            style={{ left: mousePos.x + 40, top: mousePos.y }}
           >
             {renderPreview(hoveredProject)}
           </motion.div>
@@ -271,7 +272,7 @@ export default function Home() {
           return (
             <motion.h1
               key={projectKey}
-              onMouseEnter={(e) => handleMouseEnter(projectKey, e.currentTarget)}
+              onMouseEnter={() => setHoveredProject(projectKey)}
               onMouseLeave={() => setHoveredProject(null)}
               onClick={() => navigateTo(`/${projectKey}`)}
               className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 ${

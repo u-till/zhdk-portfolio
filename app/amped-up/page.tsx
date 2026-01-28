@@ -190,140 +190,170 @@ export default function AmpedUpPage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
-      <div className='bg-gradient-to-b from-neutral-50 to-neutral-100 px-4 md:px-8 pt-16 pb-16'>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground font-mono'>
-            {/* Column 1: Brief & Idea */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
-                  Brief
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+      {/* Info Content - Vertical 5-Column Layout */}
+      <div className='px-4 md:px-8 pt-16 pb-16'>
+        <div className='flex flex-col gap-8 text-foreground font-mono'>
+          {/* Brief Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+              Brief
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
                   enables new functionality like EQ / DSP / and Bluetooth.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
-                  Idea
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+              Idea
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
                   features: digital amps with bluetooth and DSP for frequency response control and room acoustic
                   adaptation.
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
-                Specifications
-              </h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2024-2025
-                </li>
-                <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> Collaborative Project
-                </li>
-                <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
-                </li>
-                <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>MODEL:</span> Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W
-                  AMP / XLR Connectors
-                </li>
-                <li className='border-l-2 border-foreground pl-3 py-1'>
-                  <span className='font-bold'>UPGRADES:</span>{' '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://store.sure-electronics.com/product/757'
-                    className='underline hover:no-underline'
-                  >
-                    Wondom 4x 30W Amp with Bluetooth and DSP
-                  </a>
-                  {' / '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://store.sure-electronics.com/product/804'
-                    className='underline hover:no-underline'
-                  >
-                    Wondom 2x 50W Amp
-                  </a>
-                  {' / '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://store.sure-electronics.com/product/726'
-                    className='underline hover:no-underline'
-                  >
-                    WONDOM ICP5 In-circuit Programmer
-                  </a>
-                  {' / '}
-                  <a
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
-                    className='underline hover:no-underline'
-                  >
-                    Meanwell LRS 200-15 PSU
-                  </a>
-                </li>
-              </ul>
+          {/* Specifications Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+              Specifications
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2024-2025</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>Collaborative Project</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Upcycling / Retrofitting</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Model</div>
+              <div></div>
+              <div className='col-span-2'>
+                Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
+              </div>
+
+              <div></div>
+              <div className='font-bold text-right'>Upgrades</div>
+              <div></div>
+              <div className='col-span-2'>
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://store.sure-electronics.com/product/757'
+                  className='underline hover:no-underline'
+                >
+                  Wondom 4x 30W Amp with Bluetooth and DSP
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://store.sure-electronics.com/product/804'
+                  className='underline hover:no-underline'
+                >
+                  Wondom 2x 50W Amp
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://store.sure-electronics.com/product/726'
+                  className='underline hover:no-underline'
+                >
+                  WONDOM ICP5 In-circuit Programmer
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
+                  className='underline hover:no-underline'
+                >
+                  Meanwell LRS 200-15 PSU
+                </a>
+              </div>
             </div>
+          </div>
 
-            {/* Column 3: Learnings & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
-                  Learnings
-                </h3>
-                <ul className='list-disc list-inside mt-4 space-y-1'>
+          {/* Learnings Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+              Learnings
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
                   <li>Implement room correction onto DSP board</li>
                   <li>Connect front LED to DSP board to use as bluetooth status LED</li>
                 </ul>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 ${vt323.className}`}>
-                  Credits
-                </h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Idea & Concept</span>
-                    <span>Till Solenthaler & Julian Fehr</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Build</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
-                    <span>No AI tools used</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+              Credits
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Idea & Concept</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler & Julian Fehr</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Build</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
+
+              <div></div>
+              <div className='font-bold text-right'>AI Declaration</div>
+              <div></div>
+              <div className='col-span-2'>No AI tools used</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Process Section */}
-      <div className='bg-neutral-100 px-4 md:px-8 pt-12 pb-16'>
-        <div className='flex flex-col font-mono'>
-          <h3
-            className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-6 flex-shrink-0 ${vt323.className}`}
-          >
+      <div className='px-4 md:px-8 pt-12 pb-16'>
+        <div className='font-mono'>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-foreground pb-2 mb-6 ${vt323.className}`}>
             Process
           </h3>
 
-          <div className='flex flex-col lg:flex-row gap-6'>
-            {/* Left: Process List (1/3 on desktop, full on mobile) */}
-            <div className='lg:w-1/3 space-y-2'>
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+            {/* Left: Process List (2 cols on desktop, full on mobile) */}
+            <div className='lg:col-span-2 space-y-2'>
               {PROCESS_STEPS.map((step, index) => (
                 <div
                   key={step.imageIndex}
@@ -353,8 +383,8 @@ export default function AmpedUpPage() {
               ))}
             </div>
 
-            {/* Right: Selected Image (2/3) - Desktop only */}
-            <div className='hidden lg:block lg:w-2/3'>
+            {/* Right: Selected Image (3 cols) - Desktop only */}
+            <div className='hidden lg:block lg:col-span-3'>
               <div className='relative w-full aspect-[4/3] overflow-hidden border border-black/60 bg-white'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}

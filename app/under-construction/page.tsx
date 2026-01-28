@@ -84,75 +84,104 @@ export default function UnderConstructionPage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
+      {/* Info Content - Vertical 5-Column Layout */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-16 pb-16'>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground'>
-            {/* Column 1: Brief & Idea */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Brief</h3>
-                <p className='mt-4 leading-relaxed'>
+        <div className='flex flex-col gap-8'>
+          {/* Brief Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Brief</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
                   change and reusing materials in a different context. When is something truly done? Everything is in
                   perpetual development and keeps on changing its form.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Idea</h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Idea</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
                   livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
                   would be the best so we could have it to our exact specifications.
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Specifications</h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-black pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2025
-                </li>
-                <li className='border-l-2 border-black pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> Personal Project
-                </li>
-                <li className='border-l-2 border-black pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Furniture
-                </li>
-                <li className='border-l-2 border-black pl-3 py-1'>
-                  <span className='font-bold'>SIZE (W x D x H):</span> 343mm x 414mm x 640mm
-                </li>
-                <li className='border-l-2 border-black pl-3 py-1'>
-                  <span className='font-bold'>MATERIAL:</span> Wood & Metal
-                </li>
-              </ul>
+          {/* Specifications Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Specifications</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2025</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>Personal Project</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Furniture</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Size (W x D x H)</div>
+              <div></div>
+              <div className='col-span-2'>343mm x 414mm x 640mm</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Material</div>
+              <div></div>
+              <div className='col-span-2'>Wood & Metal</div>
             </div>
+          </div>
 
-            {/* Column 3: Learnings & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Learnings</h3>
-                <ul className='list-disc list-inside mt-4 space-y-1'>
+          {/* Learnings Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Learnings</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
                   <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
                   <li>Use sandpaper to refine the edges</li>
                   <li>Use live view on external screen to spot out of focus shots</li>
                 </ul>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 ${allertaStencil.className}`}>Credits</h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
-                    <span>Nano Banana for the background image of the 360° viewer</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Credits</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Solo Project</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
+
+              <div></div>
+              <div className='font-bold text-right'>AI Declaration</div>
+              <div></div>
+              <div className='col-span-2'>Nano Banana for the background image of the 360° viewer</div>
             </div>
           </div>
         </div>
@@ -160,12 +189,12 @@ export default function UnderConstructionPage() {
 
       {/* Process Section */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-12 pb-16'>
-        <div className='flex flex-col'>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-6 flex-shrink-0 ${allertaStencil.className}`}>Process</h3>
+        <div>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-6 ${allertaStencil.className}`}>Process</h3>
 
-          <div className='flex flex-col lg:flex-row gap-6'>
-            {/* Left: Process List (1/3 on desktop, full on mobile) */}
-            <div className='lg:w-1/3 space-y-2'>
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+            {/* Left: Process List (2 cols on desktop, full on mobile) */}
+            <div className='lg:col-span-2 space-y-2'>
               {PROCESS_STEPS.map((step, index) => (
                 <div
                   key={index}
@@ -189,8 +218,8 @@ export default function UnderConstructionPage() {
               ))}
             </div>
 
-            {/* Right: Selected Image (2/3) - Desktop only */}
-            <div className='hidden lg:block lg:w-2/3'>
+            {/* Right: Selected Image (3 cols) - Desktop only */}
+            <div className='hidden lg:block lg:col-span-3'>
               <div className='relative w-full aspect-[4/3] overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}

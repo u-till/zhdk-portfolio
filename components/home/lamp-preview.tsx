@@ -19,7 +19,7 @@ function SpinningLampModel() {
   });
 
   return (
-    <group ref={groupRef} position={[-0.4, -1.8, -0.3]}>
+    <group ref={groupRef} position={[-0.4, -1.8, -0.3]} rotation={[0, -1.9, 0]}>
       <primitive object={scene} scale={3.7} />
       <mesh position={[0.44, 2.55, -0.48]}>
         <sphereGeometry args={[0.08, 32, 32]} />

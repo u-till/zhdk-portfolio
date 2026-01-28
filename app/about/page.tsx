@@ -1,9 +1,11 @@
+'use client';
+
 import Image from 'next/image';
 
 export default function AboutPage() {
   return (
     <section className='h-screen overflow-y-auto px-4 md:px-8 py-24 md:py-32'>
-      <div className='flex flex-col gap-8'>
+      <div className='flex flex-col gap-8 pt-32'>
         {/* About Section */}
         <div>
           <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
@@ -20,13 +22,29 @@ export default function AboutPage() {
             <div></div>
             <div className='col-span-2'>
               <div className='font-semibold'>Web Designer & Developer</div>
-              <div className='text-muted-foreground'>Zurich, Switzerland</div>
+              <div className='text-muted-foreground'>
+                <a
+                  href='https://utill.ch'
+                  target='_blank'
+                  className='text-muted-foreground hover:text-foreground transition-colors'
+                >
+                  utill.ch{' '}
+                </a>
+                | Zurich, Switzerland
+              </div>
               <a
                 href='mailto:tillsolenthaler@gmail.com'
                 className='text-muted-foreground hover:text-foreground transition-colors'
               >
                 tillsolenthaler@gmail.com
               </a>
+              <br />
+              <br />
+              <p>
+                I like open source software, creative commons, the old-school internet movement before the capitalists
+                highjacked silicon valley, travelling, photography, design and architecture (especially brutalism),
+                geography and geopolitics, fleamarkets, bicycles, music production.
+              </p>
             </div>
           </div>
         </div>
@@ -38,31 +56,13 @@ export default function AboutPage() {
             Education
           </h2>
           <div className='grid grid-cols-5 gap-y-2 text-sm'>
-            <div></div>
-            <div className='text-muted-foreground text-right'>2020</div>
-            <div></div>
-            <div className='col-span-2'>
-              <span className='font-semibold'>Full Stack Developer</span>
-              <span className='text-muted-foreground'>
-                {' · '}
-                <a
-                  href='https://constructor.org'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='hover:text-foreground transition-colors'
-                >
-                  Constructor Academy
-                </a>
-              </span>
-            </div>
-
+            {/* First entry */}
             <div></div>
             <div className='text-muted-foreground text-right'>2013 - 2017</div>
             <div></div>
             <div className='col-span-2'>
-              <span className='font-semibold'>EFZ System Engineer, Informatik</span>
-              <span className='text-muted-foreground'>
-                {' · '}
+              <div className='font-semibold'>IT Systems Engineering EFZ</div>
+              <div className='text-muted-foreground'>
                 <a
                   href='https://tbz.ch'
                   target='_blank'
@@ -71,7 +71,33 @@ export default function AboutPage() {
                 >
                   TBZ
                 </a>
-              </span>
+                {' & '}
+                <a
+                  href='https://www.six-group.com'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-foreground transition-colors'
+                >
+                  SIX Group
+                </a>
+              </div>
+            </div>
+            {/* Second entry */}
+            <div></div>
+            <div className='text-muted-foreground text-right'>2020</div>
+            <div></div>
+            <div className='col-span-2'>
+              <div className='font-semibold'>Fullstack Developer Bootcamp</div>
+              <div className='text-muted-foreground'>
+                <a
+                  href='https://propulsion.academy'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-foreground transition-colors'
+                >
+                  Propulsion Academy
+                </a>
+              </div>
             </div>
           </div>
         </div>
@@ -84,28 +110,10 @@ export default function AboutPage() {
           </h2>
           <div className='grid grid-cols-5 gap-y-2 text-sm'>
             <div></div>
-            <div className='text-muted-foreground text-right'>Aug 2021 - Present</div>
+            <div className='text-muted-foreground text-right'>2017 - 2018</div>
             <div></div>
             <div className='col-span-2'>
-              <div className='font-semibold'>Web Designer & Developer</div>
-              <div className='text-muted-foreground'>
-                <a
-                  href='https://utill.ch'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='hover:text-foreground transition-colors'
-                >
-                  utill.ch
-                </a>
-                {' · Self-employed'}
-              </div>
-            </div>
-
-            <div></div>
-            <div className='text-muted-foreground text-right'>Oct 2020 - Aug 2021</div>
-            <div></div>
-            <div className='col-span-2'>
-              <div className='font-semibold'>Software Engineer Automation</div>
+              <div className='font-semibold'>System Engineer</div>
               <div className='text-muted-foreground'>
                 <a
                   href='https://www.six-group.com'
@@ -113,13 +121,30 @@ export default function AboutPage() {
                   rel='noopener noreferrer'
                   className='hover:text-foreground transition-colors'
                 >
-                  SIX
+                  SIX Group
                 </a>
               </div>
             </div>
 
             <div></div>
-            <div className='text-muted-foreground text-right'>Oct 2019 - Mar 2020</div>
+            <div className='text-muted-foreground text-right'>2018 - 2019</div>
+            <div></div>
+            <div className='col-span-2'>
+              <div className='font-semibold'>System Engineer</div>
+              <div className='text-muted-foreground'>
+                <a
+                  href='https://nexpert.ch'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-foreground transition-colors'
+                >
+                  Nexpert
+                </a>
+              </div>
+            </div>
+
+            <div></div>
+            <div className='text-muted-foreground text-right'>2019 - 2020</div>
             <div></div>
             <div className='col-span-2'>
               <div className='font-semibold'>IT Manager</div>
@@ -137,27 +162,10 @@ export default function AboutPage() {
             </div>
 
             <div></div>
-            <div className='text-muted-foreground text-right'>Dec 2018 - May 2019</div>
+            <div className='text-muted-foreground text-right'>2020 - 2021</div>
             <div></div>
             <div className='col-span-2'>
-              <div className='font-semibold'>System Engineer</div>
-              <div className='text-muted-foreground'>
-                <a
-                  href='https://nexpert.ch'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='hover:text-foreground transition-colors'
-                >
-                  nexpert
-                </a>
-              </div>
-            </div>
-
-            <div></div>
-            <div className='text-muted-foreground text-right'>Aug 2017 - Dec 2018</div>
-            <div></div>
-            <div className='col-span-2'>
-              <div className='font-semibold'>System Engineer</div>
+              <div className='font-semibold'>Software Engineer Automation</div>
               <div className='text-muted-foreground'>
                 <a
                   href='https://www.six-group.com'
@@ -165,36 +173,40 @@ export default function AboutPage() {
                   rel='noopener noreferrer'
                   className='hover:text-foreground transition-colors'
                 >
-                  SIX
+                  SIX Group
                 </a>
               </div>
             </div>
 
             <div></div>
-            <div className='text-muted-foreground text-right'>Aug 2013 - Aug 2017</div>
+            <div className='text-muted-foreground text-right'>2021 - Present</div>
             <div></div>
             <div className='col-span-2'>
-              <div className='font-semibold'>Engineering Apprentice</div>
+              <div className='font-semibold'>Web Designer & Developer</div>
               <div className='text-muted-foreground'>
                 <a
-                  href='https://www.six-group.com'
+                  href='https://utill.ch'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='hover:text-foreground transition-colors'
                 >
-                  SIX
+                  utill.ch
                 </a>
+                {' · Self-employed'}
               </div>
             </div>
 
+            {/* Separator */}
+
             <div></div>
-            <div className='text-muted-foreground text-right'>2018 - Present</div>
+            <div className='text-muted-foreground text-right border-t border-transparent my-2'>2018 - Present</div>
             <div></div>
             <div className='col-span-2'>
-              <div className='font-semibold'>Booking & Production and Web</div>
+              <div className='w-1/2 border-t border-foreground/10 my-2'></div>
+              <div className='font-semibold'>Booking, Production & Web</div>
               <div className='text-muted-foreground'>
                 <a
-                  href='https://stolze-openair.ch'
+                  href='https://stolze-openair.ch/year/2025/'
                   target='_blank'
                   rel='noopener noreferrer'
                   className='hover:text-foreground transition-colors'
@@ -231,6 +243,11 @@ export default function AboutPage() {
             <div className='font-semibold text-right'>Infrastructure</div>
             <div></div>
             <div className='text-muted-foreground col-span-2'>Linux, Docker, Infra as code, Networks, Security</div>
+
+            <div></div>
+            <div className='font-semibold text-right'>Languages</div>
+            <div></div>
+            <div className='text-muted-foreground col-span-2'>German: Native, English: Fluent, French: Basics</div>
           </div>
         </div>
 

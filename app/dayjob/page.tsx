@@ -285,86 +285,105 @@ export default function DayjobPage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
+      {/* Info Content - Vertical 5-Column Layout */}
       <div className='px-4 md:px-8 pt-16 pb-16' style={{ backgroundColor: '#E0E0E0' }}>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground'>
-            {/* Column 1: Brief & Idea */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 ${archivo.className}`}>
-                  Brief
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+        <div className='flex flex-col gap-8 text-foreground'>
+          {/* Brief Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Brief</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   A selection of freelance web projects I have worked on over the years. These range from small
                   portfolio sites to larger business applications, showcasing my experience in web development and
                   design.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 ${archivo.className}`}>
-                  Idea
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Idea</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   I started freelancing during my studies to gain practical experience and earn some money on the side.
                   Over time, it became a way to explore different technologies and work with diverse clients across
                   various industries.
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 ${archivo.className}`}>
-                Specifications
-              </h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-blue-400 pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2018-Ongoing
-                </li>
-                <li className='border-l-2 border-blue-400 pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> Various Clients
-                </li>
-                <li className='border-l-2 border-blue-400 pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Freelance Web Development
-                </li>
-                <li className='border-l-2 border-blue-400 pl-3 py-1'>
-                  <span className='font-bold'>TECH:</span> React, Next.js, TypeScript, Tailwind, WordPress, PHP
-                </li>
-                <li className='border-l-2 border-blue-400 pl-3 py-1'>
-                  <span className='font-bold'>SERVICES:</span> Design, Development, Hosting, Maintenance
-                </li>
-              </ul>
+          {/* Specifications Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Specifications</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2018-Ongoing</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>Various Clients</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Freelance Web Development</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Tech</div>
+              <div></div>
+              <div className='col-span-2'>React, Next.js, TypeScript, Tailwind, WordPress, PHP</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Services</div>
+              <div></div>
+              <div className='col-span-2'>Design, Development, Hosting, Maintenance</div>
             </div>
+          </div>
 
-            {/* Column 3: Learnings & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 ${archivo.className}`}>
-                  Learnings
-                </h3>
-                <ul className='list-disc list-inside mt-4 space-y-1'>
+          {/* Learnings Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Learnings</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
                   <li>Client communication is as important as technical skills</li>
                   <li>Set clear boundaries and scope from the start</li>
                   <li>Document everything for future maintenance</li>
                   <li>Always keep learning new technologies</li>
                 </ul>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 ${archivo.className}`}>
-                  Credits
-                </h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Solo Projects</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
-                    <span>Claude Code for recent projects</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>Credits</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Solo Projects</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
+
+              <div></div>
+              <div className='font-bold text-right'>AI Declaration</div>
+              <div></div>
+              <div className='col-span-2'>Claude Code for recent projects</div>
             </div>
           </div>
         </div>

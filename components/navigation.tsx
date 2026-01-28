@@ -4,6 +4,7 @@ import { MobileMenuToggle } from '@/components/mobile-menu-toggle';
 import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const NAVIGATION_LINKS = [
@@ -18,7 +19,7 @@ const NAVIGATION_LINKS = [
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
   welcome: {
-    navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
+    navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[240px] border-black border-2',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground opacity-0',
     activeLink: 'text-foreground',
@@ -109,31 +110,42 @@ export function Navigation() {
     <div className={`fixed top-4 md:top-8 w-full z-50 flex justify-start`}>
       <nav className={`flex flex-col mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
         <div className='flex items-center justify-between px-4 gap-4 md:px-6 py-3 md:py-4'>
-          <div className='flex items-baseline gap-2'>
+          <div className='flex items-center gap-2'>
             <button
               onClick={() => {
                 navigateTo('/');
                 setIsMobileMenuOpen(false);
               }}
-              className={`text-base md:text-lg py-1 font-medium tracking-tight transition-colors ${config.brand} cursor-pointer whitespace-nowrap`}
+              className='cursor-pointer flex-shrink-0'
             >
-              till solenthaler
+              <Image src='/icon.png' alt='Logo' width={24} height={24} className='rounded-sm' />
             </button>
-            <button
-              onClick={() => {
-                navigateTo('/about');
-                setIsMobileMenuOpen(false);
-              }}
-              className={`text-xs transition-colors cursor-pointer ${
-                currentSection === 'welcome'
-                  ? 'text-muted-foreground hover:text-foreground'
-                  : currentSection === 'under-construction'
-                  ? 'text-black hover:text-red-600'
-                  : config.link
-              }`}
-            >
-              about
-            </button>
+            <div className='flex items-baseline gap-2'>
+              <button
+                onClick={() => {
+                  navigateTo('/');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`text-base md:text-lg py-1 font-medium tracking-tight transition-colors ${config.brand} cursor-pointer whitespace-nowrap`}
+              >
+                till solenthaler
+              </button>
+              <button
+                onClick={() => {
+                  navigateTo('/about');
+                  setIsMobileMenuOpen(false);
+                }}
+                className={`text-xs transition-colors cursor-pointer ${
+                  currentSection === 'welcome'
+                    ? 'text-muted-foreground hover:text-foreground'
+                    : currentSection === 'under-construction'
+                      ? 'text-black hover:text-red-600'
+                      : config.link
+                }`}
+              >
+                about
+              </button>
+            </div>
           </div>
 
           {/* Desktop Navigation */}
@@ -172,10 +184,10 @@ export function Navigation() {
                             ? 'text-red-600'
                             : config.activeLink
                           : currentSection === 'under-construction'
-                          ? 'text-black hover:text-red-600'
-                          : isHovered
-                          ? 'text-foreground'
-                          : config.link
+                            ? 'text-black hover:text-red-600'
+                            : isHovered
+                              ? 'text-foreground'
+                              : config.link
                       }`}
                     >
                       {link.label}
@@ -228,10 +240,10 @@ export function Navigation() {
                                 ? 'text-red-600'
                                 : config.activeLink
                               : currentSection === 'under-construction'
-                              ? 'text-black hover:text-red-600'
-                              : isHovered
-                              ? 'text-foreground'
-                              : config.link
+                                ? 'text-black hover:text-red-600'
+                                : isHovered
+                                  ? 'text-foreground'
+                                  : config.link
                           }`}
                         >
                           {link.label}

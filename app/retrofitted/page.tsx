@@ -232,95 +232,126 @@ export default function RetrofittedPage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
+      {/* Info Content - Vertical 5-Column Layout */}
       <div className='bg-gradient-to-b from-orange-50 to-orange-100 px-4 md:px-8 pt-16 pb-16'>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground'>
-            {/* Column 1: Brief & Idea */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Brief</h3>
-                <p className='mt-4 leading-relaxed'>
+        <div className='flex flex-col gap-8 text-foreground'>
+          {/* Brief Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Brief</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
                   connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
                   project embodies my passion for repairs and sustainability.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Idea</h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Idea</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
                   this space could be used to fit a battery instead, so the project went from repair to upgrade.
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Specifications</h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-orange-400 pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2025
-                </li>
-                <li className='border-l-2 border-orange-400 pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> Personal Project
-                </li>
-                <li className='border-l-2 border-orange-400 pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Upcycling / Retrofitting
-                </li>
-                <li className='border-l-2 border-orange-400 pl-3 py-1'>
-                  <span className='font-bold'>MODEL:</span> Solis Typ 82 / 220V 25W
-                </li>
-                <li className='border-l-2 border-orange-400 pl-3 py-1'>
-                  <span className='font-bold'>UPGRADES:</span>{' '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005006005453774.html' className='text-orange-600 hover:underline'>USB-C</a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005004192388691.html' className='text-orange-600 hover:underline'>10.5Ah Battery</a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005005579072790.html' className='text-orange-600 hover:underline'>LED 5W</a>{' / '}
-                  <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005007384516556.html' className='text-orange-600 hover:underline'>Dimmer</a>
-                </li>
-              </ul>
+          {/* Specifications Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Specifications</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2025</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>Personal Project</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Upcycling / Retrofitting</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Model</div>
+              <div></div>
+              <div className='col-span-2'>Solis Typ 82 / 220V 25W</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Upgrades</div>
+              <div></div>
+              <div className='col-span-2'>
+                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005006005453774.html' className='text-orange-600 hover:underline'>USB-C</a>{' / '}
+                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005004192388691.html' className='text-orange-600 hover:underline'>10.5Ah Battery</a>{' / '}
+                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005005579072790.html' className='text-orange-600 hover:underline'>LED 5W</a>{' / '}
+                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005007384516556.html' className='text-orange-600 hover:underline'>Dimmer</a>
+              </div>
             </div>
+          </div>
 
-            {/* Column 3: Learnings & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Learnings</h3>
-                <ul className='list-disc list-inside mt-4 space-y-1'>
+          {/* Learnings Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Learnings</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
                   <li>Use 3d printed mount for parts inside</li>
                   <li>Implement custom charging indicator</li>
                   <li>Animate dimmer knob in 3d model</li>
                 </ul>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 ${shrikhand.className}`}>Credits</h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
-                    <ul className='list-disc list-inside mt-2 space-y-1'>
-                      <li>ChatGPT for circuit design</li>
-                      <li>Google Nano for schematic styling</li>
-                    </ul>
-                  </div>
-                </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Credits</h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Solo Project</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
+
+              <div></div>
+              <div className='font-bold text-right'>AI Declaration</div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
+                  <li>ChatGPT for circuit design</li>
+                  <li>Google Nano for schematic styling</li>
+                </ul>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
       {/* Process Section - flows after info */}
       <div className='bg-orange-100 px-4 md:px-8 pt-12 pb-16'>
-        <div className='flex flex-col'>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-6 flex-shrink-0 ${shrikhand.className}`}>Process</h3>
+        <div>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-6 ${shrikhand.className}`}>Process</h3>
 
-          <div className='flex flex-col lg:flex-row gap-6'>
-            {/* Left: Process List (1/3 on desktop, full on mobile) */}
-            <div className='lg:w-1/3 space-y-2'>
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+            {/* Left: Process List (2 cols on desktop, full on mobile) */}
+            <div className='lg:col-span-2 space-y-2'>
               {PROCESS_STEPS.map((step, index) => (
                 <div
                   key={step.imageIndex}
@@ -350,8 +381,8 @@ export default function RetrofittedPage() {
               ))}
             </div>
 
-            {/* Right: Selected Image (2/3) - Desktop only */}
-            <div className='hidden lg:block lg:w-2/3'>
+            {/* Right: Selected Image (3 cols) - Desktop only */}
+            <div className='hidden lg:block lg:col-span-3'>
               <div
                 className='relative w-full aspect-[4/3] rounded-lg overflow-hidden'
                 style={PROCESS_IMAGES[selectedProcessIndex]?.bg ? { backgroundColor: PROCESS_IMAGES[selectedProcessIndex].bg } : undefined}

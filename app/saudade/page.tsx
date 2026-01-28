@@ -1,16 +1,16 @@
 'use client';
 
 import { courierPrime } from '@/lib/fonts';
+import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 // Lazy load the 3D Globe to code-split three.js
 const Globe = dynamic(() => import('@/components/saudade/globe').then((mod) => mod.Globe), {
   ssr: false,
   loading: () => <div className='w-full h-full bg-black' />,
 });
-import { AnimatePresence, motion } from 'framer-motion';
-import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
 
 const PHOTOS: {
   src: string;
@@ -215,7 +215,7 @@ const PHOTOS: {
 
 export default function SaudadePage() {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [expandedPanel, setExpandedPanel] = useState<'globe' | null>(null);
+  const [isGlobeExpanded, setIsGlobeExpanded] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const navigateToPhoto = useCallback((index: number) => {
@@ -269,7 +269,7 @@ export default function SaudadePage() {
   return (
     <section className='h-screen overflow-y-auto'>
       {/* First View: Gallery */}
-      <div className='h-screen relative overflow-hidden flex flex-col items-center'>
+      <div className='h-screen relative overflow-hidden flex flex-col items-center bg-neutral-900'>
         {/* Title - Bottom Left */}
         <div
           className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
@@ -339,23 +339,23 @@ export default function SaudadePage() {
         {/* Globe Panel - Bottom Right */}
         <motion.div
           className={`absolute right-4 md:right-8 bottom-4 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
-            expandedPanel === 'globe' ? 'z-30' : ''
+            isGlobeExpanded ? 'z-30' : ''
           }`}
           animate={{
-            width: expandedPanel === 'globe' ? 'min(calc(100vw - 2rem), 512px)' : undefined,
-            height: expandedPanel === 'globe' ? 'min(calc(100vw - 2rem), 512px)' : undefined,
+            width: isGlobeExpanded ? 'min(calc(100vw - 2rem), 512px)' : undefined,
+            height: isGlobeExpanded ? 'min(calc(100vw - 2rem), 512px)' : undefined,
           }}
           transition={{ duration: 0.4, ease: 'easeInOut' }}
         >
           <button
-            onClick={() => setExpandedPanel(expandedPanel === 'globe' ? null : 'globe')}
+            onClick={() => setIsGlobeExpanded(!isGlobeExpanded)}
             className='absolute cursor-pointer top-2 right-2 w-8 h-8 rounded-lg border border-white/20 bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors z-10 font-mono'
           >
-            {expandedPanel === 'globe' ? '×' : 'i'}
+            {isGlobeExpanded ? '×' : 'i'}
           </button>
 
           <AnimatePresence mode='wait'>
-            {!expandedPanel || expandedPanel !== 'globe' ? (
+            {!isGlobeExpanded ? (
               <motion.div
                 key='globe-collapsed'
                 initial={{ opacity: 0 }}
@@ -363,7 +363,7 @@ export default function SaudadePage() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className='w-full h-full flex items-center justify-center cursor-pointer'
-                onClick={() => setExpandedPanel('globe')}
+                onClick={() => setIsGlobeExpanded(true)}
               >
                 <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
               </motion.div>
@@ -374,13 +374,14 @@ export default function SaudadePage() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2, delay: 0.2 }}
-                className='w-full h-full pt-12 px-4 pb-6 text-white overflow-y-auto flex flex-col'
+                className='w-full h-full p-4 text-white overflow-y-auto flex flex-col'
               >
                 <h3 className={`text-2xl font-bold ${courierPrime.className}`}>{PHOTOS[activeIndex].title}</h3>
                 <p className='text-sm leading-relaxed'>{PHOTOS[activeIndex].description}</p>
                 <div className='flex-1 h-full flex items-center justify-center'>
                   <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
                 </div>
+                <p className='text-sm leading-relaxed'>Use your keyboard arrows to navigate through the photos.</p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -405,27 +406,43 @@ export default function SaudadePage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
-      <div className='bg-gradient-to-b from-neutral-900 to-neutral-800 px-4 md:px-8 pt-16 pb-16'>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-white'>
-            {/* Column 1: Brief & Motivation */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
-                  Brief
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+      {/* Info Content - Vertical 5-Column Layout */}
+      <div className='bg-neutral-900 px-4 md:px-8 pt-16 pb-16'>
+        <div className='flex flex-col gap-8 text-white'>
+          {/* Brief Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
+            >
+              Brief
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   A collection of photographs taken during my travels around the world. The project explores the
                   portuguese concept of &quot;saudade&quot; - a melancholic longing for places and moments that have
                   passed.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
-                  Motivation
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Motivation Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
+            >
+              Motivation
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
                   photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
                   nature of film. I especially enjoy taking pictures in the context of street photography and
@@ -433,53 +450,75 @@ export default function SaudadePage() {
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
-                Specifications
-              </h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-white/40 pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2009-Ongoing
-                </li>
-                <li className='border-l-2 border-white/40 pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> Personal Project
-                </li>
-                <li className='border-l-2 border-white/40 pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Photography / Travel
-                </li>
-                <li className='border-l-2 border-white/40 pl-3 py-1'>
-                  <span className='font-bold'>CAMERAS:</span> Olympus XA2 / Lomo LC-A / Canon EOS 60D
-                </li>
-                <li className='border-l-2 border-white/40 pl-3 py-1'>
-                  <span className='font-bold'>SUBJECTS:</span> Cities, Architecture, People, Nature
-                </li>
-              </ul>
+          {/* Specifications Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
+            >
+              Specifications
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2009-Ongoing</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>Personal Project</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Photography / Travel</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Cameras</div>
+              <div></div>
+              <div className='col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Subjects</div>
+              <div></div>
+              <div className='col-span-2'>Cities, Architecture, People, Nature</div>
             </div>
+          </div>
 
-            {/* Column 3: Context & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
-                  Context
-                </h3>
-                <p className='mt-4 leading-relaxed'>
+          {/* Context Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
+            >
+              Context
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
                   This then also often involves a lot of post-processing in software like Photoshop.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 ${courierPrime.className}`}>
-                  Credits
-                </h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Solo Project</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
+            >
+              Credits
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Solo Project</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
             </div>
           </div>
         </div>

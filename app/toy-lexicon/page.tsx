@@ -76,7 +76,7 @@ export default function ToyLexiconPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className={`h-screen overflow-y-auto bg-white ${dinNext.className}`}>
+    <section className={`h-screen overflow-y-auto  ${dinNext.className}`}>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
@@ -179,15 +179,20 @@ export default function ToyLexiconPage() {
         </div>
       </div>
 
-      {/* Info Content - 3 Columns */}
-      <div className='bg-white px-4 md:px-8 pt-16 pb-16'>
-        <div>
-          <div className='grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 text-foreground'>
-            {/* Column 1: Brief & Idea */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Brief</h3>
-                <p className='mt-4 leading-relaxed'>
+      {/* Info Content - Vertical 5-Column Layout */}
+      <div className=' px-4 md:px-8 pt-16 pb-16'>
+        <div className='flex flex-col gap-8 text-foreground'>
+          {/* Brief Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              Brief
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   A book exploring construction kits from the last 100 years. My father and two friends photographed his
                   collection and asked me to make it into a book.
                   <br />
@@ -196,93 +201,136 @@ export default function ToyLexiconPage() {
                   into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
                 </p>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Idea</h3>
-                <p className='mt-4 leading-relaxed'>
+            </div>
+          </div>
+
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              Idea
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <p className='leading-relaxed'>
                   My father has been collecting and building with old construction kits for decades. When he asked me to
                   help turn his collection into a book, I saw an opportunity to combine my design skills with his
                   passion project.
                 </p>
               </div>
             </div>
+          </div>
 
-            {/* Column 2: Specifications */}
-            <div>
-              <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Specifications</h3>
-              <ul className='space-y-2 list-none mt-4'>
-                <li className='border-l-2 border-green-500 pl-3 py-1'>
-                  <span className='font-bold'>YEAR:</span> 2025-Ongoing
-                </li>
-                <li className='border-l-2 border-green-500 pl-3 py-1'>
-                  <span className='font-bold'>FOR:</span> My father
-                </li>
-                <li className='border-l-2 border-green-500 pl-3 py-1'>
-                  <span className='font-bold'>TYPE:</span> Book Layout / Web App
-                </li>
-                <li className='border-l-2 border-green-500 pl-3 py-1'>
-                  <span className='font-bold'>FORMAT:</span> Hardcover Book, 120+ pages
-                </li>
-              </ul>
-              <a
-                href='https://adb-cms.vercel.app/'
-                target='_blank'
-                rel='noopener noreferrer'
-                className='inline-block mt-4 px-6 py-3 bg-green-500 text-white font-bold uppercase text-sm rounded-lg hover:bg-green-600 transition-colors'
-              >
-                Editor Demo
-                <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
-              </a>
+          {/* Specifications Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              Specifications
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Year</div>
+              <div></div>
+              <div className='col-span-2'>2025-Ongoing</div>
+
+              <div></div>
+              <div className='font-bold text-right'>For</div>
+              <div></div>
+              <div className='col-span-2'>My father</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Type</div>
+              <div></div>
+              <div className='col-span-2'>Book Layout / Web App</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Format</div>
+              <div></div>
+              <div className='col-span-2'>Hardcover Book, 120+ pages</div>
+
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <a
+                  href='https://adb-cms.vercel.app/'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold uppercase text-sm rounded-lg hover:bg-green-600 transition-colors'
+                >
+                  Editor Demo
+                  <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
+                </a>
+              </div>
             </div>
+          </div>
 
-            {/* Column 3: Learnings & Credits */}
-            <div className='space-y-6'>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Learnings</h3>
-                <ul className='list-disc list-inside mt-4 space-y-1'>
+          {/* Learnings Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              Learnings
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div></div>
+              <div></div>
+              <div className='col-span-2'>
+                <ul className='list-disc list-inside space-y-1'>
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
                   <li>Invest more time in gathering inspiration for layouting</li>
                   <li>Allocate more time for experimentation</li>
                 </ul>
               </div>
-              <div>
-                <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 ${dinNext.className}`}>Credits</h3>
-                <div className='space-y-4 mt-4'>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Models and Curation</span>
-                    <span>Peter Leutenegger</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Photography</span>
-                    <span>Alex Colle</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Collages</span>
-                    <span>Kurt Kleinert</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>Layout and CMS</span>
-                    <span>Till Solenthaler</span>
-                  </div>
-                  <div>
-                    <span className='font-bold block uppercase text-sm tracking-wider'>AI Declaration</span>
-                    <span>Claude Code for co-programming CMS and InDesign ExtendScript</span>
-                  </div>
-                </div>
-              </div>
+            </div>
+          </div>
+
+          {/* Credits Section */}
+          <div>
+            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              Credits
+            </h3>
+            <div className='grid grid-cols-5 gap-y-2 text-sm'>
+              <div></div>
+              <div className='font-bold text-right'>Models and Curation</div>
+              <div></div>
+              <div className='col-span-2'>Peter Leutenegger</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Photography</div>
+              <div></div>
+              <div className='col-span-2'>Alex Colle</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Collages</div>
+              <div></div>
+              <div className='col-span-2'>Kurt Kleinert</div>
+
+              <div></div>
+              <div className='font-bold text-right'>Layout and CMS</div>
+              <div></div>
+              <div className='col-span-2'>Till Solenthaler</div>
+
+              <div></div>
+              <div className='font-bold text-right'>AI Declaration</div>
+              <div></div>
+              <div className='col-span-2'>Claude Code for co-programming CMS and InDesign ExtendScript</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Process Section */}
-      <div className='bg-white px-4 md:px-8 pt-12 pb-16'>
-        <div className='flex flex-col'>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-6 flex-shrink-0 ${dinNext.className}`}>Process</h3>
+      <div className=' px-4 md:px-8 pt-12 pb-16'>
+        <div>
+          <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>
+            Process
+          </h3>
 
-          <div className='flex flex-col lg:flex-row gap-6'>
-            {/* Left: Process List (1/3 on desktop, full on mobile) */}
-            <div className='lg:w-1/3 space-y-2'>
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+            {/* Left: Process List (2 cols on desktop, full on mobile) */}
+            <div className='lg:col-span-2 space-y-2'>
               {PROCESS_STEPS.map((step, index) => (
                 <div
                   key={step.imageIndex}
@@ -311,8 +359,8 @@ export default function ToyLexiconPage() {
               ))}
             </div>
 
-            {/* Right: Selected Image (2/3) - Desktop only */}
-            <div className='hidden lg:block lg:w-2/3'>
+            {/* Right: Selected Image (3 cols) - Desktop only */}
+            <div className='hidden lg:block lg:col-span-3'>
               <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden border-2 border-green-500/40'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
