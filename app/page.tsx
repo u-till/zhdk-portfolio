@@ -48,8 +48,8 @@ const PROJECT_PREVIEWS: Record<string, PreviewConfig> = {
   },
   'toy-lexicon': {
     type: 'toggle',
-    src: '/toy-lexicon/mockup-1.png',
-    altSrc: '/toy-lexicon/mockup-3.png',
+    src: '/toy-lexicon/mockup-1-small.png',
+    altSrc: '/toy-lexicon/mockup-3-small.png',
     interval: 2000,
     size: 'lg',
   },
@@ -228,18 +228,15 @@ export default function Home() {
     }
   }, []);
 
-  const handleMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (sectionRef.current) {
-        const sectionRect = sectionRef.current.getBoundingClientRect();
-        setMousePos({
-          x: e.clientX - sectionRect.left,
-          y: e.clientY - sectionRect.top,
-        });
-      }
-    },
-    [],
-  );
+  const handleMouseMove = useCallback((e: React.MouseEvent) => {
+    if (sectionRef.current) {
+      const sectionRect = sectionRef.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - sectionRect.left,
+        y: e.clientY - sectionRect.top,
+      });
+    }
+  }, []);
 
   return (
     <section
