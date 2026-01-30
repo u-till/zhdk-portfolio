@@ -83,15 +83,15 @@ export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProp
     <div className='w-full h-full flex items-center justify-center aspect-square'>
       <div style={{ perspective: '1000px' }}>
         <div
-          className='relative w-[340px] h-75 lg:w-[570px] lg:h-[500px]'
+          className='relative w-[340px] h-75 lg:w-[520px] lg:h-[450px]'
           style={{
             transform: `rotateX(${tilt.x}deg) rotateY(${tilt.y + (isFlipped ? 180 : 0)}deg)`,
             transformStyle: 'preserve-3d',
             transition: isFlipping
               ? 'transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1)'
               : isPushing
-              ? 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
-              : 'transform 0.1s ease-out',
+                ? 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)'
+                : 'transform 0.1s ease-out',
           }}
         >
           {/* Front - CD Cover */}
@@ -119,6 +119,11 @@ export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProp
               fill
               className='object-cover pointer-events-none'
             />
+
+            {/* Loading text - sits behind the player */}
+            <p className='absolute inset-0 flex items-center justify-center text-white/60 text-sm'>
+              Player is loading...
+            </p>
 
             {/* Spotify Player Overlay */}
             <div className='absolute inset-0 pt-3 p-4'>

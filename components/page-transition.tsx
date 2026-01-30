@@ -32,7 +32,7 @@ export function PageTransition({ children }: PageTransitionProps) {
           animate={{ y: 0 }}
           exit={{ y: direction > 0 ? '-100%' : '100%' }}
           transition={{ duration: TRANSITION_DURATION / 1000, ease: [0.65, 0, 0.35, 1] }}
-          className='absolute inset-0'
+          className='absolute inset-0 w-full'
         >
           <FrozenRouter>{children}</FrozenRouter>
         </motion.div>

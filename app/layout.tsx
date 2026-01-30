@@ -23,7 +23,7 @@ export default function RootLayout({
         <NavigationProvider>
           <ActiveSectionProvider>
             <Navigation />
-            <main>
+            <main className='w-full'>
               <PageTransition>{children}</PageTransition>
             </main>
           </ActiveSectionProvider>

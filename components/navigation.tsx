@@ -68,7 +68,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
   },
   about: {
     navbar: 'w-full rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
-    brand: 'text-foreground hover:text-foreground/80',
+    brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
     activeLink: 'text-foreground',
   },

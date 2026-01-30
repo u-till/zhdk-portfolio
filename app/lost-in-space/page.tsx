@@ -48,7 +48,9 @@ export default function LostInSpacePage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
         <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-5xl uppercase lg:text-7xl font-bold text-white ${orbitron.className}`}>lost in space</h2>
+          <h2 className={`text-5xl uppercase lg:text-7xl font-bold text-[#e34c42] ${orbitron.className}`}>
+            lost in space
+          </h2>
         </div>
 
         {/* Album Viewer */}
@@ -84,7 +86,7 @@ export default function LostInSpacePage() {
           {/* Brief Section */}
           <div>
             <h3
-              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#FF6B66] ${orbitron.className}`}
+              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               Brief
             </h3>
@@ -104,7 +106,7 @@ export default function LostInSpacePage() {
           {/* Idea Section */}
           <div>
             <h3
-              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#FF6B66] ${orbitron.className}`}
+              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               Idea
             </h3>
@@ -125,28 +127,28 @@ export default function LostInSpacePage() {
           {/* Specifications Section */}
           <div>
             <h3
-              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#FF6B66] ${orbitron.className}`}
+              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               Specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>Year</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>Year</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>2019</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>For</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>For</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>Collaborative Project</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>Type</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>Type</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>Music Album / Cover Art</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>Methodology</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>Methodology</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 Recording instruments / sounds, sampling and programming MIDI with Ableton and FL Studio.
@@ -157,7 +159,7 @@ export default function LostInSpacePage() {
           {/* Learnings Section */}
           <div>
             <h3
-              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#FF6B66] ${orbitron.className}`}
+              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               Learnings
             </h3>
@@ -177,25 +179,25 @@ export default function LostInSpacePage() {
           {/* Credits Section */}
           <div>
             <h3
-              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#FF6B66] ${orbitron.className}`}
+              className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               Credits
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>Album Art</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>Album Art</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>Music Production</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>Music Production</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
               </div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right text-[#FF6B66]'>AI Declaration</div>
+              <div className='font-bold md:text-right text-[#e34c42]'>AI Declaration</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>No AI was used in this project</div>
             </div>
@@ -207,7 +209,7 @@ export default function LostInSpacePage() {
       <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
         <div>
           <h3
-            className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-6 text-[#FF6B66] ${orbitron.className}`}
+            className={`text-xl font-bold uppercase border-b-2 border-[#AA4742] pb-2 mb-6 text-[#e34c42] ${orbitron.className}`}
           >
             Process
           </h3>
@@ -225,7 +227,7 @@ export default function LostInSpacePage() {
                   }`}
                 >
                   <div
-                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ring-2 ring-[#FF6B66] ${
+                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ring-2 ring-[#e34c42] ${
                       selectedProcessIndex !== index && 'lg:ring-1 lg:ring-[#AA4742]/40'
                     }`}
                   >
@@ -237,7 +239,7 @@ export default function LostInSpacePage() {
                     />
                   </div>
                   <div className='flex-1 text-white'>
-                    <span className='font-bold block text-[#FF6B66]'>{step.title}</span>
+                    <span className='font-bold block text-[#e34c42]'>{step.title}</span>
                     <span className='text-white/80 text-sm'>{step.text}</span>
                   </div>
                 </div>
