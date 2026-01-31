@@ -1,12 +1,12 @@
 # Portfolio
 
-Portfolio website for ZHdK (Zurich University of the Arts) application. Showcases creative projects with interactive elements, 3D viewers, and page transitions.
+Portfolio website for ZHdK IAD application. Showcases creative projects with interactive elements, 3D viewers, and page transitions.
 
 **Live:** [portfolio.utill.ch](https://portfolio.utill.ch)
 
 ## Stack
 
-- **Next.js 15** (App Router) — React framework with file-based routing
+- **Next.js 16** (App Router) — React framework with file-based routing
 - **TypeScript** — Type safety
 - **Tailwind CSS** — Utility-first styling
 - **Framer Motion** — Page transitions and animations
@@ -33,13 +33,12 @@ public/
 
 ## Key Files
 
-| File | Purpose |
-|------|---------|
-| `contexts/navigation-context.tsx` | Central state for navigation, page transitions, and homepage hover previews |
-| `components/navigation.tsx` | Navbar that adapts its style (colors, border-radius, width) based on current page |
-| `components/page-transition.tsx` | Framer Motion wrapper for fade transitions between routes |
-| `app/page.tsx` | Homepage — project list with animated previews on hover |
-| `lib/routes.ts` | Route order definition (used for transition direction) |
+| File                              | Purpose                                                                           |
+| --------------------------------- | --------------------------------------------------------------------------------- |
+| `contexts/navigation-context.tsx` | Central state for navigation, page transitions, and homepage hover previews       |
+| `components/navigation.tsx`       | Navbar that adapts its style (colors, border-radius, width) based on current page |
+| `components/page-transition.tsx`  | Framer Motion wrapper for fade transitions between routes                         |
+| `app/page.tsx`                    | Homepage — project list with animated previews on hover                           |
 
 ## Patterns
 

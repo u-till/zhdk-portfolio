@@ -481,24 +481,6 @@ export default function SaudadePage() {
             </div>
           </div>
 
-          {/* Context Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
-              context
-            </h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  Through my work as freelance webdesigner, I also get to take pictures for clients from time to time.
-                  This then also often involves a lot of post-processing in software like Photoshop.
-                </p>
-              </div>
-            </div>
-          </div>
-
           {/* credits Section */}
           <div>
             <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>

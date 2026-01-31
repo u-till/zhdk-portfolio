@@ -38,7 +38,7 @@ export function Viewer360({
         imagePadding > 0 ? String(frameIndex + 1).padStart(imagePadding, '0') : String(frameIndex + 1);
       return `/${imageFolder}/${imagePrefix}${frameNumber}.${imageFormat}`;
     },
-    [imageFolder, imagePrefix, imagePadding, imageFormat]
+    [imageFolder, imagePrefix, imagePadding, imageFormat],
   );
 
   const animateRotation = useCallback(
@@ -65,7 +65,7 @@ export function Viewer360({
         }
       }, 30);
     },
-    [isAnimating, totalFrames]
+    [isAnimating, totalFrames],
   );
 
   const rotateLeft = useCallback(() => {

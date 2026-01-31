@@ -184,7 +184,7 @@ export default function UnderConstructionPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler</div>
+              <div className='md:col-span-2'>Till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
@@ -220,7 +220,9 @@ export default function UnderConstructionPage() {
                     </div>
                     <div className='flex-1'>
                       <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
-                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>{step.text}</span>
+                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>
+                        {step.text}
+                      </span>
                     </div>
                   </div>
                 );
