@@ -7,8 +7,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'till solenthaler - Portfolio',
-  description: 'Portfolio of till solenthaler',
+  title: 'portfolio | till solenthaler',
+  description: 'Portfolio of Till Solenthaler, webdesigner and developer based in Zurich, Switzerland.',
 };
 
 export default function RootLayout({
