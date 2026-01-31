@@ -390,39 +390,41 @@ export default function RetrofittedPage() {
 
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             {/* Left: Process List (2 cols on desktop, full on mobile) */}
-            <div className='lg:col-span-2 space-y-2'>
-              {PROCESS_STEPS.map((step, index) => (
-                <div
-                  key={step.imageIndex}
-                  onClick={() => setSelectedProcessIndex(index)}
-                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-orange-500 bg-orange-300/50 ${
-                    selectedProcessIndex !== index &&
-                    'lg:border-orange-300 lg:bg-orange-200/30 lg:hover:bg-orange-200/60'
-                  }`}
-                >
+            <div className='lg:col-span-2 space-y-3'>
+              {PROCESS_STEPS.map((step, index) => {
+                const isActive = selectedProcessIndex === index;
+                return (
                   <div
-                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ring-2 ring-orange-500 ${
-                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-orange-300'
+                    key={step.imageIndex}
+                    onClick={() => setSelectedProcessIndex(index)}
+                    className={`w-full p-3 rounded-2xl transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                      isActive
+                        ? 'bg-orange-500'
+                        : 'bg-white/80 lg:hover:bg-white'
                     }`}
-                    style={
-                      PROCESS_IMAGES[step.imageIndex]?.bg
-                        ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg }
-                        : undefined
-                    }
                   >
-                    <Image
-                      src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
-                      alt={`${step.title} thumbnail`}
-                      fill
-                      className={`${PROCESS_IMAGES[step.imageIndex]?.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}`}
-                    />
+                    <div
+                      className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-orange-400'
+                      style={
+                        PROCESS_IMAGES[step.imageIndex]?.bg
+                          ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg }
+                          : undefined
+                      }
+                    >
+                      <Image
+                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        alt={`${step.title} thumbnail`}
+                        fill
+                        className={`${PROCESS_IMAGES[step.imageIndex]?.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}`}
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
+                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>{step.text}</span>
+                    </div>
                   </div>
-                  <div className='flex-1'>
-                    <span className='font-bold block'>{step.title}</span>
-                    <span className='text-foreground/80 text-sm'>{step.text}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
             {/* Right: Selected Image (3 cols) - Desktop only */}
