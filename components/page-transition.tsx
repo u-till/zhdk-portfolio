@@ -1,6 +1,6 @@
 'use client';
 
-import { TRANSITION_DURATION, useNavigation } from '@/contexts/navigation-context';
+import { TRANSITION_DURATION } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import { LayoutRouterContext } from 'next/dist/shared/lib/app-router-context.shared-runtime';
 import { usePathname } from 'next/navigation';
@@ -20,19 +20,18 @@ interface PageTransitionProps {
 }
 
 export function PageTransition({ children }: PageTransitionProps) {
-  const { direction } = useNavigation();
   const pathname = usePathname();
 
   return (
-    <div className='relative w-full h-screen overflow-hidden'>
+    <div className='relative w-full min-h-screen'>
       <AnimatePresence initial={false} mode='popLayout'>
         <motion.div
           key={pathname}
-          initial={{ y: direction > 0 ? '100%' : '-100%' }}
-          animate={{ y: 0 }}
-          exit={{ y: direction > 0 ? '-100%' : '100%' }}
-          transition={{ duration: TRANSITION_DURATION / 1000, ease: [0.65, 0, 0.35, 1] }}
-          className='absolute inset-0 w-full'
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0, position: 'absolute', top: 0, left: 0, right: 0 }}
+          transition={{ duration: TRANSITION_DURATION / 1000 / 2, ease: 'easeInOut' }}
+          className='w-full h-screen'
         >
           <FrozenRouter>{children}</FrozenRouter>
         </motion.div>

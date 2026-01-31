@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+Portfolio website for ZHdK (Zurich University of the Arts) application. Showcases creative projects with interactive elements, 3D viewers, and page transitions.
 
-First, run the development server:
+**Live:** [portfolio.utill.ch](https://portfolio.utill.ch)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Stack
+
+- **Next.js 15** (App Router) — React framework with file-based routing
+- **TypeScript** — Type safety
+- **Tailwind CSS** — Utility-first styling
+- **Framer Motion** — Page transitions and animations
+- **Three.js** — 3D content via `@react-three/fiber` and `@react-three/drei`
+
+## Architecture
+
+```
+app/
+├── layout.tsx              # Root layout, wraps everything in NavigationProvider
+├── page.tsx                # Homepage with project list and hover previews
+├── [project-name]/         # Each project has its own route
+│   ├── layout.tsx          # Project-specific metadata
+│   └── page.tsx            # Project page content
+components/
+├── navigation.tsx          # Adaptive navbar (styles change per page)
+├── page-transition.tsx     # Fade transitions between pages
+├── [project-name]/         # Project-specific components (3D viewers, etc.)
+contexts/
+├── navigation-context.tsx  # Shared state: current page, navigation, hover state
+public/
+├── [project-name]/         # Assets per project (images, 3D models)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Key Files
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| File | Purpose |
+|------|---------|
+| `contexts/navigation-context.tsx` | Central state for navigation, page transitions, and homepage hover previews |
+| `components/navigation.tsx` | Navbar that adapts its style (colors, border-radius, width) based on current page |
+| `components/page-transition.tsx` | Framer Motion wrapper for fade transitions between routes |
+| `app/page.tsx` | Homepage — project list with animated previews on hover |
+| `lib/routes.ts` | Route order definition (used for transition direction) |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Patterns
 
-## Learn More
+**Page-specific navbar styling:** Each page defines its navbar appearance in `NAVBAR_CONFIG` within `navigation.tsx`. Background colors are in `SECTION_BACKGROUNDS`.
 
-To learn more about Next.js, take a look at the following resources:
+**3D content:** Always lazy-loaded with `next/dynamic` to keep the initial bundle small. Three.js only loads when needed.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Hover previews:** Homepage shows animated previews (images, 360° rotations, 3D models) when hovering project names. State managed in `NavigationContext`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Development
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev     # Start dev server
+npm run build   # Production build
+npm run lint    # Check for errors
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## License
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Code:** MIT
+- **Content:** CC BY-NC 4.0
+
+See [LICENSE](LICENSE) for details.

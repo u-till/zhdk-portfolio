@@ -2,63 +2,29 @@
 
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
-import { vt323 } from '@/lib/fonts';
+import { dinNext } from '@/lib/fonts';
 import { ImageItem } from '@/types/project';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 
-const GALLERY_IMAGES: ImageItem[] = [
-  { src: '/amped-up/preview.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-11.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-4.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-5.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-6.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-7.jpg', objectFit: 'cover', hideTitle: true },
-];
+const GALLERY_IMAGES: ImageItem[] = [{ src: '/toy-lexicon/mockup-1.png', objectFit: 'contain' }];
 
-const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/amped-up/speaker-schematic.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-process-9.jpg', objectFit: 'contain' },
-  { src: '/amped-up/speaker-process-10.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-8.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-9.jpg', objectFit: 'cover' },
-  { src: '/amped-up/speaker-process-12.jpg', objectFit: 'cover' },
-];
+const PROCESS_IMAGES: ImageItem[] = [{ src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover' }];
 
 const PROCESS_STEPS = [
   {
     imageIndex: 0,
-    title: '01. RESEARCH & DESIGN',
-    text: 'Julian led this phase due to his speaker expertise. We chose digital amps for DSP functionality, fitted into the left enclosure with separate boards for mids/highs and lows.',
+    title: '01. COVER DESIGN',
+    text: 'Designed the cover first, experimenting with layouts and typography to set the tone. Defined a grid system for consistent layout throughout.',
   },
   {
     imageIndex: 1,
-    title: '02. REMOVE OLD AMPS',
-    text: 'Removed old analogue amplifiers by unscrewing and unplugging cables. Screenshot of the manual shown as reference since no photo was taken.',
-  },
-  {
-    imageIndex: 2,
-    title: '03. TEST CIRCUIT & BUILD ENCLOSURE',
-    text: 'Created a backplate with power connector, switch, aux input and speaker terminals for the second speaker. Tested everything before mounting.',
-  },
-  {
-    imageIndex: 3,
-    title: '04. MOUNT CIRCUIT TO ENCLOSURE',
-    text: 'Mounted all components to the enclosure and screwed the cover back onto the speaker.',
-  },
-  {
-    imageIndex: 4,
-    title: '05. CONNECT AND TEST',
-    text: 'Connected everything and tested functionality. Bluetooth worked and EQ settings could be adjusted via DSP software.',
-  },
-  {
-    imageIndex: 5,
-    title: '06. CAPTURE IMAGES',
-    text: 'Used backdrop setup with studio lights to create portfolio images.',
+    title: '02. RESEARCH AND CATALOGING',
+    text: 'Used reference books for inspiration. Created a JSON database of all kits with manufacturer, country and title for InDesign import. Found lots of missing data.',
   },
 ];
 
-export default function AmpedUpPage() {
+export default function TracePage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -87,7 +53,7 @@ export default function AmpedUpPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section>
+    <section className={dinNext.className}>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
@@ -96,7 +62,7 @@ export default function AmpedUpPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-6xl lg:text-8xl font-bold text-black ${vt323.className}`}>amped up</h2>
+          <h2 className={`text-5xl lg:text-7xl  font-bold text-black ${dinNext.className}`}>trace</h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -108,7 +74,7 @@ export default function AmpedUpPage() {
             <div key={image.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
               <Image
                 src={image.src}
-                alt={`amped up ${index + 1}`}
+                alt={`Toy Lexicon ${index + 1}`}
                 fill
                 className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
                 priority={index === 0}
@@ -122,7 +88,7 @@ export default function AmpedUpPage() {
         <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
           <button
             onClick={handlePrev}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md hover:bg-green-500/20 transition-colors pointer-events-auto'
             aria-label='Previous photo'
           >
             <svg
@@ -138,7 +104,7 @@ export default function AmpedUpPage() {
           </button>
           <button
             onClick={handleNext}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 border border-black/60 bg-background backdrop-blur-md hover:bg-neutral-100 transition-colors pointer-events-auto'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md hover:bg-green-500/20 transition-colors pointer-events-auto'
             aria-label='Next photo'
           >
             <svg
@@ -160,10 +126,10 @@ export default function AmpedUpPage() {
             <button
               key={index}
               onClick={() => navigateToPhoto(index)}
-              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 border ${
+              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-lg border ${
                 activeIndex === index
-                  ? 'border-2 border-black opacity-100'
-                  : 'border-black/60 opacity-60 hover:opacity-100'
+                  ? 'border-2 border-green-500 opacity-100'
+                  : 'border-green-500/40 opacity-60 hover:opacity-100'
               }`}
             >
               <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover' />
@@ -191,19 +157,23 @@ export default function AmpedUpPage() {
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
-      <div className='px-4 md:px-8 pt-16 pb-16'>
-        <div className='flex flex-col gap-8 text-foreground font-mono'>
+      <div className=' px-4 md:px-8 pt-16 pb-16'>
+        <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>brief</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
-                  enables new functionality like EQ / DSP / and Bluetooth.
+                  A book exploring construction kits from the last 100 years. My father and two friends photographed his
+                  collection and asked me to make it into a book.
+                  <br />
+                  <br />
+                  Since images were taken over years with missing data, I built a custom CMS for collaborative editing
+                  into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
                 </p>
               </div>
             </div>
@@ -211,16 +181,16 @@ export default function AmpedUpPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  Julian acquired these speakers with one broken amp. We brainstormed how to revive them with modern
-                  features: digital amps with bluetooth and DSP for frequency response control and room acoustic
-                  adaptation.
+                  My father has been collecting and building with old construction kits for decades. When he asked me to
+                  help turn his collection into a book, I saw an opportunity to combine my design skills with his
+                  passion project.
                 </p>
               </div>
             </div>
@@ -228,70 +198,42 @@ export default function AmpedUpPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>2024-2025</div>
+              <div className='md:col-span-2'>2025-Ongoing</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>For</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Collaborative Project</div>
+              <div className='md:col-span-2'>My father</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Upcycling / Retrofitting</div>
+              <div className='md:col-span-2'>Book Layout / Web App</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Model</div>
+              <div className='font-bold md:text-right'>Format</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
-              </div>
+              <div className='md:col-span-2'>Hardcover Book, 120+ pages</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Upgrades</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2 col-span-2'>
                 <a
+                  href='https://adb-cms.vercel.app/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  href='https://store.sure-electronics.com/product/757'
-                  className='underline hover:no-underline'
+                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold  text-sm rounded-lg hover:bg-green-600 transition-colors'
                 >
-                  Wondom 4x 30W Amp with Bluetooth and DSP
-                </a>
-                {' / '}
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href='https://store.sure-electronics.com/product/804'
-                  className='underline hover:no-underline'
-                >
-                  Wondom 2x 50W Amp
-                </a>
-                {' / '}
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href='https://store.sure-electronics.com/product/726'
-                  className='underline hover:no-underline'
-                >
-                  WONDOM ICP5 In-circuit Programmer
-                </a>
-                {' / '}
-                <a
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
-                  className='underline hover:no-underline'
-                >
-                  Meanwell LRS 200-15 PSU
+                  Editor Demo
+                  <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
                 </a>
               </div>
             </div>
@@ -299,7 +241,7 @@ export default function AmpedUpPage() {
 
           {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
               learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
@@ -308,8 +250,10 @@ export default function AmpedUpPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
-                  <li>Implement room correction onto DSP board</li>
-                  <li>Connect front LED to DSP board to use as bluetooth status LED</li>
+                  <li>Align vision before starting</li>
+                  <li>Make sure source material is complete and consistent</li>
+                  <li>Invest more time in gathering inspiration for layouting</li>
+                  <li>Allocate more time for experimentation</li>
                 </ul>
               </div>
             </div>
@@ -317,31 +261,41 @@ export default function AmpedUpPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>credits</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Idea & Concept</div>
+              <div className='font-bold md:text-right'>Models and Curation</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler & Julian Fehr</div>
+              <div className='md:col-span-2'>Peter Leutenegger</div>
 
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Build</div>
+              <div className='font-bold md:text-right'>Photography</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Alex Colle</div>
+
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Collages</div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>Kurt Kleinert</div>
+
+              <div className='hidden md:block'></div>
+              <div className='font-bold md:text-right'>Layout and CMS</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>No AI tools used</div>
+              <div className='md:col-span-2'>Claude Code for co-programming CMS and InDesign ExtendScript</div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Process Section */}
-      <div className='px-4 md:px-8 pt-12 pb-16'>
-        <div className='font-mono'>
-          <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6 ${vt323.className}`}>process</h3>
+      <div className=' px-4 md:px-8 pt-12 pb-16'>
+        <div>
+          <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>process</h3>
 
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             {/* Left: Process List (2 cols on desktop, full on mobile) */}
@@ -350,14 +304,13 @@ export default function AmpedUpPage() {
                 <div
                   key={step.imageIndex}
                   onClick={() => setSelectedProcessIndex(index)}
-                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-foreground bg-neutral-300/50 ${
-                    selectedProcessIndex !== index &&
-                    'lg:border-neutral-400 lg:bg-neutral-200/30 lg:hover:bg-neutral-200/60'
+                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer border-green-500 bg-green-200/50 ${
+                    selectedProcessIndex !== index && 'lg:border-green-300 lg:bg-green-100/50 lg:hover:bg-green-200/30'
                   }`}
                 >
                   <div
-                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden ring-2 ring-foreground ${
-                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-neutral-400'
+                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-2 ring-green-500 ${
+                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-green-300'
                     }`}
                   >
                     <Image
@@ -377,12 +330,12 @@ export default function AmpedUpPage() {
 
             {/* Right: Selected Image (3 cols) - Desktop only */}
             <div className='hidden lg:block lg:col-span-3'>
-              <div className='relative w-full aspect-[4/3] overflow-hidden border border-black/60 bg-white'>
+              <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden border-2 border-green-500/40'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className={`${PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'}`}
+                  className='object-cover'
                 />
               </div>
             </div>

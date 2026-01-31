@@ -7,6 +7,7 @@ export const ROUTES = [
   '/toy-lexicon',
   '/lost-in-space',
   '/dayjob',
+  '/trace',
   '/about',
 ] as const;
 
@@ -14,9 +15,4 @@ export type Route = (typeof ROUTES)[number];
 
 export function getRouteIndex(path: string): number {
   return ROUTES.indexOf(path as Route);
-}
-
-export function getSectionFromPath(path: string): string {
-  if (path === '/') return 'welcome';
-  return path.slice(1); // Remove leading slash
 }

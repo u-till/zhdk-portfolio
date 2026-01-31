@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: 'About - Till Solenthaler',
+  title: 'About - till solenthaler',
   description: 'Webdesigner and developer based in Zurich, Switzerland.',
   openGraph: {
-    title: 'About - Till Solenthaler',
+    title: 'About - till solenthaler',
     description: 'Webdesigner and developer based in Zurich.',
   },
 };

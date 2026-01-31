@@ -4,11 +4,11 @@ import Image from 'next/image';
 
 export default function AboutPage() {
   return (
-    <section className='h-screen overflow-y-auto px-4 md:px-8 py-24 md:py-32'>
+    <section className='min-h-screen px-4 md:px-8 py-24 md:py-32'>
       <div className='flex flex-col gap-8 pt-16'>
         {/* About Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             about
           </h2>
@@ -52,7 +52,7 @@ export default function AboutPage() {
 
         {/* Education Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Education
           </h2>
@@ -105,7 +105,7 @@ export default function AboutPage() {
 
         {/* Job Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Job
           </h2>
@@ -221,7 +221,7 @@ export default function AboutPage() {
 
         {/* Skills Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Skills
           </h2>
@@ -254,7 +254,7 @@ export default function AboutPage() {
 
         {/* Motivational Letter Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2 md:gap-4 lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Motivational Letter
           </h2>
@@ -304,6 +304,42 @@ export default function AboutPage() {
                 berufliche Entwicklung. Es bietet mir den Rahmen, meine gestalterische und konzeptionelle Arbeitsweise
                 zu vertiefen und auf ein professionelles Niveau zu heben.
               </p>
+            </div>
+          </div>
+        </div>
+        {/* Motivational Letter Section */}
+        <div>
+          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+            <span className='text-[0.88em] pb-[2px]'>●</span>
+            portfolio
+          </h2>
+          <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+            <div className='hidden md:block'></div>
+            <div className='hidden md:block'></div>
+            <div className='hidden md:block'></div>
+            <div className='md:col-span-2 text-justify'>
+              <p>
+                Portfolio website made with next.js, tailwinds, motion & three.js. Created together with Claude Code.
+              </p>
+              <div className='pt-4 text-xs text-muted-foreground'>
+                <a
+                  href='https://github.com/u-till/zhdk-portfolio'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-foreground transition-colors'
+                >
+                  Source on GitHub
+                </a>
+                {' · '}
+                <a
+                  href='https://github.com/u-till/zhdk-portfolio/blob/main/LICENSE'
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  className='hover:text-foreground transition-colors'
+                >
+                  CC BY-NC 4.0 / MIT
+                </a>
+              </div>
             </div>
           </div>
         </div>

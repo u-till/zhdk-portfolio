@@ -1,7 +1,6 @@
 'use client';
 
 import { MobileMenuToggle } from '@/components/mobile-menu-toggle';
-import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
@@ -66,6 +65,12 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
   },
+  trace: {
+    navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
+    brand: 'text-white hover:text-white/80',
+    link: 'text-white/60 hover:text-white',
+    activeLink: 'text-white',
+  },
   about: {
     navbar: 'w-full rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
     brand: 'hover:text-foreground/80',
@@ -87,11 +92,10 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 };
 
 export function Navigation() {
-  const { activeSection, hoveredProject, setHoveredProject } = useActiveSectionContext();
-  const { navigateTo } = useNavigation();
+  const { currentPage, hoveredProject, setHoveredProject, navigateTo } = useNavigation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const currentSection = activeSection && NAVBAR_CONFIG[activeSection] ? activeSection : 'welcome';
+  const currentSection = currentPage && NAVBAR_CONFIG[currentPage] ? currentPage : 'welcome';
 
   useEffect(() => {
     const backgroundColor = SECTION_BACKGROUNDS[currentSection] || SECTION_BACKGROUNDS.welcome;
@@ -159,8 +163,8 @@ export function Navigation() {
             >
               {NAVIGATION_LINKS.map((link) => {
                 const linkSection = link.href;
-                const isActive = activeSection === linkSection;
-                const isHovered = activeSection === 'welcome' && hoveredProject === linkSection;
+                const isActive = currentPage === linkSection;
+                const isHovered = currentPage === 'welcome' && hoveredProject === linkSection;
 
                 return (
                   <li key={link.href}>
@@ -169,12 +173,12 @@ export function Navigation() {
                         navigateTo(`/${linkSection}`);
                       }}
                       onMouseEnter={() => {
-                        if (activeSection === 'welcome') {
+                        if (currentPage === 'welcome') {
                           setHoveredProject(linkSection);
                         }
                       }}
                       onMouseLeave={() => {
-                        if (activeSection === 'welcome') {
+                        if (currentPage === 'welcome') {
                           setHoveredProject(null);
                         }
                       }}
@@ -224,8 +228,8 @@ export function Navigation() {
                 <ul className='flex flex-col gap-2 px-4 pb-4'>
                   {NAVIGATION_LINKS.map((link) => {
                     const linkSection = link.href;
-                    const isActive = activeSection === linkSection;
-                    const isHovered = activeSection === 'welcome' && hoveredProject === linkSection;
+                    const isActive = currentPage === linkSection;
+                    const isHovered = currentPage === 'welcome' && hoveredProject === linkSection;
 
                     return (
                       <li key={link.href}>

@@ -3,7 +3,7 @@
 import { OrbitControls, useGLTF } from '@react-three/drei';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Bloom, EffectComposer } from '@react-three/postprocessing';
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
@@ -119,6 +119,21 @@ export function Lamp3DViewer() {
   const [isOverSlider, setIsOverSlider] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const containerRef = useRef<HTMLDivElement>(null);
+  const glRef = useRef<THREE.WebGLRenderer | null>(null);
+
+  // Cleanup WebGL context on unmount to prevent HMR errors
+  useEffect(() => {
+    return () => {
+      if (glRef.current) {
+        glRef.current.dispose();
+        glRef.current = null;
+      }
+    };
+  }, []);
+
+  const handleCanvasCreated = useCallback(({ gl }: { gl: THREE.WebGLRenderer }) => {
+    glRef.current = gl;
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent) => {
     if (containerRef.current) {
@@ -205,6 +220,7 @@ export function Lamp3DViewer() {
         gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping }}
         shadows='soft'
         frameloop='demand'
+        onCreated={handleCanvasCreated}
       >
         <Suspense fallback={null}>
           {/* Ambient light for overall scene illumination */}

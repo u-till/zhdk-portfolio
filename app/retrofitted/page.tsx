@@ -1,18 +1,18 @@
 'use client';
 
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
+import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
+import { shrikhand } from '@/lib/fonts';
+import { ImageItem } from '@/types/project';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useCallback, useRef, useState } from 'react';
 
 // Lazy load the 3D Lamp viewer to code-split three.js
 const Lamp3DViewer = dynamic(() => import('@/components/retrofitted/lamp-3d-viewer').then((mod) => mod.Lamp3DViewer), {
   ssr: false,
   loading: () => <div className='w-full h-full bg-[#3C4343]' />,
 });
-import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
-import { shrikhand } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
-import Image from 'next/image';
-import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-1.png', objectFit: 'contain' },
@@ -89,7 +89,7 @@ export default function RetrofittedPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className='h-screen overflow-y-auto'>
+    <section>
       {/* First View: Gallery with 3D Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
@@ -98,9 +98,7 @@ export default function RetrofittedPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
-            className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}
-          >
+          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}>
             retrofitted
           </h2>
         </div>
@@ -237,7 +235,9 @@ export default function RetrofittedPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Brief</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+              brief
+            </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -254,7 +254,7 @@ export default function RetrofittedPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -268,9 +268,11 @@ export default function RetrofittedPage() {
             </div>
           </div>
 
-          {/* Specifications Section */}
+          {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Specifications</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+              specifications
+            </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -296,17 +298,50 @@ export default function RetrofittedPage() {
               <div className='font-bold md:text-right'>Upgrades</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005006005453774.html' className='text-orange-600 hover:underline'>USB-C</a>{' / '}
-                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005004192388691.html' className='text-orange-600 hover:underline'>10.5Ah Battery</a>{' / '}
-                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005005579072790.html' className='text-orange-600 hover:underline'>LED 5W</a>{' / '}
-                <a target='_blank' rel='noopener noreferrer' href='https://de.aliexpress.com/item/1005007384516556.html' className='text-orange-600 hover:underline'>Dimmer</a>
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://de.aliexpress.com/item/1005006005453774.html'
+                  className='text-orange-600 hover:underline'
+                >
+                  USB-C
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://de.aliexpress.com/item/1005004192388691.html'
+                  className='text-orange-600 hover:underline'
+                >
+                  10.5Ah Battery
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://de.aliexpress.com/item/1005005579072790.html'
+                  className='text-orange-600 hover:underline'
+                >
+                  LED 5W
+                </a>
+                {' / '}
+                <a
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  href='https://de.aliexpress.com/item/1005007384516556.html'
+                  className='text-orange-600 hover:underline'
+                >
+                  Dimmer
+                </a>
               </div>
             </div>
           </div>
 
-          {/* Learnings Section */}
+          {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Learnings</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+              learnings
+            </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -321,14 +356,16 @@ export default function RetrofittedPage() {
             </div>
           </div>
 
-          {/* Credits Section */}
+          {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>Credits</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+              credits
+            </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+              <div className='md:col-span-2'>till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
@@ -336,7 +373,7 @@ export default function RetrofittedPage() {
               <div className='md:col-span-2'>
                 <ul className='list-disc list-inside space-y-1'>
                   <li>ChatGPT for circuit design</li>
-                  <li>Google Nano for schematic styling</li>
+                  <li>Google Nano Banana for stylizing images for schematic</li>
                 </ul>
               </div>
             </div>
@@ -347,7 +384,9 @@ export default function RetrofittedPage() {
       {/* Process Section - flows after info */}
       <div className='bg-orange-100 px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-orange-400 pb-2 mb-6 ${shrikhand.className}`}>Process</h3>
+          <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-6 ${shrikhand.className}`}>
+            process
+          </h3>
 
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             {/* Left: Process List (2 cols on desktop, full on mobile) */}
@@ -357,14 +396,19 @@ export default function RetrofittedPage() {
                   key={step.imageIndex}
                   onClick={() => setSelectedProcessIndex(index)}
                   className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-orange-500 bg-orange-300/50 ${
-                    selectedProcessIndex !== index && 'lg:border-orange-300 lg:bg-orange-200/30 lg:hover:bg-orange-200/60'
+                    selectedProcessIndex !== index &&
+                    'lg:border-orange-300 lg:bg-orange-200/30 lg:hover:bg-orange-200/60'
                   }`}
                 >
                   <div
                     className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ring-2 ring-orange-500 ${
                       selectedProcessIndex !== index && 'lg:ring-1 lg:ring-orange-300'
                     }`}
-                    style={PROCESS_IMAGES[step.imageIndex]?.bg ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg } : undefined}
+                    style={
+                      PROCESS_IMAGES[step.imageIndex]?.bg
+                        ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg }
+                        : undefined
+                    }
                   >
                     <Image
                       src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
@@ -385,7 +429,11 @@ export default function RetrofittedPage() {
             <div className='hidden lg:block lg:col-span-3'>
               <div
                 className='relative w-full aspect-[4/3] rounded-lg overflow-hidden'
-                style={PROCESS_IMAGES[selectedProcessIndex]?.bg ? { backgroundColor: PROCESS_IMAGES[selectedProcessIndex].bg } : undefined}
+                style={
+                  PROCESS_IMAGES[selectedProcessIndex]?.bg
+                    ? { backgroundColor: PROCESS_IMAGES[selectedProcessIndex].bg }
+                    : undefined
+                }
               >
                 <Image
                   src={PROCESS_IMAGES[selectedProcessIndex]?.src || PROCESS_IMAGES[0].src}

@@ -1,30 +1,39 @@
 'use client';
 
-import { getRouteIndex } from '@/lib/routes';
 import { usePathname, useRouter } from 'next/navigation';
 import { createContext, ReactNode, useCallback, useContext, useRef, useState } from 'react';
 
-// Animation duration in ms - must match PageTransition duration
 export const TRANSITION_DURATION = 800;
 
+function getPageFromPath(path: string): string {
+  if (path === '/') return 'welcome';
+  return path.slice(1);
+}
+
 interface NavigationContextType {
-  direction: number;
+  currentPage: string;
+  hoveredProject: string | null;
+  setHoveredProject: (project: string | null) => void;
   isNavigating: boolean;
   navigateTo: (path: string) => void;
 }
 
 const NavigationContext = createContext<NavigationContextType>({
-  direction: 1,
+  currentPage: '',
+  hoveredProject: null,
+  setHoveredProject: () => {},
   isNavigating: false,
   navigateTo: () => {},
 });
 
 export function NavigationProvider({ children }: { children: ReactNode }) {
-  const [direction, setDirection] = useState(1);
-  const [isNavigating, setIsNavigating] = useState(false);
-  const router = useRouter();
   const pathname = usePathname();
+  const router = useRouter();
+  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const [isNavigating, setIsNavigating] = useState(false);
   const isNavigatingRef = useRef(false);
+
+  const currentPage = getPageFromPath(pathname);
 
   const navigateTo = useCallback(
     (path: string) => {
@@ -33,27 +42,36 @@ export function NavigationProvider({ children }: { children: ReactNode }) {
       isNavigatingRef.current = true;
       setIsNavigating(true);
 
-      const currentIndex = getRouteIndex(pathname);
-      const targetIndex = getRouteIndex(path);
-
-      // Set direction: 1 for forward (down), -1 for backward (up)
-      const newDirection = targetIndex > currentIndex ? 1 : -1;
-      setDirection(newDirection);
-
-      // Navigate after direction is set
-      setTimeout(() => {
-        router.push(path);
+      const scrollY = window.scrollY;
+      if (scrollY > 0) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        const scrollDuration = Math.min(scrollY * 0.5, 400);
         setTimeout(() => {
-          isNavigatingRef.current = false;
-          setIsNavigating(false);
-        }, TRANSITION_DURATION + 100);
-      }, 10);
+          router.push(path);
+          setTimeout(() => {
+            isNavigatingRef.current = false;
+            setIsNavigating(false);
+          }, TRANSITION_DURATION + 100);
+        }, scrollDuration);
+      } else {
+        setTimeout(() => {
+          router.push(path);
+          setTimeout(() => {
+            isNavigatingRef.current = false;
+            setIsNavigating(false);
+          }, TRANSITION_DURATION + 100);
+        }, 10);
+      }
     },
     [pathname, router],
   );
 
   return (
-    <NavigationContext.Provider value={{ direction, isNavigating, navigateTo }}>{children}</NavigationContext.Provider>
+    <NavigationContext.Provider
+      value={{ currentPage, hoveredProject, setHoveredProject, isNavigating, navigateTo }}
+    >
+      {children}
+    </NavigationContext.Provider>
   );
 }
 

@@ -42,15 +42,15 @@ export default function UnderConstructionPage() {
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
-    <section className='h-screen overflow-y-auto bg-yellow-300'>
+    <section className='bg-yellow-300'>
       {/* First View: Full-screen 360 Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
         <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2
-            className={`text-5xl lg:text-7xl font-bold text-black ${allertaStencil.className}`}
-          >
-            under<br />construction
+          <h2 className={`text-5xl lg:text-7xl font-bold text-black ${allertaStencil.className}`}>
+            under
+            <br />
+            construction
           </h2>
         </div>
 
@@ -89,16 +89,18 @@ export default function UnderConstructionPage() {
         <div className='flex flex-col gap-8'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Brief</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+              brief
+            </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to continuous
-                  change and reusing materials in a different context. When is something truly done? Everything is in
-                  perpetual development and keeps on changing its form.
+                  Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to
+                  continuous change and reusing materials in a different context. When is something truly done?
+                  Everything is in perpetual development and keeps on changing its form.
                 </p>
               </div>
             </div>
@@ -106,24 +108,26 @@ export default function UnderConstructionPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in our
-                  livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built furniture
-                  would be the best so we could have it to our exact specifications.
+                  We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in
+                  our livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built
+                  furniture would be the best so we could have it to our exact specifications.
                 </p>
               </div>
             </div>
           </div>
 
-          {/* Specifications Section */}
+          {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Specifications</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+              specifications
+            </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -152,9 +156,11 @@ export default function UnderConstructionPage() {
             </div>
           </div>
 
-          {/* Learnings Section */}
+          {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Learnings</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+              learnings
+            </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -169,14 +175,16 @@ export default function UnderConstructionPage() {
             </div>
           </div>
 
-          {/* Credits Section */}
+          {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>Credits</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+              credits
+            </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+              <div className='md:col-span-2'>till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
@@ -190,7 +198,9 @@ export default function UnderConstructionPage() {
       {/* Process Section */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-black pb-2 mb-6 ${allertaStencil.className}`}>Process</h3>
+          <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-6 ${allertaStencil.className}`}>
+            process
+          </h3>
 
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             {/* Left: Process List (2 cols on desktop, full on mobile) */}

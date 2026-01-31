@@ -176,7 +176,7 @@ export default function DayjobPage() {
   }
 
   return (
-    <section className='h-screen overflow-y-auto'>
+    <section>
       {/* First View: Desktop */}
       <div className='h-screen relative overflow-hidden'>
         {/* Background - Full Screen */}
@@ -288,9 +288,7 @@ export default function DayjobPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
-              Brief
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -307,9 +305,7 @@ export default function DayjobPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
-              Idea
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -324,10 +320,10 @@ export default function DayjobPage() {
             </div>
           </div>
 
-          {/* Specifications Section */}
+          {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
-              Specifications
+            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
+              specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -357,10 +353,10 @@ export default function DayjobPage() {
             </div>
           </div>
 
-          {/* Learnings Section */}
+          {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
-              Learnings
+            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
+              learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -377,16 +373,14 @@ export default function DayjobPage() {
             </div>
           </div>
 
-          {/* Credits Section */}
+          {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
-              Credits
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Projects</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+              <div className='md:col-span-2'>till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>

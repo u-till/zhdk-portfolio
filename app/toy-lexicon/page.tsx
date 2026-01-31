@@ -76,7 +76,7 @@ export default function ToyLexiconPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className={`h-screen overflow-y-auto  ${dinNext.className}`}>
+    <section className={dinNext.className}>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Bottom Left */}
@@ -85,7 +85,7 @@ export default function ToyLexiconPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-5xl lg:text-7xl uppercase font-bold text-black ${dinNext.className}`}>toy lexicon</h2>
+          <h2 className={`text-5xl lg:text-7xl  font-bold text-black ${dinNext.className}`}>toy lexicon</h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -184,9 +184,7 @@ export default function ToyLexiconPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
-              Brief
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -206,9 +204,7 @@ export default function ToyLexiconPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
-              Idea
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -223,10 +219,10 @@ export default function ToyLexiconPage() {
             </div>
           </div>
 
-          {/* Specifications Section */}
+          {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
-              Specifications
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -257,7 +253,7 @@ export default function ToyLexiconPage() {
                   href='https://adb-cms.vercel.app/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold uppercase text-sm rounded-lg hover:bg-green-600 transition-colors'
+                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold  text-sm rounded-lg hover:bg-green-600 transition-colors'
                 >
                   Editor Demo
                   <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
@@ -266,10 +262,10 @@ export default function ToyLexiconPage() {
             </div>
           </div>
 
-          {/* Learnings Section */}
+          {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
-              Learnings
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+              learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -286,11 +282,9 @@ export default function ToyLexiconPage() {
             </div>
           </div>
 
-          {/* Credits Section */}
+          {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
-              Credits
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Models and Curation</div>
@@ -310,7 +304,7 @@ export default function ToyLexiconPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Layout and CMS</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+              <div className='md:col-span-2'>till solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
@@ -324,9 +318,7 @@ export default function ToyLexiconPage() {
       {/* Process Section */}
       <div className=' px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold uppercase border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>
-            Process
-          </h3>
+          <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>process</h3>
 
           <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
             {/* Left: Process List (2 cols on desktop, full on mobile) */}

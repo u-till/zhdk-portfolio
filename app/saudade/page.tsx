@@ -267,7 +267,7 @@ export default function SaudadePage() {
   }, [handleNext, handlePrev]);
 
   return (
-    <section className='h-screen overflow-y-auto'>
+    <section>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center bg-neutral-900'>
         {/* Title - Bottom Left */}
@@ -290,7 +290,7 @@ export default function SaudadePage() {
             <div key={photo.src} className='h-full min-w-full snap-center flex items-center justify-center relative'>
               <Image
                 src={photo.src}
-                alt={`Saudade ${index + 1}`}
+                alt={`saudade ${index + 1}`}
                 fill
                 className='object-contain'
                 priority={index === 0}
@@ -411,10 +411,8 @@ export default function SaudadePage() {
         <div className='flex flex-col gap-8 text-white'>
           {/* Brief Section */}
           <div>
-            <h3
-              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
-            >
-              Brief
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              brief
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -432,10 +430,8 @@ export default function SaudadePage() {
 
           {/* Motivation Section */}
           <div>
-            <h3
-              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
-            >
-              Motivation
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              motivation
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -452,12 +448,10 @@ export default function SaudadePage() {
             </div>
           </div>
 
-          {/* Specifications Section */}
+          {/* specifications Section */}
           <div>
-            <h3
-              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
-            >
-              Specifications
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -489,10 +483,8 @@ export default function SaudadePage() {
 
           {/* Context Section */}
           <div>
-            <h3
-              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
-            >
-              Context
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              context
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
@@ -507,18 +499,16 @@ export default function SaudadePage() {
             </div>
           </div>
 
-          {/* Credits Section */}
+          {/* credits Section */}
           <div>
-            <h3
-              className={`text-xl font-bold uppercase border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}
-            >
-              Credits
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              credits
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+              <div className='md:col-span-2'>till solenthaler</div>
             </div>
           </div>
         </div>

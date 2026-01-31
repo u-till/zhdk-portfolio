@@ -1,11 +1,10 @@
 'use client';
 
-import { useActiveSectionContext } from '@/contexts/active-section-context';
 import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 // Lazy load the 3D preview to code-split three.js
 const Lamp3DPreview = dynamic(() => import('@/components/home/lamp-preview').then((mod) => mod.Lamp3DPreview), {
@@ -28,39 +27,51 @@ type PreviewConfig =
   | { type: '360'; src: string }
   | { type: '3d'; src: string };
 
-const PROJECT_PREVIEWS: Record<string, PreviewConfig> = {
-  'under-construction': { type: '360', src: '/under-construction/korpus-360' },
+const PROJECTS: Record<string, { name: string; preview: PreviewConfig }> = {
+  'under-construction': { name: 'under construction', preview: { type: '360', src: '/under-construction/korpus-360' } },
   saudade: {
-    type: 'blink',
-    src: '/saudade/olympus.png',
-    altSrc: '/saudade/olympus-blinking.png',
-    interval: 2000,
-    blinkDuration: 150,
-    size: 'sm',
+    name: 'saudade',
+    preview: {
+      type: 'blink',
+      src: '/saudade/olympus.png',
+      altSrc: '/saudade/olympus-blinking.png',
+      interval: 2000,
+      blinkDuration: 150,
+      size: 'sm',
+    },
   },
-  retrofitted: { type: '3d', src: '/retrofitted/lamp.glb' },
+  retrofitted: { name: 'Retrofitted', preview: { type: '3d', src: '/retrofitted/lamp.glb' } },
   'amped-up': {
-    type: 'blink',
-    src: '/amped-up/speaker-transparent.png',
-    altSrc: '/amped-up/speaker-transparent-2.png',
-    interval: 500,
-    blinkDuration: 150,
+    name: 'amped up',
+    preview: {
+      type: 'blink',
+      src: '/amped-up/speaker-transparent.png',
+      altSrc: '/amped-up/speaker-transparent-2.png',
+      interval: 500,
+      blinkDuration: 150,
+    },
   },
   'toy-lexicon': {
-    type: 'toggle',
-    src: '/toy-lexicon/mockup-1-small.png',
-    altSrc: '/toy-lexicon/mockup-3-small.png',
-    interval: 2000,
-    size: 'lg',
+    name: 'Toy Lexicon',
+    preview: {
+      type: 'toggle',
+      src: '/toy-lexicon/mockup-1-small.png',
+      altSrc: '/toy-lexicon/mockup-3-small.png',
+      interval: 2000,
+      size: 'lg',
+    },
   },
   'lost-in-space': {
-    type: 'toggle',
-    src: '/lost-in-space/cover.jpg',
-    altSrc: '/lost-in-space/backside-1.jpg',
-    interval: 2000,
-    size: 'sm',
+    name: 'Lost in Space',
+    preview: {
+      type: 'toggle',
+      src: '/lost-in-space/cover.jpg',
+      altSrc: '/lost-in-space/backside-1.jpg',
+      interval: 2000,
+      size: 'sm',
+    },
   },
-  dayjob: { type: 'image', src: '/dayjob/dayjob-thumb.png' },
+  dayjob: { name: 'dayjob', preview: { type: 'image', src: '/dayjob/dayjob-thumb.png' } },
 };
 
 // Shared floating animation for all previews
@@ -160,14 +171,12 @@ function Rotating360Preview() {
 }
 
 export default function Home() {
-  const { hoveredProject, setHoveredProject } = useActiveSectionContext();
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-  const sectionRef = useRef<HTMLElement>(null);
-  const { navigateTo } = useNavigation();
+  const { hoveredProject, setHoveredProject, navigateTo } = useNavigation();
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   // Preload preview images
   useEffect(() => {
-    Object.values(PROJECT_PREVIEWS).forEach((preview) => {
+    Object.values(PROJECTS).forEach(({ preview }) => {
       if (preview.type === 'image') {
         const img = new window.Image();
         img.src = preview.src;
@@ -180,18 +189,12 @@ export default function Home() {
     });
   }, []);
 
-  const getProjectName = useCallback((key: string) => {
-    return key
-      .split('-')
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(' ');
-  }, []);
-
-  const projectKeys = Object.keys(PROJECT_PREVIEWS);
+  const projectKeys = Object.keys(PROJECTS);
 
   const renderPreview = useCallback((projectKey: string) => {
-    const preview = PROJECT_PREVIEWS[projectKey];
-    if (!preview) return null;
+    const project = PROJECTS[projectKey];
+    if (!project) return null;
+    const preview = project.preview;
 
     const sizeClass = 'size' in preview ? SIZES[preview.size || 'md'] : SIZES.md;
 
@@ -229,21 +232,11 @@ export default function Home() {
   }, []);
 
   const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (sectionRef.current) {
-      const sectionRect = sectionRef.current.getBoundingClientRect();
-      setMousePos({
-        x: e.clientX - sectionRect.left,
-        y: e.clientY - sectionRect.top,
-      });
-    }
+    setMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      onMouseMove={handleMouseMove}
-      className='h-full flex items-start pt-32 justify-start relative overflow-hidden px-4 pb-4 md:pb-8 md:px-8'
-    >
+    <section onMouseMove={handleMouseMove} className='h-full overflow-hidden pt-32 px-4 pb-4 md:pb-8 md:px-8'>
       {/* Floating Preview - follows cursor */}
       <AnimatePresence mode='wait'>
         {hoveredProject && (
@@ -253,7 +246,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className='absolute z-20 pointer-events-none -translate-y-1/2'
+            className='fixed z-20 pointer-events-none -translate-y-1/2'
             style={{ left: mousePos.x + 40, top: mousePos.y }}
           >
             {renderPreview(hoveredProject)}
@@ -272,13 +265,12 @@ export default function Home() {
               onMouseEnter={() => setHoveredProject(projectKey)}
               onMouseLeave={() => setHoveredProject(null)}
               onClick={() => navigateTo(`/${projectKey}`)}
-              className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 ${
+              className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.25rem,6vh,2.5rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none ${
                 shouldHide ? 'opacity-20' : ''
               }`}
-              style={{ fontSize: 'clamp(1.75rem, 5vw, 8rem)', lineHeight: 1 }}
             >
               <span className='text-[0.88em] pb-[2px]'>●</span>
-              {getProjectName(projectKey)}
+              {PROJECTS[projectKey].name}
             </motion.h1>
           );
         })}
