@@ -2,10 +2,10 @@ import { Metadata } from 'next';
 import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
-  title: 'Lost in Space - till solenthaler',
+  title: 'lost in space | till solenthaler',
   description: 'A collaborative music album combining space-themed productions with original cover art.',
   openGraph: {
-    title: 'Lost in Space - till solenthaler',
+    title: 'lost in space | till solenthaler',
     description: 'A collaborative music album combining space-themed productions.',
     images: ['/lost-in-space/cover.jpg'],
   },

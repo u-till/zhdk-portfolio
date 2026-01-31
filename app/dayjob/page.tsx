@@ -296,8 +296,7 @@ export default function DayjobPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   A selection of freelance web projects I have worked on over the years. These range from small
-                  portfolio sites to larger business applications, showcasing my experience in web development and
-                  design.
+                  portfolio sites to larger business websites, showcasing my experience in web development and design.
                 </p>
               </div>
             </div>
@@ -312,9 +311,9 @@ export default function DayjobPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  I started freelancing during my studies to gain practical experience and earn some money on the side.
-                  Over time, it became a way to explore different technologies and work with diverse clients across
-                  various industries.
+                  I started freelancing because I wanted to move towards more creative and challenging work in contrast
+                  to my previous employment roles. Freelancing allows me to choose projects that align with my interests
+                  and skills, while also providing the flexibility to manage my own time and work environment.
                 </p>
               </div>
             </div>
@@ -339,7 +338,7 @@ export default function DayjobPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Freelance Web Development</div>
+              <div className='md:col-span-2'>Web Design &Development</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Tech</div>
@@ -349,7 +348,7 @@ export default function DayjobPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Services</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Design, Development, Hosting, Maintenance</div>
+              <div className='md:col-span-2'>Design, Development, Consulting, Hosting, Maintenance</div>
             </div>
           </div>
 
@@ -374,13 +373,13 @@ export default function DayjobPage() {
           </div>
 
           {/* credits Section */}
-          <div>
+          <div className='mb-16'>
             <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Projects</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler</div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>

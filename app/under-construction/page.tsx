@@ -184,7 +184,7 @@ export default function UnderConstructionPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till solenthaler</div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>

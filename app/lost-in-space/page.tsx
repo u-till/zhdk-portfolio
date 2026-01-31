@@ -185,13 +185,13 @@ export default function LostInSpacePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Album Art</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler</div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Music Production</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                till solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
+                Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
               </div>
 
               <div className='hidden md:block'></div>

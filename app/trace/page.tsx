@@ -281,7 +281,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Layout and CMS</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler</div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>

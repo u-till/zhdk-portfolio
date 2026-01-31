@@ -490,7 +490,7 @@ export default function SaudadePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>till solenthaler</div>
+              <div className='md:col-span-2'>Till Solenthaler</div>
             </div>
           </div>
         </div>
