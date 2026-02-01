@@ -203,28 +203,28 @@ export const PHOTOS: SaudadePhoto[] = [
 
 export const PROCESS_STEPS = [
   {
-    title: '01. CAPTURE',
+    title: '01. GO SOMEWHERE',
     text: 'Always carry a camera. Capture moments spontaneously, focusing on composition and light.',
-    image: '/saudade/olympus.png',
+    image: '/saudade/process-1.jpg',
   },
   {
-    title: '02. DEVELOP',
+    title: '02. BRING THE CAMERA',
     text: 'Send film rolls to a local lab for development. Digital files are transferred directly.',
-    image: '/saudade/addis.jpg',
+    image: '/saudade/process-2.jpg',
   },
   {
-    title: '03. SELECT',
+    title: '03. WALK AROUND FOR HOURS',
     text: 'Review and select the best shots. Look for emotion, story, and technical quality.',
-    image: '/saudade/hanoi-3.jpg',
+    image: '/saudade/process-3.jpg',
   },
   {
-    title: '04. EDIT',
+    title: '04. DROP OFF FILM',
     text: 'Light adjustments in Lightroom. Keep edits minimal to preserve the authentic feel.',
-    image: '/saudade/hongkong-2.jpg',
+    image: '/saudade/process-4.jpg',
   },
   {
-    title: '05. ARCHIVE',
+    title: '05. DOWNLOAD AND ARCHIVE',
     text: 'Organize by location and date. Tag with metadata for the interactive globe.',
-    image: '/saudade/annapurna.jpg',
+    image: '/saudade/process-5.jpg',
   },
 ];

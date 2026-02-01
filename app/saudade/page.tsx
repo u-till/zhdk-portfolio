@@ -78,7 +78,9 @@ export default function SaudadePage() {
             PHOTOS[activeIndex]?.hideTitle ? 'lg:opacity-0' : ''
           }`}
         >
-          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${courierPrime.className}`}>
+          <h2
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${courierPrime.className}`}
+          >
             saudade
           </h2>
         </div>
@@ -272,7 +274,7 @@ export default function SaudadePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Photography / Travel</div>
+              <div className='md:col-span-2'>Photography</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Cameras</div>
@@ -327,7 +329,9 @@ export default function SaudadePage() {
                       <span className={`font-bold block ${isActive ? 'lg:text-white text-white/80' : 'text-white/80'}`}>
                         {step.title}
                       </span>
-                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-white/60' : 'text-white/60'}`}>{step.text}</span>
+                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-white/60' : 'text-white/60'}`}>
+                        {step.text}
+                      </span>
                     </div>
                   </div>
                 );

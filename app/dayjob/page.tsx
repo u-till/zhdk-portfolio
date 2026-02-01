@@ -315,7 +315,10 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
                 <div className='md:col-span-2'>
-                  <p className='leading-relaxed'>Freelance web projects. Portfolio sites to business websites.</p>
+                  <p className='leading-relaxed'>
+                    A selection of freelance web projects I have worked on over the years. These range from small
+                    portfolio sites to larger business websites, showcasing my experience in web development and design.
+                  </p>
                 </div>
               </div>
             </div>
@@ -330,7 +333,11 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
                 <div className='md:col-span-2'>
-                  <p className='leading-relaxed'>Creative freedom. Flexible work. Aligned projects.</p>
+                  <p className='leading-relaxed'>
+                    I started freelancing because I wanted to move towards more creative and challenging work.
+                    Freelancing allows me to choose projects that align with my interests and skills, while also
+                    providing the flexibility to manage my own time and work environment..
+                  </p>
                 </div>
               </div>
             </div>
@@ -427,25 +434,25 @@ export default function DayjobPage() {
               },
               {
                 title: '02. DESIGN',
-                text: 'Create wireframes and visual designs in Figma. Iterate based on client feedback until approved.',
+                text: 'Create wireframes and visual designs in Figma. Tailor style and design language to client needs.',
                 image: '/dayjob/screenshots/dayjob-process-design.png',
                 objectFit: 'cover',
               },
               {
                 title: '03. DEVELOP',
-                text: 'Build the website using modern technologies. Regular check-ins to ensure alignment with vision.',
+                text: 'Build the website using open source technologies. Nowadays mostly with Claude Code and Agents.',
                 image: '/dayjob/screenshots/dayjob-process-develop.png',
                 objectFit: 'cover',
               },
               {
                 title: '04. LAUNCH',
-                text: 'Deploy to production, configure hosting, and set up analytics. Train client on content management.',
+                text: 'Fill content, test for speed, accessibility and seo. Deploy to hosting and set up analytics. Train client on content management.',
                 image: '/dayjob/screenshots/brookejackson-screenshot.jpg',
                 objectFit: 'cover',
               },
               {
                 title: '05. MAINTAIN & OPTIMIZE',
-                text: 'Ongoing support, updates, and improvements. Monitor performance and security.',
+                text: 'Ongoing support, updates, and improvements. Monitor search engine performance and security.',
                 image: '/dayjob/screenshots/dayjob-process-optimize.png',
                 objectFit: 'cover',
               },
