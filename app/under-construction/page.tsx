@@ -166,7 +166,7 @@ export default function UnderConstructionPage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
                   <li>Use sandpaper to refine the edges</li>
                   <li>Use live view on external screen to spot out of focus shots</li>
@@ -202,9 +202,9 @@ export default function UnderConstructionPage() {
             process
           </h3>
 
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-            {/* Left: Process List (2 cols on desktop, full on mobile) */}
-            <div className='lg:col-span-2 space-y-4'>
+          <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
+            {/* Left: Process List */}
+            <div className='order-2 lg:order-1 lg:w-2/5 space-y-4'>
               {PROCESS_STEPS.map((step, index) => {
                 const isActive = selectedProcessIndex === index;
                 return (
@@ -212,15 +212,15 @@ export default function UnderConstructionPage() {
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
                     className={`w-full p-3 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${
-                      isActive ? 'bg-red-600' : 'bg-white lg:hover:bg-neutral-100'
+                      isActive ? 'bg-white lg:bg-red-600' : 'bg-white lg:hover:bg-neutral-100'
                     }`}
                   >
                     <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden border-2 border-black'>
                       <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
                     </div>
                     <div className='flex-1'>
-                      <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
-                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>
+                      <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
+                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}>
                         {step.text}
                       </span>
                     </div>
@@ -229,9 +229,9 @@ export default function UnderConstructionPage() {
               })}
             </div>
 
-            {/* Right: Selected Image (3 cols) - Desktop only */}
-            <div className='hidden lg:block lg:col-span-3'>
-              <div className='relative w-full aspect-[4/3] overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+            {/* Right: Selected Image - Desktop only */}
+            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+              <div className='relative w-full overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}

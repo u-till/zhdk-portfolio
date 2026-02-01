@@ -73,7 +73,7 @@ export default function SaudadePage() {
         {/* Title - Bottom Left */}
         <div
           className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
-            PHOTOS[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
+            PHOTOS[activeIndex]?.hideTitle ? 'lg:opacity-0' : ''
           }`}
         >
           <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
@@ -303,8 +303,8 @@ export default function SaudadePage() {
             process
           </h3>
 
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-            <div className='lg:col-span-2 space-y-3'>
+          <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
+            <div className='order-2 lg:order-1 lg:w-2/5 space-y-3'>
               {PROCESS_STEPS.map((step, index) => {
                 const isActive = selectedProcessIndex === index;
                 return (
@@ -312,30 +312,30 @@ export default function SaudadePage() {
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
                     className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
-                      isActive ? 'bg-white/20' : 'bg-white/5 lg:hover:bg-white/10'
+                      isActive ? 'bg-white/5 lg:bg-white/20' : 'bg-white/5 lg:hover:bg-white/10'
                     }`}
                   >
                     <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-white/20'>
                       <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
                     </div>
                     <div className='flex-1'>
-                      <span className={`font-bold block ${isActive ? 'text-white' : 'text-white/80'}`}>
+                      <span className={`font-bold block ${isActive ? 'lg:text-white text-white/80' : 'text-white/80'}`}>
                         {step.title}
                       </span>
-                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-white/60'}`}>{step.text}</span>
+                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-white/60' : 'text-white/60'}`}>{step.text}</span>
                     </div>
                   </div>
                 );
               })}
             </div>
 
-            <div className='hidden lg:block lg:col-span-3'>
-              <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden ring-1 ring-white/20'>
+            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+              <div className='relative w-full rounded-lg overflow-hidden ring-1 ring-white/20'>
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-contain bg-neutral-800'
+                  className='object-cover bg-neutral-800'
                 />
               </div>
             </div>

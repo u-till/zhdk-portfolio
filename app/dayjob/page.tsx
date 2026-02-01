@@ -337,7 +337,7 @@ export default function DayjobPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>2018-Ongoing</div>
+              <div className='md:col-span-2'>2021-Ongoing</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>For</div>
@@ -371,7 +371,7 @@ export default function DayjobPage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>Client communication is as important as technical skills</li>
                   <li>Set clear boundaries and scope from the start</li>
                   <li>Document everything for future maintenance</li>
@@ -442,9 +442,9 @@ export default function DayjobPage() {
               },
             ];
             return (
-              <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+              <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
                 {/* Left: Process List */}
-                <div className='lg:col-span-2 space-y-3'>
+                <div className='order-2 lg:order-1 lg:w-2/5 space-y-3'>
                   {PROCESS_STEPS.map((step, index) => {
                     const isActive = selectedProcessIndex === index;
                     return (
@@ -452,15 +452,17 @@ export default function DayjobPage() {
                         key={index}
                         onClick={() => setSelectedProcessIndex(index)}
                         className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
-                          isActive ? 'bg-blue-500' : 'bg-white lg:hover:bg-white/80'
+                          isActive ? 'bg-white lg:bg-blue-500' : 'bg-white lg:hover:bg-white/80'
                         }`}
                       >
                         <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-blue-400'>
                           <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
                         </div>
                         <div className='flex-1'>
-                          <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
-                          <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>
+                          <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
+                          <span
+                            className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}
+                          >
                             {step.text}
                           </span>
                         </div>
@@ -470,8 +472,8 @@ export default function DayjobPage() {
                 </div>
 
                 {/* Right: Selected Image - Desktop only */}
-                <div className='hidden lg:block lg:col-span-3'>
-                  <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-white'>
+                <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+                  <div className='relative w-full rounded-lg overflow-hidden bg-white'>
                     <Image
                       src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                       alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}

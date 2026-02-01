@@ -45,6 +45,11 @@ const PROCESS_STEPS = [
     title: '04. INDESIGN AUTOMATION',
     text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. Enables quick generation of consistent layouts for refinement.',
   },
+  {
+    imageIndex: 3,
+    title: '05. ITERATE AND REFINE',
+    text: 'Continuous feedback loops with my father to adjust layouts, fix data issues, and improve the visual presentation until ready for print.',
+  },
 ];
 
 export default function ToyLexiconPage() {
@@ -111,7 +116,7 @@ export default function ToyLexiconPage() {
         <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
           <button
             onClick={handlePrev}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md hover:bg-green-500/20 transition-colors pointer-events-auto'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-[#5BB660]/10 border-2 border-[#5BB660]/40 backdrop-blur-md hover:bg-[#5BB660]/20 transition-colors pointer-events-auto'
             aria-label='Previous photo'
           >
             <svg
@@ -127,7 +132,7 @@ export default function ToyLexiconPage() {
           </button>
           <button
             onClick={handleNext}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-green-500/10 border-2 border-green-500/40 backdrop-blur-md hover:bg-green-500/20 transition-colors pointer-events-auto'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-lg bg-[#5BB660]/10 border-2 border-[#5BB660]/40 backdrop-blur-md hover:bg-[#5BB660]/20 transition-colors pointer-events-auto'
             aria-label='Next photo'
           >
             <svg
@@ -151,8 +156,8 @@ export default function ToyLexiconPage() {
               onClick={() => navigateToPhoto(index)}
               className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-lg border ${
                 activeIndex === index
-                  ? 'border-2 border-green-500 opacity-100'
-                  : 'border-green-500/40 opacity-60 hover:opacity-100'
+                  ? 'border-2 border-[#5BB660] opacity-100'
+                  : 'border-[#5BB660]/40 opacity-60 hover:opacity-100'
               }`}
             >
               <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover' />
@@ -184,7 +189,7 @@ export default function ToyLexiconPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>brief</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -204,7 +209,7 @@ export default function ToyLexiconPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -221,7 +226,7 @@ export default function ToyLexiconPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>
               specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
@@ -253,7 +258,7 @@ export default function ToyLexiconPage() {
                   href='https://adb-cms.vercel.app/'
                   target='_blank'
                   rel='noopener noreferrer'
-                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold  text-sm rounded-lg hover:bg-green-600 transition-colors'
+                  className='inline-block mt-2 px-6 py-3 bg-[#5BB660] text-white font-bold  text-sm rounded-lg hover:bg-[#4d9b52] transition-colors'
                 >
                   Editor Demo
                   <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
@@ -264,7 +269,7 @@ export default function ToyLexiconPage() {
 
           {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>
               learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
@@ -272,7 +277,7 @@ export default function ToyLexiconPage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
                   <li>Invest more time in gathering inspiration for layouting</li>
@@ -284,7 +289,7 @@ export default function ToyLexiconPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>credits</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Models and Curation</div>
@@ -318,42 +323,47 @@ export default function ToyLexiconPage() {
       {/* Process Section */}
       <div className=' px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>process</h3>
+          <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-6 ${dinNext.className}`}>process</h3>
 
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-            {/* Left: Process List (2 cols on desktop, full on mobile) */}
-            <div className='lg:col-span-2 space-y-2'>
-              {PROCESS_STEPS.map((step, index) => (
-                <div
-                  key={step.imageIndex}
-                  onClick={() => setSelectedProcessIndex(index)}
-                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer border-green-500 bg-green-200/50 ${
-                    selectedProcessIndex !== index && 'lg:border-green-300 lg:bg-green-100/50 lg:hover:bg-green-200/30'
-                  }`}
-                >
+          <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
+            {/* Left: Process List */}
+            <div className='order-2 lg:order-1 lg:w-2/5 space-y-2'>
+              {PROCESS_STEPS.map((step, index) => {
+                const isActive = selectedProcessIndex === index;
+                return (
                   <div
-                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-2 ring-green-500 ${
-                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-green-300'
+                    key={index}
+                    onClick={() => setSelectedProcessIndex(index)}
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer ${
+                      isActive
+                        ? 'lg:border-[#5BB660] bg-[#cee9cf]/50'
+                        : 'bg-[#cee9cf]/50 lg:border-[#addaaf] lg:bg-[#def0df]/50 lg:hover:bg-[#cee9cf]/30'
                     }`}
                   >
-                    <Image
-                      src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
-                      alt={`${step.title} thumbnail`}
-                      fill
-                      className='object-cover'
-                    />
+                    <div
+                      className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
+                        isActive ? 'ring-2 ring-[#5BB660]' : 'ring-2 ring-[#5BB660] lg:ring-1 lg:ring-[#addaaf]'
+                      }`}
+                    >
+                      <Image
+                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        alt={`${step.title} thumbnail`}
+                        fill
+                        className='object-cover'
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <span className='font-bold block'>{step.title}</span>
+                      <span className='text-foreground/80 text-sm'>{step.text}</span>
+                    </div>
                   </div>
-                  <div className='flex-1'>
-                    <span className='font-bold block'>{step.title}</span>
-                    <span className='text-foreground/80 text-sm'>{step.text}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Right: Selected Image (3 cols) - Desktop only */}
-            <div className='hidden lg:block lg:col-span-3'>
-              <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden border-2 border-green-500/40'>
+            {/* Right: Selected Image - Desktop only */}
+            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+              <div className='relative w-full rounded-lg overflow-hidden border-2 border-[#5BB660]/40'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}

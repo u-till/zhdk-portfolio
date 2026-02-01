@@ -269,7 +269,7 @@ export default function Home() {
               onMouseEnter={() => setHoveredProject(projectKey)}
               onMouseLeave={() => setHoveredProject(null)}
               onClick={() => navigateTo(`/${projectKey}`)}
-              className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.25rem,6vh,2.5rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none ${
+              className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.25rem,6vh,2rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none ${
                 shouldHide ? 'opacity-20' : ''
               }`}
             >

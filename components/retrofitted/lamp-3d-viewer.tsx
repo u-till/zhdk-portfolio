@@ -172,20 +172,20 @@ export function Lamp3DViewer() {
 
       {/* Light Dimmer Slider - positioned above gallery icons */}
       <div
-        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-orange-300/40 bg-orange-500/90 backdrop-blur-md cursor-auto'
+        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32]/90 backdrop-blur-md cursor-auto'
         onMouseEnter={() => setIsOverSlider(true)}
         onMouseLeave={() => setIsOverSlider(false)}
         onMouseDown={(e) => e.stopPropagation()}
         onMouseUp={(e) => e.stopPropagation()}
       >
-        <span className='text-xs font-medium text-orange-100 flex-shrink-0 hidden lg:inline'>Brightness</span>
+        <span className='text-xs font-medium text-[#f5e6c8] flex-shrink-0 hidden lg:inline'>Brightness</span>
         <svg
           xmlns='http://www.w3.org/2000/svg'
           width='12'
           height='12'
           viewBox='0 0 24 24'
-          fill={intensity > 0.1 ? '#fed7aa' : 'none'}
-          stroke='#fed7aa'
+          fill={intensity > 0.1 ? '#e7d68d' : 'none'}
+          stroke='#e7d68d'
           strokeWidth='2'
           strokeLinecap='round'
           strokeLinejoin='round'
@@ -201,10 +201,10 @@ export function Lamp3DViewer() {
           step='0.01'
           value={intensity}
           onChange={(e) => setIntensity(parseFloat(e.target.value))}
-          className='flex-1 min-w-0 h-2 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-orange-300 [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-orange-300 [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0'
+          className='flex-1 min-w-0 h-2 rounded-full appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-3 [&::-webkit-slider-thumb]:h-3 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#e7d68d] [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-3 [&::-moz-range-thumb]:h-3 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#e7d68d] [&::-moz-range-thumb]:cursor-pointer [&::-moz-range-thumb]:border-0'
           aria-label='Light intensity'
           style={{
-            background: `linear-gradient(to right, #fed7aa ${intensity * 100}%, rgba(251, 146, 60, 0.3) ${
+            background: `linear-gradient(to right, #e7d68d ${intensity * 100}%, rgba(195, 59, 50, 0.3) ${
               intensity * 100
             }%)`,
           }}
@@ -269,7 +269,7 @@ export function Lamp3DViewer() {
       {/* Hand cursor - follows mouse */}
       {isHovering && !isOverSlider && (
         <div
-          className='absolute z-30 flex items-center justify-center bg-orange-500/90 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
+          className='absolute z-30 flex items-center justify-center bg-[#c33b32]/90 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
           style={{
             left: mousePos.x,
             top: mousePos.y,

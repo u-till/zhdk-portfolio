@@ -249,7 +249,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
                   <li>Invest more time in gathering inspiration for layouting</li>
@@ -297,40 +297,45 @@ export default function TracePage() {
         <div>
           <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-6 ${dinNext.className}`}>process</h3>
 
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-            {/* Left: Process List (2 cols on desktop, full on mobile) */}
-            <div className='lg:col-span-2 space-y-2'>
-              {PROCESS_STEPS.map((step, index) => (
-                <div
-                  key={step.imageIndex}
-                  onClick={() => setSelectedProcessIndex(index)}
-                  className={`w-full p-3 border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer border-green-500 bg-green-200/50 ${
-                    selectedProcessIndex !== index && 'lg:border-green-300 lg:bg-green-100/50 lg:hover:bg-green-200/30'
-                  }`}
-                >
+          <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
+            {/* Left: Process List */}
+            <div className='order-2 lg:order-1 lg:w-2/5 space-y-2'>
+              {PROCESS_STEPS.map((step, index) => {
+                const isActive = selectedProcessIndex === index;
+                return (
                   <div
-                    className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-2 ring-green-500 ${
-                      selectedProcessIndex !== index && 'lg:ring-1 lg:ring-green-300'
+                    key={index}
+                    onClick={() => setSelectedProcessIndex(index)}
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer ${
+                      isActive
+                        ? 'lg:border-green-500 bg-green-200/50'
+                        : 'bg-green-200/50 lg:border-green-300 lg:bg-green-100/50 lg:hover:bg-green-200/30'
                     }`}
                   >
-                    <Image
-                      src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
-                      alt={`${step.title} thumbnail`}
-                      fill
-                      className='object-cover'
-                    />
+                    <div
+                      className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
+                        isActive ? 'ring-2 ring-green-500' : 'ring-2 ring-green-500 lg:ring-1 lg:ring-green-300'
+                      }`}
+                    >
+                      <Image
+                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        alt={`${step.title} thumbnail`}
+                        fill
+                        className='object-cover'
+                      />
+                    </div>
+                    <div className='flex-1'>
+                      <span className='font-bold block'>{step.title}</span>
+                      <span className='text-foreground/80 text-sm'>{step.text}</span>
+                    </div>
                   </div>
-                  <div className='flex-1'>
-                    <span className='font-bold block'>{step.title}</span>
-                    <span className='text-foreground/80 text-sm'>{step.text}</span>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
 
-            {/* Right: Selected Image (3 cols) - Desktop only */}
-            <div className='hidden lg:block lg:col-span-3'>
-              <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden border-2 border-green-500/40'>
+            {/* Right: Selected Image - Desktop only */}
+            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+              <div className='relative w-full rounded-lg overflow-hidden border-2 border-green-500/40'>
                 <Image
                   src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}

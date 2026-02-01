@@ -30,10 +30,10 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   retrofitted: {
-    navbar: 'w-full rounded-[32px] border border-border/40 bg-orange-500 backdrop-blur-md shadow-sm',
+    navbar: 'w-full rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md shadow-sm',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
-    activeLink: 'text-white',
+    activeLink: 'text-[#e7d68d]',
   },
   'amped-up': {
     navbar: 'w-full rounded-[0px] border border-black/60 bg-background backdrop-blur-md',
@@ -42,7 +42,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-foreground',
   },
   'toy-lexicon': {
-    navbar: 'w-full rounded-lg border-2 border-green-500/60 bg-green-500/40 backdrop-blur-md shadow-sm',
+    navbar: 'w-full rounded-lg border-2 border-[#5BB660]/60 bg-[#5BB660]/40 backdrop-blur-md shadow-sm',
     brand: 'hover:text-foreground/80',
     link: 'text-neutral-600 hover:text-foreground',
     activeLink: 'text-foreground',

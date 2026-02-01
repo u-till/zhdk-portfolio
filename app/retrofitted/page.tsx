@@ -23,7 +23,7 @@ const GALLERY_IMAGES: ImageItem[] = [
 ];
 
 const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#ffc19dff' },
+  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#f5efd1' },
   { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' },
   { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' },
@@ -138,7 +138,7 @@ export default function RetrofittedPage() {
         <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
           <button
             onClick={handlePrev}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md hover:bg-[#a32f28] transition-colors pointer-events-auto group'
             aria-label='Previous photo'
           >
             <svg
@@ -154,7 +154,7 @@ export default function RetrofittedPage() {
           </button>
           <button
             onClick={handleNext}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md hover:bg-[#a32f28] transition-colors pointer-events-auto group'
             aria-label='Next photo'
           >
             <svg
@@ -175,8 +175,8 @@ export default function RetrofittedPage() {
           {/* 3D Button */}
           <button
             onClick={() => navigateToPhoto(0)}
-            className={`relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
-              activeIndex === 0 ? 'ring-2 ring-orange-300/60' : ''
+            className={`relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md hover:bg-[#a32f28] flex items-center justify-center ${
+              activeIndex === 0 ? 'ring-2 ring-[#e7d68d]/60' : ''
             }`}
           >
             <svg
@@ -202,8 +202,8 @@ export default function RetrofittedPage() {
             <button
               key={index}
               onClick={() => navigateToPhoto(index + 1)}
-              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/20 backdrop-blur-sm hover:bg-orange-600/30 ${
-                activeIndex === index + 1 ? 'ring-2 ring-orange-300/60' : ''
+              className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-full border border-[#e7d68d]/40 bg-[#c33b32]/20 backdrop-blur-sm hover:bg-[#c33b32]/30 ${
+                activeIndex === index + 1 ? 'ring-2 ring-[#e7d68d]/60' : ''
               }`}
             >
               <Image src={image.src} alt={`Thumbnail ${index + 1}`} fill className='object-cover rounded-full' />
@@ -231,11 +231,11 @@ export default function RetrofittedPage() {
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
-      <div className='bg-gradient-to-b from-orange-50 to-orange-100 px-4 md:px-8 pt-16 pb-16'>
+      <div className='bg-[#faf7e8] px-4 md:px-8 pt-16 pb-16'>
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
               brief
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
@@ -254,7 +254,7 @@ export default function RetrofittedPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -270,7 +270,7 @@ export default function RetrofittedPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
               specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
@@ -302,7 +302,7 @@ export default function RetrofittedPage() {
                   target='_blank'
                   rel='noopener noreferrer'
                   href='https://de.aliexpress.com/item/1005006005453774.html'
-                  className='text-orange-600 hover:underline'
+                  className='text-[#c33b32] hover:underline'
                 >
                   USB-C
                 </a>
@@ -311,7 +311,7 @@ export default function RetrofittedPage() {
                   target='_blank'
                   rel='noopener noreferrer'
                   href='https://de.aliexpress.com/item/1005004192388691.html'
-                  className='text-orange-600 hover:underline'
+                  className='text-[#c33b32] hover:underline'
                 >
                   10.5Ah Battery
                 </a>
@@ -320,7 +320,7 @@ export default function RetrofittedPage() {
                   target='_blank'
                   rel='noopener noreferrer'
                   href='https://de.aliexpress.com/item/1005005579072790.html'
-                  className='text-orange-600 hover:underline'
+                  className='text-[#c33b32] hover:underline'
                 >
                   LED 5W
                 </a>
@@ -329,7 +329,7 @@ export default function RetrofittedPage() {
                   target='_blank'
                   rel='noopener noreferrer'
                   href='https://de.aliexpress.com/item/1005007384516556.html'
-                  className='text-orange-600 hover:underline'
+                  className='text-[#c33b32] hover:underline'
                 >
                   Dimmer
                 </a>
@@ -339,7 +339,7 @@ export default function RetrofittedPage() {
 
           {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
               learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
@@ -347,7 +347,7 @@ export default function RetrofittedPage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>Use 3d printed mount for parts inside</li>
                   <li>Implement custom charging indicator</li>
                   <li>Animate dimmer knob in 3d model</li>
@@ -358,7 +358,7 @@ export default function RetrofittedPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-4 ${shrikhand.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
               credits
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
@@ -371,7 +371,7 @@ export default function RetrofittedPage() {
               <div className='font-bold md:text-right'>AI Declaration</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <ul className='list-disc list-inside space-y-1'>
+                <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>ChatGPT for circuit design</li>
                   <li>Google Nano Banana for stylizing images for schematic</li>
                 </ul>
@@ -382,27 +382,27 @@ export default function RetrofittedPage() {
       </div>
 
       {/* Process Section - flows after info */}
-      <div className='bg-orange-100 px-4 md:px-8 pt-12 pb-16'>
+      <div className='bg-[#faf7e8] px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-orange-400 pb-2 mb-6 ${shrikhand.className}`}>
+          <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-6 ${shrikhand.className}`}>
             process
           </h3>
 
-          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-            {/* Left: Process List (2 cols on desktop, full on mobile) */}
-            <div className='lg:col-span-2 space-y-3'>
+          <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
+            {/* Left: Process List */}
+            <div className='order-2 lg:order-1 lg:w-2/5 space-y-3'>
               {PROCESS_STEPS.map((step, index) => {
                 const isActive = selectedProcessIndex === index;
                 return (
                   <div
-                    key={step.imageIndex}
+                    key={index}
                     onClick={() => setSelectedProcessIndex(index)}
                     className={`w-full p-3 rounded-2xl transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
-                      isActive ? 'bg-orange-500' : 'bg-white/80 lg:hover:bg-white'
+                      isActive ? 'bg-[#f8f3dd] lg:bg-[#c33b32]' : 'bg-[#f8f3dd] lg:hover:bg-[#fdfbf4]'
                     }`}
                   >
                     <div
-                      className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-full ring-2 ring-orange-400'
+                      className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-xl md:rounded-full ring-2 ring-[#e7d68d]'
                       style={
                         PROCESS_IMAGES[step.imageIndex]?.bg
                           ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg }
@@ -417,8 +417,10 @@ export default function RetrofittedPage() {
                       />
                     </div>
                     <div className='flex-1'>
-                      <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
-                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>
+                      <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
+                      <span
+                        className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}
+                      >
                         {step.text}
                       </span>
                     </div>
@@ -427,10 +429,10 @@ export default function RetrofittedPage() {
               })}
             </div>
 
-            {/* Right: Selected Image (3 cols) - Desktop only */}
-            <div className='hidden lg:block lg:col-span-3'>
+            {/* Right: Selected Image - Desktop only */}
+            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
               <div
-                className='relative w-full aspect-[4/3] rounded-lg overflow-hidden'
+                className='relative w-full rounded-lg overflow-hidden'
                 style={
                   PROCESS_IMAGES[selectedProcessIndex]?.bg
                     ? { backgroundColor: PROCESS_IMAGES[selectedProcessIndex].bg }
@@ -441,7 +443,7 @@ export default function RetrofittedPage() {
                   src={PROCESS_IMAGES[selectedProcessIndex]?.src || PROCESS_IMAGES[0].src}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className={`${PROCESS_IMAGES[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
+                  className='object-cover'
                 />
               </div>
             </div>
