@@ -1,9 +1,10 @@
+import { Analytics } from '@/components/analytics';
 import { Navigation } from '@/components/navigation';
 import { PageTransition } from '@/components/page-transition';
 import { NavigationProvider } from '@/contexts/navigation-context';
 import { geistMono, geistSans } from '@/lib/fonts';
-import { Analytics } from '@vercel/analytics/react';
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NavigationProvider>
-          <Navigation />
-          <main className='w-full'>
-            <PageTransition>{children}</PageTransition>
-          </main>
-        </NavigationProvider>
+        <Suspense fallback={null}>
+          <NavigationProvider>
+            <Navigation />
+            <main className='w-full'>
+              <PageTransition>{children}</PageTransition>
+            </main>
+          </NavigationProvider>
+        </Suspense>
         <Analytics />
       </body>
     </html>

@@ -1,217 +1,16 @@
 'use client';
 
+import { PHOTOS, PROCESS_STEPS } from '@/constants/saudade';
 import { courierPrime } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-// Lazy load the 3D Globe to code-split three.js
 const Globe = dynamic(() => import('@/components/saudade/globe').then((mod) => mod.Globe), {
   ssr: false,
   loading: () => <div className='w-full h-full bg-black' />,
 });
-
-const PHOTOS: {
-  src: string;
-  lat: number;
-  lng: number;
-  title: string;
-  description: string;
-  hideTitle?: boolean;
-}[] = [
-  {
-    src: '/saudade/ambalavao-mdg-2.png',
-    lat: -18.895,
-    lng: 227.006,
-    title: 'Ambalavao, Madagascar',
-    description: 'Inside of the home of a Peacecorps volunteer who lived in Ambalavao.',
-  },
-  {
-    src: '/saudade/addis.jpg',
-    lat: 12.035,
-    lng: 215.006,
-    title: 'Addis Ababa, Ethiopia',
-    description: 'Turtle transport captured in front of the national museum.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/ambalavao-mdg.png',
-    lat: -18.925,
-    lng: 226.976,
-    title: 'Ambalavao, Magagascar',
-    description: 'A scenic landscape in the south of the country.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hanoi-3.jpg',
-    lat: 24.075,
-    lng: 284.046,
-    title: 'Hanoi, Vietnam',
-    description: 'A fishermen and his buddy at lake Hồ Tây',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/addis-2.jpg',
-    lat: 11.985,
-    lng: 214.956,
-    title: 'Addis Ababa, Ethiopia',
-    description: 'The farmers school of Selam Village, an orphanage in the middle of Addis',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hanoi-2.jpg',
-    lat: 24.135,
-    lng: 284.106,
-    title: 'Hanoi, Vietnam',
-    description: 'Two students looking out of the Thăng Long Citadel.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/addis-3.jpg',
-    lat: 12.085,
-    lng: 215.056,
-    title: 'Addis Ababa, Ethiopia',
-    description: 'A church with the classic pan-african colors in the east of Addis.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/almaty-kz.jpg',
-    lat: 46.875,
-    lng: 253.235,
-    title: 'Taldyqorghan, Kazakhstan',
-    description: 'A busy markethall in the remote town of Taldyqorghan.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/ankavandra-mdg.png',
-    lat: -15.795,
-    lng: 225.416,
-    title: 'Ankavandra, Madagascar',
-    description: 'A team of doctors on their way to an isolated village.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hongkong-2.jpg',
-    lat: 25.325,
-    lng: 290.436,
-    title: 'Hongkong',
-    description: 'Inside the maze of staircases and hallways of a block in Hongkong.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hanoi-4.jpg',
-    lat: 24.155,
-    lng: 284.126,
-    title: 'Hanoi, Vietnam',
-    description: 'Construction workers in stylish jeans-only workwear.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hongkong-1.jpg',
-    lat: 25.325,
-    lng: 290.436,
-    title: 'Hongkong',
-    description: 'A red facade of one of the gigantic blocks in Hongkong.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/kunming.jpg',
-    lat: 28.045,
-    lng: 278.986,
-    title: 'Kunming, China',
-    description: 'A temple in Kunming, but maybe it was in Chengdu, not sure.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/hongkong-3.jpg',
-    lat: 25.325,
-    lng: 290.436,
-    title: 'Hongkong',
-    description: 'Inside the museum of Kowloon Walled City.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/kuala-lumpur.jpg',
-    lat: 6.145,
-    lng: 277.956,
-    title: 'Kuala Lumpur, Malaysia',
-    description: 'A sportscar being admired next to the Petronas Tower.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/kathmandu.jpg',
-    lat: 30.7,
-    lng: 265.3,
-    title: 'Kathmandu, Nepal',
-    description: 'View over the city from a hill on the outskirts.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/rio-1.jpg',
-    lat: -19.9,
-    lng: 136.8,
-    title: 'Rio de Janeiro, Brazil',
-    description: "Oscar Niemeyer's Art Museum in Niterói.",
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/mesocco.jpg',
-    lat: 49.535,
-    lng: 189.126,
-    title: 'Mesocco, Switzerland',
-    description: 'Maiensäss near Mesocco, an italian speaking village in Grisons.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/phnompenh.jpg',
-    lat: 14.565,
-    lng: 281.196,
-    title: 'Phnom Penh, Cambodia',
-    description: 'A scooter dealer waiting for customers among his many motorbikes.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/rome.jpg',
-    lat: 44.895,
-    lng: 192.466,
-    title: 'Rome',
-    description: 'Really cool facade of an administrative building outside in Rome.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/annapurna.jpg',
-    lat: 31.5,
-    lng: 263.9,
-    title: 'Annapurna, Nepal',
-    description: 'On the way to Annapurna Basecamp, high up in the Himalayas.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/sambava-mdg.png',
-    lat: -11.175,
-    lng: 230.006,
-    title: 'Sambava, Madagascar',
-    description: 'Aerial surveillance in a rural town after a cyclone to map out damages.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/stolze-1.jpg',
-    lat: 50.435,
-    lng: 188.546,
-    title: 'Stolze Openair, Zürich',
-    description: 'Emi, the brain behind the production of the Stolze Openair.',
-    hideTitle: true,
-  },
-  {
-    src: '/saudade/taldyqorghan-kz.png',
-    lat: 47.915,
-    lng: 253.016,
-    title: 'Taldyqorghan, Kazakhstan',
-    description: 'The two families gathering together, a day before the wedding.',
-    hideTitle: true,
-  },
-];
 
 export default function SaudadePage() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -504,76 +303,43 @@ export default function SaudadePage() {
             process
           </h3>
 
-          {(() => {
-            const PROCESS_STEPS = [
-              {
-                title: '01. CAPTURE',
-                text: 'Always carry a camera. Capture moments spontaneously, focusing on composition and light.',
-                image: '/saudade/olympus.png',
-              },
-              {
-                title: '02. DEVELOP',
-                text: 'Send film rolls to a local lab for development. Digital files are transferred directly.',
-                image: '/saudade/addis.jpg',
-              },
-              {
-                title: '03. SELECT',
-                text: 'Review and select the best shots. Look for emotion, story, and technical quality.',
-                image: '/saudade/hanoi-3.jpg',
-              },
-              {
-                title: '04. EDIT',
-                text: 'Light adjustments in Lightroom. Keep edits minimal to preserve the authentic feel.',
-                image: '/saudade/hongkong-2.jpg',
-              },
-              {
-                title: '05. ARCHIVE',
-                text: 'Organize by location and date. Tag with metadata for the interactive globe.',
-                image: '/saudade/annapurna.jpg',
-              },
-            ];
-            return (
-              <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
-                {/* Left: Process List */}
-                <div className='lg:col-span-2 space-y-3'>
-                  {PROCESS_STEPS.map((step, index) => {
-                    const isActive = selectedProcessIndex === index;
-                    return (
-                      <div
-                        key={index}
-                        onClick={() => setSelectedProcessIndex(index)}
-                        className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
-                          isActive ? 'bg-white/20' : 'bg-white/5 lg:hover:bg-white/10'
-                        }`}
-                      >
-                        <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-white/20'>
-                          <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
-                        </div>
-                        <div className='flex-1'>
-                          <span className={`font-bold block ${isActive ? 'text-white' : 'text-white/80'}`}>
-                            {step.title}
-                          </span>
-                          <span className={`text-sm ${isActive ? 'text-white/90' : 'text-white/60'}`}>{step.text}</span>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-
-                {/* Right: Selected Image - Desktop only */}
-                <div className='hidden lg:block lg:col-span-3'>
-                  <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden ring-1 ring-white/20'>
-                    <Image
-                      src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
-                      alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
-                      fill
-                      className='object-contain bg-neutral-800'
-                    />
+          <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+            <div className='lg:col-span-2 space-y-3'>
+              {PROCESS_STEPS.map((step, index) => {
+                const isActive = selectedProcessIndex === index;
+                return (
+                  <div
+                    key={index}
+                    onClick={() => setSelectedProcessIndex(index)}
+                    className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                      isActive ? 'bg-white/20' : 'bg-white/5 lg:hover:bg-white/10'
+                    }`}
+                  >
+                    <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-white/20'>
+                      <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
+                    </div>
+                    <div className='flex-1'>
+                      <span className={`font-bold block ${isActive ? 'text-white' : 'text-white/80'}`}>
+                        {step.title}
+                      </span>
+                      <span className={`text-sm ${isActive ? 'text-white/90' : 'text-white/60'}`}>{step.text}</span>
+                    </div>
                   </div>
-                </div>
+                );
+              })}
+            </div>
+
+            <div className='hidden lg:block lg:col-span-3'>
+              <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden ring-1 ring-white/20'>
+                <Image
+                  src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
+                  alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
+                  fill
+                  className='object-contain bg-neutral-800'
+                />
               </div>
-            );
-          })()}
+            </div>
+          </div>
         </div>
       </div>
     </section>

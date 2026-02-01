@@ -100,7 +100,7 @@ function LampModel({ intensity }: LampModelProps) {
             target-position={[1.3, -1.8, 3.1]}
             angle={8 / 3}
             penumbra={0.5}
-            intensity={intensity * 0}
+            intensity={intensity * 0.02}
             distance={12}
             color='#ffa600'
             decay={2}
@@ -219,7 +219,7 @@ export function Lamp3DViewer() {
         camera={{ position: [2.74, -4.5, 5.9], fov: 50 }}
         gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping }}
         shadows='soft'
-        frameloop='demand'
+        frameloop='always'
         onCreated={handleCanvasCreated}
       >
         <Suspense fallback={null}>

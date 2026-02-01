@@ -131,7 +131,7 @@ function AnimatedImagePreview({
 
   return (
     <motion.div className={`relative ${sizeClass}`} {...floatingAnimation}>
-      <Image src={showAlt ? altSrc : src} alt={alt} fill className='object-contain' priority />
+      <Image src={showAlt ? altSrc : src} alt={alt} fill className='object-contain' />
     </motion.div>
   );
 }
@@ -140,7 +140,7 @@ function AnimatedImagePreview({
 function StaticImagePreview({ src, alt, sizeClass }: { src: string; alt: string; sizeClass: string }) {
   return (
     <motion.div className={`relative ${sizeClass}`} {...floatingAnimation}>
-      <Image src={src} alt={alt} fill className='object-contain' priority />
+      <Image src={src} alt={alt} fill className='object-contain' />
     </motion.div>
   );
 }
@@ -174,9 +174,13 @@ export default function Home() {
   const { hoveredProject, setHoveredProject, navigateTo } = useNavigation();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  // Preload preview images
+  // Preload only the first 3 preview images to avoid network congestion
   useEffect(() => {
-    Object.values(PROJECTS).forEach(({ preview }) => {
+    const projectValues = Object.values(PROJECTS);
+    const preloadCount = Math.min(3, projectValues.length);
+
+    for (let i = 0; i < preloadCount; i++) {
+      const { preview } = projectValues[i];
       if (preview.type === 'image') {
         const img = new window.Image();
         img.src = preview.src;
@@ -186,7 +190,7 @@ export default function Home() {
         img1.src = preview.src;
         img2.src = preview.altSrc;
       }
-    });
+    }
   }, []);
 
   const projectKeys = Object.keys(PROJECTS);
