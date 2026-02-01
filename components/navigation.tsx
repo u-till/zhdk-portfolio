@@ -30,7 +30,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   retrofitted: {
-    navbar: 'w-full rounded-[32px] border border-border/40 bg-orange-500/80 backdrop-blur-md shadow-sm',
+    navbar: 'w-full rounded-[32px] border border-border/40 bg-orange-500 backdrop-blur-md shadow-sm',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',

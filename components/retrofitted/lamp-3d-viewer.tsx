@@ -172,7 +172,7 @@ export function Lamp3DViewer() {
 
       {/* Light Dimmer Slider - positioned above gallery icons */}
       <div
-        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-orange-300/40 bg-orange-500/80 backdrop-blur-md cursor-auto'
+        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-orange-300/40 bg-orange-500/90 backdrop-blur-md cursor-auto'
         onMouseEnter={() => setIsOverSlider(true)}
         onMouseLeave={() => setIsOverSlider(false)}
         onMouseDown={(e) => e.stopPropagation()}
@@ -216,7 +216,7 @@ export function Lamp3DViewer() {
 
       {/* 3D Canvas */}
       <Canvas
-        camera={{ position: [2.74, -11, 0.9], fov: 50 }}
+        camera={{ position: [2.74, -4.5, 5.9], fov: 50 }}
         gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping }}
         shadows='soft'
         frameloop='demand'
@@ -269,7 +269,7 @@ export function Lamp3DViewer() {
       {/* Hand cursor - follows mouse */}
       {isHovering && !isOverSlider && (
         <div
-          className='absolute z-30 flex items-center justify-center bg-orange-500/80 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
+          className='absolute z-30 flex items-center justify-center bg-orange-500/90 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
           style={{
             left: mousePos.x,
             top: mousePos.y,

@@ -138,7 +138,7 @@ export default function RetrofittedPage() {
         <div className='absolute inset-0 flex items-center justify-between px-8 pointer-events-none z-10'>
           <button
             onClick={handlePrev}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
             aria-label='Previous photo'
           >
             <svg
@@ -154,7 +154,7 @@ export default function RetrofittedPage() {
           </button>
           <button
             onClick={handleNext}
-            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
+            className='hidden cursor-pointer lg:flex items-center justify-center w-12 h-12 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 transition-colors pointer-events-auto group'
             aria-label='Next photo'
           >
             <svg
@@ -175,7 +175,7 @@ export default function RetrofittedPage() {
           {/* 3D Button */}
           <button
             onClick={() => navigateToPhoto(0)}
-            className={`relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500/80 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
+            className={`relative cursor-pointer transition-all flex-shrink-0 w-16 h-16 rounded-full border border-orange-300/40 bg-orange-500 backdrop-blur-md hover:bg-orange-600/80 flex items-center justify-center ${
               activeIndex === 0 ? 'ring-2 ring-orange-300/60' : ''
             }`}
           >

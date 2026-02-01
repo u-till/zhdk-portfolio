@@ -39,7 +39,7 @@ export const BrowserWindow = React.memo(function BrowserWindow({
       exit={{ scale: 0.3, opacity: 0 }}
       transition={ANIMATIONS.WINDOW}
       style={{
-        position: isMaximized ? 'absolute' : 'fixed',
+        position: 'fixed',
         left: isMaximized ? 0 : position.x,
         top: isMaximized ? 0 : position.y,
         width: isMaximized ? '100%' : size.width,

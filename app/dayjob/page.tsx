@@ -134,6 +134,7 @@ const DOCK_ITEMS: DockItem[] = WINDOW_CONFIGS.filter((w) => w.type === 'browser'
 export default function DayjobPage() {
   const isMobile = useIsMobile(768);
   const [windows, setWindows] = useState<WindowState[]>(WINDOW_CONFIGS);
+  const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   const openWindow = useCallback((id: string) => {
     setWindows((prevWindows) => {
@@ -144,6 +145,7 @@ export default function DayjobPage() {
           ? {
               ...w,
               isOpen: true,
+              isMaximized: w.type === 'browser',
               zIndex: newZ,
             }
           : w,
@@ -284,11 +286,18 @@ export default function DayjobPage() {
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
-      <div className='px-4 md:px-8 pt-16 pb-16' style={{ backgroundColor: '#E0E0E0' }}>
+      <div className='relative px-4 md:px-8 pt-16 pb-16 bg-[#E4E3E3]'>
+        {/* Grain overlay */}
+        <div
+          className='absolute inset-0 pointer-events-none opacity-[0.08]'
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>brief</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -304,7 +313,7 @@ export default function DayjobPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>idea</h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>idea</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -321,7 +330,7 @@ export default function DayjobPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
               specifications
             </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
@@ -354,7 +363,7 @@ export default function DayjobPage() {
 
           {/* learnings Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>
+            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
               learnings
             </h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
@@ -373,8 +382,10 @@ export default function DayjobPage() {
           </div>
 
           {/* credits Section */}
-          <div className='mb-16'>
-            <h3 className={`text-xl font-bold  border-b-2 border-blue-400 pb-2 mb-4 ${archivo.className}`}>credits</h3>
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+              credits
+            </h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Projects</div>
@@ -387,6 +398,91 @@ export default function DayjobPage() {
               <div className='md:col-span-2'>Claude Code for recent projects</div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Process Section */}
+      <div className='relative px-4 md:px-8 pt-12 pb-16 bg-[#E4E3E3]'>
+        {/* Grain overlay */}
+        <div
+          className='absolute inset-0 pointer-events-none opacity-[0.08]'
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+          }}
+        />
+        <div>
+          <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-6 ${archivo.className}`}>process</h3>
+
+          {(() => {
+            const PROCESS_STEPS = [
+              {
+                title: '01. DISCOVERY',
+                text: 'Initial meeting to understand client needs, goals, and target audience. Define project scope and timeline.',
+                image: '/dayjob/icons/utill-logo.jpg',
+              },
+              {
+                title: '02. DESIGN',
+                text: 'Create wireframes and visual designs in Figma. Iterate based on client feedback until approved.',
+                image: '/dayjob/icons/hannibal-icon.png',
+              },
+              {
+                title: '03. DEVELOP',
+                text: 'Build the website using modern technologies. Regular check-ins to ensure alignment with vision.',
+                image: '/dayjob/icons/swing-icon.jpg',
+              },
+              {
+                title: '04. LAUNCH',
+                text: 'Deploy to production, configure hosting, and set up analytics. Train client on content management.',
+                image: '/dayjob/icons/fabiotozzo-icon.png',
+              },
+              {
+                title: '05. MAINTAIN',
+                text: 'Ongoing support, updates, and improvements. Monitor performance and security.',
+                image: '/dayjob/icons/anothernarrative-icon.png',
+              },
+            ];
+            return (
+              <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+                {/* Left: Process List */}
+                <div className='lg:col-span-2 space-y-3'>
+                  {PROCESS_STEPS.map((step, index) => {
+                    const isActive = selectedProcessIndex === index;
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setSelectedProcessIndex(index)}
+                        className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                          isActive ? 'bg-blue-500' : 'bg-white lg:hover:bg-white/80'
+                        }`}
+                      >
+                        <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-blue-400'>
+                          <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
+                        </div>
+                        <div className='flex-1'>
+                          <span className={`font-bold block ${isActive ? 'text-white' : ''}`}>{step.title}</span>
+                          <span className={`text-sm ${isActive ? 'text-white/90' : 'text-foreground/80'}`}>
+                            {step.text}
+                          </span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Right: Selected Image - Desktop only */}
+                <div className='hidden lg:block lg:col-span-3'>
+                  <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden bg-white'>
+                    <Image
+                      src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
+                      alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
+                      fill
+                      className='object-contain p-8'
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
     </section>

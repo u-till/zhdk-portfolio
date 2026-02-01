@@ -216,6 +216,7 @@ const PHOTOS: {
 export default function SaudadePage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGlobeExpanded, setIsGlobeExpanded] = useState(false);
+  const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const navigateToPhoto = useCallback((index: number) => {
@@ -493,6 +494,86 @@ export default function SaudadePage() {
               <div className='md:col-span-2'>Till Solenthaler</div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Process Section */}
+      <div className='bg-neutral-900 px-4 md:px-8 pt-12 pb-16 text-white'>
+        <div>
+          <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-6 ${courierPrime.className}`}>
+            process
+          </h3>
+
+          {(() => {
+            const PROCESS_STEPS = [
+              {
+                title: '01. CAPTURE',
+                text: 'Always carry a camera. Capture moments spontaneously, focusing on composition and light.',
+                image: '/saudade/olympus.png',
+              },
+              {
+                title: '02. DEVELOP',
+                text: 'Send film rolls to a local lab for development. Digital files are transferred directly.',
+                image: '/saudade/addis.jpg',
+              },
+              {
+                title: '03. SELECT',
+                text: 'Review and select the best shots. Look for emotion, story, and technical quality.',
+                image: '/saudade/hanoi-3.jpg',
+              },
+              {
+                title: '04. EDIT',
+                text: 'Light adjustments in Lightroom. Keep edits minimal to preserve the authentic feel.',
+                image: '/saudade/hongkong-2.jpg',
+              },
+              {
+                title: '05. ARCHIVE',
+                text: 'Organize by location and date. Tag with metadata for the interactive globe.',
+                image: '/saudade/annapurna.jpg',
+              },
+            ];
+            return (
+              <div className='grid grid-cols-1 lg:grid-cols-5 gap-6'>
+                {/* Left: Process List */}
+                <div className='lg:col-span-2 space-y-3'>
+                  {PROCESS_STEPS.map((step, index) => {
+                    const isActive = selectedProcessIndex === index;
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => setSelectedProcessIndex(index)}
+                        className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                          isActive ? 'bg-white/20' : 'bg-white/5 lg:hover:bg-white/10'
+                        }`}
+                      >
+                        <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-white/20'>
+                          <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
+                        </div>
+                        <div className='flex-1'>
+                          <span className={`font-bold block ${isActive ? 'text-white' : 'text-white/80'}`}>
+                            {step.title}
+                          </span>
+                          <span className={`text-sm ${isActive ? 'text-white/90' : 'text-white/60'}`}>{step.text}</span>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* Right: Selected Image - Desktop only */}
+                <div className='hidden lg:block lg:col-span-3'>
+                  <div className='relative w-full aspect-[4/3] rounded-lg overflow-hidden ring-1 ring-white/20'>
+                    <Image
+                      src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
+                      alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
+                      fill
+                      className='object-contain bg-neutral-800'
+                    />
+                  </div>
+                </div>
+              </div>
+            );
+          })()}
         </div>
       </div>
     </section>
