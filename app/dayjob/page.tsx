@@ -6,6 +6,7 @@ import { Dock } from '@/components/dayjob/dock';
 import { MobileGrid } from '@/components/dayjob/mobile-grid';
 import { TerminalWindow } from '@/components/dayjob/terminal-window';
 import { TextWindow } from '@/components/dayjob/text-window';
+import { useNavigation } from '@/contexts/navigation-context';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { archivo } from '@/lib/fonts';
 import { DockItem, WindowState } from '@/types/macos';
@@ -132,6 +133,7 @@ const DOCK_ITEMS: DockItem[] = WINDOW_CONFIGS.filter((w) => w.type === 'browser'
 }));
 
 export default function DayjobPage() {
+  const { navigateTo } = useNavigation();
   const isMobile = useIsMobile(768);
   const [windows, setWindows] = useState<WindowState[]>(WINDOW_CONFIGS);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
@@ -180,19 +182,24 @@ export default function DayjobPage() {
   return (
     <section>
       {/* First View: Desktop */}
-      <div className='h-screen relative overflow-hidden'>
-        {/* Background - Full Screen */}
-        <Image src='/dayjob/bg.jpg' alt='Desktop Background' fill className='object-cover object-bottom' priority />
+      <div className='h-screen relative overflow-hidden isolate z-20'>
+        {/* Background Video - Full Screen */}
+        <video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover object-bottom'>
+          <source src='/dayjob/dayjob-trailer.mp4' type='video/mp4' />
+        </video>
 
-        {/* Title - Bottom Left */}
-        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-5xl lg:text-7xl font-bold text-black mix-blend-difference ${archivo.className}`}>
+        {/* Virtual Desktop - Full Screen Area */}
+        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden pointer-events-none'>
+          {/* Title - Bottom Left (inside desktop area for proper blend) */}
+          <h2
+            className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${archivo.className}`}
+          >
             dayjob
           </h2>
         </div>
 
-        {/* Virtual Desktop - Full Screen Area */}
-        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden'>
+        {/* Desktop Icons - Separate layer for interactivity */}
+        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden z-30'>
           {/* Desktop Icons */}
           <DesktopIcon
             onOpen={() => openWindow('info')}
@@ -285,8 +292,8 @@ export default function DayjobPage() {
         </div>
       </div>
 
-      {/* Info Content - Vertical 5-Column Layout */}
-      <div className='relative px-4 md:px-8 pt-16 pb-16 bg-[#E4E3E3]'>
+      {/* Content wrapper with shared background */}
+      <div className='relative bg-[#E4E3E3] z-10'>
         {/* Grain overlay */}
         <div
           className='absolute inset-0 pointer-events-none opacity-[0.08]'
@@ -294,151 +301,153 @@ export default function DayjobPage() {
             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
           }}
         />
-        <div className='flex flex-col gap-8 text-foreground'>
-          {/* Brief Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>brief</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  A selection of freelance web projects I have worked on over the years. These range from small
-                  portfolio sites to larger business websites, showcasing my experience in web development and design.
-                </p>
+
+        {/* Info Content - Vertical 5-Column Layout */}
+        <div className='relative px-4 md:px-8 pt-16 pb-16'>
+          <div className='flex flex-col gap-8 text-foreground'>
+            {/* Brief Section */}
+            <div>
+              <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                brief
+              </h3>
+              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>
+                  <p className='leading-relaxed'>Freelance web projects. Portfolio sites to business websites.</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Idea Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>idea</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  I started freelancing because I wanted to move towards more creative and challenging work in contrast
-                  to my previous employment roles. Freelancing allows me to choose projects that align with my interests
-                  and skills, while also providing the flexibility to manage my own time and work environment.
-                </p>
+            {/* Idea Section */}
+            <div>
+              <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                idea
+              </h3>
+              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>
+                  <p className='leading-relaxed'>Creative freedom. Flexible work. Aligned projects.</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* specifications Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
-              specifications
-            </h3>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Year</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>2021-Ongoing</div>
+            {/* specifications Section */}
+            <div>
+              <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                specifications
+              </h3>
+              <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>Year</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>2021-Ongoing</div>
 
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>For</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Various Clients</div>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>For</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>Various Clients</div>
 
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Type</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Web Design &Development</div>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>Type</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>Web Design &Development</div>
 
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Tech</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>React, Next.js, TypeScript, Tailwind, WordPress, PHP</div>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>Tech</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>React, Next.js, TypeScript, Tailwind, WordPress, PHP</div>
 
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Services</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Design, Development, Consulting, Hosting, Maintenance</div>
-            </div>
-          </div>
-
-          {/* learnings Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
-              learnings
-            </h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Client communication is as important as technical skills</li>
-                  <li>Set clear boundaries and scope from the start</li>
-                  <li>Document everything for future maintenance</li>
-                  <li>Always keep learning new technologies</li>
-                </ul>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>Services</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>Design, Development, Consulting, Hosting, Maintenance</div>
               </div>
             </div>
-          </div>
 
-          {/* credits Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
-              credits
-            </h3>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Solo Projects</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Till Solenthaler</div>
+            {/* learnings Section */}
+            <div>
+              <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                learnings
+              </h3>
+              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>
+                  <ul className='list-disc list-outside pl-3 space-y-1'>
+                    <li>Client communication</li>
+                    <li>Clear boundaries and scope</li>
+                    <li>Documentation</li>
+                    <li>Continuous learning</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
 
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>AI Declaration</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Claude Code for recent projects</div>
+            {/* credits Section */}
+            <div>
+              <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                credits
+              </h3>
+              <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>Solo Projects</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>Till Solenthaler</div>
+
+                <div className='hidden md:block'></div>
+                <div className='font-bold md:text-right'>AI Declaration</div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>Claude Code for recent projects</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Process Section */}
-      <div className='relative px-4 md:px-8 pt-12 pb-16 bg-[#E4E3E3]'>
-        {/* Grain overlay */}
-        <div
-          className='absolute inset-0 pointer-events-none opacity-[0.08]'
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-          }}
-        />
-        <div>
+        {/* Process Section */}
+        <div className='relative px-4 md:px-8 pt-12 pb-16'>
           <h3 className={`text-xl font-bold  border-b-2 border-neutral-500 pb-2 mb-6 ${archivo.className}`}>process</h3>
 
           {(() => {
-            const PROCESS_STEPS = [
+            const PROCESS_STEPS: {
+              title: string;
+              text: string;
+              image: string;
+              objectFit: 'cover' | 'contain';
+            }[] = [
               {
                 title: '01. DISCOVERY',
                 text: 'Initial meeting to understand client needs, goals, and target audience. Define project scope and timeline.',
-                image: '/dayjob/icons/utill-logo.jpg',
+                image: '/dayjob/bg.jpg',
+                objectFit: 'cover',
               },
               {
                 title: '02. DESIGN',
                 text: 'Create wireframes and visual designs in Figma. Iterate based on client feedback until approved.',
-                image: '/dayjob/icons/hannibal-icon.png',
+                image: '/dayjob/screenshots/dayjob-process-design.png',
+                objectFit: 'cover',
               },
               {
                 title: '03. DEVELOP',
                 text: 'Build the website using modern technologies. Regular check-ins to ensure alignment with vision.',
-                image: '/dayjob/icons/swing-icon.jpg',
+                image: '/dayjob/screenshots/dayjob-process-develop.png',
+                objectFit: 'cover',
               },
               {
                 title: '04. LAUNCH',
                 text: 'Deploy to production, configure hosting, and set up analytics. Train client on content management.',
-                image: '/dayjob/icons/fabiotozzo-icon.png',
+                image: '/dayjob/screenshots/brookejackson-screenshot.jpg',
+                objectFit: 'cover',
               },
               {
-                title: '05. MAINTAIN',
+                title: '05. MAINTAIN & OPTIMIZE',
                 text: 'Ongoing support, updates, and improvements. Monitor performance and security.',
-                image: '/dayjob/icons/anothernarrative-icon.png',
+                image: '/dayjob/screenshots/dayjob-process-optimize.png',
+                objectFit: 'cover',
               },
             ];
             return (
@@ -455,8 +464,13 @@ export default function DayjobPage() {
                           isActive ? 'bg-white lg:bg-blue-500' : 'bg-white lg:hover:bg-white/80'
                         }`}
                       >
-                        <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-blue-400'>
-                          <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
+                        <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-neutral-400/80 bg-white'>
+                          <Image
+                            src={step.image}
+                            alt={`${step.title} thumbnail`}
+                            fill
+                            className={step.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}
+                          />
                         </div>
                         <div className='flex-1'>
                           <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
@@ -478,13 +492,28 @@ export default function DayjobPage() {
                       src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                       alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                       fill
-                      className='object-contain p-8'
+                      className={
+                        PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                          ? 'object-contain p-8'
+                          : 'object-cover'
+                      }
                     />
                   </div>
                 </div>
               </div>
             );
           })()}
+        </div>
+
+        {/* Next Project */}
+        <div className='relative px-4 md:px-8 pb-16'>
+          <h1
+            onClick={() => navigateTo('/about')}
+            className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            <span className='text-[0.88em] pb-[2px]'>●</span>
+            about
+          </h1>
         </div>
       </div>
     </section>

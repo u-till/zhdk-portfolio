@@ -1,5 +1,6 @@
 'use client';
 
+import { useNavigation } from '@/contexts/navigation-context';
 import { Viewer360 } from '@/components/under-construction/viewer-360';
 import { allertaStencil } from '@/lib/fonts';
 import Image from 'next/image';
@@ -39,15 +40,16 @@ const PROCESS_STEPS = [
 ];
 
 export default function UnderConstructionPage() {
+  const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
     <section className='bg-yellow-300'>
       {/* First View: Full-screen 360 Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title - Bottom Left */}
-        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-5xl lg:text-7xl font-bold text-black ${allertaStencil.className}`}>
+        {/* Title - Consistent position with other pages */}
+        <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
+          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}>
             under
             <br />
             construction
@@ -242,6 +244,17 @@ export default function UnderConstructionPage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Next Project */}
+      <div className='bg-yellow-300 px-4 md:px-8 pb-16'>
+        <h1
+          onClick={() => navigateTo('/saudade')}
+          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-4 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+        >
+          <span className='text-[0.88em] pb-[2px]'>●</span>
+          saudade
+        </h1>
       </div>
     </section>
   );

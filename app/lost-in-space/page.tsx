@@ -2,6 +2,7 @@
 
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
 import { StarField } from '@/components/lost-in-space/star-field';
+import { useNavigation } from '@/contexts/navigation-context';
 import { orbitron } from '@/lib/fonts';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -14,35 +15,46 @@ const IMAGES = [
   '/lost-in-space/backside-4.jpg',
 ];
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: {
+  image: string;
+  objectFit: 'cover' | 'contain';
+  title: string;
+  text: string;
+}[] = [
   {
-    imageIndex: 1,
+    image: '/lost-in-space/backside-1.jpg',
+    objectFit: 'cover',
     title: '01. COVER ART',
     text: 'The whole project actually started, because i created the cover art. We then searched for fitting beats and also produced a few tracks specifically to this space theme.',
   },
   {
-    imageIndex: 2,
+    image: '/lost-in-space/backside-2.jpg',
+    objectFit: 'cover',
     title: '02. PRODUCTION',
     text: 'Made at Vogelsang, a creative interim building. Mostly produced by me (Ableton) and Lars (FL Studio). We often collaborated on tracks - one creating samples, the other drums.',
   },
   {
-    imageIndex: 3,
+    image: '/lost-in-space/backside-3.jpg',
+    objectFit: 'cover',
     title: '03. RELEASE',
     text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and Soundcloud.',
   },
   {
-    imageIndex: 4,
+    image: '/lost-in-space/backside-4.jpg',
+    objectFit: 'cover',
     title: '04. OUTREACH TO ARTISTS',
     text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
   },
   {
-    imageIndex: 4,
+    image: '/lost-in-space/backside-4.jpg',
+    objectFit: 'cover',
     title: '05. FINALIZATION',
     text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
   },
 ];
 
 export default function LostInSpacePage() {
+  const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
 
   return (
@@ -51,9 +63,9 @@ export default function LostInSpacePage() {
 
       {/* First View: Album Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title - Bottom Left */}
-        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-5xl  lg:text-7xl font-bold text-[#e34c42] ${orbitron.className}`}>lost in space</h2>
+        {/* Title - Consistent position with other pages */}
+        <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
+          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}>lost in space</h2>
         </div>
 
         {/* Album Viewer */}
@@ -238,10 +250,10 @@ export default function LostInSpacePage() {
                       }`}
                     >
                       <Image
-                        src={IMAGES[step.imageIndex]}
+                        src={step.image}
                         alt={`${step.title} thumbnail`}
                         fill
-                        className='object-cover'
+                        className={step.objectFit === 'contain' ? 'object-contain' : 'object-cover'}
                       />
                     </div>
                     <div className='flex-1 text-white'>
@@ -257,15 +269,30 @@ export default function LostInSpacePage() {
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
               <div className='relative w-full rounded-lg overflow-hidden'>
                 <Image
-                  src={IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex] || IMAGES[0]}
+                  src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-cover'
+                  className={
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                      ? 'object-contain'
+                      : 'object-cover'
+                  }
                 />
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Next Project */}
+      <div className='relative z-10 px-4 md:px-8 pb-16'>
+        <h1
+          onClick={() => navigateTo('/dayjob')}
+          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-[#AA4742] pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
+        >
+          <span className='text-[0.88em] pb-[2px]'>●</span>
+          dayjob
+        </h1>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { shrikhand } from '@/lib/fonts';
@@ -19,46 +20,44 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-2.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-3.png', objectFit: 'contain' },
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover', hideTitle: true },
-  { src: '/retrofitted/lamp-mood-2.jpg', objectFit: 'cover', hideTitle: true },
-];
-
-const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/retrofitted/lamp-schematic.png', objectFit: 'contain', bg: '#f5efd1' },
-  { src: '/retrofitted/lamp-process-13.jpg', objectFit: 'cover' },
-  { src: '/retrofitted/lamp-process.jpg', objectFit: 'cover' },
-  { src: '/retrofitted/lamp-process-12.jpg', objectFit: 'cover' },
-  { src: '/retrofitted/lamp-process-11.jpg', objectFit: 'cover' },
 ];
 
 const PROCESS_STEPS = [
   {
-    imageIndex: 0,
+    image: '/retrofitted/lamp-schematic.png',
+    objectFit: 'contain' as const,
+    bg: '#f5efd1',
     title: '01. RESEARCH & DESIGN',
     text: 'Drafted a schematic and shopping list with ChatGPT. Visualized in Fritzing and ordered parts from Aliexpress.',
   },
   {
-    imageIndex: 1,
+    image: '/retrofitted/lamp-process-13.jpg',
+    objectFit: 'cover' as const,
     title: '02. SALVAGE & UPGRADE',
     text: 'Removed the old transformer and power cable. Built separate blocks: base with charging board and USB-C, middle with dimmer and batteries, top with new LED bulb. Modified some casing to fit.',
   },
   {
-    imageIndex: 2,
+    image: '/retrofitted/lamp-process.jpg',
+    objectFit: 'cover' as const,
     title: '03. FINALIZE, TESTING AND ASSEMBLE',
     text: 'Tested all voltages, battery charging and lamp function while disassembled. Then assembled everything back together.',
   },
   {
-    imageIndex: 3,
+    image: '/retrofitted/lamp-process-12.jpg',
+    objectFit: 'cover' as const,
     title: '04. 3D CAPTURE',
     text: 'Captured as 3D model using Polycam app with backdrop setup for optimal lighting.',
   },
   {
-    imageIndex: 4,
+    image: '/retrofitted/lamp-process-11.jpg',
+    objectFit: 'cover' as const,
     title: '05. ENHANCE',
     text: 'Used Blender to crop, retouch, add a bottom, and fix corners and texture spots.',
   },
 ];
 
 export default function RetrofittedPage() {
+  const { navigateTo } = useNavigation();
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
@@ -92,13 +91,13 @@ export default function RetrofittedPage() {
     <section>
       {/* First View: Gallery with 3D Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title - Bottom Left */}
+        {/* Title - Above controls on mobile, bottom left on desktop */}
         <div
-          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             activeIndex > 0 && GALLERY_IMAGES[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${shrikhand.className}`}>
+          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${shrikhand.className}`}>
             retrofitted
           </h2>
         </div>
@@ -171,7 +170,7 @@ export default function RetrofittedPage() {
         </div>
 
         {/* Album Controls - Bottom Right */}
-        <div className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 pointer-events-auto flex gap-2 items-center'>
+        <div className='absolute bottom-4 md:bottom-8 left-4 md:left-auto md:right-8 z-20 pointer-events-auto flex gap-2 items-center'>
           {/* 3D Button */}
           <button
             onClick={() => navigateToPhoto(0)}
@@ -235,9 +234,7 @@ export default function RetrofittedPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
-              brief
-            </h3>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>brief</h3>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -384,9 +381,7 @@ export default function RetrofittedPage() {
       {/* Process Section - flows after info */}
       <div className='bg-[#faf7e8] px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-6 ${shrikhand.className}`}>
-            process
-          </h3>
+          <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-6 ${shrikhand.className}`}>process</h3>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -403,17 +398,13 @@ export default function RetrofittedPage() {
                   >
                     <div
                       className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-xl md:rounded-full ring-2 ring-[#e7d68d]'
-                      style={
-                        PROCESS_IMAGES[step.imageIndex]?.bg
-                          ? { backgroundColor: PROCESS_IMAGES[step.imageIndex].bg }
-                          : undefined
-                      }
+                      style={step.bg ? { backgroundColor: step.bg } : undefined}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        src={step.image}
                         alt={`${step.title} thumbnail`}
                         fill
-                        className={`${PROCESS_IMAGES[step.imageIndex]?.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}`}
+                        className={step.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}
                       />
                     </div>
                     <div className='flex-1'>
@@ -434,21 +425,36 @@ export default function RetrofittedPage() {
               <div
                 className='relative w-full rounded-lg overflow-hidden'
                 style={
-                  PROCESS_IMAGES[selectedProcessIndex]?.bg
-                    ? { backgroundColor: PROCESS_IMAGES[selectedProcessIndex].bg }
+                  PROCESS_STEPS[selectedProcessIndex]?.bg
+                    ? { backgroundColor: PROCESS_STEPS[selectedProcessIndex].bg }
                     : undefined
                 }
               >
                 <Image
-                  src={PROCESS_IMAGES[selectedProcessIndex]?.src || PROCESS_IMAGES[0].src}
+                  src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-cover'
+                  className={
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                      ? 'object-contain'
+                      : 'object-cover'
+                  }
                 />
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Next Project */}
+      <div className='bg-[#faf7e8] px-4 md:px-8 pb-16'>
+        <h1
+          onClick={() => navigateTo('/amped-up')}
+          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+        >
+          <span className='text-[0.88em] pb-[2px]'>●</span>
+          amped up
+        </h1>
       </div>
     </section>
   );

@@ -9,16 +9,21 @@ import { useCallback, useRef, useState } from 'react';
 
 const GALLERY_IMAGES: ImageItem[] = [{ src: '/toy-lexicon/mockup-1.png', objectFit: 'contain' }];
 
-const PROCESS_IMAGES: ImageItem[] = [{ src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover' }];
-
-const PROCESS_STEPS = [
+const PROCESS_STEPS: {
+  image: string;
+  objectFit: 'cover' | 'contain';
+  title: string;
+  text: string;
+}[] = [
   {
-    imageIndex: 0,
+    image: '/toy-lexicon/book-process-1.jpg',
+    objectFit: 'cover',
     title: '01. COVER DESIGN',
     text: 'Designed the cover first, experimenting with layouts and typography to set the tone. Defined a grid system for consistent layout throughout.',
   },
   {
-    imageIndex: 1,
+    image: '/toy-lexicon/book-process-1.jpg',
+    objectFit: 'cover',
     title: '02. RESEARCH AND CATALOGING',
     text: 'Used reference books for inspiration. Created a JSON database of all kits with manufacturer, country and title for InDesign import. Found lots of missing data.',
   },
@@ -318,10 +323,10 @@ export default function TracePage() {
                       }`}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        src={step.image}
                         alt={`${step.title} thumbnail`}
                         fill
-                        className='object-cover'
+                        className={step.objectFit === 'contain' ? 'object-contain' : 'object-cover'}
                       />
                     </div>
                     <div className='flex-1'>
@@ -337,10 +342,14 @@ export default function TracePage() {
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
               <div className='relative w-full rounded-lg overflow-hidden border-2 border-green-500/40'>
                 <Image
-                  src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                  src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-cover'
+                  className={
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                      ? 'object-contain'
+                      : 'object-cover'
+                  }
                 />
               </div>
             </div>

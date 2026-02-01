@@ -57,9 +57,10 @@ function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitContro
 
 interface LampModelProps {
   intensity: number;
+  scale?: number;
 }
 
-function LampModel({ intensity }: LampModelProps) {
+function LampModel({ intensity, scale = 3.7 }: LampModelProps) {
   const { scene } = useGLTF('/retrofitted/lamp.glb');
   const spotLight2Ref = useRef<THREE.SpotLight>(null!);
 
@@ -75,7 +76,7 @@ function LampModel({ intensity }: LampModelProps) {
 
   return (
     <group position={[-0.4, -1.8, -0.3]} rotation={[0, -1.8, 0]}>
-      <primitive object={scene} scale={3.7} />
+      <primitive object={scene} scale={scale} />
       {/* Glass bulb with light inside */}
       <mesh position={[0.44, 2.55, -0.48]}>
         <sphereGeometry args={[0.08, 32, 32]} />
@@ -148,7 +149,7 @@ export function Lamp3DViewer() {
   return (
     <div
       ref={containerRef}
-      className='relative w-full h-full pt-8 md:pt-12 cursor-none'
+      className='relative w-full h-full pt-12 pb-28 md:pt-12 md:pb-0 cursor-none'
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => {
@@ -172,7 +173,7 @@ export function Lamp3DViewer() {
 
       {/* Light Dimmer Slider - positioned above gallery icons */}
       <div
-        className='absolute bottom-24 md:bottom-28 right-4 md:right-8 w-44 lg:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32]/90 backdrop-blur-md cursor-auto'
+        className='absolute bottom-38 md:bottom-28 left-4 right-4 md:left-auto md:right-8 md:w-72 px-3 py-2 z-10 flex items-center gap-2 rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32]/90 backdrop-blur-md cursor-auto'
         onMouseEnter={() => setIsOverSlider(true)}
         onMouseLeave={() => setIsOverSlider(false)}
         onMouseDown={(e) => e.stopPropagation()}

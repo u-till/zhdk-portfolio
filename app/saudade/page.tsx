@@ -1,6 +1,7 @@
 'use client';
 
 import { PHOTOS, PROCESS_STEPS } from '@/constants/saudade';
+import { useNavigation } from '@/contexts/navigation-context';
 import { courierPrime } from '@/lib/fonts';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
@@ -13,6 +14,7 @@ const Globe = dynamic(() => import('@/components/saudade/globe').then((mod) => m
 });
 
 export default function SaudadePage() {
+  const { navigateTo } = useNavigation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isGlobeExpanded, setIsGlobeExpanded] = useState(false);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
@@ -70,13 +72,13 @@ export default function SaudadePage() {
     <section>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center bg-neutral-900'>
-        {/* Title - Bottom Left */}
+        {/* Title - Above globe on mobile, bottom left on desktop */}
         <div
-          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             PHOTOS[activeIndex]?.hideTitle ? 'lg:opacity-0' : ''
           }`}
         >
-          <h2 className={`text-5xl lg:text-7xl font-bold text-white mix-blend-difference ${courierPrime.className}`}>
+          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${courierPrime.className}`}>
             saudade
           </h2>
         </div>
@@ -181,7 +183,10 @@ export default function SaudadePage() {
                 <div className='flex-1 h-full flex items-center justify-center'>
                   <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
                 </div>
-                <p className='text-sm leading-relaxed'>Use your keyboard arrows to navigate through the photos.</p>
+                <p className='text-sm leading-relaxed'>
+                  <span className='md:hidden'>Swipe to look through the photos.</span>
+                  <span className='hidden md:inline'>Use your keyboard arrows to navigate through the photos.</span>
+                </p>
               </motion.div>
             )}
           </AnimatePresence>
@@ -341,6 +346,17 @@ export default function SaudadePage() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Next Project */}
+      <div className='bg-neutral-900 px-4 md:px-8 pb-16'>
+        <h1
+          onClick={() => navigateTo('/retrofitted')}
+          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-white/40 pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-white hover:opacity-60 transition-opacity'
+        >
+          <span className='text-[0.88em] pb-[2px]'>●</span>
+          Retrofitted
+        </h1>
       </div>
     </section>
   );

@@ -1,5 +1,6 @@
 'use client';
 
+import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { dinNext } from '@/lib/fonts';
@@ -17,42 +18,46 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/macbook-mockup-2.png', objectFit: 'contain' },
 ];
 
-const PROCESS_IMAGES: ImageItem[] = [
-  { src: '/toy-lexicon/book-process-1.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-2.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-3.jpg', objectFit: 'cover' },
-  { src: '/toy-lexicon/book-process-4.jpg', objectFit: 'cover' },
-];
-
-const PROCESS_STEPS = [
+const PROCESS_STEPS: {
+  image: string;
+  objectFit: 'cover' | 'contain';
+  title: string;
+  text: string;
+}[] = [
   {
-    imageIndex: 0,
+    image: '/toy-lexicon/book-process-1.jpg',
+    objectFit: 'cover',
     title: '01. COVER DESIGN',
     text: 'Designed the cover first, experimenting with layouts and typography to set the tone. Defined a grid system for consistent layout throughout.',
   },
   {
-    imageIndex: 1,
+    image: '/toy-lexicon/book-process-2.jpg',
+    objectFit: 'cover',
     title: '02. RESEARCH AND CATALOGING',
     text: 'Used reference books for inspiration. Created a JSON database of all kits with manufacturer, country and title for InDesign import. Found lots of missing data.',
   },
   {
-    imageIndex: 2,
+    image: '/toy-lexicon/book-process-3.jpg',
+    objectFit: 'cover',
     title: '03. CMS FOR CONTENT',
     text: 'Built a custom CMS so my father and his friends could easily add, edit and organize content without technical knowledge.',
   },
   {
-    imageIndex: 3,
+    image: '/toy-lexicon/book-process-4.jpg',
+    objectFit: 'cover',
     title: '04. INDESIGN AUTOMATION',
     text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. Enables quick generation of consistent layouts for refinement.',
   },
   {
-    imageIndex: 3,
+    image: '/toy-lexicon/book-process-4.jpg',
+    objectFit: 'cover',
     title: '05. ITERATE AND REFINE',
     text: 'Continuous feedback loops with my father to adjust layouts, fix data issues, and improve the visual presentation until ready for print.',
   },
 ];
 
 export default function ToyLexiconPage() {
+  const { navigateTo } = useNavigation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -84,13 +89,13 @@ export default function ToyLexiconPage() {
     <section className={dinNext.className}>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
-        {/* Title - Bottom Left */}
+        {/* Title - Above thumbnails on mobile, bottom left on desktop */}
         <div
-          className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-5xl lg:text-7xl  font-bold text-black ${dinNext.className}`}>toy lexicon</h2>
+          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${dinNext.className}`}>toy lexicon</h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -149,12 +154,14 @@ export default function ToyLexiconPage() {
         </div>
 
         {/* Thumbnail Strip - Bottom Right */}
-        <div className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 pointer-events-auto flex gap-2 overflow-x-auto max-w-[calc(100vw-2rem)] md:max-w-[calc(100vw-4rem)]'>
+        <div className='absolute bottom-4 md:bottom-8 left-0 right-0 md:left-auto md:right-8 z-20 pointer-events-auto flex gap-2 overflow-x-auto'>
           {GALLERY_IMAGES.map((image, index) => (
             <button
               key={index}
               onClick={() => navigateToPhoto(index)}
               className={`relative cursor-pointer overflow-hidden transition-all flex-shrink-0 w-16 h-16 rounded-lg border ${
+                index === 0 ? 'ml-4 md:ml-0' : ''
+              } ${index === GALLERY_IMAGES.length - 1 ? 'mr-4 md:mr-0' : ''} ${
                 activeIndex === index
                   ? 'border-2 border-[#5BB660] opacity-100'
                   : 'border-[#5BB660]/40 opacity-60 hover:opacity-100'
@@ -346,10 +353,10 @@ export default function ToyLexiconPage() {
                       }`}
                     >
                       <Image
-                        src={PROCESS_IMAGES[step.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                        src={step.image}
                         alt={`${step.title} thumbnail`}
                         fill
-                        className='object-cover'
+                        className={step.objectFit === 'contain' ? 'object-contain' : 'object-cover'}
                       />
                     </div>
                     <div className='flex-1'>
@@ -365,15 +372,30 @@ export default function ToyLexiconPage() {
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
               <div className='relative w-full rounded-lg overflow-hidden border-2 border-[#5BB660]/40'>
                 <Image
-                  src={PROCESS_IMAGES[PROCESS_STEPS[selectedProcessIndex]?.imageIndex]?.src || PROCESS_IMAGES[0].src}
+                  src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-cover'
+                  className={
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                      ? 'object-contain'
+                      : 'object-cover'
+                  }
                 />
               </div>
             </div>
           </div>
         </div>
+      </div>
+
+      {/* Next Project */}
+      <div className='px-4 md:px-8 pb-16'>
+        <h1
+          onClick={() => navigateTo('/lost-in-space')}
+          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+        >
+          <span className='text-[0.88em] pb-[2px]'>●</span>
+          Lost in Space
+        </h1>
       </div>
     </section>
   );
