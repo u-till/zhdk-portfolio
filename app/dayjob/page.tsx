@@ -361,7 +361,7 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>Type</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Web Design &Development</div>
+                <div className='md:col-span-2'>Web Design & Development</div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>Tech</div>
@@ -512,15 +512,22 @@ export default function DayjobPage() {
           })()}
         </div>
 
-        {/* Next Project */}
+        {/* Project Navigation */}
         <div className='relative px-4 md:px-8 pb-16'>
-          <h1
-            onClick={() => navigateTo('/about')}
-            className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
-          >
-            <span className='text-[0.88em] pb-[2px]'>●</span>
-            about
-          </h1>
+          <div className='flex justify-between items-center border-b-2 border-black pb-2'>
+            <h1
+              onClick={() => navigateTo('/lost-in-space')}
+              className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+            >
+              previous
+            </h1>
+            <h1
+              onClick={() => navigateTo('/under-construction')}
+              className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+            >
+              next
+            </h1>
+          </div>
         </div>
       </div>
     </section>

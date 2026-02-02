@@ -24,34 +24,41 @@ const GALLERY_IMAGES: ImageItem[] = [
 
 const PROCESS_STEPS = [
   {
+    image: '/retrofitted/lamp-process-0.jpg',
+    objectFit: 'contain' as const,
+    bg: '#ffffff',
+    title: '01. IDEA & CONCEPT',
+    text: 'After identifying the transformer as the issue, I started to think about ways to improve the lamp beyond just repairing it.',
+  },
+  {
     image: '/retrofitted/lamp-schematic.png',
     objectFit: 'contain' as const,
     bg: '#f5efd1',
-    title: '01. RESEARCH & DESIGN',
-    text: 'Drafted a schematic and shopping list with ChatGPT. Visualized in Fritzing and ordered parts from Aliexpress.',
+    title: '02. RESEARCH & DESIGN',
+    text: 'Drafted a schematic and shopping list with ChatGPT. I visualized the schematic using the Fritzing app and ordered parts from Aliexpress.',
   },
   {
     image: '/retrofitted/lamp-process-13.jpg',
     objectFit: 'cover' as const,
-    title: '02. SALVAGE & UPGRADE',
+    title: '03. SALVAGE & UPGRADE',
     text: 'Removed the old transformer and power cable. Built separate blocks: base with charging board and USB-C, middle with dimmer and batteries, top with new LED bulb. Modified some casing to fit.',
   },
   {
     image: '/retrofitted/lamp-process.jpg',
     objectFit: 'cover' as const,
-    title: '03. FINALIZE, TESTING AND ASSEMBLE',
+    title: '04. FINALIZE, TESTING AND ASSEMBLE',
     text: 'Tested all voltages, battery charging and lamp function while disassembled. Then assembled everything back together.',
   },
   {
     image: '/retrofitted/lamp-process-12.jpg',
     objectFit: 'cover' as const,
-    title: '04. 3D CAPTURE',
+    title: '05. 3D CAPTURE',
     text: 'Captured as 3D model using Polycam app with backdrop setup for optimal lighting.',
   },
   {
     image: '/retrofitted/lamp-process-11.jpg',
     objectFit: 'cover' as const,
-    title: '05. ENHANCE',
+    title: '06. ENHANCE',
     text: 'Used Blender to crop, retouch, add a bottom, and fix corners and texture spots.',
   },
 ];
@@ -97,7 +104,9 @@ export default function RetrofittedPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${shrikhand.className}`}>
+          <h2
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${shrikhand.className}`}
+          >
             retrofitted
           </h2>
         </div>
@@ -435,9 +444,7 @@ export default function RetrofittedPage() {
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
                   className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
-                      ? 'object-contain'
-                      : 'object-cover'
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'
                   }
                 />
               </div>
@@ -446,15 +453,22 @@ export default function RetrofittedPage() {
         </div>
       </div>
 
-      {/* Next Project */}
+      {/* Project Navigation */}
       <div className='bg-[#faf7e8] px-4 md:px-8 pb-16'>
-        <h1
-          onClick={() => navigateTo('/amped-up')}
-          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
-        >
-          <span className='text-[0.88em] pb-[2px]'>●</span>
-          amped up
-        </h1>
+        <div className='flex justify-between items-center border-b-2 border-black pb-2'>
+          <h1
+            onClick={() => navigateTo('/saudade')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            previous
+          </h1>
+          <h1
+            onClick={() => navigateTo('/amped-up')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            next
+          </h1>
+        </div>
       </div>
     </section>
   );

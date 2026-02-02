@@ -95,7 +95,11 @@ export default function ToyLexiconPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${dinNext.className}`}>toy lexicon</h2>
+          <h2
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${dinNext.className}`}
+          >
+            toy lexicon
+          </h2>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -288,7 +292,6 @@ export default function ToyLexiconPage() {
                   <li>Align vision before starting</li>
                   <li>Make sure source material is complete and consistent</li>
                   <li>Invest more time in gathering inspiration for layouting</li>
-                  <li>Allocate more time for experimentation</li>
                 </ul>
               </div>
             </div>
@@ -376,9 +379,7 @@ export default function ToyLexiconPage() {
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
                   className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
-                      ? 'object-contain'
-                      : 'object-cover'
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'
                   }
                 />
               </div>
@@ -387,15 +388,22 @@ export default function ToyLexiconPage() {
         </div>
       </div>
 
-      {/* Next Project */}
+      {/* Project Navigation */}
       <div className='px-4 md:px-8 pb-16'>
-        <h1
-          onClick={() => navigateTo('/lost-in-space')}
-          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
-        >
-          <span className='text-[0.88em] pb-[2px]'>●</span>
-          Lost in Space
-        </h1>
+        <div className='flex justify-between items-center border-b-2 border-black pb-2'>
+          <h1
+            onClick={() => navigateTo('/amped-up')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            previous
+          </h1>
+          <h1
+            onClick={() => navigateTo('/lost-in-space')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            next
+          </h1>
+        </div>
       </div>
     </section>
   );

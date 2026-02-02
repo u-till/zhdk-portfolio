@@ -284,15 +284,22 @@ export default function LostInSpacePage() {
         </div>
       </div>
 
-      {/* Next Project */}
+      {/* Project Navigation */}
       <div className='relative z-10 px-4 md:px-8 pb-16'>
-        <h1
-          onClick={() => navigateTo('/dayjob')}
-          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-[#AA4742] pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
-        >
-          <span className='text-[0.88em] pb-[2px]'>●</span>
-          dayjob
-        </h1>
+        <div className='flex justify-between items-center border-b-2 border-[#AA4742] pb-2'>
+          <h1
+            onClick={() => navigateTo('/toy-lexicon')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
+          >
+            previous
+          </h1>
+          <h1
+            onClick={() => navigateTo('/dayjob')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
+          >
+            next
+          </h1>
+        </div>
       </div>
     </section>
   );

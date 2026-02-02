@@ -279,7 +279,7 @@ export default function SaudadePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Cameras</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D</div>
+              <div className='md:col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D / iPhone</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Subjects</div>
@@ -352,15 +352,22 @@ export default function SaudadePage() {
         </div>
       </div>
 
-      {/* Next Project */}
+      {/* Project Navigation */}
       <div className='bg-neutral-900 px-4 md:px-8 pb-16'>
-        <h1
-          onClick={() => navigateTo('/retrofitted')}
-          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-white/40 pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-white hover:opacity-60 transition-opacity'
-        >
-          <span className='text-[0.88em] pb-[2px]'>●</span>
-          Retrofitted
-        </h1>
+        <div className='flex justify-between items-center border-b-2 border-white/40 pb-2'>
+          <h1
+            onClick={() => navigateTo('/under-construction')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-white hover:opacity-60 transition-opacity'
+          >
+            previous
+          </h1>
+          <h1
+            onClick={() => navigateTo('/retrofitted')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-white hover:opacity-60 transition-opacity'
+          >
+            next
+          </h1>
+        </div>
       </div>
     </section>
   );

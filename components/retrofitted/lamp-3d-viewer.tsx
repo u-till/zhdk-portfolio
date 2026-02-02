@@ -8,12 +8,17 @@ import * as THREE from 'three';
 import type { OrbitControls as OrbitControlsType } from 'three-stdlib';
 
 function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitControlsType | null> }) {
-  const { camera } = useThree();
+  const { camera, invalidate } = useThree();
 
-  //CAMERA POSITION
   const initialPosition = useRef(new THREE.Vector3(2.74, 1.1, 0.9));
   const initialTarget = useRef(new THREE.Vector3(0, 0, 0));
   const isInteracting = useRef(false);
+  const needsReset = useRef(true);
+
+  // Trigger initial animation on mount
+  useEffect(() => {
+    invalidate();
+  }, [invalidate]);
 
   useEffect(() => {
     const controls = controlsRef.current;
@@ -21,6 +26,7 @@ function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitContro
 
     const handleInteractionStart = () => {
       isInteracting.current = true;
+      needsReset.current = true;
     };
 
     const handleInteractionEnd = () => {
@@ -37,8 +43,7 @@ function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitContro
   }, [controlsRef]);
 
   useFrame(() => {
-    if (!isInteracting.current && controlsRef.current) {
-      // Constantly pull camera back to initial position when not interacting (slower)
+    if (!isInteracting.current && controlsRef.current && needsReset.current) {
       camera.position.lerp(initialPosition.current, 0.03);
       controlsRef.current.target.lerp(initialTarget.current, 0.03);
 
@@ -46,6 +51,9 @@ function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitContro
       if (camera.position.distanceTo(initialPosition.current) < 0.001) {
         camera.position.copy(initialPosition.current);
         controlsRef.current.target.copy(initialTarget.current);
+        needsReset.current = false;
+      } else {
+        invalidate();
       }
 
       controlsRef.current.update();
@@ -58,6 +66,14 @@ function CameraReset({ controlsRef }: { controlsRef: React.RefObject<OrbitContro
 interface LampModelProps {
   intensity: number;
   scale?: number;
+}
+
+function InvalidateOnChange({ intensity }: { intensity: number }) {
+  const { invalidate } = useThree();
+  useEffect(() => {
+    invalidate();
+  }, [intensity, invalidate]);
+  return null;
 }
 
 function LampModel({ intensity, scale = 3.7 }: LampModelProps) {
@@ -220,10 +236,11 @@ export function Lamp3DViewer() {
         camera={{ position: [2.74, -4.5, 5.9], fov: 50 }}
         gl={{ antialias: false, toneMapping: THREE.ACESFilmicToneMapping }}
         shadows='soft'
-        frameloop='always'
+        frameloop='demand'
         onCreated={handleCanvasCreated}
       >
         <Suspense fallback={null}>
+          <InvalidateOnChange intensity={intensity} />
           {/* Ambient light for overall scene illumination */}
           <ambientLight intensity={1.4} color='#faf7e9ff' />
           {/* Key light from top-right */}

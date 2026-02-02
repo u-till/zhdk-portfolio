@@ -1,41 +1,52 @@
 'use client';
 
-import { useNavigation } from '@/contexts/navigation-context';
 import { Viewer360 } from '@/components/under-construction/viewer-360';
+import { useNavigation } from '@/contexts/navigation-context';
 import { allertaStencil } from '@/lib/fonts';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: {
+  image: string;
+  title: string;
+  text: string;
+  objectFit: 'cover' | 'contain';
+}[] = [
   {
     image: '/under-construction/korpus-process-0.jpg',
-    title: '01. DESIGN & CONCEPT',
-    text: 'Created the design in SketchUp with real measurements to calculate planks, screws and corner-brackets needed. Sized to fit RAKO boxes with ideal keyboard height.',
+    title: '01. CONCEPT',
+    text: 'Conceptualized a mobile corpus to serve as a keyboard stand and storage unit to use the space in our livingroom more efficiently.',
+    objectFit: 'contain',
   },
   {
     image: '/under-construction/korpus-process-1.jpg',
-    title: '02. SOURCE MATERIALS',
-    text: 'Workers from the construction site next door gave me planks they had cut to non-standard lengths.',
+    title: '01. DESIGN',
+    text: 'Created the design in SketchUp with real measurements to calculate planks, screws and corner-brackets needed. Sized to fit RAKO boxes with ideal keyboard height.',
+    objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-2.jpg',
-    title: '03. BUILD',
-    text: 'Cut planks to the four lengths from SketchUp, then assembled using corner-brackets and wheels.',
+    title: '02. SOURCE MATERIALS',
+    text: 'Workers from the construction site next door gave me planks they had cut to non-standard lengths.',
+    objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-3.jpg',
-    title: '04. CAPTURE',
-    text: 'Set up a makeshift white backdrop and studio lights to capture 360° photos.',
+    title: '03. BUILD',
+    text: 'Cut planks to the four lengths from SketchUp, then assembled using corner-brackets and wheels.',
+    objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-4.jpg',
-    title: '05. EDIT',
-    text: 'Used Photoshop batch processing to adjust light temperature, crop, and remove backgrounds.',
+    title: '04. CAPTURE & EDIT',
+    text: 'Used a white backdrop and studio lights to capture 360° photos. Used Photoshop batch processing to adjust light temperature, crop, and remove backgrounds.',
+    objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-5.jpg',
     title: '06. PUT TO USE',
     text: 'Final setup: mobile keyboard stand on wheels with storage space.',
+    objectFit: 'cover',
   },
 ];
 
@@ -49,7 +60,9 @@ export default function UnderConstructionPage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}>
+          <h2
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}
+          >
             under
             <br />
             construction
@@ -217,12 +230,19 @@ export default function UnderConstructionPage() {
                       isActive ? 'bg-white lg:bg-red-600' : 'bg-white lg:hover:bg-neutral-100'
                     }`}
                   >
-                    <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden border-2 border-black'>
-                      <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
+                    <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden border-2 border-black bg-white'>
+                      <Image
+                        src={step.image}
+                        alt={`${step.title} thumbnail`}
+                        fill
+                        className={step.objectFit === 'contain' ? 'object-contain p-2' : 'object-cover'}
+                      />
                     </div>
                     <div className='flex-1'>
                       <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
-                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}>
+                      <span
+                        className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}
+                      >
                         {step.text}
                       </span>
                     </div>
@@ -238,7 +258,11 @@ export default function UnderConstructionPage() {
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className='object-cover'
+                  className={
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
+                      ? 'object-contain p-8'
+                      : 'object-cover'
+                  }
                 />
               </div>
             </div>
@@ -246,15 +270,22 @@ export default function UnderConstructionPage() {
         </div>
       </div>
 
-      {/* Next Project */}
+      {/* Project Navigation */}
       <div className='bg-yellow-300 px-4 md:px-8 pb-16'>
-        <h1
-          onClick={() => navigateTo('/saudade')}
-          className='font-bold cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-4 border-black pb-2 text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
-        >
-          <span className='text-[0.88em] pb-[2px]'>●</span>
-          saudade
-        </h1>
+        <div className='flex justify-between items-center border-b-4 border-black pb-2'>
+          <h1
+            onClick={() => navigateTo('/dayjob')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            previous
+          </h1>
+          <h1
+            onClick={() => navigateTo('/saudade')}
+            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+          >
+            next
+          </h1>
+        </div>
       </div>
     </section>
   );
