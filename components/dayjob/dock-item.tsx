@@ -7,15 +7,20 @@ import React, { useState } from 'react';
 
 interface DockItemProps {
   item: DockItem;
-  onClick: () => void;
 }
 
-export const DockItemComponent = React.memo(function DockItemComponent({ item, onClick }: DockItemProps) {
+export const DockItemComponent = React.memo(function DockItemComponent({ item }: DockItemProps) {
   const [isHovered, setIsHovered] = useState(false);
+
+  const handleClick = () => {
+    if (item.url) {
+      window.open(item.url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <button
-      onClick={onClick}
+      onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className='cursor-pointer relative flex items-end justify-center w-14 h-14'

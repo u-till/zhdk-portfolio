@@ -1,35 +1,6 @@
-export interface WindowState {
-  id: string;
-  url?: string;
-  title: string;
-  icon?: string;
-  isOpen: boolean;
-  isMaximized: boolean;
-  zIndex: number;
-  position: { x: number; y: number };
-  size: { width: number; height: number };
-  type: 'browser' | 'text' | 'terminal';
-}
-
 export interface DockItem {
   id: string;
   label: string;
   icon: string;
   url?: string;
-}
-
-export interface WindowProps {
-  id: string;
-  title: string;
-  url?: string;
-  type: 'browser' | 'text' | 'terminal';
-  position: { x: number; y: number };
-  size: { width: number; height: number };
-  zIndex: number;
-  isMaximized: boolean;
-  onClose: () => void;
-  onFocus: () => void;
-  onMaximize: () => void;
-  onResize: (size: { width: number; height: number }) => void;
-  content?: React.ReactNode;
 }

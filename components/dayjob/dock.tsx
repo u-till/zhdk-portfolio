@@ -6,12 +6,11 @@ import { DockItemComponent } from './dock-item';
 
 interface DockProps {
   items: DockItem[];
-  onItemClick: (id: string) => void;
 }
 
-export function Dock({ items, onItemClick }: DockProps) {
+export function Dock({ items }: DockProps) {
   return (
-    <div className='fixed bottom-4 left-1/2 -translate-x-1/2 z-100'>
+    <div className='hidden md:block fixed bottom-4 left-1/2 -translate-x-1/2 z-100'>
       <div
         className='bg-[#65656ba1] backdrop-blur-2xl rounded-2xl px-3 py-3 flex gap-2 items-center'
         style={{
@@ -21,7 +20,7 @@ export function Dock({ items, onItemClick }: DockProps) {
       >
         {items.map((item, index) => (
           <React.Fragment key={item.id}>
-            <DockItemComponent item={item} onClick={() => onItemClick(item.id)} />
+            <DockItemComponent item={item} />
             {index === 0 && <div className='h-12 w-px bg-black/10 mx-1' aria-hidden='true' />}
           </React.Fragment>
         ))}

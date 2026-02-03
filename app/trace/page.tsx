@@ -172,14 +172,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  A book exploring construction kits from the last 100 years. My father and two friends photographed his
-                  collection and asked me to make it into a book.
-                  <br />
-                  <br />
-                  Since images were taken over years with missing data, I built a custom CMS for collaborative editing
-                  into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
-                </p>
+                <p className='leading-relaxed'>tbd</p>
               </div>
             </div>
           </div>
@@ -192,11 +185,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  My father has been collecting and building with old construction kits for decades. When he asked me to
-                  help turn his collection into a book, I saw an opportunity to combine my design skills with his
-                  passion project.
-                </p>
+                <p className='leading-relaxed'>tbd</p>
               </div>
             </div>
           </div>
@@ -210,37 +199,22 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>2025-Ongoing</div>
+              <div className='md:col-span-2'>2026</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>For</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>My father</div>
+              <div className='md:col-span-2'>ZHdk Homework Assignment</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Book Layout / Web App</div>
+              <div className='md:col-span-2'>tbd</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Format</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Hardcover Book, 120+ pages</div>
-
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2 col-span-2'>
-                <a
-                  href='https://adb-cms.vercel.app/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-block mt-2 px-6 py-3 bg-green-500 text-white font-bold  text-sm rounded-lg hover:bg-green-600 transition-colors'
-                >
-                  Editor Demo
-                  <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
-                </a>
-              </div>
+              <div className='md:col-span-2'>tbd</div>
             </div>
           </div>
 
@@ -255,10 +229,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Align vision before starting</li>
-                  <li>Make sure source material is complete and consistent</li>
-                  <li>Invest more time in gathering inspiration for layouting</li>
-                  <li>Allocate more time for experimentation</li>
+                  <li>tbd</li>
                 </ul>
               </div>
             </div>
@@ -269,29 +240,14 @@ export default function TracePage() {
             <h3 className={`text-xl font-bold  border-b-2 border-green-500 pb-2 mb-4 ${dinNext.className}`}>credits</h3>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Models and Curation</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Peter Leutenegger</div>
-
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Photography</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Alex Colle</div>
-
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Collages</div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Kurt Kleinert</div>
-
-              <div className='hidden md:block'></div>
-              <div className='font-bold md:text-right'>Layout and CMS</div>
+              <div className='font-bold md:text-right'>Solo Project</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>Till Solenthaler</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>AI Declaration</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Claude Code for co-programming CMS and InDesign ExtendScript</div>
+              <div className='md:col-span-2'>Claude for Brainstorming</div>
             </div>
           </div>
         </div>
@@ -346,9 +302,7 @@ export default function TracePage() {
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
                   className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
-                      ? 'object-contain'
-                      : 'object-cover'
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'
                   }
                 />
               </div>
