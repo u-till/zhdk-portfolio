@@ -43,9 +43,9 @@ export default function AboutPage() {
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>
             <p className='col-span-2 md:col-span-2'>
-              I like open source software, creative commons, the old-school internet movement before silicon valley
-              turned dystopian, travelling, photography, design and architecture (especially brutalism), geography and
-              geopolitics, fleamarkets, bicycles and music production.
+              I like open source software, the old-school internet movement before silicon valley turned dystopian,
+              traveling, photography, design and architecture (especially brutalism), geography and geopolitics, arte,
+              fleamarkets, bicycles and music.
             </p>
           </div>
         </div>

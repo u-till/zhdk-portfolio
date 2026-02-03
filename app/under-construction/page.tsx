@@ -259,9 +259,7 @@ export default function UnderConstructionPage() {
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
                   className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
-                      ? 'object-contain p-8'
-                      : 'object-cover'
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'
                   }
                 />
               </div>
@@ -272,7 +270,7 @@ export default function UnderConstructionPage() {
 
       {/* Project Navigation */}
       <div className='bg-yellow-300 px-4 md:px-8 pb-16'>
-        <div className='flex justify-between items-center border-b-4 border-black pb-2'>
+        <div className='flex justify-between items-center border-b-2 border-black pb-2'>
           <h1
             onClick={() => navigateTo('/dayjob')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'

@@ -182,24 +182,21 @@ export default function DayjobPage() {
   return (
     <section>
       {/* First View: Desktop */}
-      <div className='h-screen relative overflow-hidden isolate z-20'>
-        {/* Background Video - Full Screen */}
-        <video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover object-bottom'>
-          <source src='/dayjob/dayjob-trailer.mp4' type='video/mp4' />
-        </video>
-
-        {/* Virtual Desktop - Full Screen Area */}
-        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden pointer-events-none'>
-          {/* Title - Bottom Left (inside desktop area for proper blend) */}
+      <div className='h-screen relative overflow-hidden'>
+        {/* Video + Title container with isolate for mix-blend to work */}
+        <div className='absolute inset-0 isolate'>
+          <video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover object-bottom'>
+            <source src='/dayjob/dayjob-trailer.mp4' type='video/mp4' />
+          </video>
           <h2
-            className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${archivo.className}`}
+            className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none pointer-events-none ${archivo.className}`}
           >
             dayjob
           </h2>
         </div>
 
-        {/* Desktop Icons - Separate layer for interactivity */}
-        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden z-30'>
+        {/* Desktop Icons - Sibling container, above navbar */}
+        <div className='absolute top-0 left-0 right-0 bottom-0 overflow-hidden z-[60]'>
           {/* Desktop Icons */}
           <DesktopIcon
             onOpen={() => openWindow('info')}
