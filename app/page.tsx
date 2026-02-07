@@ -72,6 +72,16 @@ const PROJECTS: Record<string, { name: string; preview: PreviewConfig }> = {
     },
   },
   dayjob: { name: 'dayjob', preview: { type: 'image', src: '/dayjob/dayjob-thumb.png' } },
+  traces: {
+    name: 'traces',
+    preview: {
+      type: 'toggle',
+      src: '/traces/IMG_3769_with_overlay.jpg',
+      altSrc: '/traces/IMG_3769.jpeg',
+      interval: 2000,
+      size: 'sm',
+    },
+  },
 };
 
 // Shared floating animation for all previews
@@ -203,13 +213,18 @@ export default function Home() {
 
     // Use smaller sizes for mobile inline preview
     const mobileSize = 'w-24 h-24';
-    const sizeClass = isMobile ? mobileSize : ('size' in preview ? SIZES[preview.size || 'md'] : SIZES.md);
+    const sizeClass = isMobile ? mobileSize : 'size' in preview ? SIZES[preview.size || 'md'] : SIZES.md;
 
     switch (preview.type) {
       case '360':
         return isMobile ? (
           <div className={`relative ${mobileSize}`}>
-            <Image src='/under-construction/korpus-360/normalized-01.png' alt='360 preview' fill className='object-contain' />
+            <Image
+              src='/under-construction/korpus-360/normalized-01.png'
+              alt='360 preview'
+              fill
+              className='object-contain'
+            />
           </div>
         ) : (
           <Rotating360Preview />
@@ -268,13 +283,16 @@ export default function Home() {
     setMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const handleMobileTouch = useCallback((projectKey: string) => {
-    if (activeProject === projectKey) {
-      navigateTo(`/${projectKey}`);
-    } else {
-      setActiveProject(projectKey);
-    }
-  }, [activeProject, navigateTo]);
+  const handleMobileTouch = useCallback(
+    (projectKey: string) => {
+      if (activeProject === projectKey) {
+        navigateTo(`/${projectKey}`);
+      } else {
+        setActiveProject(projectKey);
+      }
+    },
+    [activeProject, navigateTo],
+  );
 
   return (
     <section onMouseMove={handleMouseMove} className='h-full overflow-hidden pt-32 px-4 pb-4 md:pb-8 md:px-8'>

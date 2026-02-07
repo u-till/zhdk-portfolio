@@ -14,6 +14,7 @@ const NAVIGATION_LINKS = [
   { href: 'toy-lexicon', label: 'toy lexicon' },
   { href: 'lost-in-space', label: 'lost in space' },
   { href: 'dayjob', label: 'dayjob' },
+  { href: 'traces', label: 'traces' },
 ];
 
 const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
@@ -65,7 +66,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
   },
-  trace: {
+  traces: {
     navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
@@ -88,6 +89,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
   'lost-in-space': '#000000ff',
   saudade: 'rgb(0, 0, 0)',
   dayjob: '#EAEAE8',
+  traces: '#EAEAE8',
   about: '#f9fafb',
 };
 
