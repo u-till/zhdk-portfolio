@@ -193,24 +193,6 @@ export default function SaudadePage() {
             )}
           </AnimatePresence>
         </motion.div>
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-foreground/30 animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -230,26 +212,6 @@ export default function SaudadePage() {
                   A collection of photographs taken during my travels around the world. The project explores the
                   portuguese concept of &quot;saudade&quot; - a melancholic longing for places and moments that have
                   passed.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Motivation Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
-              motivation
-            </h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
-                  photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
-                  nature of film. I especially enjoy taking pictures in the context of street photography and
-                  architecture.
                 </p>
               </div>
             </div>
@@ -279,12 +241,32 @@ export default function SaudadePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Cameras</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Olympus XA2 / Lomo LC-A / Canon EOS 60D / iPhone</div>
+              <div className='md:col-span-2'>Olympus XA2 / iPhone / Lomo LC-A / Canon EOS 60D </div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Subjects</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>Cities, Architecture, People, Nature</div>
+            </div>
+          </div>
+
+          {/* Motivation Section */}
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-white/40 pb-2 mb-4 ${courierPrime.className}`}>
+              motivation
+            </h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  I bought my first camera when I was about 12 and quickly filled my SD card with an abundance of
+                  photos. Later, I rediscovered the appeal of photography through analog cameras, drawn to the limiting
+                  nature of film. I especially enjoy taking pictures in the context of street photography and
+                  architecture.
+                </p>
+              </div>
             </div>
           </div>
 

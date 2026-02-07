@@ -56,6 +56,7 @@ const PROCESS_STEPS: {
 export default function LostInSpacePage() {
   const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   return (
     <section className='relative'>
@@ -65,7 +66,11 @@ export default function LostInSpacePage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2 className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}>lost in space</h2>
+          <h2
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}
+          >
+            lost in space
+          </h2>
         </div>
 
         {/* Album Viewer */}
@@ -73,26 +78,28 @@ export default function LostInSpacePage() {
           <AlbumViewer3D
             coverImage={IMAGES[0]}
             spotifyEmbedUrl='https://open.spotify.com/embed/album/6qs3jyw9rqToXnp1EjEXzL?utm_source=generator&theme=0'
+            isFlipped={isFlipped}
+            onFlip={() => setIsFlipped(!isFlipped)}
           />
         </div>
 
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
+        {/* Play Button */}
+        <button
+          onClick={() => setIsFlipped(true)}
+          className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 px-6 py-3 rounded-lg bg-[#e34c42] hover:bg-[#c93d34] text-white font-bold text-sm transition-colors shadow-md cursor-pointer flex items-center gap-2'
+        >
+          play
           <svg
             xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
+            width='16'
+            height='16'
             viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-white/30 animate-bounce'
+            fill='currentColor'
+            stroke='none'
           >
-            <path d='M12 5v14M5 12l7 7 7-7' />
+            <polygon points='5 3 19 12 5 21 5 3' />
           </svg>
-        </div>
+        </button>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -113,27 +120,6 @@ export default function LostInSpacePage() {
                 <p className='leading-relaxed'>
                   An album i did toghether with my friends when i used to live in a house full of musicians. Combining
                   productions under the theme of space, with cover art created by me.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Idea Section */}
-          <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
-            >
-              idea
-            </h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
-                  to match the space theme. Original plan included vocal collaborations for each track, which never
-                  materialized.
                 </p>
               </div>
             </div>
@@ -171,7 +157,28 @@ export default function LostInSpacePage() {
             </div>
           </div>
 
-          {/* learnings Section */}
+          {/* Idea Section */}
+          <div>
+            <h3
+              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            >
+              idea
+            </h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
+                  to match the space theme. Original plan included vocal collaborations for each track, which never
+                  materialized.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* learnings Section 
           <div>
             <h3
               className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
@@ -189,7 +196,7 @@ export default function LostInSpacePage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* credits Section */}
           <div>
@@ -273,9 +280,7 @@ export default function LostInSpacePage() {
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
                   className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain'
-                      ? 'object-contain'
-                      : 'object-cover'
+                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'
                   }
                 />
               </div>

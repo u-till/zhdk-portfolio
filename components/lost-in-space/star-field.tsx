@@ -90,17 +90,10 @@ export function StarField() {
 
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
-      render();
-    };
-
-    const render = () => {
-      // Use performance.now() for better performance
       const time = 0.00075 * performance.now();
       const maxW = canvas.width;
       const maxH = canvas.height;
-
       ctx.clearRect(0, 0, maxW, maxH);
-
       particlesRef.current.forEach((particle) => {
         particle.onUpdate(ctx, time);
       });

@@ -218,24 +218,6 @@ export default function RetrofittedPage() {
             </button>
           ))}
         </div>
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-foreground/30 animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -253,22 +235,6 @@ export default function RetrofittedPage() {
                   An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
                   connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
                   project embodies my passion for repairs and sustainability.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Idea Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
-                  this space could be used to fit a battery instead, so the project went from repair to upgrade.
                 </p>
               </div>
             </div>
@@ -293,7 +259,7 @@ export default function RetrofittedPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Upcycling / Retrofitting</div>
+              <div className='md:col-span-2'>Upcycling</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Model</div>
@@ -343,7 +309,23 @@ export default function RetrofittedPage() {
             </div>
           </div>
 
-          {/* learnings Section */}
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
+                  this space could be used to fit a battery instead, so the project went from repair to upgrade.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* learnings Section 
           <div>
             <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
               learnings
@@ -360,7 +342,7 @@ export default function RetrofittedPage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* credits Section */}
           <div>
@@ -379,7 +361,7 @@ export default function RetrofittedPage() {
               <div className='md:col-span-2'>
                 <ul className='list-disc list-outside pl-3 space-y-1'>
                   <li>ChatGPT for circuit design</li>
-                  <li>Google Nano Banana for stylizing images for schematic</li>
+                  <li>Google Nano Banana for stylizing images of components for schematic</li>
                 </ul>
               </div>
             </div>

@@ -67,7 +67,7 @@ const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: strin
     activeLink: 'text-white',
   },
   traces: {
-    navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
+    navbar: 'w-full rounded-2xl border-0 border-transparent bg-sky-700/70 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
     activeLink: 'text-white',
@@ -161,7 +161,7 @@ export function Navigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3, delay: 0.2 }}
-              className='hidden lg:flex items-center gap-8'
+              className='hidden xl:flex items-center gap-8'
             >
               {NAVIGATION_LINKS.map((link) => {
                 const linkSection = link.href;
@@ -208,7 +208,7 @@ export function Navigation() {
           {currentSection !== 'welcome' && (
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`lg:hidden ${config.brand}`}
+              className={`xl:hidden ${config.brand}`}
               aria-label='Toggle menu'
             >
               <MobileMenuToggle menuOpen={isMobileMenuOpen} />
@@ -224,7 +224,7 @@ export function Navigation() {
               animate={{ height: 'auto', opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className={`overflow-hidden lg:hidden ${currentSection === 'under-construction' ? 'bg-white' : ''}`}
+              className={`overflow-hidden xl:hidden ${currentSection === 'under-construction' ? 'bg-white' : ''}`}
             >
               {currentSection !== 'welcome' && (
                 <ul className='flex flex-col gap-2 px-4 pb-4'>

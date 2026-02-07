@@ -79,24 +79,6 @@ export default function UnderConstructionPage() {
             imagePadding={2}
           />
         </div>
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-black animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -116,23 +98,6 @@ export default function UnderConstructionPage() {
                   Mobile filing cabinet built with the visually distinct planks from a construction site. An ode to
                   continuous change and reusing materials in a different context. When is something truly done?
                   Everything is in perpetual development and keeps on changing its form.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Idea Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>idea</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in
-                  our livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built
-                  furniture would be the best so we could have it to our exact specifications.
                 </p>
               </div>
             </div>
@@ -171,7 +136,24 @@ export default function UnderConstructionPage() {
             </div>
           </div>
 
-          {/* learnings Section */}
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>idea</h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in
+                  our livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built
+                  furniture would be the best so we could have it to our exact specifications.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* learnings Section
           <div>
             <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
               learnings
@@ -188,7 +170,7 @@ export default function UnderConstructionPage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* credits Section */}
           <div>
@@ -272,10 +254,10 @@ export default function UnderConstructionPage() {
       <div className='bg-yellow-300 px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
           <h1
-            onClick={() => navigateTo('/dayjob')}
+            onClick={() => navigateTo('/')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
-            previous
+            index
           </h1>
           <h1
             onClick={() => navigateTo('/saudade')}

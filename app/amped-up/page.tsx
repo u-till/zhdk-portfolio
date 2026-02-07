@@ -175,24 +175,6 @@ export default function AmpedUpPage() {
             </button>
           ))}
         </div>
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-foreground/30 animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -209,23 +191,6 @@ export default function AmpedUpPage() {
                 <p className='leading-relaxed'>
                   An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
                   enables new functionality like EQ / DSP / and Bluetooth.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Idea Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>idea</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  My friend Julian acquired these speakers with one broken amp. We brainstormed how to revive them with
-                  modern features: digital amps with bluetooth and DSP for frequency response control and room acoustic
-                  adaptation.
                 </p>
               </div>
             </div>
@@ -250,7 +215,7 @@ export default function AmpedUpPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Type</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Upcycling / Retrofitting</div>
+              <div className='md:col-span-2'>Upcycling</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Model</div>
@@ -302,7 +267,24 @@ export default function AmpedUpPage() {
             </div>
           </div>
 
-          {/* learnings Section */}
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>idea</h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  My friend Julian acquired these speakers with one broken amp. We brainstormed how to revive them with
+                  modern features: digital amps with bluetooth and DSP for frequency response control and room acoustic
+                  adaptation.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* learnings Section
           <div>
             <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
               learnings
@@ -318,7 +300,7 @@ export default function AmpedUpPage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* credits Section */}
           <div>

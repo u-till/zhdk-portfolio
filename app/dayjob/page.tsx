@@ -12,9 +12,24 @@ const DOCK_ITEMS: DockItem[] = [
   { id: 'hannibal', label: 'hannibal.ch', icon: '/dayjob/icons/hannibal-icon.png', url: 'https://hannibal.ch' },
   { id: 'fabio', label: 'fabiotozzo.com', icon: '/dayjob/icons/fabiotozzo-icon.png', url: 'https://fabiotozzo.com' },
   { id: 'swing', label: 'swing.ch', icon: '/dayjob/icons/swing-icon.jpg', url: 'https://swing.ch' },
-  { id: 'njk', label: 'nicolaijaronkager.ch', icon: '/dayjob/icons/cropped-favicon-njk-2-192x192.png', url: 'https://nicolaijaronkager.ch' },
-  { id: 'narrative', label: 'anothernarrative.studio', icon: '/dayjob/icons/anothernarrative-icon.png', url: 'https://anothernarrative.studio' },
-  { id: 'brooke', label: 'brookejackson.ch', icon: '/dayjob/icons/brookejackson-icon.png', url: 'https://brookejackson.ch' },
+  {
+    id: 'njk',
+    label: 'nicolaijaronkager.ch',
+    icon: '/dayjob/icons/cropped-favicon-njk-2-192x192.png',
+    url: 'https://nicolaijaronkager.ch',
+  },
+  {
+    id: 'narrative',
+    label: 'anothernarrative.studio',
+    icon: '/dayjob/icons/anothernarrative-icon.png',
+    url: 'https://anothernarrative.studio',
+  },
+  {
+    id: 'brooke',
+    label: 'brookejackson.ch',
+    icon: '/dayjob/icons/brookejackson-icon.png',
+    url: 'https://brookejackson.ch',
+  },
 ];
 
 const PROCESS_STEPS = [
@@ -24,8 +39,8 @@ const PROCESS_STEPS = [
     image: '/dayjob/bg.jpg',
   },
   {
-    title: '02. DESIGN',
-    text: 'Create wireframes and visual designs in Figma. Tailor style and design language to client needs.',
+    title: '02. STRUCTURE & DESIGN',
+    text: 'Create sitemap, wireframes, design-system and views in Figma. Tailor style and design language to client needs.',
     image: '/dayjob/screenshots/dayjob-process-design.png',
   },
   {
@@ -65,24 +80,6 @@ export default function DayjobPage() {
         </div>
 
         <Dock items={DOCK_ITEMS} />
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-white/30 animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Content */}
@@ -110,7 +107,9 @@ export default function DayjobPage() {
           <div className='flex flex-col gap-8 text-foreground'>
             {/* Brief Section */}
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>brief</h3>
+              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+                brief
+              </h3>
               <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
@@ -119,23 +118,6 @@ export default function DayjobPage() {
                   <p className='leading-relaxed'>
                     A selection of freelance web projects I have worked on over the years. These range from small
                     portfolio sites to larger business websites, showcasing my experience in web development and design.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Idea Section */}
-            <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>idea</h3>
-              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-                <div className='hidden md:block'></div>
-                <div className='hidden md:block'></div>
-                <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>
-                  <p className='leading-relaxed'>
-                    I started freelancing because I wanted to move towards more creative and challenging work.
-                    Freelancing allows me to choose projects that align with my interests and skills, while also
-                    providing the flexibility to manage my own time and work environment.
                   </p>
                 </div>
               </div>
@@ -174,7 +156,24 @@ export default function DayjobPage() {
               </div>
             </div>
 
-            {/* Learnings Section */}
+            {/* Idea Section */}
+            <div>
+              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>idea</h3>
+              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='hidden md:block'></div>
+                <div className='md:col-span-2'>
+                  <p className='leading-relaxed'>
+                    I started freelancing because I wanted to move towards more creative and challenging work.
+                    Freelancing allows me to choose projects that align with my interests and skills, while also
+                    providing the flexibility to manage my own time and work environment.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Learnings Section
             <div>
               <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
                 learnings
@@ -192,7 +191,7 @@ export default function DayjobPage() {
                   </ul>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Credits Section */}
             <div>
@@ -213,7 +212,9 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>fabiotozzo.com</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Design: Noel Oppliger & Till Solenthaler, Development: Till Solenthaler</div>
+                <div className='md:col-span-2'>
+                  Design: Noel Oppliger & Till Solenthaler, Development: Till Solenthaler
+                </div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>swing.ch</div>
@@ -223,17 +224,23 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>nicolaijaronkager.ch</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Design: Nicolai Kager & Till Solenthaler, Development: Till Solenthaler</div>
+                <div className='md:col-span-2'>
+                  Design: Nicolai Kager & Till Solenthaler, Development: Till Solenthaler
+                </div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>anothernarrative.studio</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Design: Another Narrative & Till Solenthaler, Development: Till Solenthaler</div>
+                <div className='md:col-span-2'>
+                  Design: Another Narrative & Till Solenthaler, Development: Till Solenthaler
+                </div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>brookejackson.ch</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Design: Brooke Jackson & Till Solenthaler, Development: Till Solenthaler</div>
+                <div className='md:col-span-2'>
+                  Design: Brooke Jackson & Till Solenthaler, Development: Till Solenthaler
+                </div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>AI Declaration</div>
@@ -266,7 +273,9 @@ export default function DayjobPage() {
                     </div>
                     <div className='flex-1'>
                       <span className={`font-bold block ${isActive ? 'lg:text-white' : ''}`}>{step.title}</span>
-                      <span className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}>
+                      <span
+                        className={`text-sm ${isActive ? 'lg:text-white/90 text-foreground/80' : 'text-foreground/80'}`}
+                      >
                         {step.text}
                       </span>
                     </div>

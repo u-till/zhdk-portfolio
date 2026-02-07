@@ -9,22 +9,25 @@ const THICKNESS = 15;
 interface AlbumViewer3DProps {
   coverImage: string;
   spotifyEmbedUrl: string;
+  isFlipped: boolean;
+  onFlip: () => void;
 }
 
-export function AlbumViewer3D({ coverImage, spotifyEmbedUrl }: AlbumViewer3DProps) {
-  const [isFlipped, setIsFlipped] = useState(false);
+export function AlbumViewer3D({ coverImage, spotifyEmbedUrl, isFlipped, onFlip }: AlbumViewer3DProps) {
   const [tilt, setTilt] = useState({ x: 0, y: 0 });
   const [isFlipping, setIsFlipping] = useState(false);
   const [isPushing, setIsPushing] = useState(false);
   const isMobile = useIsMobile();
 
-  const handleFlip = () => {
+  useEffect(() => {
     setIsFlipping(true);
-    setIsFlipped(!isFlipped);
-    // Reset tilt during flip for smoother animation
     setTilt({ x: 0, y: 0 });
-    // Re-enable tilt after flip completes
-    setTimeout(() => setIsFlipping(false), 800);
+    const timeout = setTimeout(() => setIsFlipping(false), 800);
+    return () => clearTimeout(timeout);
+  }, [isFlipped]);
+
+  const handleFlip = () => {
+    onFlip();
   };
 
   useEffect(() => {

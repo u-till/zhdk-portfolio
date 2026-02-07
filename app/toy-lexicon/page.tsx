@@ -175,24 +175,6 @@ export default function ToyLexiconPage() {
             </button>
           ))}
         </div>
-
-        {/* Scroll Down Arrow */}
-        <div className='hidden md:block absolute bottom-8 left-1/2 -translate-x-1/2 z-10 pointer-events-none'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            width='32'
-            height='32'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2.5'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='text-foreground/30 animate-bounce'
-          >
-            <path d='M12 5v14M5 12l7 7 7-7' />
-          </svg>
-        </div>
       </div>
 
       {/* Info Content - Vertical 5-Column Layout */}
@@ -213,23 +195,6 @@ export default function ToyLexiconPage() {
                   <br />
                   Since images were taken over years with missing data, I built a custom CMS for collaborative editing
                   into a central JSON database. This then feeds into an InDesign ExtendScript for automated layout.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Idea Section */}
-          <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>idea</h3>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <p className='leading-relaxed'>
-                  My father has been collecting and building with old construction kits for decades. When he asked me to
-                  help turn his collection into a book, I saw an opportunity to combine my design skills with his
-                  passion project.
                 </p>
               </div>
             </div>
@@ -278,7 +243,24 @@ export default function ToyLexiconPage() {
             </div>
           </div>
 
-          {/* learnings Section */}
+          {/* Idea Section */}
+          <div>
+            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>idea</h3>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='hidden md:block'></div>
+              <div className='md:col-span-2'>
+                <p className='leading-relaxed'>
+                  My father has been collecting and building with old construction kits for decades. When he asked me to
+                  help turn his collection into a book, I saw an opportunity to combine my design skills with his
+                  passion project.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* learnings Section
           <div>
             <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>
               learnings
@@ -295,7 +277,7 @@ export default function ToyLexiconPage() {
                 </ul>
               </div>
             </div>
-          </div>
+          </div>*/}
 
           {/* credits Section */}
           <div>

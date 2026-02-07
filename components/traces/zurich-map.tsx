@@ -26,7 +26,7 @@ const createImageIcon = (imageSrc: string, overlaySrc?: string) => {
         width: 90px;
         height: 120px;
         border-radius: 8px;
-        border: 3px solid #0ea5e9;
+        border: 3px solid #0284c7;
         overflow: hidden;
         cursor: pointer;
         background: white;

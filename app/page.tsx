@@ -109,34 +109,23 @@ function AnimatedImagePreview({
   const [showAlt, setShowAlt] = useState(false);
 
   useEffect(() => {
-    // For blink pattern: show alt briefly then return
-    // For toggle pattern: alternate between images
     const isBlink = blinkDuration !== undefined;
+    let intervalId: ReturnType<typeof setInterval>;
+    let blinkTimeoutId: ReturnType<typeof setTimeout>;
 
     if (isBlink) {
-      // Initial blink on mount
-      const initialTimeout = setTimeout(() => {
+      intervalId = setInterval(() => {
         setShowAlt(true);
-        setTimeout(() => setShowAlt(false), blinkDuration);
-      }, 100);
-
-      const blinkInterval = setInterval(() => {
-        setShowAlt(true);
-        setTimeout(() => setShowAlt(false), blinkDuration);
+        blinkTimeoutId = setTimeout(() => setShowAlt(false), blinkDuration);
       }, interval);
-
-      return () => {
-        clearTimeout(initialTimeout);
-        clearInterval(blinkInterval);
-      };
     } else {
-      // Toggle pattern
-      const toggleInterval = setInterval(() => {
-        setShowAlt((prev) => !prev);
-      }, interval);
-
-      return () => clearInterval(toggleInterval);
+      intervalId = setInterval(() => setShowAlt((prev) => !prev), interval);
     }
+
+    return () => {
+      clearInterval(intervalId);
+      clearTimeout(blinkTimeoutId);
+    };
   }, [interval, blinkDuration]);
 
   return (
