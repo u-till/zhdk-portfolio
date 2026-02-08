@@ -76,8 +76,8 @@ const PROJECTS: Record<string, { name: string; preview: PreviewConfig }> = {
     name: 'traces',
     preview: {
       type: 'toggle',
-      src: '/traces/IMG_3769_with_overlay.jpg',
-      altSrc: '/traces/IMG_3769.jpeg',
+      src: '/traces/trace-collection/IMG_3769_with_overlay.jpg',
+      altSrc: '/traces/trace-collection/IMG_3769.jpeg',
       interval: 2000,
       size: 'sm',
     },
