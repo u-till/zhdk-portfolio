@@ -1,5 +1,6 @@
 'use client';
 
+import { Lightbox } from '@/components/traces/lightbox';
 import { Viewer360 } from '@/components/under-construction/viewer-360';
 import { useNavigation } from '@/contexts/navigation-context';
 import { allertaStencil } from '@/lib/fonts';
@@ -53,6 +54,7 @@ const PROCESS_STEPS: {
 export default function UnderConstructionPage() {
   const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
 
   return (
     <section className='bg-yellow-300'>
@@ -60,13 +62,13 @@ export default function UnderConstructionPage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2
+          <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}
           >
             under
             <br />
             construction
-          </h2>
+          </h1>
         </div>
 
         {/* 360 Viewer - Full Width */}
@@ -86,9 +88,9 @@ export default function UnderConstructionPage() {
         <div className='flex flex-col gap-8'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
               brief
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -105,9 +107,9 @@ export default function UnderConstructionPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
               specifications
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -138,7 +140,7 @@ export default function UnderConstructionPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>idea</h3>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>idea</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -155,9 +157,9 @@ export default function UnderConstructionPage() {
 
           {/* learnings Section
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
               learnings
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -174,9 +176,9 @@ export default function UnderConstructionPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
               credits
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
@@ -195,9 +197,9 @@ export default function UnderConstructionPage() {
       {/* Process Section */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-6 ${allertaStencil.className}`}>
+          <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-6'>
             process
-          </h3>
+          </h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -208,11 +210,11 @@ export default function UnderConstructionPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${
+                    className={`w-full p-3 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 lg:cursor-pointer border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${
                       isActive ? 'bg-white lg:bg-red-600' : 'bg-white lg:hover:bg-neutral-100'
                     }`}
                   >
-                    <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden border-2 border-black bg-white'>
+                    <div className='relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden border-2 border-black bg-white'>
                       <Image
                         src={step.image}
                         alt={`${step.title} thumbnail`}
@@ -235,7 +237,13 @@ export default function UnderConstructionPage() {
 
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
-              <div className='relative w-full overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]'>
+              <div
+                className='relative w-full overflow-hidden border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] cursor-pointer'
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
+              >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
@@ -253,20 +261,22 @@ export default function UnderConstructionPage() {
       {/* Project Navigation */}
       <div className='bg-yellow-300 px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
-          <h1
+          <span
             onClick={() => navigateTo('/')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             index
-          </h1>
-          <h1
+          </span>
+          <span
             onClick={() => navigateTo('/saudade')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             next
-          </h1>
+          </span>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }

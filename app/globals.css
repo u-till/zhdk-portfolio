@@ -205,6 +205,9 @@
     scrollbar-width: thin;
     scrollbar-color: rgb(253, 186, 116) rgba(253, 186, 116, 0.2);
   }
+  .text-stroke {
+    -webkit-text-stroke: 1px white;
+  }
 }
 
 .leaflet-control-attribution {

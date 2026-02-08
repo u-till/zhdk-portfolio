@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'traces | till solenthaler',
-  description: 'ZhdK Homework assignment for the subject traces',
+  description: 'ZHdK Homework assignment for the subject traces',
   openGraph: {
     title: 'traces | till solenthaler',
     description: 'A book exploring construction kits from the last 100 years.',

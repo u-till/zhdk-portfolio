@@ -1,6 +1,7 @@
 'use client';
 
 import { Dock } from '@/components/dayjob/dock';
+import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { archivo } from '@/lib/fonts';
 import { DockItem } from '@/types/macos';
@@ -63,6 +64,7 @@ const PROCESS_STEPS = [
 export default function DayjobPage() {
   const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
 
   return (
     <section>
@@ -72,11 +74,11 @@ export default function DayjobPage() {
           <video autoPlay loop muted playsInline className='absolute inset-0 w-full h-full object-cover object-bottom'>
             <source src='/dayjob/dayjob-trailer.mp4' type='video/mp4' />
           </video>
-          <h2
+          <h1
             className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none pointer-events-none ${archivo.className}`}
           >
             dayjob
-          </h2>
+          </h1>
         </div>
 
         <Dock items={DOCK_ITEMS} />
@@ -107,9 +109,9 @@ export default function DayjobPage() {
           <div className='flex flex-col gap-8 text-foreground'>
             {/* Brief Section */}
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
                 brief
-              </h3>
+              </h2>
               <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
@@ -125,9 +127,9 @@ export default function DayjobPage() {
 
             {/* Specifications Section */}
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
                 specifications
-              </h3>
+              </h2>
               <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>Year</div>
@@ -158,7 +160,7 @@ export default function DayjobPage() {
 
             {/* Idea Section */}
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>idea</h3>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>idea</h2>
               <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
@@ -175,9 +177,9 @@ export default function DayjobPage() {
 
             {/* Learnings Section
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+              <h2 className={`text-xl font-bold border-b-2 border-foreground pb-2 mb-4 ${archivo.className}`}>
                 learnings
-              </h3>
+              </h2>
               <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
@@ -195,9 +197,9 @@ export default function DayjobPage() {
 
             {/* Credits Section */}
             <div>
-              <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-4 ${archivo.className}`}>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
                 credits
-              </h3>
+              </h2>
               <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>utill.ch</div>
@@ -253,7 +255,7 @@ export default function DayjobPage() {
 
         {/* Process Section */}
         <div className='relative px-4 md:px-8 pt-12 pb-16'>
-          <h3 className={`text-xl font-bold border-b-2 border-neutral-500 pb-2 mb-6 ${archivo.className}`}>process</h3>
+          <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-6'>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -264,11 +266,11 @@ export default function DayjobPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 rounded-lg transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                    className={`w-full p-3 rounded-lg transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 lg:cursor-pointer ${
                       isActive ? 'bg-white lg:bg-blue-500' : 'bg-white lg:hover:bg-white/80'
                     }`}
                   >
-                    <div className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-neutral-400/80 bg-white'>
+                    <div className='relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded-lg ring-1 ring-neutral-400/80 bg-white'>
                       <Image src={step.image} alt={`${step.title} thumbnail`} fill className='object-cover' />
                     </div>
                     <div className='flex-1'>
@@ -286,7 +288,13 @@ export default function DayjobPage() {
 
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
-              <div className='relative w-full rounded-lg overflow-hidden bg-white'>
+              <div
+                className='relative w-full rounded-lg overflow-hidden bg-white cursor-pointer'
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
+              >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
@@ -301,21 +309,23 @@ export default function DayjobPage() {
         {/* Project Navigation */}
         <div className='relative px-4 md:px-8 pb-16'>
           <div className='flex justify-between items-center border-b-2 border-black pb-2'>
-            <h1
+            <span
               onClick={() => navigateTo('/lost-in-space')}
               className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
             >
               previous
-            </h1>
-            <h1
-              onClick={() => navigateTo('/under-construction')}
+            </span>
+            <span
+              onClick={() => navigateTo('/traces')}
               className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
             >
               next
-            </h1>
+            </span>
           </div>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }

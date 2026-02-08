@@ -1,5 +1,6 @@
 'use client';
 
+import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
@@ -49,7 +50,7 @@ const PROCESS_STEPS: {
     text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. Enables quick generation of consistent layouts for refinement.',
   },
   {
-    image: '/toy-lexicon/book-process-4.jpg',
+    image: '/toy-lexicon/book-process-5.jpg',
     objectFit: 'cover',
     title: '05. ITERATE AND REFINE',
     text: 'Continuous feedback loops with my father to adjust layouts, fix data issues, and improve the visual presentation until ready for print.',
@@ -60,6 +61,7 @@ export default function ToyLexiconPage() {
   const { navigateTo } = useNavigation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const navigateToPhoto = useCallback((imageIndex: number) => {
@@ -86,7 +88,7 @@ export default function ToyLexiconPage() {
   useCarouselKeyboard(handlePrev, handleNext);
 
   return (
-    <section className={dinNext.className}>
+    <section>
       {/* First View: Gallery */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Above thumbnails on mobile, bottom left on desktop */}
@@ -95,11 +97,11 @@ export default function ToyLexiconPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
+          <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${dinNext.className}`}
           >
             toy lexicon
-          </h2>
+          </h1>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -182,7 +184,7 @@ export default function ToyLexiconPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>brief</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -202,9 +204,9 @@ export default function ToyLexiconPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               specifications
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -245,7 +247,7 @@ export default function ToyLexiconPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>idea</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>idea</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -262,9 +264,9 @@ export default function ToyLexiconPage() {
 
           {/* learnings Section
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               learnings
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -281,7 +283,7 @@ export default function ToyLexiconPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-4 ${dinNext.className}`}>credits</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Models and Curation</div>
@@ -315,7 +317,7 @@ export default function ToyLexiconPage() {
       {/* Process Section */}
       <div className=' px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-[#5BB660] pb-2 mb-6 ${dinNext.className}`}>process</h3>
+          <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6`}>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -326,14 +328,14 @@ export default function ToyLexiconPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 rounded-r-lg lg:cursor-pointer ${
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 rounded-r-lg lg:cursor-pointer ${
                       isActive
                         ? 'lg:border-[#5BB660] bg-[#cee9cf]/50'
                         : 'bg-[#cee9cf]/50 lg:border-[#addaaf] lg:bg-[#def0df]/50 lg:hover:bg-[#cee9cf]/30'
                     }`}
                   >
                     <div
-                      className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
+                      className={`relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
                         isActive ? 'ring-2 ring-[#5BB660]' : 'ring-2 ring-[#5BB660] lg:ring-1 lg:ring-[#addaaf]'
                       }`}
                     >
@@ -355,7 +357,13 @@ export default function ToyLexiconPage() {
 
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
-              <div className='relative w-full rounded-lg overflow-hidden border-2 border-[#5BB660]/40'>
+              <div
+                className='relative w-full rounded-lg overflow-hidden border-2 border-[#5BB660]/40 cursor-pointer'
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
+              >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
@@ -373,20 +381,22 @@ export default function ToyLexiconPage() {
       {/* Project Navigation */}
       <div className='px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
-          <h1
+          <span
             onClick={() => navigateTo('/amped-up')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             previous
-          </h1>
-          <h1
+          </span>
+          <span
             onClick={() => navigateTo('/lost-in-space')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             next
-          </h1>
+          </span>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }

@@ -1,5 +1,6 @@
 'use client';
 
+import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
@@ -60,6 +61,7 @@ export default function AmpedUpPage() {
   const { navigateTo } = useNavigation();
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
 
   const navigateToPhoto = useCallback((imageIndex: number) => {
@@ -95,11 +97,11 @@ export default function AmpedUpPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
+          <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${vt323.className}`}
           >
             amped up
-          </h2>
+          </h1>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -179,10 +181,10 @@ export default function AmpedUpPage() {
 
       {/* Info Content - Vertical 5-Column Layout */}
       <div className='px-4 md:px-8 pt-16 pb-16'>
-        <div className='flex flex-col gap-8 text-foreground font-mono'>
+        <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>brief</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -198,9 +200,9 @@ export default function AmpedUpPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               specifications
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -269,7 +271,7 @@ export default function AmpedUpPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>idea</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>idea</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -286,9 +288,9 @@ export default function AmpedUpPage() {
 
           {/* learnings Section
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               learnings
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -304,7 +306,7 @@ export default function AmpedUpPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4 ${vt323.className}`}>credits</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Idea & Concept</div>
@@ -327,8 +329,8 @@ export default function AmpedUpPage() {
 
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16'>
-        <div className='font-mono'>
-          <h3 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6 ${vt323.className}`}>process</h3>
+        <div>
+          <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6`}>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -339,14 +341,14 @@ export default function AmpedUpPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 lg:cursor-pointer ${
                       isActive
                         ? 'lg:border-foreground bg-neutral-300/50'
                         : 'bg-neutral-300/50 lg:border-neutral-400 lg:bg-neutral-200/30 lg:hover:bg-neutral-200/60'
                     }`}
                   >
                     <div
-                      className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden ${
+                      className={`relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden ${
                         isActive ? 'ring-2 ring-foreground' : 'ring-2 ring-foreground lg:ring-1 lg:ring-neutral-400'
                       }`}
                     >
@@ -368,7 +370,13 @@ export default function AmpedUpPage() {
 
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
-              <div className='relative w-full overflow-hidden border border-black/60 bg-white'>
+              <div
+                className='relative w-full overflow-hidden border border-black/60 bg-white cursor-pointer'
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
+              >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
@@ -386,20 +394,22 @@ export default function AmpedUpPage() {
       {/* Project Navigation */}
       <div className='px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
-          <h1
+          <span
             onClick={() => navigateTo('/retrofitted')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             previous
-          </h1>
-          <h1
+          </span>
+          <span
             onClick={() => navigateTo('/toy-lexicon')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             next
-          </h1>
+          </span>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }

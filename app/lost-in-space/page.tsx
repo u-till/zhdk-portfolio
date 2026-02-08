@@ -2,6 +2,7 @@
 
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
 import { StarField } from '@/components/lost-in-space/star-field';
+import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { orbitron } from '@/lib/fonts';
 import Image from 'next/image';
@@ -22,25 +23,25 @@ const PROCESS_STEPS: {
   text: string;
 }[] = [
   {
-    image: '/lost-in-space/backside-1.jpg',
+    image: '/lost-in-space/cover.jpg',
     objectFit: 'cover',
     title: '01. COVER ART',
     text: 'The whole project actually started, because i created the cover art. We then searched for fitting beats and also produced a few tracks specifically to this space theme.',
   },
   {
-    image: '/lost-in-space/backside-2.jpg',
+    image: '/lost-in-space/backside-1.jpg',
     objectFit: 'cover',
     title: '02. PRODUCTION',
     text: 'Made at Vogelsang, a creative interim building. Mostly produced by me (Ableton) and Lars (FL Studio). We often collaborated on tracks - one creating samples, the other drums.',
   },
   {
-    image: '/lost-in-space/backside-3.jpg',
+    image: '/lost-in-space/backside-2.jpg',
     objectFit: 'cover',
     title: '03. RELEASE',
     text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and Soundcloud.',
   },
   {
-    image: '/lost-in-space/backside-4.jpg',
+    image: '/lost-in-space/backside-3.jpg',
     objectFit: 'cover',
     title: '04. OUTREACH TO ARTISTS',
     text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
@@ -56,6 +57,7 @@ const PROCESS_STEPS: {
 export default function LostInSpacePage() {
   const { navigateTo } = useNavigation();
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
   const [isFlipped, setIsFlipped] = useState(false);
 
   return (
@@ -66,11 +68,11 @@ export default function LostInSpacePage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
-          <h2
+          <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}
           >
             lost in space
-          </h2>
+          </h1>
         </div>
 
         {/* Album Viewer */}
@@ -107,11 +109,11 @@ export default function LostInSpacePage() {
         <div className='flex flex-col gap-8 text-white'>
           {/* Brief Section */}
           <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            <h2
+              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
             >
               brief
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -127,11 +129,11 @@ export default function LostInSpacePage() {
 
           {/* specifications Section */}
           <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            <h2
+              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
             >
               specifications
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Year</div>
@@ -159,11 +161,11 @@ export default function LostInSpacePage() {
 
           {/* Idea Section */}
           <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            <h2
+              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
             >
               idea
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -180,11 +182,11 @@ export default function LostInSpacePage() {
 
           {/* learnings Section 
           <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            <h2
+              className={`text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
             >
               learnings
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -200,11 +202,11 @@ export default function LostInSpacePage() {
 
           {/* credits Section */}
           <div>
-            <h3
-              className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
+            <h2
+              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
             >
               credits
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Album Art</div>
@@ -215,7 +217,8 @@ export default function LostInSpacePage() {
               <div className='font-bold md:text-right text-[#e34c42]'>Music Production</div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
-                Till Solenthaler, Lars Faber, Julian Fehr, Ilja Kager, Michael Ehlers, Unikat Dynamik
+                Till Solenthaler (Freddie Chopper), Lars Faber (Dirty Uludag), Julian Fehr, Ilja Kager, Michael Ehlers,
+                Unikat Dynamik
               </div>
 
               <div className='hidden md:block'></div>
@@ -230,11 +233,11 @@ export default function LostInSpacePage() {
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
         <div>
-          <h3
-            className={`text-xl font-bold  border-b-2 border-[#AA4742] pb-2 mb-6 text-[#e34c42] ${orbitron.className}`}
+          <h2
+            className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-6 text-[#e34c42]'
           >
             process
-          </h3>
+          </h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -245,14 +248,14 @@ export default function LostInSpacePage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 lg:cursor-pointer ${
                       isActive
-                        ? 'lg:border-[#AA4742] bg-[#AA4742]/20'
-                        : 'bg-[#AA4742]/20 lg:border-[#AA4742]/40 lg:bg-[#AA4742]/10 lg:hover:bg-[#AA4742]/20'
+                        ? 'lg:border-[#e34c42] bg-[#AA4742]/20'
+                        : 'bg-[#AA4742]/20 lg:border-[#e34c42]/40 lg:bg-[#AA4742]/10 lg:hover:bg-[#AA4742]/20'
                     }`}
                   >
                     <div
-                      className={`relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded ${
+                      className={`relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded ${
                         isActive ? 'ring-2 ring-[#e34c42]' : 'ring-2 ring-[#e34c42] lg:ring-1 lg:ring-[#AA4742]/40'
                       }`}
                     >
@@ -274,7 +277,13 @@ export default function LostInSpacePage() {
 
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
-              <div className='relative w-full rounded-lg overflow-hidden'>
+              <div
+                className='relative w-full rounded-lg overflow-hidden cursor-pointer'
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
+              >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
@@ -291,21 +300,23 @@ export default function LostInSpacePage() {
 
       {/* Project Navigation */}
       <div className='relative z-10 px-4 md:px-8 pb-16'>
-        <div className='flex justify-between items-center border-b-2 border-[#AA4742] pb-2'>
-          <h1
+        <div className='flex justify-between items-center border-b-2 border-[#e34c42] pb-2'>
+          <span
             onClick={() => navigateTo('/toy-lexicon')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
             previous
-          </h1>
-          <h1
+          </span>
+          <span
             onClick={() => navigateTo('/dayjob')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
             next
-          </h1>
+          </span>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }

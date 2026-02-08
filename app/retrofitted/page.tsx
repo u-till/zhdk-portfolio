@@ -1,5 +1,6 @@
 'use client';
 
+import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
@@ -31,9 +32,9 @@ const PROCESS_STEPS = [
     text: 'After identifying the transformer as the issue, I started to think about ways to improve the lamp beyond just repairing it.',
   },
   {
-    image: '/retrofitted/lamp-schematic.png',
+    image: '/retrofitted/lamp-schematic.jpg',
     objectFit: 'contain' as const,
-    bg: '#f5efd1',
+    bg: '#F8F3DD',
     title: '02. RESEARCH & DESIGN',
     text: 'Drafted a schematic and shopping list with ChatGPT. I visualized the schematic using the Fritzing app and ordered parts from Aliexpress.',
   },
@@ -68,6 +69,7 @@ export default function RetrofittedPage() {
   const [activeIndex, setActiveIndex] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [selectedProcessIndex, setSelectedProcessIndex] = useState(0);
+  const [lightboxImage, setLightboxImage] = useState<{ src: string; title?: string } | null>(null);
 
   const navigateToPhoto = useCallback((imageIndex: number) => {
     if (scrollRef.current) {
@@ -104,11 +106,11 @@ export default function RetrofittedPage() {
             activeIndex > 0 && GALLERY_IMAGES[activeIndex - 1]?.hideTitle ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <h2
+          <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${shrikhand.className}`}
           >
             retrofitted
-          </h2>
+          </h1>
         </div>
 
         {/* Scrolling Photos - Full Width */}
@@ -225,7 +227,7 @@ export default function RetrofittedPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>brief</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -242,9 +244,9 @@ export default function RetrofittedPage() {
 
           {/* specifications Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               specifications
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -311,7 +313,7 @@ export default function RetrofittedPage() {
 
           {/* Idea Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>idea</h3>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>idea</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -327,9 +329,9 @@ export default function RetrofittedPage() {
 
           {/* learnings Section 
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               learnings
-            </h3>
+            </h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -346,9 +348,9 @@ export default function RetrofittedPage() {
 
           {/* credits Section */}
           <div>
-            <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-4 ${shrikhand.className}`}>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
               credits
-            </h3>
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
@@ -372,7 +374,7 @@ export default function RetrofittedPage() {
       {/* Process Section - flows after info */}
       <div className='bg-[#faf7e8] px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h3 className={`text-xl font-bold  border-b-2 border-[#c33b32] pb-2 mb-6 ${shrikhand.className}`}>process</h3>
+          <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6`}>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -383,12 +385,12 @@ export default function RetrofittedPage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 rounded-2xl transition-all text-left flex flex-col md:flex-row md:items-center gap-3 lg:cursor-pointer ${
+                    className={`w-full p-3 rounded-2xl transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 lg:cursor-pointer ${
                       isActive ? 'bg-[#f8f3dd] lg:bg-[#c33b32]' : 'bg-[#f8f3dd] lg:hover:bg-[#fdfbf4]'
                     }`}
                   >
                     <div
-                      className='relative w-full aspect-square md:w-20 md:h-20 flex-shrink-0 overflow-hidden rounded-xl md:rounded-full ring-2 ring-[#e7d68d]'
+                      className='relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded-xl lg:rounded-full ring-2 ring-[#e7d68d]'
                       style={step.bg ? { backgroundColor: step.bg } : undefined}
                     >
                       <Image
@@ -414,12 +416,16 @@ export default function RetrofittedPage() {
             {/* Right: Selected Image - Desktop only */}
             <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
               <div
-                className='relative w-full rounded-lg overflow-hidden'
+                className='relative w-full rounded-lg overflow-hidden cursor-pointer'
                 style={
                   PROCESS_STEPS[selectedProcessIndex]?.bg
                     ? { backgroundColor: PROCESS_STEPS[selectedProcessIndex].bg }
                     : undefined
                 }
+                onClick={() => {
+                  const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
+                  setLightboxImage({ src: step.image, title: step.title });
+                }}
               >
                 <Image
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
@@ -438,20 +444,22 @@ export default function RetrofittedPage() {
       {/* Project Navigation */}
       <div className='bg-[#faf7e8] px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
-          <h1
+          <span
             onClick={() => navigateTo('/saudade')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             previous
-          </h1>
-          <h1
+          </span>
+          <span
             onClick={() => navigateTo('/amped-up')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
           >
             next
-          </h1>
+          </span>
         </div>
       </div>
+
+      <Lightbox src={lightboxImage?.src || null} title={lightboxImage?.title} onClose={() => setLightboxImage(null)} />
     </section>
   );
 }
