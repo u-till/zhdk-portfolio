@@ -10,6 +10,11 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'portfolio | till solenthaler',
   description: 'Portfolio of Till Solenthaler, webdesigner and developer based in Zurich, Switzerland.',
+  openGraph: {
+    title: 'portfolio | till solenthaler',
+    description: 'Portfolio of Till Solenthaler, webdesigner and developer based in Zurich, Switzerland.',
+    images: ['/social-thumbnail.jpg'],
+  },
 };
 
 export default function RootLayout({

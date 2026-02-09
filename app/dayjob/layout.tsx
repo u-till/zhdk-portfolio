@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description: 'A selection of freelance web projects ranging from portfolio sites to business applications.',
   openGraph: {
     title: 'dayjob | till solenthaler',
-    description: 'Freelance web development projects.',
-    images: ['/dayjob/dayjob-thumb.png'],
+    description: 'A selection of freelance web projects ranging from portfolio sites to business applications.',
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

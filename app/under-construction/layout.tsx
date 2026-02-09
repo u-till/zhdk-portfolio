@@ -3,12 +3,11 @@ import { ReactNode } from 'react';
 
 export const metadata: Metadata = {
   title: 'under construction | till solenthaler',
-  description:
-    'A concrete sound amplifier designed with brutalist architecture principles. Amplifies smartphone audio without electricity.',
+  description: 'A filing cabinet on wheels built from construction site planks.',
   openGraph: {
     title: 'under construction | till solenthaler',
-    description: 'A concrete sound amplifier designed with brutalist architecture principles.',
-    images: ['/under-construction/korpus-360/normalized-01.png'],
+    description: 'A filing cabinet on wheels built from construction site planks.',
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

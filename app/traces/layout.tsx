@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'traces | till solenthaler',
     description: 'ZHdK Homework assignment for the subject traces.',
-    images: ['/toy-lexicon/mockup-1.png'],
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

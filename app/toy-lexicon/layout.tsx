@@ -7,8 +7,9 @@ export const metadata: Metadata = {
     'A book exploring construction kits from the last 100 years, with custom CMS and automated InDesign layout.',
   openGraph: {
     title: 'toy lexicon | till solenthaler',
-    description: 'A book exploring construction kits from the last 100 years.',
-    images: ['/toy-lexicon/mockup-1.png'],
+    description:
+      'A book exploring construction kits from the last 100 years, with custom CMS and automated InDesign layout.',
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

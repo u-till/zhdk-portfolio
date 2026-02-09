@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description: 'Klein+Hummel studio monitors upgraded with digital amplifiers, Bluetooth, and DSP capabilities.',
   openGraph: {
     title: 'amped up | till solenthaler',
-    description: 'Klein+Hummel studio monitors upgraded with digital amplifiers and Bluetooth.',
-    images: ['/amped-up/preview.jpg'],
+    description: 'Klein+Hummel studio monitors upgraded with digital amplifiers, Bluetooth, and DSP capabilities.',
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

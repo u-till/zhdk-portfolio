@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'saudade | till solenthaler',
     description: 'A photography project capturing moments of longing from travels around the world.',
-    images: ['/saudade/ambalavao-mdg-2.png'],
+    images: ['/social-thumbnail.jpg'],
   },
 };
 

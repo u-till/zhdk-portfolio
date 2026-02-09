@@ -6,8 +6,8 @@ export const metadata: Metadata = {
   description: 'A collaborative music album combining space-themed productions with original cover art.',
   openGraph: {
     title: 'lost in space | till solenthaler',
-    description: 'A collaborative music album combining space-themed productions.',
-    images: ['/lost-in-space/cover.jpg'],
+    description: 'A collaborative music album combining space-themed productions with original cover art.',
+    images: ['/social-thumbnail.jpg'],
   },
 };
 
