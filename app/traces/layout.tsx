@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'ZHdK Homework assignment for the subject traces',
   openGraph: {
     title: 'traces | till solenthaler',
-    description: 'A book exploring construction kits from the last 100 years.',
+    description: 'ZHdK Homework assignment for the subject traces.',
     images: ['/toy-lexicon/mockup-1.png'],
   },
 };

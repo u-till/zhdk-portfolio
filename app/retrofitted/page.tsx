@@ -60,7 +60,7 @@ const PROCESS_STEPS = [
     image: '/retrofitted/lamp-process-11.jpg',
     objectFit: 'cover' as const,
     title: '06. ENHANCE',
-    text: 'Used Blender to crop, retouch, add a bottom, and fix corners and texture spots.',
+    text: 'I then used Blender to crop, retouch, fix corners, texture spots and add a bottom plate.',
   },
 ];
 
@@ -244,9 +244,7 @@ export default function RetrofittedPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              specifications
-            </h2>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -348,9 +346,7 @@ export default function RetrofittedPage() {
 
           {/* credits Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              credits
-            </h2>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>

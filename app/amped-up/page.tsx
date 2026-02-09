@@ -29,19 +29,19 @@ const PROCESS_STEPS = [
     image: '/amped-up/speaker-process-9.jpg',
     objectFit: 'contain' as const,
     title: '02. REMOVE OLD AMPS',
-    text: 'Removed old analogue amplifiers by unscrewing and unplugging cables. Screenshot of the manual shown as reference since no photo was taken.',
+    text: 'Removed old analogue amplifiers. Screenshot of the manual shown as reference since i have no photo of the old amps.',
   },
   {
     image: '/amped-up/speaker-process-10.jpg',
     objectFit: 'cover' as const,
     title: '03. TEST CIRCUIT & BUILD ENCLOSURE',
-    text: 'Created a backplate with power connector, switch, aux input and speaker terminals for the second speaker. Tested everything before mounting.',
+    text: 'Created a backplate with a power connector, switch, aux input and speaker terminals for the second speaker. Mounted components onto the backplate and wired everything up.',
   },
   {
     image: '/amped-up/speaker-8.jpg',
     objectFit: 'cover' as const,
-    title: '04. MOUNT CIRCUIT TO ENCLOSURE',
-    text: 'Mounted all components to the enclosure and screwed the cover back onto the speaker.',
+    title: '04. MOUNT BACKPLATE',
+    text: 'Mounted the backplates to the speakers. The first one with the Amps and DSP board went onto the left speaker, the second one with only cable terminals went onto the right speaker.',
   },
   {
     image: '/amped-up/speaker-9.jpg',
@@ -191,8 +191,8 @@ export default function AmpedUpPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An old pair of Klein+Hummel speakers where we replaced the analogue amplifiers with digital amps. This
-                  enables new functionality like EQ / DSP / and Bluetooth.
+                  An old pair of Klein+Hummel speakers where my flatmate and i replaced the analogue amplifiers with
+                  digital amps. This enables new functionality like EQ, DSP and Bluetooth.
                 </p>
               </div>
             </div>
@@ -200,9 +200,7 @@ export default function AmpedUpPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              specifications
-            </h2>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -222,9 +220,7 @@ export default function AmpedUpPage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Model</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                Klein+Hummel O 96 / 3 way studio monitor speakers / 3 x 60W AMP / XLR Connectors
-              </div>
+              <div className='md:col-span-2'>Klein+Hummel O 96 - 3 way studio monitor speakers</div>
 
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Upgrades</div>
@@ -236,7 +232,7 @@ export default function AmpedUpPage() {
                   href='https://store.sure-electronics.com/product/757'
                   className='underline hover:no-underline'
                 >
-                  Wondom 4x 30W Amp with Bluetooth and DSP
+                  30W Amp with Bluetooth and DSP
                 </a>
                 {' / '}
                 <a
@@ -245,7 +241,7 @@ export default function AmpedUpPage() {
                   href='https://store.sure-electronics.com/product/804'
                   className='underline hover:no-underline'
                 >
-                  Wondom 2x 50W Amp
+                  50W Amp for lows
                 </a>
                 {' / '}
                 <a
@@ -254,7 +250,7 @@ export default function AmpedUpPage() {
                   href='https://store.sure-electronics.com/product/726'
                   className='underline hover:no-underline'
                 >
-                  WONDOM ICP5 In-circuit Programmer
+                  ICP5 In-circuit Programmer
                 </a>
                 {' / '}
                 <a
@@ -263,7 +259,7 @@ export default function AmpedUpPage() {
                   href='https://www.meanwell.com/webapp/product/search.aspx?prod=LRS-200'
                   className='underline hover:no-underline'
                 >
-                  Meanwell LRS 200-15 PSU
+                  15V Power Supply
                 </a>
               </div>
             </div>
@@ -279,8 +275,8 @@ export default function AmpedUpPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   My friend Julian acquired these speakers with one broken amp. We brainstormed how to revive them with
-                  modern features: digital amps with bluetooth and DSP for frequency response control and room acoustic
-                  adaptation.
+                  modern features and came to the conclusion that digital amps with bluetooth and DSP for frequency
+                  response control and room acoustic adaptation would be the way to go.
                 </p>
               </div>
             </div>

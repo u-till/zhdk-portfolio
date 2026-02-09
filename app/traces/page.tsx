@@ -202,7 +202,7 @@ const PROCESS_STEPS: { image: string; objectFit: 'cover' | 'contain'; title: str
     text: 'I wanted to work with traces that have been removed or faded over time, so I came up with a concept that would allow me to work with traces in a creative way by reconstructing them.',
   },
   {
-    image: '/traces/traces-process-2.jpg',
+    image: '/traces/traces-process-3.jpg',
     objectFit: 'cover',
     bg: '#ffffff',
     title: '04. COLLECT AND RECONSTRUCT',
@@ -239,7 +239,7 @@ export default function TracePage() {
               onImageClick={(img) => setLightboxImage({ src: img.src, overlaySrc: img.overlaySrc, title: img.id })}
             />
           ) : (
-            <div className='w-full h-full p-4 md:p-8 pt-22 md:pt-32 pb-18 md:pb-8 bg-neutral-100 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 auto-rows-fr'>
+            <div className='w-full h-full p-4 md:p-8 pt-22 md:pt-32 pb-18 md:pb-8 grid grid-cols-4 md:grid-cols-6 lg:grid-cols-8 gap-2 auto-rows-fr'>
               {[...MAP_IMAGES].reverse().map((image) => (
                 <div
                   key={image.id}
@@ -268,7 +268,7 @@ export default function TracePage() {
               ))}
               <div
                 onClick={() => setViewMode('map')}
-                className='relative rounded-lg overflow-hidden border-2 border-sky-600 cursor-pointer flex flex-col items-center justify-center gap-1 bg-white hover:bg-neutral-50 transition-colors font-bold text-sm'
+                className='relative rounded-lg overflow-hidden border-2 border-sky-600 cursor-pointer flex flex-col items-center justify-center gap-1 bg-white hover:bg-neutral-50 transition-colors text-md font-bold'
               >
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
