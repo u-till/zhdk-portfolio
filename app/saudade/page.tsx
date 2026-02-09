@@ -3,6 +3,7 @@
 import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { courierPrime } from '@/lib/fonts';
+import { ProcessStep } from '@/types/project';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
@@ -211,7 +212,7 @@ const PHOTOS: SaudadePhoto[] = [
   },
 ];
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     title: '01. GO SOMEWHERE',
     text: 'It does not really matter where. There are good subjects to take pictures of everywhere.',

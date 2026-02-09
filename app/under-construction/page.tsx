@@ -4,15 +4,11 @@ import { Lightbox } from '@/components/traces/lightbox';
 import { Viewer360 } from '@/components/under-construction/viewer-360';
 import { useNavigation } from '@/contexts/navigation-context';
 import { allertaStencil } from '@/lib/fonts';
+import { ProcessStep } from '@/types/project';
 import Image from 'next/image';
 import { useState } from 'react';
 
-const PROCESS_STEPS: {
-  image: string;
-  title: string;
-  text: string;
-  objectFit: 'cover' | 'contain';
-}[] = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/under-construction/korpus-process-0.jpg',
     title: '01. CONCEPT',

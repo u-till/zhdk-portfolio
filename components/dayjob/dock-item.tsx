@@ -1,6 +1,6 @@
 'use client';
 
-import { DockItem } from '@/types/macos';
+import { DockItem } from '@/types/project';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React, { useState } from 'react';

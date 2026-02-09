@@ -5,7 +5,7 @@ import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { vt323 } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
+import { ImageItem, ProcessStep } from '@/types/project';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 
@@ -18,40 +18,40 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/amped-up/speaker-7.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/amped-up/speaker-schematic.jpg',
-    objectFit: 'contain' as const,
+    objectFit: 'contain',
     title: '01. RESEARCH & DESIGN',
     text: 'Julian led this phase due to his speaker expertise. We chose digital amps for DSP functionality, fitted into the left enclosure with separate boards for mids/highs and lows.',
   },
   {
     image: '/amped-up/speaker-process-9.jpg',
-    objectFit: 'contain' as const,
+    objectFit: 'contain',
     title: '02. REMOVE OLD AMPS',
     text: 'Removed old analogue amplifiers. Screenshot of the manual shown as reference since I have no photo of the old amps.',
   },
   {
     image: '/amped-up/speaker-process-10.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '03. TEST CIRCUIT & BUILD ENCLOSURE',
     text: 'Created a backplate with a power connector, switch, aux input and speaker terminals for the second speaker. Mounted components onto the backplate and wired everything up.',
   },
   {
     image: '/amped-up/speaker-8.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '04. MOUNT BACKPLATE',
     text: 'Mounted the backplates to the speakers. The first one with the Amps and DSP board went onto the left speaker, the second one with only cable terminals went onto the right speaker.',
   },
   {
     image: '/amped-up/speaker-9.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '05. CONNECT AND TEST',
     text: 'Connected everything and tested functionality. Bluetooth worked and EQ settings could be adjusted via DSP software.',
   },
   {
     image: '/amped-up/speaker-process-12.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '06. CAPTURE IMAGES',
     text: 'Used backdrop setup with studio lights to create portfolio images.',
   },

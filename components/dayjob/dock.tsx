@@ -1,6 +1,6 @@
 'use client';
 
-import { DockItem } from '@/types/macos';
+import { DockItem } from '@/types/project';
 import React from 'react';
 import { DockItemComponent } from './dock-item';
 

@@ -5,6 +5,7 @@ import { StarField } from '@/components/lost-in-space/star-field';
 import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { orbitron } from '@/lib/fonts';
+import { ProcessStep } from '@/types/project';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -16,12 +17,7 @@ const IMAGES = [
   '/lost-in-space/backside-4.jpg',
 ];
 
-const PROCESS_STEPS: {
-  image: string;
-  objectFit: 'cover' | 'contain';
-  title: string;
-  text: string;
-}[] = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/lost-in-space/cover.jpg',
     objectFit: 'cover',

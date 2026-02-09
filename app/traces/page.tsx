@@ -3,6 +3,7 @@
 import { Lightbox } from '@/components/traces/lightbox';
 import { MapImage } from '@/components/traces/zurich-map';
 import { useNavigation } from '@/contexts/navigation-context';
+import { ProcessStep } from '@/types/project';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -180,7 +181,7 @@ const MAP_IMAGES: MapImage[] = [
   },
 ];
 
-const PROCESS_STEPS: { image: string; objectFit: 'cover' | 'contain'; title: string; text: string; bg?: string }[] = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/traces/traces-process-0.jpg',
     objectFit: 'contain',

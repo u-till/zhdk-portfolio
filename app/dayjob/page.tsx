@@ -4,7 +4,7 @@ import { Dock } from '@/components/dayjob/dock';
 import { Lightbox } from '@/components/traces/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { archivo } from '@/lib/fonts';
-import { DockItem } from '@/types/macos';
+import { DockItem, ProcessStep } from '@/types/project';
 import Image from 'next/image';
 import { useState } from 'react';
 
@@ -33,7 +33,7 @@ const DOCK_ITEMS: DockItem[] = [
   },
 ];
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     title: '01. DISCOVERY',
     text: 'First is the initial meeting to understand client needs, goals and target audience. There we define project scope and timeline.',

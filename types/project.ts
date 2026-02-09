@@ -12,3 +12,18 @@ export interface Tab {
   label: string;
   content: ReactNode;
 }
+
+export interface ProcessStep {
+  image: string;
+  title: string;
+  text: string;
+  objectFit?: 'cover' | 'contain';
+  bg?: string;
+}
+
+export interface DockItem {
+  id: string;
+  label: string;
+  icon: string;
+  url?: string;
+}

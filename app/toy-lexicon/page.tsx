@@ -5,7 +5,7 @@ import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { dinNext } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
+import { ImageItem, ProcessStep } from '@/types/project';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
 
@@ -19,12 +19,7 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/toy-lexicon/macbook-mockup-2.png', objectFit: 'contain' },
 ];
 
-const PROCESS_STEPS: {
-  image: string;
-  objectFit: 'cover' | 'contain';
-  title: string;
-  text: string;
-}[] = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/toy-lexicon/book-process-1.jpg',
     objectFit: 'cover',

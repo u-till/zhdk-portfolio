@@ -5,7 +5,7 @@ import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';
 import { shrikhand } from '@/lib/fonts';
-import { ImageItem } from '@/types/project';
+import { ImageItem, ProcessStep } from '@/types/project';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useCallback, useRef, useState } from 'react';
@@ -23,42 +23,42 @@ const GALLERY_IMAGES: ImageItem[] = [
   { src: '/retrofitted/lamp-mood.jpg', objectFit: 'cover', hideTitle: true },
 ];
 
-const PROCESS_STEPS = [
+const PROCESS_STEPS: ProcessStep[] = [
   {
     image: '/retrofitted/lamp-process-0.jpg',
-    objectFit: 'contain' as const,
+    objectFit: 'contain',
     bg: '#ffffff',
     title: '01. IDEA & CONCEPT',
     text: 'After identifying the transformer as the issue, I started to think about ways to improve the lamp beyond just repairing it.',
   },
   {
     image: '/retrofitted/lamp-schematic.jpg',
-    objectFit: 'contain' as const,
+    objectFit: 'contain',
     bg: '#F8F3DD',
     title: '02. RESEARCH & DESIGN',
     text: 'I drafted a schematic and shopping list with ChatGPT. I visualized the schematic using the Fritzing app and ordered parts from AliExpress.',
   },
   {
     image: '/retrofitted/lamp-process-13.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '03. SALVAGE & UPGRADE',
     text: 'Removed the old transformer and power cable. Built separate blocks: base with charging board and USB-C, middle with dimmer and batteries, top with new LED bulb. Modified some casing to fit.',
   },
   {
     image: '/retrofitted/lamp-process.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '04. FINALIZE, TESTING AND ASSEMBLE',
     text: 'Tested all voltages, battery charging and lamp function while disassembled. Then assembled everything back together.',
   },
   {
     image: '/retrofitted/lamp-process-12.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '05. 3D CAPTURE',
     text: 'Captured as 3D model using Polycam app with backdrop setup for optimal lighting.',
   },
   {
     image: '/retrofitted/lamp-process-11.jpg',
-    objectFit: 'cover' as const,
+    objectFit: 'cover',
     title: '06. ENHANCE',
     text: 'I then used Blender to crop, retouch, fix corners, texture spots and add a bottom plate.',
   },
