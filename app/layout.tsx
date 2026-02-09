@@ -2,7 +2,6 @@ import { Analytics } from '@/components/analytics';
 import { Navigation } from '@/components/navigation';
 import { PageTransition } from '@/components/page-transition';
 import { NavigationProvider } from '@/contexts/navigation-context';
-import { geistMono, geistSans } from '@/lib/fonts';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import './globals.css';
@@ -24,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang='en'>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className='font-sans antialiased'>
         <Suspense fallback={null}>
           <NavigationProvider>
             <Navigation />

@@ -136,7 +136,7 @@ export default function RetrofittedPage() {
                 src={image.src}
                 alt={`Retrofitted ${index + 1}`}
                 fill
-                className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
+                className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-contain md:object-cover'}`}
                 priority={index === 0}
                 sizes='100vw'
               />
@@ -234,8 +234,8 @@ export default function RetrofittedPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An old lamp from the 70s which broke so i retrofitted it with modern technology including a USB-C
-                  connector, a rechargable battery and a stepless dimmer, while preserving its iconic aesthetic. This
+                  An old lamp from the 70s which broke so I retrofitted it with modern technology including a USB-C
+                  connector, a rechargeable battery and a stepless dimmer, while preserving its iconic aesthetic. This
                   project embodies my passion for repairs and sustainability.
                 </p>
               </div>
@@ -318,7 +318,7 @@ export default function RetrofittedPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  My nightstand lamp broke, so i wanted to repair it. Upon opening it, i saw the tranformer and thought
+                  My nightstand lamp broke, so I wanted to repair it. Upon opening it, I saw the transformer and thought
                   this space could be used to fit a battery instead, so the project went from repair to upgrade.
                 </p>
               </div>

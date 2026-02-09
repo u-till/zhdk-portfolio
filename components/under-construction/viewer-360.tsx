@@ -249,7 +249,7 @@ export function Viewer360({
       {/* Rotate hint - follows cursor */}
       {!isLoading && isHovering && (
         <div
-          className='absolute z-30 flex items-center justify-center bg-black/80 p-2 rounded-full pointer-events-none transition-opacity -translate-x-1/2 -translate-y-1/2'
+          className='absolute z-30 hidden md:flex items-center justify-center bg-black/80 p-2 rounded-full pointer-events-none transition-opacity -translate-x-1/2 -translate-y-1/2'
           style={{
             left: mousePos.x,
             top: mousePos.y,

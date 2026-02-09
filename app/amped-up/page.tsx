@@ -29,7 +29,7 @@ const PROCESS_STEPS = [
     image: '/amped-up/speaker-process-9.jpg',
     objectFit: 'contain' as const,
     title: '02. REMOVE OLD AMPS',
-    text: 'Removed old analogue amplifiers. Screenshot of the manual shown as reference since i have no photo of the old amps.',
+    text: 'Removed old analogue amplifiers. Screenshot of the manual shown as reference since I have no photo of the old amps.',
   },
   {
     image: '/amped-up/speaker-process-10.jpg',
@@ -115,7 +115,7 @@ export default function AmpedUpPage() {
                 src={image.src}
                 alt={`amped up ${index + 1}`}
                 fill
-                className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`}
+                className={`${image.objectFit === 'contain' ? 'object-contain p-8' : 'object-contain md:object-cover'}`}
                 priority={index === 0}
                 sizes='100vw'
               />
@@ -191,7 +191,7 @@ export default function AmpedUpPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An old pair of Klein+Hummel speakers where my flatmate and i replaced the analogue amplifiers with
+                  An old pair of Klein+Hummel speakers where my flatmate and I replaced the analogue amplifiers with
                   digital amps. This enables new functionality like EQ, DSP and Bluetooth.
                 </p>
               </div>

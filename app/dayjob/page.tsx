@@ -41,7 +41,7 @@ const PROCESS_STEPS = [
   },
   {
     title: '02. STRUCTURE & DESIGN',
-    text: 'Create sitemap, wireframes, design-system and views in Figma. Tailor style and design language to client needs.',
+    text: 'Create sitemap, wireframes, design system and views in Figma. Tailor style and design language to client needs.',
     image: '/dayjob/screenshots/dayjob-process-design.png',
   },
   {
@@ -51,7 +51,7 @@ const PROCESS_STEPS = [
   },
   {
     title: '04. LAUNCH',
-    text: 'Fill content, test for speed, accessibility and seo. Deploy to hosting and set up analytics. Train client on content management.',
+    text: 'Fill content, test for speed, accessibility and SEO. Deploy to hosting and set up analytics. Train client on content management.',
     image: '/dayjob/screenshots/brookejackson-screenshot.jpg',
   },
   {

@@ -43,9 +43,9 @@ export default function AboutPage() {
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>
             <p className='col-span-2 md:col-span-2'>
-              I like open source software, the old-school internet movement before silicon valley turned dystopian,
+              I like open source software, the old-school internet movement before Silicon Valley turned dystopian,
               traveling, photography, design and architecture (especially brutalism), geography and geopolitics, arte,
-              fleamarkets, bicycles and music.
+              flea markets, bicycles and music.
             </p>
           </div>
         </div>
@@ -88,7 +88,7 @@ export default function AboutPage() {
             <div className='text-muted-foreground md:text-right'>2020</div>
             <div className='hidden md:block'></div>
             <div className='md:col-span-2'>
-              <div className='font-semibold'>Fullstack Developer Bootcamp</div>
+              <div className='font-semibold'>Full-Stack Developer Bootcamp</div>
               <div className='text-muted-foreground'>
                 <a
                   href='https://propulsion.academy'
@@ -230,14 +230,14 @@ export default function AboutPage() {
             <div className='font-semibold md:text-right'>Development</div>
             <div className='hidden md:block'></div>
             <div className='text-muted-foreground md:col-span-2'>
-              React, Tailwind, Next.js, TypeScript, Python, Wordpress
+              React, Tailwind, Next.js, TypeScript, Python, WordPress
             </div>
 
             <div className='hidden md:block'></div>
             <div className='font-semibold md:text-right'>Creative Tools</div>
             <div className='hidden md:block'></div>
             <div className='text-muted-foreground md:col-span-2'>
-              Photoshop, Illustrator, Figma, InDesign, Premiere / Davinci, Ableton, Three.js / Blender
+              Photoshop, Illustrator, Figma, InDesign, Premiere / DaVinci, Ableton, Three.js / Blender
             </div>
 
             <div className='hidden md:block'></div>
@@ -264,45 +264,44 @@ export default function AboutPage() {
             <div className='hidden md:block'></div>
             <div className='md:col-span-2 text-justify'>
               <p>
-                Interaction Design ist für mich die Schnittstelle zwischen Mensch und Technologie, mit dem Ziel
-                menschenzentrierte Lösungen zu schaffen. Dies gelingt, indem man gewohnte Konzepte hinterfragt, neue
-                Ansätze erarbeitet und dabei den sozialen und kulturellen Kontext mitdenkt, auf den Technologie Einfluss
-                hat. In diesem Rahmen möchte ich einen Beitrag für unsere Gesellschaft leisten.
+                For me, interaction design is the interface between people and technology, with the aim of creating
+                human-centred solutions. This is achieved by questioning familiar concepts, developing new approaches
+                and considering the social and cultural context that technology influences. It is within this framework
+                that I would like to make a contribution to our society.
               </p>
               <br />
               <p>
-                Mein technisches Fundament habe ich mir während meiner Informatiklehre in Systemtechnik bei der SIX
-                angeeignet, wo ich mich mit IT-Infrastruktur, Netzwerken, Linux und Security auseinandersetzte. Da diese
-                Arbeit meine Kreativität kaum herausforderte, absolvierte ich einige Jahre später eine Weiterbildung zum
-                Fullstack-Developer. Diese öffnete mir den Weg in Richtung Webdesign, was mich schliesslich in die
-                Selbstständigkeit mit meiner kleinen Webagentur utill.ch führte. Die Selbstständigkeit erwies sich als
-                effizienter Katalysator: Sie fordert mich ständig neue Fähigkeiten zu erlernen. Von Corporate Identity
-                über UX/UI-Design bis hin zu konzeptionellem Denken und Projektmanagement.
+                I acquired my technical foundation during my IT apprenticeship in systems engineering at SIX, where I
+                dealt with IT infrastructure, networks, Linux and security. As I felt this work didn&apos;t challenge my
+                creativity enough, I completed further training as a full-stack developer a few years later. This opened
+                the door to web design, which ultimately led me to become self-employed with my small web agency
+                utill.ch. Self-employment proved to be an efficient catalyst: it constantly challenges me to learn new
+                skills. From corporate identity and UX/UI design to conceptual thinking and project management.
               </p>
               <br />
               <p>
-                Parallel zu meinem Arbeitsleben verfolge ich seit jeher kreative Projekte. Schon in der Primarschule
-                drehte ich Kurzfilme, später folgten Fotografie und Musikproduktion. Mein Interesse an Design und
-                Architektur begleitet mich ebenfalls seit der Kindheit. Ich hatte das Privileg, mit Eltern aufzuwachsen,
-                denen Kunst und Kultur sehr wichtig sind. Ihnen verdanke ich meine Leidenschaft und Grundbildung in
-                diesem Bereich. Diese Leidenschaft lebe ich auch im Openair Stolze aus, wo ich seit 2018 für Booking,
-                Produktion und Webauftritt mitverantwortlich bin.
+                Parallel to my working life, I have always pursued creative projects. I was already making short films
+                in primary school, followed later by photography and music production. My interest in design and
+                architecture has also been with me since childhood. I had the privilege of growing up with parents who
+                valued art and culture highly. I owe my passion and basic education in this field to them. I also live
+                out this passion at Openair Stolze, where I have been jointly responsible for booking, production and
+                the website since 2018.
               </p>
               <br />
               <p>
-                Durch den Austausch mit IAD-Studierenden aus meinem Umfeld wurde mir klar, dass dieses Studium perfekt
-                zu meinem Werdegang, meinen Interessen und Zielen passt. Es ermöglicht mir, meine technischen und
-                gestalterischen Fähigkeiten zusammenzuführen. Die Bandbreite der Arbeiten fasziniert mich besonders: von
-                konzeptioneller Entwicklung bis zu handwerklicher Umsetzung, von experimentellen Ansätzen bis zu
-                alltagstauglichen Lösungen. Auch die Zusammenarbeit mit anderen Studierenden und die Möglichkeit,
-                erworbenes Wissen direkt in Projekten anzuwenden, motivieren mich. Ich bin wissenshungrig, ehrgeizig und
-                gewillt, mich intensiv mit neuen Themen auseinanderzusetzen.
+                Through exchanges with IAD students in my circle, I realised that this degree programme is a perfect fit
+                for my career, interests and goals. It allows me to combine my technical and creative skills. I am
+                particularly fascinated by the variety of the work: from conceptual development to technical
+                implementation, from experimental approaches to everyday solutions. I am also motivated by the
+                opportunity to collaborate with other students and apply the knowledge I have acquired directly to
+                projects. I am eager to learn, ambitious and willing to engage intensively with new topics.
               </p>
               <br />
               <p>
-                Das IAD-Studium an der ZHdK ist für mich der logische Schritt für meine persönliche, kreative und
-                berufliche Entwicklung. Es bietet mir den Rahmen, meine gestalterische und konzeptionelle Arbeitsweise
-                zu vertiefen und auf ein professionelles Niveau zu heben.
+                Studying IAD at ZHdK is the logical step for my personal, creative and professional development. It
+                provides me with the framework to deepen my creative and conceptual approach and raise it to a
+                professional level. In the future I see myself starting an agency together with friends and one day
+                I&apos;d like to go into teaching to pass my knowledge to others.
               </p>
             </div>
           </div>
@@ -319,7 +318,7 @@ export default function AboutPage() {
             <div className='hidden md:block'></div>
             <div className='md:col-span-2 text-justify'>
               <p>
-                Portfolio website made with next.js, tailwinds, motion & three.js. Created together with Claude Code.
+                Portfolio website made with Next.js, Tailwind, Motion & Three.js. Created together with Claude Code.
               </p>
               <div className='pt-4 text-xs text-muted-foreground'>
                 <a

@@ -26,7 +26,7 @@ const PROCESS_STEPS: {
     image: '/lost-in-space/cover.jpg',
     objectFit: 'cover',
     title: '01. COVER ART',
-    text: 'The whole project actually started, because i created the cover art. We then searched for fitting beats and also produced a few tracks specifically to this space theme.',
+    text: 'The whole project actually started because I created the cover art. We then searched for fitting beats and also produced a few tracks specifically for this space theme.',
   },
   {
     image: '/lost-in-space/backside-1.jpg',
@@ -38,19 +38,19 @@ const PROCESS_STEPS: {
     image: '/lost-in-space/backside-2.jpg',
     objectFit: 'cover',
     title: '03. RELEASE',
-    text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and Soundcloud.',
+    text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and SoundCloud.',
   },
   {
     image: '/lost-in-space/backside-3.jpg',
     objectFit: 'cover',
     title: '04. OUTREACH TO ARTISTS',
-    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
+    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also COVID hit around that time, which made collaboration even harder.',
   },
   {
     image: '/lost-in-space/backside-4.jpg',
     objectFit: 'cover',
     title: '05. FINALIZATION',
-    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also covid hit around that time, which made collaboration even harder.',
+    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also COVID hit around that time, which made collaboration even harder.',
   },
 ];
 
@@ -67,7 +67,7 @@ export default function LostInSpacePage() {
       {/* First View: Album Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
-        <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
+        <div className='absolute bottom-8 left-4 md:left-8 pointer-events-none z-10'>
           <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}
           >
@@ -88,7 +88,7 @@ export default function LostInSpacePage() {
         {/* Play Button */}
         <button
           onClick={() => setIsFlipped(true)}
-          className='absolute bottom-4 md:bottom-8 right-4 md:right-8 z-20 px-6 py-3 rounded-lg bg-[#e34c42] hover:bg-[#c93d34] text-white font-bold text-sm transition-colors shadow-md cursor-pointer flex items-center gap-2'
+          className='absolute bottom-24 md:bottom-8 left-4 md:right-8 z-20 px-6 py-3 rounded-lg bg-[#e34c42] hover:bg-[#c93d34] text-white font-bold text-sm transition-colors shadow-md cursor-pointer flex items-center gap-2'
         >
           play
           <svg
@@ -109,18 +109,14 @@ export default function LostInSpacePage() {
         <div className='flex flex-col gap-8 text-white'>
           {/* Brief Section */}
           <div>
-            <h2
-              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
-            >
-              brief
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An album i did toghether with my friends when i used to live in a house full of musicians. Combining
+                  An album I did together with my friends when I used to live in a house full of musicians. Combining
                   productions under the theme of space, with cover art created by me.
                 </p>
               </div>
@@ -129,11 +125,7 @@ export default function LostInSpacePage() {
 
           {/* specifications Section */}
           <div>
-            <h2
-              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
-            >
-              specifications
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Year</div>
@@ -161,11 +153,7 @@ export default function LostInSpacePage() {
 
           {/* Idea Section */}
           <div>
-            <h2
-              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
-            >
-              idea
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>idea</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -202,11 +190,7 @@ export default function LostInSpacePage() {
 
           {/* credits Section */}
           <div>
-            <h2
-              className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'
-            >
-              credits
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Album Art</div>
@@ -233,11 +217,7 @@ export default function LostInSpacePage() {
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
         <div>
-          <h2
-            className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-6 text-[#e34c42]'
-          >
-            process
-          </h2>
+          <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-6 text-[#e34c42]'>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}

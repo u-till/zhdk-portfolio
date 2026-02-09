@@ -23,7 +23,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: -18.895,
     lng: 227.006,
     title: 'Ambalavao, Madagascar',
-    description: 'Inside of the home of a Peacecorps volunteer who lived in Ambalavao.',
+    description: 'Inside the home of a Peace Corps volunteer who lived in Ambalavao.',
   },
   {
     src: '/saudade/addis.jpg',
@@ -37,7 +37,7 @@ const PHOTOS: SaudadePhoto[] = [
     src: '/saudade/ambalavao-mdg.png',
     lat: -18.925,
     lng: 226.976,
-    title: 'Ambalavao, Magagascar',
+    title: 'Ambalavao, Madagascar',
     description: 'A scenic landscape in the south of the country.',
     hideTitle: true,
   },
@@ -46,7 +46,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 24.075,
     lng: 284.046,
     title: 'Hanoi, Vietnam',
-    description: 'A fishermen and his buddy at lake Hồ Tây',
+    description: 'A fisherman and his buddy at lake Hồ Tây.',
     hideTitle: true,
   },
   {
@@ -54,7 +54,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 11.985,
     lng: 214.956,
     title: 'Addis Ababa, Ethiopia',
-    description: 'The farmers school of Selam Village, an orphanage in the middle of Addis',
+    description: 'The farmers school of Selam Village, an orphanage in the middle of Addis.',
     hideTitle: true,
   },
   {
@@ -70,7 +70,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 12.085,
     lng: 215.056,
     title: 'Addis Ababa, Ethiopia',
-    description: 'A church with the classic pan-african colors in the east of Addis.',
+    description: 'A church with the classic Pan-African colors in the east of Addis.',
     hideTitle: true,
   },
   {
@@ -78,7 +78,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 46.875,
     lng: 253.235,
     title: 'Taldyqorghan, Kazakhstan',
-    description: 'A busy markethall in the remote town of Taldyqorghan.',
+    description: 'A busy market hall in the remote town of Taldyqorghan.',
     hideTitle: true,
   },
   {
@@ -93,8 +93,8 @@ const PHOTOS: SaudadePhoto[] = [
     src: '/saudade/hongkong-2.jpg',
     lat: 25.325,
     lng: 290.436,
-    title: 'Hongkong',
-    description: 'Inside the maze of staircases and hallways of a block in Hongkong.',
+    title: 'Hong Kong',
+    description: 'Inside the maze of staircases and hallways of a block in Hong Kong.',
     hideTitle: true,
   },
   {
@@ -109,8 +109,8 @@ const PHOTOS: SaudadePhoto[] = [
     src: '/saudade/hongkong-1.jpg',
     lat: 25.325,
     lng: 290.436,
-    title: 'Hongkong',
-    description: 'A red facade of one of the gigantic blocks in Hongkong.',
+    title: 'Hong Kong',
+    description: 'A red facade of one of the gigantic blocks in Hong Kong.',
     hideTitle: true,
   },
   {
@@ -125,7 +125,7 @@ const PHOTOS: SaudadePhoto[] = [
     src: '/saudade/hongkong-3.jpg',
     lat: 25.325,
     lng: 290.436,
-    title: 'Hongkong',
+    title: 'Hong Kong',
     description: 'Inside the museum of Kowloon Walled City.',
     hideTitle: true,
   },
@@ -158,7 +158,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 49.535,
     lng: 189.126,
     title: 'Mesocco, Switzerland',
-    description: 'Maiensäss near Mesocco, an italian speaking village in Grisons.',
+    description: 'Maiensäss near Mesocco, an Italian-speaking village in Grisons.',
     hideTitle: true,
   },
   {
@@ -174,7 +174,7 @@ const PHOTOS: SaudadePhoto[] = [
     lat: 44.895,
     lng: 192.466,
     title: 'Rome',
-    description: 'Really cool facade of an administrative building outside in Rome.',
+    description: 'A facade of an administrative building in Rome.',
     hideTitle: true,
   },
   {
@@ -219,22 +219,22 @@ const PROCESS_STEPS = [
   },
   {
     title: '02. BRING THE CAMERA',
-    text: 'More important is to always bring the camera everyhwere you go.',
+    text: 'More important is to always bring the camera everywhere you go.',
     image: '/saudade/process-2.jpg',
   },
   {
     title: '03. WALK AROUND FOR HOURS',
-    text: 'My favorite way of exploring an new place is by just walking around for hours. Whenever something catches my attention, i take a photo.',
+    text: 'My favorite way of exploring a new place is by just walking around for hours. Whenever something catches my attention, I take a photo.',
     image: '/saudade/process-3.jpg',
   },
   {
     title: '04. DROP OFF FILM',
-    text: 'After filling a few films or upon returning home, i drop them off at a local lab for development.',
+    text: 'After filling a few films or upon returning home, I drop them off at a local lab for development.',
     image: '/saudade/process-4.jpg',
   },
   {
     title: '05. DOWNLOAD AND ARCHIVE',
-    text: 'And then the exiting part: downloading the scans and going through them. I mark the best ones and archive them on my NAS.',
+    text: 'And then the exciting part: downloading the scans and going through them. I mark the best ones and archive them on my NAS.',
     image: '/saudade/process-5.jpg',
   },
 ];
@@ -306,7 +306,7 @@ export default function SaudadePage() {
       <div className='h-screen relative overflow-hidden flex flex-col items-center bg-neutral-900'>
         {/* Title - Above globe on mobile, bottom left on desktop */}
         <div
-          className={`absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
+          className={`absolute bottom-8 left-4 md:left-8 pointer-events-none z-10 transition-opacity duration-300 ${
             PHOTOS[activeIndex]?.hideTitle ? 'lg:opacity-0' : ''
           }`}
         >
@@ -374,7 +374,7 @@ export default function SaudadePage() {
 
         {/* Globe Panel - Bottom Right */}
         <motion.div
-          className={`absolute right-4 md:right-8 bottom-4 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
+          className={`absolute left-4 md:right-8 bottom-24 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
             isGlobeExpanded ? 'z-30' : ''
           }`}
           animate={{
@@ -432,9 +432,7 @@ export default function SaudadePage() {
         <div className='flex flex-col gap-8 text-white'>
           {/* Brief Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>
-              brief
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -451,9 +449,7 @@ export default function SaudadePage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>
-              specifications
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -484,9 +480,7 @@ export default function SaudadePage() {
 
           {/* Motivation Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>
-              motivation
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>motivation</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -504,9 +498,7 @@ export default function SaudadePage() {
 
           {/* credits Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>
-              credits
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-4'>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
@@ -524,9 +516,7 @@ export default function SaudadePage() {
       {/* Process Section */}
       <div className='bg-neutral-900 px-4 md:px-8 pt-12 pb-16 text-white'>
         <div>
-          <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-6'>
-            process
-          </h2>
+          <h2 className='text-xl font-bold  border-b-2 border-white pb-2 mb-6'>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             <div className='order-2 lg:order-1 lg:w-2/5 space-y-3'>

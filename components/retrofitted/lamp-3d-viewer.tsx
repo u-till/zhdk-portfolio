@@ -287,7 +287,7 @@ export function Lamp3DViewer() {
       {/* Hand cursor - follows mouse */}
       {isHovering && !isOverSlider && (
         <div
-          className='absolute z-30 flex items-center justify-center bg-[#c33b32]/90 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
+          className='absolute z-30 hidden md:flex items-center justify-center bg-[#c33b32]/90 p-2 rounded-full pointer-events-none -translate-x-1/2 -translate-y-1/2'
           style={{
             left: mousePos.x,
             top: mousePos.y,

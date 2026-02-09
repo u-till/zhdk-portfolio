@@ -1,15 +1,5 @@
-import { Allerta_Stencil, Archivo, Courier_Prime, Geist, Geist_Mono, Orbitron, Shrikhand, VT323 } from 'next/font/google';
+import { Allerta_Stencil, Archivo, Courier_Prime, Orbitron, Shrikhand, VT323 } from 'next/font/google';
 import localFont from 'next/font/local';
-
-export const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-export const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const allertaStencil = Allerta_Stencil({
   weight: '400',

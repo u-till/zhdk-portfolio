@@ -16,30 +16,30 @@ const PROCESS_STEPS: {
   {
     image: '/under-construction/korpus-process-0.jpg',
     title: '01. CONCEPT',
-    text: 'Conceptualized a mobile corpus to serve as a keyboard stand and storage unit to use the space in our livingroom more efficiently.',
+    text: 'Conceptualized a mobile corpus to serve as a keyboard stand and storage unit to use the space in our living room more efficiently.',
     objectFit: 'contain',
   },
   {
     image: '/under-construction/korpus-process-1.jpg',
-    title: '01. DESIGN',
+    title: '02. DESIGN',
     text: 'Created the design in SketchUp with real measurements to calculate planks, screws and corner-brackets needed. Sized to fit RAKO boxes with ideal keyboard height.',
     objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-2.jpg',
-    title: '02. SOURCE MATERIALS',
+    title: '03. SOURCE MATERIALS',
     text: 'Workers from the construction site next door gave me planks they had cut to non-standard lengths.',
     objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-3.jpg',
-    title: '03. BUILD',
+    title: '04. BUILD',
     text: 'Cut planks to the four lengths from SketchUp, then assembled using corner-brackets and wheels.',
     objectFit: 'cover',
   },
   {
     image: '/under-construction/korpus-process-4.jpg',
-    title: '04. CAPTURE & EDIT',
+    title: '05. CAPTURE & EDIT',
     text: 'Used a white backdrop and studio lights to capture 360° photos. Used Photoshop batch processing to adjust light temperature, crop, and remove backgrounds.',
     objectFit: 'cover',
   },
@@ -61,7 +61,7 @@ export default function UnderConstructionPage() {
       {/* First View: Full-screen 360 Viewer */}
       <div className='h-screen relative overflow-hidden flex flex-col items-center'>
         {/* Title - Consistent position with other pages */}
-        <div className='absolute bottom-24 md:bottom-8 left-4 md:left-8 pointer-events-none z-10'>
+        <div className='absolute bottom-8 left-4 md:left-8 pointer-events-none z-10'>
           <h1
             className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}
           >
@@ -88,9 +88,7 @@ export default function UnderConstructionPage() {
         <div className='flex flex-col gap-8'>
           {/* Brief Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
-              brief
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>brief</h2>
             <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -107,9 +105,7 @@ export default function UnderConstructionPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
-              specifications
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -148,7 +144,7 @@ export default function UnderConstructionPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   We needed mobile furniture for our keyboard in our flat to make the most out of the limited space in
-                  our livingroom. My flatmate and i brainstormed for a bit and came to the conclusion that custom built
+                  our living room. My flatmate and I brainstormed for a bit and came to the conclusion that custom-built
                   furniture would be the best so we could have it to our exact specifications.
                 </p>
               </div>
@@ -176,9 +172,7 @@ export default function UnderConstructionPage() {
 
           {/* credits Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>
-              credits
-            </h2>
+            <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>credits</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Solo Project</div>
@@ -197,9 +191,7 @@ export default function UnderConstructionPage() {
       {/* Process Section */}
       <div className='bg-yellow-300 px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-6'>
-            process
-          </h2>
+          <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-6'>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}

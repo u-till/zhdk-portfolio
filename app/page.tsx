@@ -4,7 +4,7 @@ import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
 
 // Lazy load the 3D preview to code-split three.js
 const Lamp3DPreview = dynamic(() => import('@/components/home/lamp-preview').then((mod) => mod.Lamp3DPreview), {
@@ -27,8 +27,8 @@ type PreviewConfig =
   | { type: '360'; src: string }
   | { type: '3d'; src: string };
 
-const PROJECTS: Record<string, { name: string; preview: PreviewConfig }> = {
-  'under-construction': { name: 'under construction', preview: { type: '360', src: '/under-construction/korpus-360' } },
+const PROJECTS: Record<string, { name: string; mobileName?: string; preview: PreviewConfig }> = {
+  'under-construction': { name: 'under construction', mobileName: 'construction', preview: { type: '360', src: '/under-construction/korpus-360' } },
   saudade: {
     name: 'saudade',
     preview: {
@@ -172,7 +172,11 @@ function Rotating360Preview() {
 export default function Home() {
   const { hoveredProject, setHoveredProject, navigateTo } = useNavigation();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [activeProject, setActiveProject] = useState<string | null>(null);
+
+  // Force browser to recalculate vh-based clamp() values on mount
+  useLayoutEffect(() => {
+    window.dispatchEvent(new Event('resize'));
+  }, []);
 
   // Preload only the first 3 preview images to avoid network congestion
   useEffect(() => {
@@ -272,15 +276,11 @@ export default function Home() {
     setMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const handleMobileTouch = useCallback(
+  const handleClick = useCallback(
     (projectKey: string) => {
-      if (activeProject === projectKey) {
-        navigateTo(`/${projectKey}`);
-      } else {
-        setActiveProject(projectKey);
-      }
+      navigateTo(`/${projectKey}`);
     },
-    [activeProject, navigateTo],
+    [navigateTo],
   );
 
   return (
@@ -306,42 +306,26 @@ export default function Home() {
       <div className='relative z-10 flex flex-col items-start w-full h-full justify-between group'>
         {projectKeys.map((projectKey) => {
           const isHovered = hoveredProject === projectKey;
-          const isActive = activeProject === projectKey;
-          const shouldHide = (hoveredProject && !isHovered) || (activeProject && !isActive);
+          const shouldHide = hoveredProject && !isHovered;
           return (
             <motion.h1
               key={projectKey}
               onMouseEnter={() => setHoveredProject(projectKey)}
               onMouseLeave={() => setHoveredProject(null)}
-              onClick={(e) => {
-                // Check if it's a touch device (no hover capability)
-                if (window.matchMedia('(hover: none)').matches) {
-                  e.preventDefault();
-                  handleMobileTouch(projectKey);
-                } else {
-                  navigateTo(`/${projectKey}`);
-                }
-              }}
+              onClick={() => handleClick(projectKey)}
               className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none relative ${
                 shouldHide ? 'opacity-20' : ''
               }`}
             >
               <span className='text-[0.88em] pb-[2px]'>●</span>
-              {PROJECTS[projectKey].name}
-              {/* Mobile inline preview - absolutely positioned at right end */}
-              <AnimatePresence>
-                {isActive && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.8 }}
-                    transition={{ duration: 0.15 }}
-                    className='md:hidden absolute right-0 top-0'
-                  >
-                    {renderPreview(projectKey, true)}
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {PROJECTS[projectKey].mobileName ? (
+                <>
+                  <span className='md:hidden'>{PROJECTS[projectKey].mobileName}</span>
+                  <span className='hidden md:inline'>{PROJECTS[projectKey].name}</span>
+                </>
+              ) : (
+                PROJECTS[projectKey].name
+              )}
             </motion.h1>
           );
         })}

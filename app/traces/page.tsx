@@ -190,7 +190,8 @@ const PROCESS_STEPS: { image: string; objectFit: 'cover' | 'contain'; title: str
   },
   {
     image: '/traces/traces-process-1.jpg',
-    objectFit: 'cover',
+    objectFit: 'contain',
+    bg: '#000000',
     title: '02. RESEARCH',
     text: "Went out into the city to find traces and researched further into the topic to make sure I didn't miss any important angles during brainstorming. Collected all inspiration on a moodboard.",
   },
