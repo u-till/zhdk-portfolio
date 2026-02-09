@@ -1,6 +1,6 @@
 'use client';
 
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { useCarouselKeyboard } from '@/hooks/use-carousel-keyboard';
 import { useCarouselScroll } from '@/hooks/use-carousel-scroll';

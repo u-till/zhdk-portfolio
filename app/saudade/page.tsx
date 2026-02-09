@@ -1,6 +1,6 @@
 'use client';
 
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { courierPrime } from '@/lib/fonts';
 import { ProcessStep } from '@/types/project';

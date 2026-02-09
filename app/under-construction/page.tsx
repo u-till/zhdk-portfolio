@@ -1,6 +1,6 @@
 'use client';
 
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { Viewer360 } from '@/components/under-construction/viewer-360';
 import { useNavigation } from '@/contexts/navigation-context';
 import { allertaStencil } from '@/lib/fonts';

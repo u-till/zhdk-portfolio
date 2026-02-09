@@ -2,7 +2,7 @@
 
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
 import { StarField } from '@/components/lost-in-space/star-field';
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { orbitron } from '@/lib/fonts';
 import { ProcessStep } from '@/types/project';

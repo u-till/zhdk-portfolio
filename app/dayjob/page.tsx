@@ -1,7 +1,7 @@
 'use client';
 
 import { Dock } from '@/components/dayjob/dock';
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { archivo } from '@/lib/fonts';
 import { DockItem, ProcessStep } from '@/types/project';

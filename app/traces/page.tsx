@@ -1,6 +1,6 @@
 'use client';
 
-import { Lightbox } from '@/components/traces/lightbox';
+import { Lightbox } from '@/components/lightbox';
 import { MapImage } from '@/components/traces/zurich-map';
 import { useNavigation } from '@/contexts/navigation-context';
 import { ProcessStep } from '@/types/project';
