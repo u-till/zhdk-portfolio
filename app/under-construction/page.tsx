@@ -151,25 +151,6 @@ export default function UnderConstructionPage() {
             </div>
           </div>
 
-          {/* learnings Section
-          <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-black pb-2 mb-4 ${allertaStencil.className}`}>
-              learnings
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Use a circular saw instead of a jigsaw for cleaner cuts</li>
-                  <li>Use sandpaper to refine the edges</li>
-                  <li>Use live view on external screen to spot out of focus shots</li>
-                </ul>
-              </div>
-            </div>
-          </div>*/}
-
           {/* credits Section */}
           <div>
             <h2 className='text-xl font-bold  border-b-2 border-black pb-2 mb-4'>credits</h2>

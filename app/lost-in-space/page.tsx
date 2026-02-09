@@ -26,30 +26,30 @@ const PROCESS_STEPS: {
     image: '/lost-in-space/cover.jpg',
     objectFit: 'cover',
     title: '01. COVER ART',
-    text: 'The whole project actually started because I created the cover art. We then searched for fitting beats and also produced a few tracks specifically for this space theme.',
+    text: 'The whole project started around the cover art. We then searched for fitting beats we already had and also produced a few tracks specifically for this space theme.',
   },
   {
     image: '/lost-in-space/backside-1.jpg',
     objectFit: 'cover',
     title: '02. PRODUCTION',
-    text: 'Made at Vogelsang, a creative interim building. Mostly produced by me (Ableton) and Lars (FL Studio). We often collaborated on tracks - one creating samples, the other drums.',
+    text: 'Most of the work was produced by Lars and me. We would mostly use electronic production techniques, but also recorded some live instruments and sounds to sample from time to time.',
   },
   {
     image: '/lost-in-space/backside-2.jpg',
     objectFit: 'cover',
-    title: '03. RELEASE',
-    text: 'We then released the album on all major streaming platforms, including Spotify, Apple Music, and SoundCloud.',
+    title: '03. COLLABORATE',
+    text: 'But because there were many other producers in this house, we often collaborated with them as well, which made the project really fun and diverse.',
   },
   {
     image: '/lost-in-space/backside-3.jpg',
     objectFit: 'cover',
-    title: '04. OUTREACH TO ARTISTS',
-    text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also COVID hit around that time, which made collaboration even harder.',
+    title: '04. RELEASE',
+    text: 'After we had a good amount of tracks together, we released the album on Spotify and other streaming platforms in order to reach more potential collaborators.',
   },
   {
     image: '/lost-in-space/backside-4.jpg',
     objectFit: 'cover',
-    title: '05. FINALIZATION',
+    title: '05. OUTREACH TO ARTISTS',
     text: 'We then reached out to various artists to collaborate on vocals for each track, but we only got about half of the tracks done before losing momentum on the project. Also COVID hit around that time, which made collaboration even harder.',
   },
 ];
@@ -88,7 +88,7 @@ export default function LostInSpacePage() {
         {/* Play Button */}
         <button
           onClick={() => setIsFlipped(true)}
-          className='absolute bottom-24 md:bottom-8 left-4 md:right-8 z-20 px-6 py-3 rounded-lg bg-[#e34c42] hover:bg-[#c93d34] text-white font-bold text-sm transition-colors shadow-md cursor-pointer flex items-center gap-2'
+          className='absolute bottom-24 md:bottom-8 left-4 md:left-auto md:right-8 z-20 px-6 py-3 rounded-lg bg-[#e34c42] hover:bg-[#c93d34] text-white font-bold text-sm transition-colors shadow-md cursor-pointer flex items-center gap-2'
         >
           play
           <svg
@@ -116,8 +116,8 @@ export default function LostInSpacePage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  An album I did together with my friends when I used to live in a house full of musicians. Combining
-                  productions under the theme of space, with cover art created by me.
+                  An album I produced together with my friends when I used to live in a house full of music studios.
+                  Combining productions under the theme of space, with cover art created by me.
                 </p>
               </div>
             </div>
@@ -160,33 +160,13 @@ export default function LostInSpacePage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  Started with the cover art, which set the direction. We searched for fitting beats and produced tracks
-                  to match the space theme. Original plan included vocal collaborations for each track, which never
-                  materialized.
+                  The project started with the cover art, which set the direction. We searched for fitting beats and
+                  produced tracks to match the space theme. Our original plan included vocal collaborations for each
+                  track, which unfortunately never materialized.
                 </p>
               </div>
             </div>
           </div>
-
-          {/* learnings Section 
-          <div>
-            <h2
-              className={`text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42] ${orbitron.className}`}
-            >
-              learnings
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Outreach to more artists for collaboration</li>
-                  <li>Maintain momentum on long-term projects</li>
-                </ul>
-              </div>
-            </div>
-          </div>*/}
 
           {/* credits Section */}
           <div>
@@ -256,9 +236,9 @@ export default function LostInSpacePage() {
             </div>
 
             {/* Right: Selected Image - Desktop only */}
-            <div className='hidden lg:flex order-1 lg:order-2 lg:w-3/5'>
+            <div className='hidden lg:block order-1 lg:order-2 lg:w-3/5'>
               <div
-                className='relative w-full rounded-lg overflow-hidden cursor-pointer'
+                className='relative w-full h-full rounded-lg overflow-hidden cursor-pointer'
                 onClick={() => {
                   const step = PROCESS_STEPS[selectedProcessIndex] || PROCESS_STEPS[0];
                   setLightboxImage({ src: step.image, title: step.title });
@@ -268,9 +248,7 @@ export default function LostInSpacePage() {
                   src={PROCESS_STEPS[selectedProcessIndex]?.image || PROCESS_STEPS[0].image}
                   alt={PROCESS_STEPS[selectedProcessIndex]?.title || 'Process step'}
                   fill
-                  className={
-                    PROCESS_STEPS[selectedProcessIndex]?.objectFit === 'contain' ? 'object-contain' : 'object-cover'
-                  }
+                  className='object-contain object-left-top'
                 />
               </div>
             </div>

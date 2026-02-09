@@ -47,7 +47,7 @@ const PROCESS_STEPS: {
     image: '/toy-lexicon/book-process-4.jpg',
     objectFit: 'cover',
     title: '04. INDESIGN AUTOMATION',
-    text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. Enables quick generation of consistent layouts for refinement.',
+    text: 'Developed an InDesign ExtendScript to automatically layout content from JSON using labeled template fields. This enables quick generation of consistent layouts for refinement.',
   },
   {
     image: '/toy-lexicon/book-process-5.jpg',
@@ -191,8 +191,8 @@ export default function ToyLexiconPage() {
               <div className='hidden md:block'></div>
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
-                  A book exploring construction kits from the last 100 years. My father and two friends photographed his
-                  collection and asked me to make it into a book.
+                  A book exploring the aesthetics of construction kits from the last 100 years. My father photographed
+                  his collection with the help of two friends and asked me to make it into a book.
                   <br />
                   <br />
                   Since images were taken over years with missing data, I built a custom CMS for collaborative editing
@@ -204,9 +204,7 @@ export default function ToyLexiconPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              specifications
-            </h2>
+            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -238,7 +236,7 @@ export default function ToyLexiconPage() {
                   rel='noopener noreferrer'
                   className='inline-block mt-2 px-6 py-3 bg-[#5BB660] text-white font-bold  text-sm rounded-lg hover:bg-[#4d9b52] transition-colors'
                 >
-                  Editor Demo
+                  CMS Demo
                   <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
                 </a>
               </div>
@@ -261,25 +259,6 @@ export default function ToyLexiconPage() {
               </div>
             </div>
           </div>
-
-          {/* learnings Section
-          <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              learnings
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Align vision before starting</li>
-                  <li>Make sure source material is complete and consistent</li>
-                  <li>Invest more time in gathering inspiration for layouting</li>
-                </ul>
-              </div>
-            </div>
-          </div>*/}
 
           {/* credits Section */}
           <div>

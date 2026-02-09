@@ -36,7 +36,7 @@ const DOCK_ITEMS: DockItem[] = [
 const PROCESS_STEPS = [
   {
     title: '01. DISCOVERY',
-    text: 'Initial meeting to understand client needs, goals, and target audience. Define project scope and timeline.',
+    text: 'First is the initial meeting to understand client needs, goals and target audience. There we define project scope and timeline.',
     image: '/dayjob/bg.jpg',
   },
   {
@@ -46,17 +46,17 @@ const PROCESS_STEPS = [
   },
   {
     title: '03. DEVELOP',
-    text: 'Build the website using open source technologies. Nowadays mostly with Claude Code and Agents.',
+    text: 'After the client signs off on the design, I build the website using open source technologies. Nowadays mostly with Claude Code and Agents.',
     image: '/dayjob/screenshots/dayjob-process-develop.png',
   },
   {
     title: '04. LAUNCH',
-    text: 'Fill content, test for speed, accessibility and SEO. Deploy to hosting and set up analytics. Train client on content management.',
+    text: 'Fill content, test for speed, accessibility and SEO. Deploy to hosting and set up analytics. Train the client on content management.',
     image: '/dayjob/screenshots/brookejackson-screenshot.jpg',
   },
   {
     title: '05. MAINTAIN & OPTIMIZE',
-    text: 'Ongoing support, updates, and improvements. Monitor search engine performance and security.',
+    text: 'Ongoing support, updates and improvements. Monitor search engine performance and security.',
     image: '/dayjob/screenshots/dayjob-process-optimize.png',
   },
 ];
@@ -109,9 +109,7 @@ export default function DayjobPage() {
           <div className='flex flex-col gap-8 text-foreground'>
             {/* Brief Section */}
             <div>
-              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
-                brief
-              </h2>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>brief</h2>
               <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='hidden md:block'></div>
@@ -127,9 +125,7 @@ export default function DayjobPage() {
 
             {/* Specifications Section */}
             <div>
-              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
-                specifications
-              </h2>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>specifications</h2>
               <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>Year</div>
@@ -168,38 +164,16 @@ export default function DayjobPage() {
                 <div className='md:col-span-2'>
                   <p className='leading-relaxed'>
                     I started freelancing because I wanted to move towards more creative and challenging work.
-                    Freelancing allows me to choose projects that align with my interests and skills, while also
-                    providing the flexibility to manage my own time and work environment.
+                    Freelancing allows me to choose projects that align with my interests and skills, while also giving
+                    me the flexibility to manage my own time and work environment.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Learnings Section
-            <div>
-              <h2 className={`text-xl font-bold border-b-2 border-foreground pb-2 mb-4 ${archivo.className}`}>
-                learnings
-              </h2>
-              <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-                <div className='hidden md:block'></div>
-                <div className='hidden md:block'></div>
-                <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>
-                  <ul className='list-disc list-outside pl-3 space-y-1'>
-                    <li>Client communication</li>
-                    <li>Clear boundaries and scope</li>
-                    <li>Documentation</li>
-                    <li>Continuous learning</li>
-                  </ul>
-                </div>
-              </div>
-            </div> */}
-
             {/* Credits Section */}
             <div>
-              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>
-                credits
-              </h2>
+              <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>credits</h2>
               <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>utill.ch</div>
@@ -214,9 +188,7 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>fabiotozzo.com</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>
-                  Design: Noel Oppliger & Till Solenthaler, Development: Till Solenthaler
-                </div>
+                <div className='md:col-span-2'>Design: Noel Oppliger & Fabio Tozzo, Development: Till Solenthaler</div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>swing.ch</div>
@@ -226,16 +198,12 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>nicolaijaronkager.ch</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>
-                  Design: Nicolai Kager & Till Solenthaler, Development: Till Solenthaler
-                </div>
+                <div className='md:col-span-2'>Design: Nicolai Kager, Development: Till Solenthaler</div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>anothernarrative.studio</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>
-                  Design: Another Narrative & Till Solenthaler, Development: Till Solenthaler
-                </div>
+                <div className='md:col-span-2'>Design: Michèle Twerenbold, Development: Till Solenthaler</div>
 
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>brookejackson.ch</div>
@@ -247,7 +215,7 @@ export default function DayjobPage() {
                 <div className='hidden md:block'></div>
                 <div className='font-bold md:text-right'>AI Declaration</div>
                 <div className='hidden md:block'></div>
-                <div className='md:col-span-2'>Claude Code for recent projects</div>
+                <div className='md:col-span-2'>Claude Code, Google Nano Banana and Veo for recent projects</div>
               </div>
             </div>
           </div>

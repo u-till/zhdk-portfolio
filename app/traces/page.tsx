@@ -186,7 +186,7 @@ const PROCESS_STEPS: { image: string; objectFit: 'cover' | 'contain'; title: str
     objectFit: 'contain',
     bg: '#ffffff',
     title: '01. BRAINSTORMING',
-    text: 'Wrote everything down what came to mind when thinking about traces. Looked up definition, origin and synonyms of the word to get more ideas.',
+    text: 'Wrote down everything that came to mind when thinking about traces. Looked up definition, origin and synonyms of the word to get more ideas.',
   },
   {
     image: '/traces/traces-process-1.jpg',
@@ -207,7 +207,7 @@ const PROCESS_STEPS: { image: string; objectFit: 'cover' | 'contain'; title: str
     objectFit: 'cover',
     bg: '#ffffff',
     title: '04. COLLECT AND RECONSTRUCT',
-    text: 'I went out into the city again to find more traces, giving me a diverse set of traces to work with. I then used ProCreate and Photoshop to reconstruct the traces.',
+    text: 'I went out into the city again to find more traces, giving me a diverse set of traces to work with. I then used Procreate and Photoshop to reconstruct the traces.',
   },
   {
     image: '/traces/traces-process-5.jpg',
@@ -343,7 +343,7 @@ export default function TracePage() {
                   stickers, walls with marks of climbing plants.
                   <br />
                   <br />
-                  Using ProCreate and Photoshop, I reconstructed these erased traces, making them visible again. I
+                  Using Procreate and Photoshop, I reconstructed these erased traces, making them visible again. I
                   deliberately chose to vary between forensic reconstruction and speculative fiction. Some restorations
                   are intentionally &apos;wrong&apos;. This playful inaccuracy exposes the difficulty of objective
                   reconstruction and the inherently vague nature of traces. It also questions who controls urban
@@ -378,7 +378,7 @@ export default function TracePage() {
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Methodology</div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>Photography / ProCreate / Photoshop / Code </div>
+              <div className='md:col-span-2'>Photography / Procreate / Photoshop / Code </div>
             </div>
           </div>
 
@@ -404,21 +404,6 @@ export default function TracePage() {
               </div>
             </div>
           </div>
-
-          {/* Learnings Section 
-          <div>
-            <h2 className='text-xl font-bold border-b-2 border-foreground pb-2 mb-4'>learnings</h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>tbd</li>
-                </ul>
-              </div>
-            </div>
-          </div>*/}
 
           {/* Credits Section */}
           <div>

@@ -275,30 +275,12 @@ export default function AmpedUpPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   My friend Julian acquired these speakers with one broken amp. We brainstormed how to revive them with
-                  modern features and came to the conclusion that digital amps with bluetooth and DSP for frequency
+                  modern features and came to the conclusion that digital amps with Bluetooth and DSP for frequency
                   response control and room acoustic adaptation would be the way to go.
                 </p>
               </div>
             </div>
           </div>
-
-          {/* learnings Section
-          <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              learnings
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Implement room correction onto DSP board</li>
-                  <li>Connect front LED to DSP board to use as bluetooth status LED</li>
-                </ul>
-              </div>
-            </div>
-          </div> */}
 
           {/* credits Section */}
           <div>

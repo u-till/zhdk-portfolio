@@ -214,12 +214,12 @@ const PHOTOS: SaudadePhoto[] = [
 const PROCESS_STEPS = [
   {
     title: '01. GO SOMEWHERE',
-    text: 'It does not really matter where. There are good subjects everywhere.',
+    text: 'It does not really matter where. There are good subjects to take pictures of everywhere.',
     image: '/saudade/process-1.jpg',
   },
   {
     title: '02. BRING THE CAMERA',
-    text: 'More important is to always bring the camera everywhere you go.',
+    text: 'Most important is to always bring the camera everywhere you go. This is why I prefer point-and-shoot cameras.',
     image: '/saudade/process-2.jpg',
   },
   {
@@ -374,7 +374,7 @@ export default function SaudadePage() {
 
         {/* Globe Panel - Bottom Right */}
         <motion.div
-          className={`absolute left-4 md:right-8 bottom-24 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
+          className={`absolute left-4 md:left-auto md:right-8 bottom-24 md:bottom-8 rounded-xl border border-white/20 bg-black/40 backdrop-blur-md overflow-hidden pointer-events-auto w-36 h-36 lg:w-48 lg:h-48 z-20 ${
             isGlobeExpanded ? 'z-30' : ''
           }`}
           animate={{
@@ -418,8 +418,7 @@ export default function SaudadePage() {
                   <Globe activeLocation={{ lat: PHOTOS[activeIndex].lat, lng: PHOTOS[activeIndex].lng }} />
                 </div>
                 <p className='text-sm leading-relaxed'>
-                  <span className='md:hidden'>Swipe to look through the photos.</span>
-                  <span className='hidden md:inline'>Use your keyboard arrows to navigate through the photos.</span>
+                  <span className='hidden md:inline'>Use the arrow keys to navigate through the photos.</span>
                 </p>
               </motion.div>
             )}

@@ -36,7 +36,7 @@ const PROCESS_STEPS = [
     objectFit: 'contain' as const,
     bg: '#F8F3DD',
     title: '02. RESEARCH & DESIGN',
-    text: 'Drafted a schematic and shopping list with ChatGPT. I visualized the schematic using the Fritzing app and ordered parts from Aliexpress.',
+    text: 'I drafted a schematic and shopping list with ChatGPT. I visualized the schematic using the Fritzing app and ordered parts from AliExpress.',
   },
   {
     image: '/retrofitted/lamp-process-13.jpg',
@@ -235,8 +235,8 @@ export default function RetrofittedPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   An old lamp from the 70s which broke so I retrofitted it with modern technology including a USB-C
-                  connector, a rechargeable battery and a stepless dimmer, while preserving its iconic aesthetic. This
-                  project embodies my passion for repairs and sustainability.
+                  connector, a rechargeable battery and a stepless dimmer, making the lamp portable and more energy
+                  efficient. This project embodies my passion for repairs and sustainability.
                 </p>
               </div>
             </div>
@@ -319,30 +319,11 @@ export default function RetrofittedPage() {
               <div className='md:col-span-2'>
                 <p className='leading-relaxed'>
                   My nightstand lamp broke, so I wanted to repair it. Upon opening it, I saw the transformer and thought
-                  this space could be used to fit a battery instead, so the project went from repair to upgrade.
+                  this space could be used to fit a battery instead, so the project went from repair to upcycle.
                 </p>
               </div>
             </div>
           </div>
-
-          {/* learnings Section 
-          <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>
-              learnings
-            </h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='hidden md:block'></div>
-              <div className='md:col-span-2'>
-                <ul className='list-disc list-outside pl-3 space-y-1'>
-                  <li>Use 3d printed mount for parts inside</li>
-                  <li>Implement custom charging indicator</li>
-                  <li>Animate dimmer knob in 3d model</li>
-                </ul>
-              </div>
-            </div>
-          </div>*/}
 
           {/* credits Section */}
           <div>
