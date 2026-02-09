@@ -439,15 +439,15 @@ export default function TracePage() {
                   <div
                     key={index}
                     onClick={() => setSelectedProcessIndex(index)}
-                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 rounded-r-lg lg:cursor-pointer ${
+                    className={`w-full p-3 lg:border-l-4 transition-all text-left flex flex-col lg:flex-row lg:items-center gap-3 rounded-lg lg:rounded-l-none lg:cursor-pointer ${
                       isActive
-                        ? 'lg:border-sky-600 bg-sky-600/50'
+                        ? 'lg:border-sky-600 bg-sky-200/50 lg:bg-sky-600/50'
                         : 'bg-sky-200/50 lg:border-sky-200 lg:bg-sky-200/50 lg:hover:bg-sky-200/30'
                     }`}
                   >
                     <div
                       className={`relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
-                        isActive ? 'ring-2 ring-sky-600' : 'ring-2 ring-sky-600 lg:ring-1 lg:ring-sky-300'
+                        isActive ? 'ring-1 ring-sky-300 lg:ring-2 lg:ring-sky-600' : 'ring-1 ring-sky-300 lg:ring-1 lg:ring-sky-300'
                       }`}
                       style={step.bg ? { backgroundColor: step.bg } : undefined}
                     >
