@@ -396,11 +396,6 @@ export default function TracePage() {
                   traces for the assignment. Many traces like graffiti and trash are unwanted and get removed, but this
                   act itself often leaves a new trace behind. This caught my eye and I wanted to explore this further by
                   reconstructing erased traces.
-                  <br />
-                  <br /> During this process I realized that I would essentially have to just trace &quot;FCZ&quot; onto
-                  jpegs, which sounded boring and one-dimensional. This led me to the idea of intentionally making some
-                  of the reconstructions inaccurate, challenging the user to look closer and question the nature of
-                  traces and the narratives they create.
                 </p>
               </div>
             </div>
@@ -448,7 +443,9 @@ export default function TracePage() {
                   >
                     <div
                       className={`relative w-full aspect-square lg:w-20 lg:h-20 flex-shrink-0 overflow-hidden rounded-lg ${
-                        isActive ? 'ring-1 ring-sky-300 lg:ring-2 lg:ring-sky-600' : 'ring-1 ring-sky-300 lg:ring-1 lg:ring-sky-300'
+                        isActive
+                          ? 'ring-1 ring-sky-300 lg:ring-2 lg:ring-sky-600'
+                          : 'ring-1 ring-sky-300 lg:ring-1 lg:ring-sky-300'
                       }`}
                       style={step.bg ? { backgroundColor: step.bg } : undefined}
                     >
