@@ -59,7 +59,7 @@ export default function UnderConstructionPage() {
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-8 left-4 md:left-8 pointer-events-none z-10'>
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${allertaStencil.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black [text-box-trim:trim-end] [text-box-edge:cap_alphabetic] leading-none ${allertaStencil.className}`}
           >
             under
             <br />

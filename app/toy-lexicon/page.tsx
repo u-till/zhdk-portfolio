@@ -93,7 +93,7 @@ export default function ToyLexiconPage() {
           }`}
         >
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${dinNext.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none [text-box-trim:trim-end] [text-box-edge:cap_alphabetic] ${dinNext.className}`}
           >
             toy lexicon
           </h1>

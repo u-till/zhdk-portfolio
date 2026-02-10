@@ -230,7 +230,9 @@ export default function TracePage() {
       <div className='h-screen relative'>
         {/* Title - Bottom Left */}
         <div className='absolute bottom-4 md:bottom-8 left-4 md:left-8 pointer-events-none z-20'>
-          <h1 className='text-5xl lg:text-7xl font-bold text-black text-stroke'>traces</h1>
+          <h1 className='text-5xl lg:text-7xl font-bold text-black text-stroke md:[text-box-trim:trim-end] md:[text-box-edge:cap_alphabetic]'>
+            traces
+          </h1>
         </div>
 
         {/* Map / Grid View */}

@@ -75,7 +75,7 @@ export default function DayjobPage() {
             <source src='/dayjob/dayjob-trailer.mp4' type='video/mp4' />
           </video>
           <h1
-            className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none pointer-events-none ${archivo.className}`}
+            className={`absolute bottom-4 md:bottom-8 left-4 md:left-8 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] md:[text-box-trim:trim-end] md:[text-box-edge:cap_alphabetic] font-bold text-white mix-blend-difference leading-none pointer-events-none ${archivo.className}`}
           >
             dayjob
           </h1>

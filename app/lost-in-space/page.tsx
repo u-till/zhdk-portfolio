@@ -1,8 +1,8 @@
 'use client';
 
+import { Lightbox } from '@/components/lightbox';
 import { AlbumViewer3D } from '@/components/lost-in-space/album-viewer-3d';
 import { StarField } from '@/components/lost-in-space/star-field';
-import { Lightbox } from '@/components/lightbox';
 import { useNavigation } from '@/contexts/navigation-context';
 import { orbitron } from '@/lib/fonts';
 import { ProcessStep } from '@/types/project';
@@ -65,7 +65,7 @@ export default function LostInSpacePage() {
         {/* Title - Consistent position with other pages */}
         <div className='absolute bottom-8 left-4 md:left-8 pointer-events-none z-10'>
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] leading-none ${orbitron.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[#e34c42] [text-box-trim:trim-end] [text-box-edge:cap_alphabetic] leading-none ${orbitron.className}`}
           >
             lost in space
           </h1>

@@ -98,7 +98,7 @@ export default function AmpedUpPage() {
           }`}
         >
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none ${vt323.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-black leading-none [text-box-trim:trim-end] [text-box-edge:cap_alphabetic] ${vt323.className}`}
           >
             amped up
           </h1>

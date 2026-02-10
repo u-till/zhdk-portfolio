@@ -312,7 +312,7 @@ export default function SaudadePage() {
           }`}
         >
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${courierPrime.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white [text-box-trim:trim-end] [text-box-edge:cap_alphabetic] leading-none ${courierPrime.className}`}
           >
             saudade
           </h1>
