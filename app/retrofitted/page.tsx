@@ -107,7 +107,7 @@ export default function RetrofittedPage() {
           }`}
         >
           <h1
-            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-white mix-blend-difference leading-none ${shrikhand.className}`}
+            className={`text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] font-bold text-[rgb(231,214,141)] mix-blend-difference leading-none ${shrikhand.className}`}
           >
             retrofitted
           </h1>
