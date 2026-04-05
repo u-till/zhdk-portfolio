@@ -184,8 +184,8 @@ export default function AmpedUpPage() {
         <div className='flex flex-col gap-8 text-foreground'>
           {/* Brief Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>brief</h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>brief</h2>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -200,8 +200,8 @@ export default function AmpedUpPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
               <div className='hidden md:block'></div>
@@ -267,8 +267,8 @@ export default function AmpedUpPage() {
 
           {/* Idea Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>idea</h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>idea</h2>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -284,8 +284,8 @@ export default function AmpedUpPage() {
 
           {/* credits Section */}
           <div>
-            <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-4`}>credits</h2>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>credits</h2>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Idea & Concept</div>
               <div className='hidden md:block'></div>
@@ -308,7 +308,7 @@ export default function AmpedUpPage() {
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16'>
         <div>
-          <h2 className={`text-xl font-bold  border-b-2 border-foreground pb-2 mb-6`}>process</h2>
+          <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-6`}>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -374,13 +374,13 @@ export default function AmpedUpPage() {
         <div className='flex justify-between items-center border-b-2 border-black pb-2'>
           <span
             onClick={() => navigateTo('/retrofitted')}
-            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+            className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none hover:opacity-60 transition-opacity'
           >
             previous
           </span>
           <span
             onClick={() => navigateTo('/toy-lexicon')}
-            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none hover:opacity-60 transition-opacity'
+            className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none hover:opacity-60 transition-opacity'
           >
             next
           </span>

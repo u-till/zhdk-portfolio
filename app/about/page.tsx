@@ -8,7 +8,7 @@ export default function AboutPage() {
       <div className='flex flex-col gap-8 pt-16'>
         {/* About Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             about
           </h2>
@@ -52,11 +52,11 @@ export default function AboutPage() {
 
         {/* Education Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Education
           </h2>
-          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
             {/* First entry */}
             <div className='hidden md:block'></div>
             <div className='text-muted-foreground md:text-right'>2013 - 2017</div>
@@ -105,11 +105,11 @@ export default function AboutPage() {
 
         {/* Job Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Job
           </h2>
-          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
             <div className='hidden md:block'></div>
             <div className='text-muted-foreground md:text-right'>2017 - 2018</div>
             <div className='hidden md:block'></div>
@@ -221,11 +221,11 @@ export default function AboutPage() {
 
         {/* Skills Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Skills
           </h2>
-          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+          <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
             <div className='hidden md:block'></div>
             <div className='font-semibold md:text-right'>Development</div>
             <div className='hidden md:block'></div>
@@ -254,11 +254,11 @@ export default function AboutPage() {
 
         {/* Motivational Letter Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             Motivational Letter
           </h2>
-          <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+          <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>
@@ -308,11 +308,11 @@ export default function AboutPage() {
         </div>
         {/* Motivational Letter Section */}
         <div>
-          <h2 className='text-xl font-bold flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
+          <h2 className='text-xl font-extrabold tracking-tight flex items-center gap-2  lowercase border-b-2 border-black pb-2 mb-4'>
             <span className='text-[0.88em] pb-[2px]'>●</span>
             portfolio
           </h2>
-          <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+          <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>
             <div className='hidden md:block'></div>

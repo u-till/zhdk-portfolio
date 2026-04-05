@@ -105,8 +105,8 @@ export default function LostInSpacePage() {
         <div className='flex flex-col gap-8 text-white'>
           {/* Brief Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>brief</h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className='text-xl font-extrabold tracking-tight  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>brief</h2>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -121,8 +121,8 @@ export default function LostInSpacePage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>specifications</h2>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className='text-xl font-extrabold tracking-tight  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>specifications</h2>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Year</div>
               <div className='hidden md:block'></div>
@@ -149,8 +149,8 @@ export default function LostInSpacePage() {
 
           {/* Idea Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>idea</h2>
-            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className='text-xl font-extrabold tracking-tight  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>idea</h2>
+            <div className='grid grid-cols-1 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
@@ -166,8 +166,8 @@ export default function LostInSpacePage() {
 
           {/* credits Section */}
           <div>
-            <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>credits</h2>
-            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-sm'>
+            <h2 className='text-xl font-extrabold tracking-tight  border-b-2 border-[#e34c42] pb-2 mb-4 text-[#e34c42]'>credits</h2>
+            <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right text-[#e34c42]'>Album Art</div>
               <div className='hidden md:block'></div>
@@ -193,7 +193,7 @@ export default function LostInSpacePage() {
       {/* Process Section */}
       <div className='px-4 md:px-8 pt-12 pb-16 relative z-10'>
         <div>
-          <h2 className='text-xl font-bold  border-b-2 border-[#e34c42] pb-2 mb-6 text-[#e34c42]'>process</h2>
+          <h2 className='text-xl font-extrabold tracking-tight  border-b-2 border-[#e34c42] pb-2 mb-6 text-[#e34c42]'>process</h2>
 
           <div className='flex flex-col lg:flex-row lg:items-stretch gap-6'>
             {/* Left: Process List */}
@@ -257,13 +257,13 @@ export default function LostInSpacePage() {
         <div className='flex justify-between items-center border-b-2 border-[#e34c42] pb-2'>
           <span
             onClick={() => navigateTo('/toy-lexicon')}
-            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
+            className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
             previous
           </span>
           <span
             onClick={() => navigateTo('/dayjob')}
-            className='font-bold cursor-pointer lowercase text-[clamp(0.625rem,3vh,1rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
+            className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
             next
           </span>

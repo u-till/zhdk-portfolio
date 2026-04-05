@@ -2,6 +2,7 @@ import { Analytics } from '@/components/analytics';
 import { Navigation } from '@/components/navigation';
 import { PageTransition } from '@/components/page-transition';
 import { NavigationProvider } from '@/contexts/navigation-context';
+import { archivo } from '@/lib/fonts';
 import type { Metadata } from 'next';
 import { Suspense } from 'react';
 import './globals.css';
@@ -22,7 +23,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html lang='en' className={archivo.variable}>
       <body className='font-sans antialiased'>
         <Suspense fallback={null}>
           <NavigationProvider>

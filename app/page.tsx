@@ -313,11 +313,11 @@ export default function Home() {
               onMouseEnter={() => setHoveredProject(projectKey)}
               onMouseLeave={() => setHoveredProject(null)}
               onClick={() => handleClick(projectKey)}
-              className={`font-bold cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none relative ${
+              className={`font-extrabold tracking-tight cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none relative ${
                 shouldHide ? 'opacity-20' : ''
               }`}
             >
-              <span className='text-[0.88em] pb-[2px]'>●</span>
+              <span className='inline-block rounded-full bg-current flex-shrink-0 w-[1cap] h-[1cap]' />
               {PROJECTS[projectKey].mobileName ? (
                 <>
                   <span className='md:hidden'>{PROJECTS[projectKey].mobileName}</span>

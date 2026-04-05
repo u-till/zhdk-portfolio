@@ -141,7 +141,7 @@ export function Navigation() {
                   navigateTo('/about');
                   setIsMobileMenuOpen(false);
                 }}
-                className={`text-xs transition-colors cursor-pointer ${
+                className={`text-sm font-semibold transition-colors cursor-pointer ${
                   currentSection === 'welcome'
                     ? 'text-muted-foreground hover:text-foreground'
                     : currentSection === 'under-construction'
@@ -184,7 +184,7 @@ export function Navigation() {
                           setHoveredProject(null);
                         }
                       }}
-                      className={`relative text-sm font-medium transition-colors cursor-pointer pt-2 pb-2 px-2 whitespace-nowrap isolate ${
+                      className={`relative text-sm font-semibold transition-colors cursor-pointer pt-2 pb-2 px-2 whitespace-nowrap isolate ${
                         isActive
                           ? linkSection === 'under-construction'
                             ? 'text-red-600'
@@ -240,7 +240,7 @@ export function Navigation() {
                             navigateTo(`/${linkSection}`);
                             setIsMobileMenuOpen(false);
                           }}
-                          className={`relative text-left text-sm font-medium transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
+                          className={`relative text-left text-sm font-semibold transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
                             isActive
                               ? linkSection === 'under-construction'
                                 ? 'text-red-600'
