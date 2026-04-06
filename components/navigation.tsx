@@ -1,82 +1,59 @@
 'use client';
 
-import { MobileMenuToggle } from '@/components/mobile-menu-toggle';
 import { useNavigation } from '@/contexts/navigation-context';
-import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
-const NAVIGATION_LINKS = [
-  { href: 'under-construction', label: 'under construction' },
-  { href: 'saudade', label: 'saudade' },
-  { href: 'retrofitted', label: 'retrofitted' },
-  { href: 'amped-up', label: 'amped up' },
-  { href: 'toy-lexicon', label: 'toy lexicon' },
-  { href: 'lost-in-space', label: 'lost in space' },
-  { href: 'dayjob', label: 'dayjob' },
-  { href: 'traces', label: 'traces' },
-];
-
-const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string; activeLink: string }> = {
+const NAVBAR_CONFIG: Record<string, { navbar: string; brand: string; link: string }> = {
   welcome: {
-    navbar: 'rounded-sm bg-background/60 backdrop-blur-md w-[240px] border-black border-2',
+    navbar: 'rounded-sm bg-background/60 backdrop-blur-md border-black border-2',
     brand: 'text-foreground hover:text-foreground/80',
-    link: 'text-muted-foreground hover:text-foreground opacity-0',
-    activeLink: 'text-foreground',
+    link: 'text-muted-foreground hover:text-foreground',
   },
   'under-construction': {
-    navbar: 'w-full rounded-[0px] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]',
+    navbar: 'rounded-[0px] border-4 border-black bg-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]',
     brand: 'text-black hover:text-black/80',
-    link: 'text-black transition-colors',
-    activeLink: 'text-white',
+    link: 'text-black hover:text-red-600',
   },
   retrofitted: {
-    navbar: 'w-full rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md shadow-sm',
+    navbar: 'rounded-[32px] border border-[#e7d68d]/40 bg-[#c33b32] backdrop-blur-md shadow-sm',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
-    activeLink: 'text-[#e7d68d]',
   },
   'amped-up': {
-    navbar: 'w-full rounded-[0px] border border-black/60 bg-background backdrop-blur-md',
+    navbar: 'rounded-[0px] border border-black/60 bg-background backdrop-blur-md',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
-    activeLink: 'text-foreground',
   },
   'toy-lexicon': {
-    navbar: 'w-full rounded-lg border-2 border-[#5BB660]/60 bg-[#5BB660]/40 backdrop-blur-md shadow-sm',
+    navbar: 'rounded-lg border-2 border-[#5BB660]/60 bg-[#5BB660]/40 backdrop-blur-md shadow-sm',
     brand: 'hover:text-foreground/80',
     link: 'text-neutral-600 hover:text-foreground',
-    activeLink: 'text-foreground',
   },
   'lost-in-space': {
-    navbar: 'w-full rounded-lg border-4 border-foreground/20 bg-neutral-600/60 backdrop-blur-md shadow-xl',
+    navbar: 'rounded-lg border-4 border-foreground/20 bg-neutral-600/60 backdrop-blur-md shadow-xl',
     brand: 'text-white',
     link: 'text-muted-foreground hover:text-white',
-    activeLink: 'text-white',
   },
   saudade: {
-    navbar: 'w-full rounded-xl border-1 border border-white/10 bg-neutral-500/10 backdrop-blur-md',
+    navbar: 'rounded-xl border border-white/10 bg-neutral-500/10 backdrop-blur-md',
     brand: 'text-white/60 hover:text-white',
     link: 'text-white/60 hover:text-white',
-    activeLink: 'text-white',
   },
   dayjob: {
-    navbar: 'w-full rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
+    navbar: 'rounded-2xl border-0 border-transparent bg-foreground/70 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
-    activeLink: 'text-white',
   },
   traces: {
-    navbar: 'w-full rounded-2xl border-0 border-transparent bg-sky-700/70 backdrop-blur-md shadow-2xl',
+    navbar: 'rounded-2xl border-0 border-transparent bg-sky-700/70 backdrop-blur-md shadow-2xl',
     brand: 'text-white hover:text-white/80',
     link: 'text-white/60 hover:text-white',
-    activeLink: 'text-white',
   },
   about: {
-    navbar: 'w-full rounded-sm bg-background/60 backdrop-blur-md w-[200px] border-black border-2',
+    navbar: 'rounded-sm bg-background/60 backdrop-blur-md border-black border-2',
     brand: 'hover:text-foreground/80',
     link: 'text-muted-foreground hover:text-foreground',
-    activeLink: 'text-foreground',
   },
 };
 
@@ -94,8 +71,7 @@ const SECTION_BACKGROUNDS: Record<string, string> = {
 };
 
 export function Navigation() {
-  const { currentPage, hoveredProject, setHoveredProject, navigateTo } = useNavigation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { currentPage, navigateTo } = useNavigation();
 
   const currentSection = currentPage && NAVBAR_CONFIG[currentPage] ? currentPage : 'welcome';
 
@@ -109,159 +85,29 @@ export function Navigation() {
 
   const navbarStyle = {
     transition:
-      'background-color 400ms ease-in-out, border-color 400ms ease-in-out, border-width 400ms ease-in-out, border-radius 400ms ease-in-out, box-shadow 400ms ease-in-out, width 400ms ease-in-out',
+      'background-color 400ms ease-in-out, border-color 400ms ease-in-out, border-width 400ms ease-in-out, border-radius 400ms ease-in-out, box-shadow 400ms ease-in-out',
   };
 
   return (
-    <div className={`fixed top-4 md:top-8 w-full z-50 flex justify-start`}>
-      <nav className={`flex flex-col mx-4 md:mx-8 ${config.navbar}`} style={navbarStyle}>
-        <div className='flex items-center justify-between px-4 gap-4 md:px-6 py-3 md:py-4'>
-          <div className='flex items-center gap-2'>
-            <button
-              onClick={() => {
-                navigateTo('/');
-                setIsMobileMenuOpen(false);
-              }}
-              className='cursor-pointer flex-shrink-0'
-            >
-              <Image src='/icon.png' alt='Logo' width={24} height={24} className='rounded-sm' />
-            </button>
-            <div className='flex items-baseline gap-2'>
-              <button
-                onClick={() => {
-                  navigateTo('/');
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`text-base md:text-lg py-1 font-medium tracking-tight transition-colors ${config.brand} cursor-pointer whitespace-nowrap`}
-              >
-                till solenthaler
-              </button>
-              <button
-                onClick={() => {
-                  navigateTo('/about');
-                  setIsMobileMenuOpen(false);
-                }}
-                className={`text-sm font-semibold transition-colors cursor-pointer ${
-                  currentSection === 'welcome'
-                    ? 'text-muted-foreground hover:text-foreground'
-                    : currentSection === 'under-construction'
-                      ? 'text-black hover:text-red-600'
-                      : config.link
-                }`}
-              >
-                about
-              </button>
-            </div>
-          </div>
-
-          {/* Desktop Navigation */}
-          {currentSection !== 'welcome' && (
-            <motion.ul
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-              className='hidden xl:flex items-center gap-8'
-            >
-              {NAVIGATION_LINKS.map((link) => {
-                const linkSection = link.href;
-                const isActive = currentPage === linkSection;
-                const isHovered = currentPage === 'welcome' && hoveredProject === linkSection;
-
-                return (
-                  <li key={link.href}>
-                    <button
-                      onClick={() => {
-                        navigateTo(`/${linkSection}`);
-                      }}
-                      onMouseEnter={() => {
-                        if (currentPage === 'welcome') {
-                          setHoveredProject(linkSection);
-                        }
-                      }}
-                      onMouseLeave={() => {
-                        if (currentPage === 'welcome') {
-                          setHoveredProject(null);
-                        }
-                      }}
-                      className={`relative text-sm font-semibold transition-colors cursor-pointer pt-2 pb-2 px-2 whitespace-nowrap isolate ${
-                        isActive
-                          ? linkSection === 'under-construction'
-                            ? 'text-red-600'
-                            : config.activeLink
-                          : currentSection === 'under-construction'
-                            ? 'text-black hover:text-red-600'
-                            : isHovered
-                              ? 'text-foreground'
-                              : config.link
-                      }`}
-                    >
-                      {link.label}
-                    </button>
-                  </li>
-                );
-              })}
-            </motion.ul>
-          )}
-
-          {/* Mobile Menu Button */}
-          {currentSection !== 'welcome' && (
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`xl:hidden ${config.brand}`}
-              aria-label='Toggle menu'
-            >
-              <MobileMenuToggle menuOpen={isMobileMenuOpen} />
-            </button>
-          )}
+    <div className='fixed top-4 md:top-8 w-full z-50 flex justify-start'>
+      <nav className={`mx-4 md:mx-8 px-4 md:px-6 py-3 md:py-4 flex items-center gap-2 ${config.navbar}`} style={navbarStyle}>
+        <button onClick={() => navigateTo('/')} className='cursor-pointer flex-shrink-0'>
+          <Image src='/icon.png' alt='Logo' width={24} height={24} className='rounded-sm' />
+        </button>
+        <div className='flex items-baseline gap-2'>
+          <button
+            onClick={() => navigateTo('/')}
+            className={`text-base md:text-lg font-medium tracking-tight transition-colors ${config.brand} cursor-pointer whitespace-nowrap`}
+          >
+            till solenthaler
+          </button>
+          <button
+            onClick={() => navigateTo('/about')}
+            className={`text-sm font-semibold transition-colors cursor-pointer ${config.link}`}
+          >
+            about
+          </button>
         </div>
-
-        {/* Mobile Menu - Expandable */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: 'auto', opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className={`overflow-hidden xl:hidden ${currentSection === 'under-construction' ? 'bg-white' : ''}`}
-            >
-              {currentSection !== 'welcome' && (
-                <ul className='flex flex-col gap-2 px-4 pb-4'>
-                  {NAVIGATION_LINKS.map((link) => {
-                    const linkSection = link.href;
-                    const isActive = currentPage === linkSection;
-                    const isHovered = currentPage === 'welcome' && hoveredProject === linkSection;
-
-                    return (
-                      <li key={link.href}>
-                        <button
-                          onClick={() => {
-                            navigateTo(`/${linkSection}`);
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className={`relative text-left text-sm font-semibold transition-colors cursor-pointer w-full py-2 px-2 whitespace-nowrap isolate ${
-                            isActive
-                              ? linkSection === 'under-construction'
-                                ? 'text-red-600'
-                                : config.activeLink
-                              : currentSection === 'under-construction'
-                                ? 'text-black hover:text-red-600'
-                                : isHovered
-                                  ? 'text-foreground'
-                                  : config.link
-                          }`}
-                        >
-                          {link.label}
-                        </button>
-                      </li>
-                    );
-                  })}
-                </ul>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
       </nav>
     </div>
   );

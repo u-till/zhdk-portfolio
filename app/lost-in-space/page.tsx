@@ -256,16 +256,16 @@ export default function LostInSpacePage() {
       <div className='relative z-10 px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-[#e34c42] pb-2'>
           <span
-            onClick={() => navigateTo('/toy-lexicon')}
+            onClick={() => navigateTo('/')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
-            previous
+            index
           </span>
           <span
-            onClick={() => navigateTo('/dayjob')}
+            onClick={() => navigateTo('/about')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-[#e34c42] hover:opacity-60 transition-opacity'
           >
-            next
+            about
           </span>
         </div>
       </div>

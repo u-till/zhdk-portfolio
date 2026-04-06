@@ -570,16 +570,16 @@ export default function SaudadePage() {
       <div className='bg-neutral-900 px-4 md:px-8 pb-16'>
         <div className='flex justify-between items-center border-b-2 border-white pb-2'>
           <span
-            onClick={() => navigateTo('/under-construction')}
+            onClick={() => navigateTo('/')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-white hover:opacity-60 transition-opacity'
           >
-            previous
+            index
           </span>
           <span
-            onClick={() => navigateTo('/retrofitted')}
+            onClick={() => navigateTo('/about')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none text-white hover:opacity-60 transition-opacity'
           >
-            next
+            about
           </span>
         </div>
       </div>

@@ -4,22 +4,19 @@ import { useNavigation } from '@/contexts/navigation-context';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { useCallback, useEffect, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-// Lazy load the 3D preview to code-split three.js
 const Lamp3DPreview = dynamic(() => import('@/components/home/lamp-preview').then((mod) => mod.Lamp3DPreview), {
   ssr: false,
   loading: () => <div className='w-64 h-64 md:w-80 md:h-80 lg:w-[416px] lg:h-[416px]' />,
 });
 
-// Size presets for previews
 const SIZES = {
   sm: 'w-36 h-36 md:w-48 md:h-48 lg:w-60 lg:h-60',
   md: 'w-48 h-48 md:w-64 md:h-64 lg:w-80 lg:h-80',
   lg: 'w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96',
 } as const;
 
-// Preview configuration for each project
 type PreviewConfig =
   | { type: 'image'; src: string; size?: keyof typeof SIZES }
   | { type: 'toggle'; src: string; altSrc: string; interval: number; size?: keyof typeof SIZES }
@@ -28,7 +25,11 @@ type PreviewConfig =
   | { type: '3d'; src: string };
 
 const PROJECTS: Record<string, { name: string; mobileName?: string; preview: PreviewConfig }> = {
-  'under-construction': { name: 'under construction', mobileName: 'construction', preview: { type: '360', src: '/under-construction/korpus-360' } },
+  'under-construction': {
+    name: 'under construction',
+    mobileName: 'construction',
+    preview: { type: '360', src: '/under-construction/korpus-360' },
+  },
   saudade: {
     name: 'saudade',
     preview: {
@@ -71,7 +72,7 @@ const PROJECTS: Record<string, { name: string; mobileName?: string; preview: Pre
       size: 'sm',
     },
   },
-  dayjob: { name: 'dayjob', preview: { type: 'image', src: '/dayjob/dayjob-thumb.png' } },
+  dayjob: { name: 'utill.ch', preview: { type: 'image', src: '/dayjob/dayjob-thumb.png' } },
   traces: {
     name: 'traces',
     preview: {
@@ -84,13 +85,19 @@ const PROJECTS: Record<string, { name: string; mobileName?: string; preview: Pre
   },
 };
 
-// Shared floating animation for all previews
+const TAGS: Array<{ name: string; projects: string[] }> = [
+  { name: 'object', projects: ['under-construction', 'retrofitted', 'amped-up'] },
+  { name: 'visual', projects: ['saudade', 'traces'] },
+  { name: 'interactive', projects: ['traces'] },
+  { name: 'music', projects: ['lost-in-space'] },
+  { name: 'code', projects: ['dayjob', 'toy-lexicon'] },
+];
+
 const floatingAnimation = {
   animate: { y: [0, -6, 0] },
   transition: { duration: 3, repeat: Infinity, ease: 'easeInOut' as const },
 };
 
-// Unified animated image preview - handles toggle and blink patterns
 function AnimatedImagePreview({
   src,
   altSrc,
@@ -135,7 +142,6 @@ function AnimatedImagePreview({
   );
 }
 
-// Simple static image preview with floating animation
 function StaticImagePreview({ src, alt, sizeClass }: { src: string; alt: string; sizeClass: string }) {
   return (
     <motion.div className={`relative ${sizeClass}`} {...floatingAnimation}>
@@ -144,7 +150,6 @@ function StaticImagePreview({ src, alt, sizeClass }: { src: string; alt: string;
   );
 }
 
-// Auto-rotating 360 viewer
 function Rotating360Preview() {
   const [currentFrame, setCurrentFrame] = useState(1);
   const totalFrames = 27;
@@ -172,17 +177,16 @@ function Rotating360Preview() {
 export default function Home() {
   const { hoveredProject, setHoveredProject, navigateTo } = useNavigation();
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [openTag, setOpenTag] = useState<string | null>(null);
+  const cycleRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  // Force browser to recalculate vh-based clamp() values on mount
   useLayoutEffect(() => {
     window.dispatchEvent(new Event('resize'));
   }, []);
 
-  // Preload only the first 3 preview images to avoid network congestion
   useEffect(() => {
     const projectValues = Object.values(PROJECTS);
     const preloadCount = Math.min(3, projectValues.length);
-
     for (let i = 0; i < preloadCount; i++) {
       const { preview } = projectValues[i];
       if (preview.type === 'image') {
@@ -197,45 +201,25 @@ export default function Home() {
     }
   }, []);
 
-  const projectKeys = Object.keys(PROJECTS);
+  useEffect(() => {
+    return () => {
+      if (cycleRef.current) clearInterval(cycleRef.current);
+    };
+  }, []);
 
-  const renderPreview = useCallback((projectKey: string, isMobile: boolean = false) => {
+  const renderPreview = useCallback((projectKey: string) => {
     const project = PROJECTS[projectKey];
     if (!project) return null;
     const preview = project.preview;
-
-    // Use smaller sizes for mobile inline preview
-    const mobileSize = 'w-24 h-24';
-    const sizeClass = isMobile ? mobileSize : 'size' in preview ? SIZES[preview.size || 'md'] : SIZES.md;
+    const sizeClass = 'size' in preview ? SIZES[preview.size || 'md'] : SIZES.md;
 
     switch (preview.type) {
       case '360':
-        return isMobile ? (
-          <div className={`relative ${mobileSize}`}>
-            <Image
-              src='/under-construction/korpus-360/normalized-01.png'
-              alt='360 preview'
-              fill
-              className='object-contain'
-            />
-          </div>
-        ) : (
-          <Rotating360Preview />
-        );
+        return <Rotating360Preview />;
       case '3d':
-        return isMobile ? (
-          <div className={`relative ${mobileSize}`}>
-            <Image src='/retrofitted/lamp-1.png' alt='3D preview' fill className='object-contain' />
-          </div>
-        ) : (
-          <Lamp3DPreview />
-        );
+        return <Lamp3DPreview />;
       case 'toggle':
-        return isMobile ? (
-          <div className={`relative ${mobileSize}`}>
-            <Image src={preview.src} alt={projectKey} fill className='object-contain' />
-          </div>
-        ) : (
+        return (
           <AnimatedImagePreview
             src={preview.src}
             altSrc={preview.altSrc}
@@ -245,11 +229,7 @@ export default function Home() {
           />
         );
       case 'blink':
-        return isMobile ? (
-          <div className={`relative ${mobileSize}`}>
-            <Image src={preview.src} alt={projectKey} fill className='object-contain' />
-          </div>
-        ) : (
+        return (
           <AnimatedImagePreview
             src={preview.src}
             altSrc={preview.altSrc}
@@ -260,13 +240,7 @@ export default function Home() {
           />
         );
       case 'image':
-        return isMobile ? (
-          <div className={`relative ${mobileSize}`}>
-            <Image src={preview.src} alt={projectKey} fill className='object-contain' />
-          </div>
-        ) : (
-          <StaticImagePreview src={preview.src} alt={projectKey} sizeClass={sizeClass} />
-        );
+        return <StaticImagePreview src={preview.src} alt={projectKey} sizeClass={sizeClass} />;
       default:
         return null;
     }
@@ -276,15 +250,28 @@ export default function Home() {
     setMousePos({ x: e.clientX, y: e.clientY });
   }, []);
 
-  const handleClick = useCallback(
-    (projectKey: string) => {
-      navigateTo(`/${projectKey}`);
+  const startCycling = useCallback(
+    (projects: string[]) => {
+      if (cycleRef.current) clearInterval(cycleRef.current);
+      let index = 0;
+      setHoveredProject(projects[0]);
+      cycleRef.current = setInterval(() => {
+        index = (index + 1) % projects.length;
+        setHoveredProject(projects[index]);
+      }, 3000);
     },
-    [navigateTo],
+    [setHoveredProject],
   );
 
+  const stopCycling = useCallback(() => {
+    if (cycleRef.current) {
+      clearInterval(cycleRef.current);
+      cycleRef.current = null;
+    }
+  }, []);
+
   return (
-    <section onMouseMove={handleMouseMove} className='h-full overflow-hidden pt-32 px-4 pb-4 md:pb-8 md:px-8'>
+    <section onMouseMove={handleMouseMove} className='pt-32 px-4 pb-16 md:pb-16 md:px-8'>
       {/* Floating Preview - follows cursor (desktop only) */}
       <AnimatePresence mode='wait'>
         {hoveredProject && (
@@ -302,31 +289,66 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* Project List */}
-      <div className='relative z-10 flex flex-col items-start w-full h-full justify-between group'>
-        {projectKeys.map((projectKey) => {
-          const isHovered = hoveredProject === projectKey;
-          const shouldHide = hoveredProject && !isHovered;
+      {/* Tag List */}
+      <div className='relative z-10 flex flex-col w-full'>
+        {TAGS.map((tag) => {
+          const isOpen = openTag === tag.name;
           return (
-            <motion.h1
-              key={projectKey}
-              onMouseEnter={() => setHoveredProject(projectKey)}
-              onMouseLeave={() => setHoveredProject(null)}
-              onClick={() => handleClick(projectKey)}
-              className={`font-extrabold tracking-tight cursor-pointer transition-opacity duration-200 flex items-center gap-2 md:gap-4 lowercase flex-1 w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none relative ${
-                shouldHide ? 'opacity-20' : ''
-              }`}
-            >
-              <span className='inline-block rounded-full bg-current flex-shrink-0 w-[1cap] h-[1cap]' />
-              {PROJECTS[projectKey].mobileName ? (
-                <>
-                  <span className='md:hidden'>{PROJECTS[projectKey].mobileName}</span>
-                  <span className='hidden md:inline'>{PROJECTS[projectKey].name}</span>
-                </>
-              ) : (
-                PROJECTS[projectKey].name
-              )}
-            </motion.h1>
+            <div key={tag.name}>
+              {/* Tag row */}
+              <div
+                onClick={() => setOpenTag(isOpen ? null : tag.name)}
+                onMouseEnter={() => startCycling(tag.projects)}
+                onMouseLeave={() => {
+                  stopCycling();
+                  setHoveredProject(null);
+                }}
+                className='font-extrabold tracking-tight cursor-pointer flex items-center gap-2 md:gap-4 lowercase w-full border-b-2 border-black pb-0 md:pb-2 text-[clamp(1.75rem,8vh,3rem)] md:text-[clamp(1.75rem,8vh,8rem)] leading-none py-1 md:py-2'
+              >
+                <span className='inline-block rounded-full bg-current flex-shrink-0 w-[1cap] h-[1cap]' />
+                {tag.name}
+              </div>
+
+              {/* Project drawer */}
+              <AnimatePresence>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: 'easeInOut' }}
+                    className='overflow-hidden'
+                  >
+                    <div className='flex flex-col pl-6 md:pl-10'>
+                      {tag.projects.map((projectKey) => (
+                        <div
+                          key={projectKey}
+                          onClick={() => navigateTo(`/${projectKey}`)}
+                          onMouseEnter={() => {
+                            stopCycling();
+                            setHoveredProject(projectKey);
+                          }}
+                          onMouseLeave={() => setHoveredProject(null)}
+                          className='group/project relative font-extrabold tracking-tight cursor-pointer flex items-center lowercase w-full border-b border-black/30 text-[clamp(0.875rem,4vh,1.5rem)] md:text-[clamp(0.875rem,4vh,4rem)] leading-none py-1 md:py-2'
+                        >
+                          <span className='absolute -left-[1em] translate-x-[-0.5em] opacity-0 group-hover/project:translate-x-0 group-hover/project:opacity-100 transition-all duration-300 ease-out'>
+                            ➔
+                          </span>
+                          {PROJECTS[projectKey].mobileName ? (
+                            <>
+                              <span className='md:hidden'>{PROJECTS[projectKey].mobileName}</span>
+                              <span className='hidden md:inline'>{PROJECTS[projectKey].name}</span>
+                            </>
+                          ) : (
+                            PROJECTS[projectKey].name
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           );
         })}
       </div>

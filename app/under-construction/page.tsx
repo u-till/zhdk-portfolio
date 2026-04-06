@@ -237,10 +237,10 @@ export default function UnderConstructionPage() {
             index
           </span>
           <span
-            onClick={() => navigateTo('/saudade')}
+            onClick={() => navigateTo('/about')}
             className='font-bold cursor-pointer lowercase text-[clamp(0.75rem,3vh,1.125rem)] md:text-[clamp(1rem,4vh,4.5rem)] leading-none hover:opacity-60 transition-opacity'
           >
-            next
+            about
           </span>
         </div>
       </div>
