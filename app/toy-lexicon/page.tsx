@@ -199,7 +199,9 @@ export default function ToyLexiconPage() {
 
           {/* specifications Section */}
           <div>
-            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>specifications</h2>
+            <h2 className={`text-xl font-extrabold tracking-tight  border-b-2 border-foreground pb-2 mb-4`}>
+              specifications
+            </h2>
             <div className='grid grid-cols-2 md:grid-cols-5 gap-y-2 text-base'>
               <div className='hidden md:block'></div>
               <div className='font-bold md:text-right'>Year</div>
@@ -224,17 +226,6 @@ export default function ToyLexiconPage() {
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
               <div className='hidden md:block'></div>
-              <div className='md:col-span-2 col-span-2'>
-                <a
-                  href='https://adb-cms.vercel.app/'
-                  target='_blank'
-                  rel='noopener noreferrer'
-                  className='inline-block mt-2 px-6 py-3 bg-[#5BB660] text-white font-bold  text-sm rounded-lg hover:bg-[#4d9b52] transition-colors'
-                >
-                  CMS Demo
-                  <span className='block text-xs font-normal opacity-80'>user: guest / password: guest</span>
-                </a>
-              </div>
             </div>
           </div>
 
